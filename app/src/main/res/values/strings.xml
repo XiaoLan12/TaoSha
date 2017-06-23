@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TaoSha</string>
+    <string name="home">首页</string>
+    <string name="shoppcart">购物车</string>
+    <string name="me">个人中心</string>
+</resources>

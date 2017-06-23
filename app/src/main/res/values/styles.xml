@@ -1,0 +1,147 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!--导航栏的样式-->
+    <style name="basetoolbarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_45</item>
+        <item name="android:background">@color/red</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="TS.Theme" parent="AppTheme"/>
+    <!-- Widget -->
+
+    <style name="TS.Theme.Widget"/>
+    <!-- Widget - Divider 直线 -->
+    <style name="TS.Theme.Widget.Divider">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/common_divider_narrow</item>
+    </style>
+
+    <style name="TS.Theme.Widget.Divider.Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="TS.Theme.Widget.Divider.Line.Vertical">
+        <item name="android:layout_height">@dimen/divider_size</item>
+    </style>
+
+    <style name="TS.Theme.Widget.Divider.Line.Horizontal">
+        <item name="android:layout_width">@dimen/divider_size</item>
+    </style>
+    <!--TextView样式-->
+    <style name="TS.Theme.Widget.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/common_h2</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <!--EditText样式-->
+    <style name="TS.Theme.Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColorHint">@color/common_h3</item>
+        <item name="android:textColor">@color/common_h2</item>
+        <item name="android:gravity">top|center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:padding">@dimen/dp_2</item>
+    </style>
+    <!--RecyclerView样式-->
+    <style name="TS.Theme.Widget.RecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/shape_rv_selector</item>
+    </style>
+
+    <!--普通dialog-->
+    <style name="CustomProgressDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/white</item><!-- 自己想要的背景 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+    <style name="Theme.ToolBar.Menu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- 设置-弹窗的背景-颜色-->
+        <item name="android:colorBackground">@color/common_bg</item>
+        <!-- 字体的颜色-->
+        <item name="android:textColor">@color/white</item>
+        <!-- 字体大小-->
+        <item name="android:textSize">16sp</item>
+
+
+        <!--用于控制menu弹出的位置，位于toolbar的下面，而不是上面-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+    <!--把该属性改为false即可使menu位置位于toolbar之下-->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+
+    <!-- ActionSheet底部Dialog的样式 ，有模糊效果 -->
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/bottomDialogAnim</item>
+    </style>
+    <!--从底部进入的动画-->
+    <style name="bottomDialogAnim" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/bottom_dialog_enter
+        </item>
+        <item name="@android:windowExitAnimation">@anim/bottom_dialog_exit
+        </item>
+    </style>
+    <style name="NormalDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimAmount">0.7</item>
+        <item name="android:windowAnimationStyle">@style/normalDialogAnim</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="normalDialogAnim" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/normal_dialog_enter
+        </item>
+        <item name="@android:windowExitAnimation">@anim/normal_dialog_exit
+        </item>
+    </style>
+</resources>
