@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,11 +24,11 @@ import butterknife.Bind;
  */
 public abstract class BaseRVActivity<P extends BasePresenter,T> extends BaseActivity<P> implements
 SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
-    //@Bind(R.id.recyclerview)
+    @Bind(R.id.recyclerview)
     RecyclerView mRecyclerView;
     //@Bind(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    protected BaseQuickAdapter mAdapter;
+    protected BaseQuickAdapter<T,BaseViewHolder> mAdapter;
 
     /**
      * @param refreshable
@@ -40,7 +41,7 @@ SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
                 mAdapter.setOnLoadMoreListener(this, mRecyclerView);
                 mAdapter.setLoadMoreView(new CustomLoadMoreView());
             }
-            if (refreshable && mRecyclerView != null) {
+            if (refreshable && mSwipeRefreshLayout != null) {
                 //改变加载显示的颜色
                 mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
                         RescourseUtil.getColor(R.color.red));
@@ -48,25 +49,27 @@ SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
                 mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
                 mSwipeRefreshLayout.setOnRefreshListener(this);
             }
+
         }
         if (mRecyclerView != null) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setNestedScrollingEnabled(false);
-            mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(this, LinearLayoutManager.VERTICAL));
             mRecyclerView.setAdapter(mAdapter);
         }
+
     }
 
     /**
-     * @param adapter 传入的Adapter
+     * @param madapter 传入的Adapter
      * @param refreshable 是否开启刷新
      * @param loadmoreable 是否开启加载更多
      */
-    protected void initAdapter(BaseQuickAdapter<T,BaseViewHolder> adapter, boolean refreshable, boolean loadmoreable) {
-        mAdapter = adapter;
+    protected void initAdapter(BaseQuickAdapter<T,BaseViewHolder> madapter, boolean refreshable, boolean loadmoreable) {
+        this.mAdapter = madapter;
         initAdapter(refreshable, loadmoreable);
     }
+
     @Override
     public void onLoadMoreRequested() {
         if(!NetWorkUtil.isNetConnected(this)){

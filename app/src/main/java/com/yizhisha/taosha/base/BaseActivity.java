@@ -22,7 +22,7 @@ import qiu.niorgai.StatusBarCompat;
  * Created by lan on 2017/6/22.
  * Activity基类
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements View.OnClickListener{
     //使用泛型定义Presenter
     protected T mPresenter;
     //上下文
@@ -31,7 +31,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(getLayoutId());
-        StatusBarCompat.setStatusBarColor(this, Color.GREEN);
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE,125);
         //添加注解
         ButterKnife.bind(this);
         mContext=this;
@@ -43,7 +43,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             mPresenter.setV(this);
             mPresenter.mContext=this;
         }
+        this.initToolBar();
         this.initView();
+
         //把Activity添加到集合，统一管理
         ActivityManager.getActivityMar().addActivity(this);
 
@@ -122,5 +124,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         ButterKnife.unbind(this);
         //Activity销毁时，从集合移除
         ActivityManager.getActivityMar().finishActivity(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

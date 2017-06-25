@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/set_me_iv"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
                 android:src="@drawable/icon_setting"
@@ -55,6 +56,7 @@
 
         android:background="@color/white">
         <TextView
+            android:id="@+id/myorder_set_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,6 +84,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_selector"
             android:padding="@dimen/dp_14">
 
             <TextView
@@ -103,6 +106,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_selector"
             android:padding="@dimen/dp_14">
 
             <TextView
@@ -125,6 +129,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_selector"
             android:padding="@dimen/dp_14">
 
             <TextView
@@ -146,6 +151,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_selector"
         android:padding="@dimen/dp_14">
 
         <TextView
@@ -167,6 +173,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_selector"
         android:padding="@dimen/dp_14">
 
         <TextView
@@ -189,6 +196,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_selector"
         android:padding="@dimen/dp_14">
 
         <TextView

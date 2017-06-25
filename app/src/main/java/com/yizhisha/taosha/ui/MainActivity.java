@@ -1,7 +1,6 @@
 package com.yizhisha.taosha.ui;
 
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -10,7 +9,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.bean.TabEntity;
+import com.yizhisha.taosha.bean.MainTabEntity;
 import com.yizhisha.taosha.ui.home.HomeFragment;
 import com.yizhisha.taosha.ui.me.MeFragment;
 import com.yizhisha.taosha.ui.shoppcart.ShoppCartFragment;
@@ -60,7 +59,7 @@ public class MainActivity extends BaseActivity {
      */
     private void initTab() {
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+            mTabEntities.add(new MainTabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         tabLayout.setTabData(mTabEntities);
         //点击监听
