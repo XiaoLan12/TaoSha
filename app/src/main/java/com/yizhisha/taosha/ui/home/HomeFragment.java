@@ -1,14 +1,24 @@
 package com.yizhisha.taosha.ui.home;
 
 import android.graphics.Color;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.adapter.HomeYarnTypeAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
+import com.yizhisha.taosha.widget.GridSpacingItemDecoration;
 import com.youth.banner.Banner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import qiu.niorgai.StatusBarCompat;
@@ -19,13 +29,17 @@ import qiu.niorgai.StatusBarCompat;
 public class HomeFragment extends BaseFragment{
     @Bind(R.id.banner)
     Banner banner;
+    @Bind(R.id.recycleview_type)
+    RecyclerView recycleview_type;
+
     //设置图片资源:url或本地资源
     String[] images= new String[] {
             "http://img.zcool.cn/community/0166c756e1427432f875520f7cc838.jpg",
-            "http://img.zcool.cn/community/018fdb56e1428632f875520f7b67cb.jpg",
-            "http://img.zcool.cn/community/01c8dc56e1428e6ac72531cbaa5f2c.jpg",
             "http://img.zcool.cn/community/01fd2756e142716ac72531cbf8bbbf.jpg",
             "http://img.zcool.cn/community/0114a856640b6d32f87545731c076a.jpg"};
+    HomeYarnTypeAdapter homeYarnTypeAdapter;
+    List<HomeYarnTypeEntity> homeYarnTypeEntityList=new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -34,8 +48,7 @@ public class HomeFragment extends BaseFragment{
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-
-
+            StatusBarCompat.translucentStatusBar(getActivity(), true);
 //            StatusBarCompat.setStatusBarColor(activity, Color.GREEN);
         }
     }
@@ -44,26 +57,12 @@ public class HomeFragment extends BaseFragment{
         StatusBarCompat.translucentStatusBar(getActivity(), true);
 
         //设置样式,默认为:Banner.NOT_INDICATOR(不显示指示器和标题)
-        //可选样式如下:
-        //1. Banner.CIRCLE_INDICATOR	显示圆形指示器
-        //2. Banner.NUM_INDICATOR	显示数字指示器
-        //3. Banner.NUM_INDICATOR_TITLE	显示数字指示器和标题
-        //4. Banner.CIRCLE_INDICATOR_TITLE	显示圆形指示器和标题
-        banner.setBannerStyle(Banner.CIRCLE_INDICATOR_TITLE);
+        banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
 
         //设置轮播样式（没有标题默认为右边,有标题时默认左边）
-        //可选样式:
-        //Banner.LEFT	指示器居左
-        //Banner.CENTER	指示器居中
-        //Banner.RIGHT	指示器居右
         banner.setIndicatorGravity(Banner.RIGHT);
-
-        //设置轮播要显示的标题和图片对应（如果不传默认不显示标题）
-//        banner.setBannerTitle(titles);
-
         //设置是否自动轮播（不设置则默认自动）
         banner.isAutoPlay(true);
-
         //设置轮播图片间隔时间（不设置默认为2000）
         banner.setDelayTime(5000);
         //设置图片资源:可选图片网址/资源文件，默认用Glide加载,也可自定义图片的加载框架
@@ -87,5 +86,33 @@ public class HomeFragment extends BaseFragment{
             }
         });
 
+        //recycleview_type
+        //设置横向布局
+        RecyclerView.LayoutManager linearLayoutManager=new GridLayoutManager(getActivity(),5);
+
+        recycleview_type.setLayoutManager(linearLayoutManager);
+        //设置间隔includeEdge
+        int spanCount = 5;
+        int spacing = 50;
+        boolean includeEdge = true;
+        recycleview_type.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        homeYarnTypeEntityList=setData();
+        homeYarnTypeAdapter=new HomeYarnTypeAdapter(homeYarnTypeEntityList);
+        recycleview_type.setAdapter(homeYarnTypeAdapter);
+
+
+
+    }
+    private List<HomeYarnTypeEntity> setData(){
+        List<HomeYarnTypeEntity> list=new ArrayList<>();
+
+
+        for(int i=0;i<10;i++){
+            HomeYarnTypeEntity homeYarnTypeEntity=new HomeYarnTypeEntity();
+
+            homeYarnTypeEntity.setName("第"+i+"种");
+            list.add(homeYarnTypeEntity);
+        }
+        return list;
     }
 }

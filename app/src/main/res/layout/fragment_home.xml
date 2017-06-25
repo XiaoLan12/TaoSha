@@ -1,23 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
- <!--   <com.yizhisha.taosha.base.BaseToolbar
-        android:id="@+id/toolber"
-        style="@style/basetoolbarStyle"
-        app:isShowSearchView="false"
-        app:title="@string/home"/>-->
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/common_bg">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.youth.banner.Banner
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:indicator_drawable_selected="@drawable/selected_radius"
         app:indicator_drawable_unselected="@drawable/unselected_radius"
-        app:indicator_height="8dp"
+        app:indicator_height="5dp"
         app:indicator_margin="4dp"
-        app:indicator_width="8dp"
+        app:indicator_width="5dp"
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:background="@color/black"
+        android:layout_height="180dp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/home_search_linearlayout"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/ll_search">
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginLeft="6dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:text="请输入关键字"/>
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginRight="6dp"
+            android:src="@mipmap/ic_launcher"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="26dp"
+        android:orientation="vertical"
+
+      android:layout_marginTop="22dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="8sp"
+            android:textColor="@color/white"
+            android:text="扫一扫"/>
+    </LinearLayout>
+</RelativeLayout>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycleview_type"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"/>
+
+
 </LinearLayout>
