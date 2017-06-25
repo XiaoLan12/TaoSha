@@ -4,9 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.yizhisha.taosha.base.BaseToolbar
+ <!--   <com.yizhisha.taosha.base.BaseToolbar
         android:id="@+id/toolber"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:title="@string/home"/>
+        app:title="@string/home"/>-->
+
+    <com.youth.banner.Banner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:indicator_drawable_selected="@drawable/selected_radius"
+        app:indicator_drawable_unselected="@drawable/unselected_radius"
+        app:indicator_height="8dp"
+        app:indicator_margin="4dp"
+        app:indicator_width="8dp"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 </LinearLayout>
