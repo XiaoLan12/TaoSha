@@ -10,7 +10,7 @@
     <style name="basetoolbarStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_45</item>
-        <item name="android:background">@color/red</item>
+        <item name="android:background">@color/white</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:gravity">center</item>
@@ -58,7 +58,7 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:cursorVisible">true</item>
         <item name="android:textCursorDrawable">@null</item>
-        <item name="android:padding">@dimen/dp_2</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
     </style>
     <!--RecyclerView样式-->
     <style name="TS.Theme.Widget.RecyclerView">

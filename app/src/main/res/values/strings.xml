@@ -3,4 +3,16 @@
     <string name="home">首页</string>
     <string name="shoppcart">购物车</string>
     <string name="me">个人中心</string>
+
+    <!--个人中心-->
+    <string name="setting">设置</string>
+    <string name="manage_delivery_address">管理收货地址</string>
+    <string name="change_phone">修改/绑定手机</string>
+    <string name="change_pwd">修改密码</string>
+    <string name="new_phone">请输入新的手机号码</string>
+    <string name="enter_code">请输入手机验证码</string>
+    <string name="save">保存</string>
+    <string name="change_oneinfo">修改个人资料</string>
+    <string name="change_username">修改用户名</string>
+    <string name="myorder">我的订单</string>
 </resources>

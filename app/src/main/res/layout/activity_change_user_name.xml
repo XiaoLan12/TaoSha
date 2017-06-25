@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.yizhisha.taosha.base.BaseToolbar
+        android:id="@+id/toolbar"
+        style="@style/basetoolbarStyle"
+        app:isShowSearchView="false"
+        app:leftButtonIcon="@drawable/icon_right"
+        app:title="@string/change_username"/>
+    <com.yizhisha.taosha.widget.ClearEditText
+        android:id="@+id/changeusername_et"
+        style="@style/TS.Theme.Widget.EditText"
+        android:background="@drawable/shape_edittext_gray_selector"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:hint="请输入新的用户名"/>
+
+    <Button
+        android:id="@+id/save_changeusername_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@drawable/shape_redbtn_selector"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/save"/>
+    </LinearLayout>

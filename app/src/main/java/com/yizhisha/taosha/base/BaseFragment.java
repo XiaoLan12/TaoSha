@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by lan on 2017/6/22.
  * Fragment基类
  */
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment{
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements View.OnClickListener{
     protected P mPresenter;
     protected View mFragmentRootView;
     protected FragmentActivity activity;
@@ -112,5 +112,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

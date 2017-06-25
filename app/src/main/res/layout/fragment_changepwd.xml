@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.yizhisha.taosha.base.BaseToolbar
+        android:id="@+id/toolbar"
+        style="@style/basetoolbarStyle"
+        app:isShowSearchView="false"
+        app:leftButtonIcon="@drawable/icon_right"
+        app:title="@string/change_pwd"/>
+    <com.yizhisha.taosha.widget.ClearEditText
+        android:id="@+id/old_pwd_et"
+        style="@style/TS.Theme.Widget.EditText"
+        android:background="@drawable/shape_edittext_gray_selector"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:hint="请输入原登录密码"/>
+    <com.yizhisha.taosha.widget.ClearEditText
+        android:id="@+id/new_pwd_et"
+        style="@style/TS.Theme.Widget.EditText"
+        android:background="@drawable/shape_edittext_gray_selector"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:hint="请输入新的登录密码"/>
+    <com.yizhisha.taosha.widget.ClearEditText
+        android:id="@+id/again_pwd_et"
+        style="@style/TS.Theme.Widget.EditText"
+        android:background="@drawable/shape_edittext_gray_selector"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:hint="请再次输入新的登录密码"/>
+
+
+
+    <Button
+        android:id="@+id/save_changepwd_btn"
+       android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@drawable/shape_redbtn_selector"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/save"/>
+
+</LinearLayout>
