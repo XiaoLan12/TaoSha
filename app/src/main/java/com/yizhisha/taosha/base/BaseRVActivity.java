@@ -37,7 +37,7 @@ SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
      */
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {
         if (mAdapter != null) {
-            if (loadmoreable) {
+            if (loadmoreable&&mRecyclerView!=null) {
                 mAdapter.setOnLoadMoreListener(this, mRecyclerView);
                 mAdapter.setLoadMoreView(new CustomLoadMoreView());
             }

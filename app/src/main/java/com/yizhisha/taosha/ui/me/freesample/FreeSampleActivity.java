@@ -11,9 +11,11 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
+import com.yizhisha.taosha.ui.me.accountingcenter.AccountCenterActivity;
 import com.yizhisha.taosha.ui.me.myorder.OrderDetailsActivity;
 
 import java.util.ArrayList;
@@ -36,6 +38,12 @@ public class FreeSampleActivity extends BaseRVActivity {
     @Override
     protected void initToolBar() {
         toolbar.setTitle("免费拿样");
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityManager.getActivityMar().finishActivity(FreeSampleActivity.this);
+            }
+        });
     }
 
     @Override

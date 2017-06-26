@@ -3,9 +3,11 @@ package com.yizhisha.taosha.ui.me.accountingcenter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.AccountCenterAdapter;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
@@ -25,7 +27,12 @@ public class AccountCenterActivity extends BaseRVActivity {
 
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityManager.getActivityMar().finishActivity(AccountCenterActivity.this);
+            }
+        });
     }
 
     @Override

@@ -12,10 +12,12 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
+import com.yizhisha.taosha.ui.me.mycollect.MyCollectActivity;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
@@ -37,7 +39,12 @@ public class MyOrderAcitvity extends BaseRVActivity {
 
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityManager.getActivityMar().finishActivity(MyOrderAcitvity.this);
+            }
+        });
     }
     @Override
     protected void initView() {

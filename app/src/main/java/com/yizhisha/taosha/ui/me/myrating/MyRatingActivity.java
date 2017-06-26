@@ -6,16 +6,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
+import com.yizhisha.taosha.ui.me.accountingcenter.AccountCenterActivity;
 import com.yizhisha.taosha.ui.me.myfootprint.MyFootprintFragment;
 
 import java.util.ArrayList;
@@ -39,7 +42,12 @@ public class MyRatingActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityManager.getActivityMar().finishActivity(MyRatingActivity.this);
+            }
+        });
     }
 
     @Override
