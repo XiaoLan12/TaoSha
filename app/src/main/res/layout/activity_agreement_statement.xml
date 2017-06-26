@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.yizhisha.taosha.base.BaseToolbar
+        android:id="@+id/toolbar"
+        style="@style/basetoolbarStyle"
+        app:isShowSearchView="false"
+        app:leftButtonIcon="@drawable/icon_right"
+        app:title="协议声明"/>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+    <TextView
+        style="@style/TS.Theme.Widget.Text"
+        android:padding="@dimen/dp_10"
+        android:text="感动撒访问的三国撒登革热股份萨博的空间放华为；连接方式；看到了附件为哦啊手机发送旅客；打飞机哦未按国家扫"/>
+    </LinearLayout>

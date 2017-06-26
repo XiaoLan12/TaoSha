@@ -5,6 +5,7 @@ import android.widget.Switch;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.ui.me.abouttaosha.AboutActivity;
 import com.yizhisha.taosha.ui.me.accountingcenter.AccountCenterActivity;
 import com.yizhisha.taosha.ui.me.contactus.ContactUsActivity;
 import com.yizhisha.taosha.ui.me.freesample.FreeSampleActivity;
@@ -39,7 +40,7 @@ public class MeFragment extends BaseFragment{
 
     }
     @OnClick({R.id.set_me_iv,R.id.myorder_set_tv,R.id.mycollect_set_tv,R.id.myfootprint_set_tv,
-    R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl})
+    R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl,R.id.abouttaosha_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -67,6 +68,9 @@ public class MeFragment extends BaseFragment{
                 break;
             case R.id.contactus_rl:
                 startActivity(ContactUsActivity.class);
+                break;
+            case R.id.abouttaosha_rl:
+                startActivity(AboutActivity.class);
                 break;
         }
     }

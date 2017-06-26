@@ -29,7 +29,9 @@
         <activity android:name=".ui.me.accountingcenter.AccountCenterActivity" />
         <activity android:name=".ui.me.freesample.FreeSampleActivity" />
         <activity android:name=".ui.me.myrating.MyRatingActivity" />
-        <activity android:name=".ui.me.contactus.ContactUsActivity"></activity>
+        <activity android:name=".ui.me.contactus.ContactUsActivity" />
+        <activity android:name=".ui.me.abouttaosha.AboutActivity" />
+        <activity android:name=".ui.me.abouttaosha.AgreementStatementActivity"></activity>
     </application>
 
 </manifest>
