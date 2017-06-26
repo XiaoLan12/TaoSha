@@ -25,9 +25,9 @@ import butterknife.Bind;
 public abstract class BaseRVActivity<P extends BasePresenter,T> extends BaseActivity<P> implements
 SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
     @Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    protected RecyclerView mRecyclerView;
     //@Bind(R.id.swiperefreshlayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected BaseQuickAdapter<T,BaseViewHolder> mAdapter;
 
     /**

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:layout_marginTop="@dimen/dp_10"
+        android:padding="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/tradehead_remainrating_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:src="@drawable/icon_delete" />
+
+        <TextView
+            android:id="@+id/tradename_remainrating_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_remainrating_iv"
+            android:textColor="@color/common_h1"
+            android:text="段染四经——纬  20%腈纶  80%尼龙" />
+
+        <TextView
+            android:id="@+id/tradeprice_remainrating_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_remainrating_iv"
+            android:layout_below="@+id/tradename_remainrating_tv"
+            android:textColor="@color/red1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="￥33.50" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        >
+        <TextView
+            android:id="@+id/tiem_remainrating_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_centerVertical="true"
+            android:text="2017-08-14" />
+        <TextView
+            android:id="@+id/tradecolor_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tiem_remainrating_tv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="颜色：" />
+        <TextView
+            android:id="@+id/tradecolor_remainrating_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradecolor_tv"
+            android:layout_centerVertical="true"
+            android:text="#f40" />
+        <TextView
+            android:id="@+id/immediaterating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_8"
+            android:background="@drawable/shape_edittext_red_selector"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/red1"
+            android:layout_marginRight="@dimen/dp_8"
+            android:text="立即评价"/>
+    </RelativeLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+        android:layout_height="@dimen/dp_8"
+        />
+</LinearLayout>

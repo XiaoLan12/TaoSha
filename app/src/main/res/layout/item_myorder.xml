@@ -70,13 +70,6 @@
             android:layout_alignBottom="@+id/tradehead_myorder_iv"
             android:textColor="@color/red1"
             android:text="$33.50" />
-        <TextView
-            android:id="@+id/tradenumber_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/tradehead_myorder_iv"
-            android:layout_marginRight="@dimen/dp_5"
-            android:text="X1" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -175,5 +168,4 @@
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_height="@dimen/dp_8"
         />
-    Confirm the goods
 </LinearLayout>

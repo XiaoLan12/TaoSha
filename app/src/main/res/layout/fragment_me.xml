@@ -6,218 +6,242 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     >
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/img_full_screen"
-        android:fitsSystemWindows="true">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/set_me_iv"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25"
-                android:src="@drawable/icon_setting"
-                android:layout_margin="@dimen/dp_5"
-                android:layout_alignParentRight="true"/>
-            <ImageView
-                android:id="@+id/head_me_iv"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_20"
-                />
-            <TextView
-                android:id="@+id/username_me_tv"
-                style="@style/TS.Theme.Widget.Text"
-                android:layout_below="@+id/head_me_iv"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_normal2"
-                android:text="隔壁家的老"/>
-        </RelativeLayout>
-    </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-
-        android:background="@color/white">
-        <TextView
-            android:id="@+id/myorder_set_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/icon_delete"
-            android:gravity="center"
-            android:text="我的订单"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/icon_delete"
-            android:gravity="center"
-            android:text="我的收藏"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/icon_delete"
-            android:gravity="center"
-            android:text="我的足迹"/>
-    </LinearLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_height="@dimen/dp_10"/>
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_selector"
-            android:padding="@dimen/dp_14">
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/TS.Theme.Widget.Text"
-                android:text="账务中心"
-                android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:src="@drawable/icon_right"
-                android:layout_alignParentRight="true"
-                />
-        </RelativeLayout>
-        <View
-            style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_selector"
-            android:padding="@dimen/dp_14">
 
-            <TextView
-                style="@style/TS.Theme.Widget.Text"
-                android:text="秒纱活动"
-                android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:src="@drawable/icon_right"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-        <View
-            style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_selector"
-            android:padding="@dimen/dp_14">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/img_full_screen"
+                android:fitsSystemWindows="true">
 
-            <TextView
-                style="@style/TS.Theme.Widget.Text"
-                android:text="免费拿样"
-                android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:src="@drawable/icon_right"
-                android:layout_alignParentRight="true"
-                />
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_height="@dimen/dp_10"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_selector"
-        android:padding="@dimen/dp_14">
+                    <ImageView
+                        android:id="@+id/set_me_iv"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/dp_5"
+                        android:src="@drawable/icon_setting" />
 
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="我的评价"
-            android:layout_centerVertical="true"
-            />
-        <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_right"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_selector"
-        android:padding="@dimen/dp_14">
+                    <ImageView
+                        android:id="@+id/head_me_iv"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:src="@mipmap/ic_launcher" />
 
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="联系我们"
-            android:layout_centerVertical="true"
-            />
-        <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_right"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_selector"
-        android:padding="@dimen/dp_14">
+                    <TextView
+                        android:id="@+id/username_me_tv"
+                        style="@style/TS.Theme.Widget.Text"
+                        android:layout_below="@+id/head_me_iv"
+                        android:layout_centerHorizontal="true"
+                        android:text="隔壁家的老"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_normal2" />
+                </RelativeLayout>
+            </FrameLayout>
 
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="关于大浪淘沙"
-            android:layout_centerVertical="true"
-            />
-        <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_right"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-        <View
-            style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"/>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="40dp"/>
-    </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white"
+
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/myorder_set_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:text="我的订单" />
+
+                <TextView
+                    android:id="@+id/mycollect_set_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:text="我的收藏" />
+
+                <TextView
+                    android:id="@+id/myfootprint_set_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:text="我的足迹" />
+            </LinearLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_height="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:id="@+id/accountcenter_me_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="账务中心" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="秒纱活动" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:id="@+id/freesample_me_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="免费拿样" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_height="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:id="@+id/myrating_me_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="我的评价" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:id="@+id/contactus_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="联系我们" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_selector"
+                android:padding="@dimen/dp_14">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="关于大浪淘沙" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_right" />
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

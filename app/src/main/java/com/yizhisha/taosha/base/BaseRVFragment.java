@@ -12,14 +12,16 @@ import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CustomLoadMoreView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
+import butterknife.Bind;
+
 /**
  * Created by lan on 2017/6/23.
  * RecyclerView的BaseFragment
  */
 public abstract class BaseRVFragment<P extends BasePresenter,T> extends BaseFragment<P> implements
         SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
-    //@Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerview)
+    protected RecyclerView mRecyclerView;
     //@Bind(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     protected BaseQuickAdapter mAdapter;
@@ -30,7 +32,7 @@ public abstract class BaseRVFragment<P extends BasePresenter,T> extends BaseFrag
                 mAdapter.setOnLoadMoreListener(this, mRecyclerView);
                 mAdapter.setLoadMoreView(new CustomLoadMoreView());
             }
-            if (refreshable && mRecyclerView != null) {
+            if (refreshable && mSwipeRefreshLayout != null) {
                 //改变加载显示的颜色
                 mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
                         RescourseUtil.getColor(R.color.red));
@@ -43,7 +45,7 @@ public abstract class BaseRVFragment<P extends BasePresenter,T> extends BaseFrag
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setNestedScrollingEnabled(false);
-            mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
+
             mRecyclerView.setAdapter(mAdapter);
         }
     }

@@ -15,4 +15,10 @@
     <string name="change_oneinfo">修改个人资料</string>
     <string name="change_username">修改用户名</string>
     <string name="myorder">我的订单</string>
+    <string name="oreder_details">订单详情</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="my_footprint">我的足迹</string>
+    <string name="account_center">账务中心</string>
+    <string name="my_rating">我的评价</string>
+    <string name="contact_us">联系我们</string>
 </resources>

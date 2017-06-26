@@ -1,8 +1,7 @@
-package com.yizhisha.taosha.ui.me.myorder;
+package com.yizhisha.taosha.ui.me.freesample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,18 +11,17 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
-import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
-import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
+import com.yizhisha.taosha.ui.me.myorder.OrderDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 
-public class MyOrderAcitvity extends BaseRVActivity {
+public class FreeSampleActivity extends BaseRVActivity {
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.commontablayout)
@@ -37,8 +35,9 @@ public class MyOrderAcitvity extends BaseRVActivity {
 
     @Override
     protected void initToolBar() {
-
+        toolbar.setTitle("免费拿样");
     }
+
     @Override
     protected void initView() {
         for (int i = 0; i < mTitles.length; i++) {
@@ -49,23 +48,23 @@ public class MyOrderAcitvity extends BaseRVActivity {
             @Override
             public void onTabSelect(int position) {
                 commonTabLayout.setCurrentTab(position);
-                    switch (position){
-                        case 0:
-                            mAdapter.setNewData(getAllData());
-                            break;
-                        case 1:
-                            mAdapter.setNewData(getData1());
-                            break;
-                        case 2:
-                            mAdapter.setNewData(getData2());
-                            break;
-                        case 3:
-                            mAdapter.setNewData(getData3());
-                            break;
-                        case 4:
-                            mAdapter.setNewData(getData4());
-                            break;
-                    }
+                switch (position){
+                    case 0:
+                        mAdapter.setNewData(getAllData());
+                        break;
+                    case 1:
+                        mAdapter.setNewData(getData1());
+                        break;
+                    case 2:
+                        mAdapter.setNewData(getData2());
+                        break;
+                    case 3:
+                        mAdapter.setNewData(getData3());
+                        break;
+                    case 4:
+                        mAdapter.setNewData(getData4());
+                        break;
+                }
             }
 
             @Override
@@ -153,11 +152,5 @@ public class MyOrderAcitvity extends BaseRVActivity {
         data.add("已完成");
         data.add("已完成");
         return data;
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        super.onLoadMoreRequested();
-            mAdapter.loadMoreEnd();
     }
 }
