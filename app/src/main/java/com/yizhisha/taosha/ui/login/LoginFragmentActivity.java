@@ -39,14 +39,15 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
             }
             if(!fragment.isAdded()){
                 transaction.add(R.id.fragment,fragment);
+                transaction.addToBackStack(null).commit();
             }else{
                 if(currentFragment!=null){
                     transaction.hide(currentFragment);
                 }
-                transaction.show(fragment);
+                transaction.show(fragment).commit();
 
             }
-            transaction.addToBackStack(null).commit();
+
             currentFragment=fragment;
         }
     }
