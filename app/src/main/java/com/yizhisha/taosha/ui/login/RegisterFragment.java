@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.utils.CountDownTimerUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 
 import butterknife.Bind;
@@ -21,8 +22,6 @@ public class RegisterFragment extends BaseFragment {
     BaseToolbar toolbar;
     @Bind(R.id.getcode_register_tv)
     TextView mTvGetCode;
-
-    private MyCount mc;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_register;
@@ -43,34 +42,11 @@ public class RegisterFragment extends BaseFragment {
         super.onClick(v);
         switch (v.getId()){
             case R.id.getcode_register_tv:
-                /*if (mc == null) {
-                    mc = new MyCount(60000, 1000);
-                }
-                mc.start();*/
+
+                CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(mTvGetCode, 60000, 1000);
+                mCountDownTimerUtils.start();
                 break;
         }
     }
-    /**
-     * 内部类,获取验证码
-     */
 
-    private class MyCount extends CountDownTimer {
-        public MyCount(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            mTvGetCode.setEnabled(false);
-            mTvGetCode.setTextColor(RescourseUtil.getColor(R.color.gray1));
-            mTvGetCode.setText(millisUntilFinished / 1000 + "秒后重发");
-        }
-
-        @Override
-        public void onFinish() {
-            mTvGetCode.setEnabled(true);
-            mTvGetCode.setTextColor(RescourseUtil.getColor(R.color.red2));
-            mTvGetCode.setText("获取验证码");
-        }
-    }
 }
