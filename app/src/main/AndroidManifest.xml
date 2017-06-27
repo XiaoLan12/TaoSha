@@ -31,7 +31,11 @@
         <activity android:name=".ui.me.myrating.MyRatingActivity" />
         <activity android:name=".ui.me.contactus.ContactUsActivity" />
         <activity android:name=".ui.me.abouttaosha.AboutActivity" />
-        <activity android:name=".ui.me.abouttaosha.AgreementStatementActivity"></activity>
+        <activity android:name=".ui.me.abouttaosha.AgreementStatementActivity" />
+        <activity android:name=".ui.me.manageaddress.MyAddressActivity" />
+        <activity android:name=".ui.me.manageaddress.AddAddressActivity" />
+        <activity android:name=".ui.login.PhoneLoginActivity" />
+        <activity android:name=".ui.login.LoginFragmentActivity"></activity>
     </application>
 
 </manifest>

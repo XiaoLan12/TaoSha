@@ -65,14 +65,17 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dp_10"
         android:paddingLeft="@dimen/dp_14"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_10"
         >
         <TextView
             style="@style/TS.Theme.Widget.Text"
+            android:gravity="center"
             android:text="企业地址:"/>
         <TextView
             android:id="@+id/business_address_tv"
             style="@style/TS.Theme.Widget.Text"
+            android:gravity="center"
             android:text="广东省东莞市东莞市福利卡世纪东方看来是打开"/>
 
     </LinearLayout>

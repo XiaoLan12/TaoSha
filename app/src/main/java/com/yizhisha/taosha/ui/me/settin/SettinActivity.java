@@ -7,6 +7,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.ui.me.manageaddress.MyAddressActivity;
 import com.yizhisha.taosha.ui.me.settin.changeinfo.ChangeUserNameActivity;
 
 import butterknife.Bind;
@@ -33,7 +34,8 @@ public class SettinActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.changepwd_rl,R.id.changephone_rl,R.id.changeoneinfo_rl})
+    @OnClick({R.id.changepwd_rl,R.id.changephone_rl,R.id.changeoneinfo_rl,
+    R.id.managedeladdress_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -52,6 +54,9 @@ public class SettinActivity extends BaseActivity {
                 Bundle bundle2=new Bundle();
                 bundle2.putInt("TARGET",2);
                 startActivity(SetInfoActivity.class,bundle2);
+                break;
+            case R.id.managedeladdress_rl:
+                startActivity(MyAddressActivity.class);
                 break;
 
         }

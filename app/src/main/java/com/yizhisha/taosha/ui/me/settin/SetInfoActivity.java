@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.ui.me.manageaddress.MyAddressActivity;
 import com.yizhisha.taosha.ui.me.settin.changeinfo.ChangeOneInfoFragment;
 import com.yizhisha.taosha.ui.me.settin.changeinfo.ChangePhoneFragment;
 import com.yizhisha.taosha.ui.me.settin.changeinfo.ChangePwdFragment;
@@ -55,8 +56,7 @@ public class SetInfoActivity extends BaseActivity {
                 }
                 switchFragment(changePhoneFragment);
                 break;
-            case 3:
-                break;
+
         }
     }
 }
