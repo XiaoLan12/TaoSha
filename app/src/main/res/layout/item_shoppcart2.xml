@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        >
+        <CheckBox
+            android:id="@+id/childshopp_cb"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/shape_checxbox_selector1"
+            android:button="@null" />
+        <ImageView
+            android:id="@+id/tradehead_shoppcar2_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:layout_toRightOf="@+id/childshopp_cb"
+            android:src="@drawable/icon_delete" />
+
+        <TextView
+            android:id="@+id/tradename_shoppcar2_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_shoppcar2_iv"
+            android:textColor="@color/common_h1"
+            android:text="段染四经——纬  20%腈纶  80%尼龙" />
+
+        <TextView
+            android:id="@+id/tradecolor_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_shoppcar2_tv"
+            android:layout_toRightOf="@+id/tradehead_shoppcar2_iv"
+            android:text="颜色：" />
+        <TextView
+            android:id="@+id/tradecolor_shoppcar2_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_shoppcar2_tv"
+            android:layout_toRightOf="@+id/tradecolor_tv"
+            android:text="#f40" />
+        <TextView
+            android:id="@+id/tradeprice_shoppcar2_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_shoppcar2_iv"
+            android:layout_alignBottom="@+id/tradehead_shoppcar2_iv"
+            android:textColor="@color/red1"
+            android:text="$33.50" />
+        <TextView
+            android:id="@+id/change_shoppcar2_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tradehead_shoppcar2_iv"
+            android:textColor="@color/blue"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="修改" />
+    </RelativeLayout>
+</LinearLayout>

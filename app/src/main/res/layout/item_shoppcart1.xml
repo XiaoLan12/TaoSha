@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+
+    >
+    <View
+        android:id="@+id/shoppcart1_view"
+        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+        android:layout_height="@dimen/dp_10"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        >
+        <CheckBox
+            android:id="@+id/groupshopp_cb"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/shape_checxbox_selector"
+            android:button="@null" />
+        <TextView
+            android:id="@+id/company_shoppcart1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/groupshopp_cb"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="东莞市纺织有限公司" />
+
+        <TextView
+            android:id="@+id/delete_shoppcart1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:text="删除" />
+    </RelativeLayout>
+
+</LinearLayout>
