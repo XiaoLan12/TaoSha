@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -23,5 +24,6 @@ public class HomeYarnTypeAdapter extends BaseQuickAdapter<HomeYarnTypeEntity,Bas
     @Override
     protected void convert(BaseViewHolder helper, HomeYarnTypeEntity item) {
             helper.setText(R.id.tv_name,item.getName());
+        ( (ImageView)helper.getView(R.id.img_type)).setImageResource(item.getImg());
     }
 }
