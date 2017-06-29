@@ -100,6 +100,8 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             groupViewHolder = new GroupViewHolder();
             groupViewHolder.tv_title_parent = (TextView) convertView
                     .findViewById(R.id.company_shoppcart1_tv);
+            groupViewHolder.id_tv_delete = (TextView) convertView
+                    .findViewById(R.id.delete_shoppcart1_tv);
             groupViewHolder.id_cb_select_parent = (CheckBox) convertView
                     .findViewById(R.id.groupshopp_cb);
             groupViewHolder.topDivider = (View) convertView
@@ -130,6 +132,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 setupOneParentAllChildChecked(!nowBeanChecked, groupPosition);
                 //控制总checkedbox 接口
                 onAllCheckedBoxNeedChangeListener.onCheckedBoxNeedChange(dealAllParentIsChecked());
+            }
+        });
+        groupViewHolder.id_tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeGoods(groupPosition);
             }
         });
         if (groupPosition == 0) {
@@ -276,34 +284,22 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         //计算回调
         onGoodsCheckedChangeListener.onGoodsCheckedChange(totalCount, totalPrice);
     }
-
-
-    public void removeOneGood(int groupPosition, int childPosition) {
-        //StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
+    //移除数据
+    public void removeGoods(int groupPosition) {
         List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
-        // GoodsBean goodsBean = (GoodsBean) childMapList.get(childPosition).get("childName");
-        childMapList.remove(childPosition);
-
-        //通过子项
+        for (int j = childMapList.size()-1; j >=0; j--) {//倒过来遍历  remove
+            GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+            if (goodsBean.isChecked()) {
+                childMapList.remove(j);
+            }
+        }
+//通过子项
         if (childMapList!=null&&childMapList.size()>0){
 
         }else {
             parentMapList.remove(groupPosition);
             childMapList_list.remove(groupPosition);//！！！！因为parentMapList和childMapList_list是pos关联的  得保持一致
         }
-        if (parentMapList != null && parentMapList.size() > 0) {
-            onCheckHasGoodsListener.onCheckHasGoods(true);//
-        } else {
-            onCheckHasGoodsListener.onCheckHasGoods(false);//
-        }
-        notifyDataSetChanged();
-        dealPrice();
-    }
-
-
-    public void removeGoods(int groupPosition, int childPosition) {
-        //StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-        List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
         // GoodsBean goodsBean = (GoodsBean) childMapList.get(childPosition).get("childName");
 /*
         for (int i = parentMapList.size()-1; i>=0; i--) {//倒过来遍历  remove

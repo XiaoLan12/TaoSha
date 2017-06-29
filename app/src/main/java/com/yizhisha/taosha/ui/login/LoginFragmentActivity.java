@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
@@ -14,8 +15,6 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
     private RegisterFragment registerFragment;
     private LoginFragment loginFragment;
     private PhoneLoginFragment phoneLoginFragment;
-    private Fragment currentFragment;
-    private FragmentManager fragmentManager=getSupportFragmentManager();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login_fragment;
@@ -27,29 +26,20 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
     }
     @Override
     protected void initView() {
-        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         loginFragment=new LoginFragment();
         transaction.add(R.id.fragment,loginFragment).commit();
+
     }
-    public void switchFragment(Fragment fragment){
-        FragmentTransaction transaction=fragmentManager.beginTransaction();
-        if(fragment!=null){
-            if(currentFragment!=null){
-                transaction.hide(currentFragment);
-            }
-            if(!fragment.isAdded()){
-                transaction.add(R.id.fragment,fragment);
-                transaction.addToBackStack(null).commit();
-            }else{
-                if(currentFragment!=null){
-                    transaction.hide(currentFragment);
-                }
-                transaction.show(fragment).commit();
-
-            }
-
-            currentFragment=fragment;
-        }
+    /**
+     * hide和show切换Fragment
+     *
+     * @param fragment
+     */
+    private void switchFragment(Fragment fragment,String tag)
+    {
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment,fragment,tag).addToBackStack(null).commit();
     }
 
     @Override
@@ -58,17 +48,17 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
             if(findPwdFragment==null){
                 findPwdFragment=new FindPwdFragment();
             }
-            switchFragment(findPwdFragment);
+            switchFragment(findPwdFragment,"findPwdFragment");
         }else if(index==2){
             if(registerFragment==null){
                 registerFragment=new RegisterFragment();
             }
-            switchFragment(registerFragment);
+            switchFragment(registerFragment,"registerFragment");
         }else if(index==3){
             if(phoneLoginFragment==null){
                 phoneLoginFragment=new PhoneLoginFragment();
             }
-            switchFragment(phoneLoginFragment);
+            switchFragment(phoneLoginFragment,"phoneLoginFragment");
         }
     }
 }
