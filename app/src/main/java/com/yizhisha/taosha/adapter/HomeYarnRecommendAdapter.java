@@ -11,17 +11,17 @@ import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/6/25.
+ * Created by ude on 2017/6/29.
  */
 
-public class HomeYarnTypeAdapter extends BaseQuickAdapter<HomeYarnTypeEntity,BaseViewHolder> {
-    public HomeYarnTypeAdapter(@Nullable List<HomeYarnTypeEntity> data) {
-        super(R.layout.item_home_yarn_type,data);
+public class HomeYarnRecommendAdapter extends BaseQuickAdapter<HomeYarnTypeEntity,BaseViewHolder> {
+    public HomeYarnRecommendAdapter(@Nullable List<HomeYarnTypeEntity> data) {
+        super(R.layout.item_home_recommend,data);
 
     }
     @Override
     protected void convert(BaseViewHolder helper, HomeYarnTypeEntity item) {
-            helper.setText(R.id.tv_name,item.getName());
+        helper.setText(R.id.tv_name,item.getName());
         ( (ImageView)helper.getView(R.id.img_type)).setImageResource(item.getImg());
     }
 }

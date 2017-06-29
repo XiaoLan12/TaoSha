@@ -10,10 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.adapter.HomeYarnRecommendAdapter;
 import com.yizhisha.taosha.adapter.HomeYarnTypeAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.GridSpacingItemDecoration;
 import com.youth.banner.Banner;
 
@@ -31,6 +34,11 @@ public class HomeFragment extends BaseFragment{
     Banner banner;
     @Bind(R.id.recycleview_type)
     RecyclerView recycleview_type;
+    @Bind(R.id.recycleview1)
+    RecyclerView recycleview1;
+    @Bind(R.id.recycleview2)
+    RecyclerView recycleview2;
+
 
     //设置图片资源:url或本地资源
     String[] images= new String[] {
@@ -39,6 +47,12 @@ public class HomeFragment extends BaseFragment{
             "http://img.zcool.cn/community/0114a856640b6d32f87545731c076a.jpg"};
     HomeYarnTypeAdapter homeYarnTypeAdapter;
     List<HomeYarnTypeEntity> homeYarnTypeEntityList=new ArrayList<>();
+
+    HomeYarnRecommendAdapter adapter1;
+    List<HomeYarnTypeEntity> data1=new ArrayList<>();
+
+    HomeYarnRecommendAdapter adapter2;
+    List<HomeYarnTypeEntity> data2=new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -99,10 +113,42 @@ public class HomeFragment extends BaseFragment{
         homeYarnTypeEntityList=setData();
         homeYarnTypeAdapter=new HomeYarnTypeAdapter(homeYarnTypeEntityList);
         recycleview_type.setAdapter(homeYarnTypeAdapter);
+        homeYarnTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ToastUtil.showShortToast(position+1+"");
+            }
+        });
+
+     LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getActivity());
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycleview1.setLayoutManager(linearLayoutManager1);
+        data1 =seData1();
+        adapter1=new HomeYarnRecommendAdapter(data1);
+        recycleview1.setAdapter(adapter1);
+
+
+        LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getActivity());
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycleview2.setLayoutManager(linearLayoutManager2);
+        adapter2=new HomeYarnRecommendAdapter(data1);
+        recycleview2.setAdapter(adapter2);
+
 
 
 
     }
+    private List<HomeYarnTypeEntity> seData1(){
+        List<HomeYarnTypeEntity> list=new ArrayList<>();
+        for(int i=0;i<10;i++){
+            HomeYarnTypeEntity homeYarnTypeEntity=new HomeYarnTypeEntity();
+            homeYarnTypeEntity.setImg(R.drawable.index_rc_1);
+            homeYarnTypeEntity.setName("第"+i);
+            list.add(homeYarnTypeEntity);
+        }
+        return list;
+    }
+
     private List<HomeYarnTypeEntity> setData(){
         List<HomeYarnTypeEntity> list=new ArrayList<>();
         String[] names= new String[] {
