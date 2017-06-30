@@ -18,6 +18,7 @@ import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.GridSpacingItemDecoration;
+import com.yizhisha.taosha.widget.SpacesItemDecoration;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -123,6 +124,10 @@ public class HomeFragment extends BaseFragment{
      LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getActivity());
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycleview1.setLayoutManager(linearLayoutManager1);
+        //RecycleView 增加边距
+        int spacingInPixels = 8;
+        recycleview1.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+
         data1 =seData1();
         adapter1=new HomeYarnRecommendAdapter(data1);
         recycleview1.setAdapter(adapter1);
@@ -131,6 +136,8 @@ public class HomeFragment extends BaseFragment{
         LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getActivity());
         linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycleview2.setLayoutManager(linearLayoutManager2);
+        int spacingInPixels1 = 8;
+        recycleview2.addItemDecoration(new SpacesItemDecoration(spacingInPixels1));
         adapter2=new HomeYarnRecommendAdapter(data1);
         recycleview2.setAdapter(adapter2);
 
