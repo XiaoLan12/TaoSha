@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -25,12 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
 
 /**
  * Created by lan on 2017/6/22.
  */
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.recycleview_type)
@@ -39,6 +41,8 @@ public class HomeFragment extends BaseFragment{
     RecyclerView recycleview1;
     @Bind(R.id.recycleview2)
     RecyclerView recycleview2;
+    @Bind(R.id.tv_search)
+    TextView tv_search;
 
 
     //设置图片资源:url或本地资源
@@ -132,7 +136,6 @@ public class HomeFragment extends BaseFragment{
         adapter1=new HomeYarnRecommendAdapter(data1);
         recycleview1.setAdapter(adapter1);
 
-
         LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getActivity());
         linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycleview2.setLayoutManager(linearLayoutManager2);
@@ -170,5 +173,16 @@ public class HomeFragment extends BaseFragment{
             list.add(homeYarnTypeEntity);
         }
         return list;
+    }
+
+    @OnClick({R.id.tv_search})
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.tv_search:
+                startActivity(SearchActivity.class);
+                break;
+        }
     }
 }

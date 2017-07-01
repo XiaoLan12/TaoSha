@@ -36,6 +36,7 @@
         <activity android:name=".ui.me.manageaddress.AddAddressActivity" />
         <activity android:name=".ui.login.PhoneLoginActivity" />
         <activity android:name=".ui.login.LoginFragmentActivity"></activity>
+        <activity android:name=".ui.home.SearchActivity"></activity>
     </application>
 
 </manifest>

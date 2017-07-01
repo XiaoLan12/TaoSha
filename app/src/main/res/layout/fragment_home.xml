@@ -50,6 +50,7 @@
             android:layout_marginLeft="6dp"
             android:src="@mipmap/ic_launcher"/>
         <TextView
+            android:id="@+id/tv_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
