@@ -59,6 +59,7 @@ public class FreeSampleActivity extends BaseRVActivity {
                 switch (position){
                     case 0:
                         mAdapter.setNewData(getAllData());
+
                         break;
                     case 1:
                         mAdapter.setNewData(getData1());

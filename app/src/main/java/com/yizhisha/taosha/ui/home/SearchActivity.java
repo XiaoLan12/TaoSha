@@ -43,9 +43,9 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
     protected void initToolBar() {
 
     }
-
     @Override
     protected void initView() {
+                //设置状态栏颜色
                     StatusBarCompat.setStatusBarColor(SearchActivity.this, this.getResources().getColor(R.color.home_search_color));
         //设置颜色分割线
         LinearLayoutManager mManagerColor = new GridLayoutManager(SearchActivity.this, 4);

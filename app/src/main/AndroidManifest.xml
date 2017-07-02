@@ -37,6 +37,8 @@
         <activity android:name=".ui.login.PhoneLoginActivity" />
         <activity android:name=".ui.login.LoginFragmentActivity"></activity>
         <activity android:name=".ui.home.SearchActivity"></activity>
+        <activity android:name=".ui.home.selectyarn.SelectYarnActivity"></activity>
+        <activity android:name=".ui.home.yran.YarnActivity"></activity>
     </application>
 
 </manifest>

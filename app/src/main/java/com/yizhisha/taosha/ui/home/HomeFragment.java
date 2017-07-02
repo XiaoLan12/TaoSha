@@ -17,6 +17,7 @@ import com.yizhisha.taosha.adapter.HomeYarnRecommendAdapter;
 import com.yizhisha.taosha.adapter.HomeYarnTypeAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
+import com.yizhisha.taosha.ui.home.selectyarn.SelectYarnActivity;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.GridSpacingItemDecoration;
 import com.yizhisha.taosha.widget.SpacesItemDecoration;
@@ -121,6 +122,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         homeYarnTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(SelectYarnActivity.class);
                 ToastUtil.showShortToast(position+1+"");
             }
         });

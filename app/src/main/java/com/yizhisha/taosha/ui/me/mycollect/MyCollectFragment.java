@@ -2,12 +2,15 @@ package com.yizhisha.taosha.ui.me.mycollect;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseRVFragment;
+import com.yizhisha.taosha.ui.home.yran.YarnActivity;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
@@ -50,8 +53,15 @@ public class MyCollectFragment extends BaseRVFragment {
         }
         else if(mTitle.equals("混纺纱")){
             mAdapter.setNewData(getData5());
+        }else {
+            mAdapter.setNewData(getData(mTitle));
         }
-
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
 
     }
     private List<String> getAllData(){
@@ -130,6 +140,19 @@ public class MyCollectFragment extends BaseRVFragment {
         data.add("混纺纱");
         data.add("混纺纱");
         data.add("混纺纱");
+        return data;
+    }
+    private List<String> getData(String string){
+        List<String> data=new ArrayList<>();
+        data.add(string);
+        data.add(string);
+        data.add(string);
+        data.add(string);
+
+        data.add(string);
+        data.add(string);
+        data.add(string);
+        data.add(string);
         return data;
     }
 
