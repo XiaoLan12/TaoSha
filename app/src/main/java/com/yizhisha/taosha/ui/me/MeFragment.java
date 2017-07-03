@@ -1,10 +1,13 @@
 package com.yizhisha.taosha.ui.me;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.ui.login.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.me.abouttaosha.AboutActivity;
 import com.yizhisha.taosha.ui.me.accountingcenter.AccountCenterActivity;
@@ -15,7 +18,9 @@ import com.yizhisha.taosha.ui.me.myfootprint.MyFootprintActivity;
 import com.yizhisha.taosha.ui.me.myorder.MyOrderAcitvity;
 import com.yizhisha.taosha.ui.me.myrating.MyRatingActivity;
 import com.yizhisha.taosha.ui.me.settin.SettinActivity;
+import com.yizhisha.taosha.utils.GlideUtil;
 
+import butterknife.Bind;
 import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
 
@@ -23,6 +28,10 @@ import qiu.niorgai.StatusBarCompat;
  * Created by lan on 2017/6/22.
  */
 public class MeFragment extends BaseFragment{
+    @Bind(R.id.head_me_iv)
+    ImageView mIvHead;
+    @Bind(R.id.username_me_tv)
+    TextView mTVUserName;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_me;
@@ -41,7 +50,7 @@ public class MeFragment extends BaseFragment{
 
     }
     @OnClick({R.id.set_me_iv,R.id.myorder_set_tv,R.id.mycollect_set_tv,R.id.myfootprint_set_tv,
-    R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl,R.id.abouttaosha_rl})
+            R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl,R.id.abouttaosha_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -71,8 +80,8 @@ public class MeFragment extends BaseFragment{
                 startActivity(ContactUsActivity.class);
                 break;
             case R.id.abouttaosha_rl:
-                //startActivity(AboutActivity.class);
-                startActivity(LoginFragmentActivity.class);
+                startActivity(AboutActivity.class);
+                //startActivity(LoginFragmentActivity.class);
                 break;
         }
     }

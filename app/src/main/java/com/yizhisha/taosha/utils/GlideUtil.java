@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.yizhisha.taosha.R;
 
 /**
  * Created by lan on 2017/6/22.
@@ -154,7 +155,18 @@ public class GlideUtil {
     public void LoadContextCircleBitmap(Context context, String path, ImageView imageView){
         Glide.with(context).load(path).bitmapTransform(new GlideCircleTransform(context)).into(imageView);
     }
-
+    /**
+     * Glide请求图片设置圆形，会受到android.support.v4.app.Fragment生命周期控制，
+     * 设置默认图片
+     * @param fragment
+     * @param path
+     * @param imageView
+     *
+     */
+    @SuppressWarnings("unchecked")
+    public void LoadSupportv4FragmentCircleBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView){
+            LoadSupportv4FragmentCircleBitmap(fragment,path,imageView,R.drawable.icon_delete,R.drawable.icon_delete);
+    }
     /**
      * Glide请求图片设置圆形，会受到android.support.v4.app.Fragment生命周期控制
      * @param fragment
@@ -162,8 +174,9 @@ public class GlideUtil {
      * @param imageView
      */
     @SuppressWarnings("unchecked")
-    public void LoadSupportv4FragmentCircleBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView){
-        Glide.with(fragment).load(path).bitmapTransform(new GlideCircleTransform(fragment.getActivity())).into(imageView);
+    public void LoadSupportv4FragmentCircleBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView, int placeid, int errorid){
+        Glide.with(fragment).load(path).placeholder(placeid).error(errorid).
+        bitmapTransform(new GlideCircleTransform(fragment.getActivity())).into(imageView);
     }
     //-----------------------圆角图片----------------------
     /**

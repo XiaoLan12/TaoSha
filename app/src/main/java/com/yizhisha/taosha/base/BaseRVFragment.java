@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.utils.NetWorkUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CustomLoadMoreView;
@@ -24,7 +25,7 @@ public abstract class BaseRVFragment<P extends BasePresenter,T> extends BaseFrag
     protected RecyclerView mRecyclerView;
     //@Bind(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    protected BaseQuickAdapter mAdapter;
+    protected BaseQuickAdapter<T,BaseViewHolder> mAdapter;
 
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {
         if (mAdapter != null) {

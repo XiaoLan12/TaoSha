@@ -29,7 +29,7 @@ public class MyFootprintFragment extends BaseRVFragment {
 
     @Override
     protected void initView() {
-        initAdapter(new MyCollectAdapter(getAllData()),true,false);
+       /* initAdapter(new MyCollectAdapter(getAllData()),true,false);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
         if(mTitle.equals("全部")){
             mAdapter.setNewData(getAllData());
@@ -47,7 +47,7 @@ public class MyFootprintFragment extends BaseRVFragment {
         }
         else if(mTitle.equals("混纺纱")){
             mAdapter.setNewData(getData5());
-        }
+        }*/
     }
     private List<String> getAllData(){
         List<String> data=new ArrayList<>();

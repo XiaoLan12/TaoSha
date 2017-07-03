@@ -10,6 +10,7 @@ import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseRVFragment;
+import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.ui.home.yran.YarnActivity;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -20,8 +21,9 @@ import java.util.List;
  * Created by lan on 2017/6/26.
  */
 
-public class MyCollectFragment extends BaseRVFragment {
+public class MyCollectFragment extends BaseRVFragment<MyCollectPresenter,CollectListBean.Favorite> {
     private String mTitle;
+    private List<CollectListBean.Favorite> mDataList=new ArrayList<>();
 
     public static MyCollectFragment getInstance(String title) {
         MyCollectFragment sf = new MyCollectFragment();
@@ -35,9 +37,10 @@ public class MyCollectFragment extends BaseRVFragment {
 
     @Override
     protected void initView() {
-        initAdapter(new MyCollectAdapter(getAllData()),true,false);
+        initAdapter(new MyCollectAdapter(mDataList),true,false);
+        mPresenter.loadCollect(240,165);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
-        if(mTitle.equals("全部")){
+      /*  if(mTitle.equals("全部")){
             mAdapter.setNewData(getAllData());
         }else if(mTitle.equals("棉纺纱")){
             mAdapter.setNewData(getData1());
@@ -61,7 +64,7 @@ public class MyCollectFragment extends BaseRVFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 startActivity(YarnActivity.class);
             }
-        });
+        });*/
 
     }
     private List<String> getAllData(){
