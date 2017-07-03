@@ -5,4 +5,5 @@ package com.yizhisha.taosha;
  */
 public class AppConstant {
     public static final String HOME_CURRENT_TAB_POSITION="HOME_CURRENT_TAB_POSITION";
+    public static final String IMAGE_URL="http://www.taoshamall.com/data/attached/ads/";
 }

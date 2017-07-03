@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.bean.json.IndexPPT;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import retrofit2.http.GET;
@@ -20,4 +21,8 @@ public interface ApiService {
     //获得收藏列表
     @GET("ios/ucenter/favorite/")
     Observable<CollectListBean> getCollectList(@Query("uid") int uid,@Query("pid") int pid);
+    //获得收藏列表
+    @GET("ios/index/")
+    Observable<IndexPPT> getPPT();
+
 }
