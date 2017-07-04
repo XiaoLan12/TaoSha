@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import com.yizhisha.taosha.adapter.HomeYarnTypeAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
 import com.yizhisha.taosha.ui.home.selectyarn.SelectYarnActivity;
+import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.GridSpacingItemDecoration;
 import com.yizhisha.taosha.widget.SpacesItemDecoration;
@@ -112,10 +114,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
         recycleview_type.setLayoutManager(linearLayoutManager);
         //设置间隔includeEdge
-        int spanCount = 5;
-        int spacing = 50;
-        boolean includeEdge = true;
-        recycleview_type.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+//        int spanCount =  DensityUtil.dip2px(5);
+//        int spacing = DensityUtil.dip2px(10);
+//        Log.e("HHH",spanCount+"---"+spacing);
+//        boolean includeEdge = true;
+//        recycleview_type.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
         homeYarnTypeEntityList=setData();
         homeYarnTypeAdapter=new HomeYarnTypeAdapter(homeYarnTypeEntityList);
         recycleview_type.setAdapter(homeYarnTypeAdapter);

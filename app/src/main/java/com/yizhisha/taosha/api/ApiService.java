@@ -6,8 +6,6 @@ import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
-import java.util.Map;
-
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
