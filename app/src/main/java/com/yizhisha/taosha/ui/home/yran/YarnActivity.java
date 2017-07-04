@@ -13,7 +13,6 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.home.selectyarn.SelectYarnActivity;
-import com.yizhisha.taosha.ui.me.mycollect.MyCollectFragment;
 
 import java.util.ArrayList;
 
@@ -53,7 +52,7 @@ public class YarnActivity extends BaseActivity {
         mFragments.add(new ProductYarnFragnment());
         for (String title : new String[]{ "参数", "色卡", "详情","评论"}) {
 
-            mFragments.add(MyCollectFragment.getInstance(title));
+            //mFragments.add(MyCollectFragment.getInstance(title));
         }
 
         for (int i = 0; i < mTitles.length; i++) {

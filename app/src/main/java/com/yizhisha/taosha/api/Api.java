@@ -1,8 +1,12 @@
 package com.yizhisha.taosha.api;
 
+import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -52,8 +56,23 @@ public class Api {
         return service.getUserInfo(uid);
     }
     //获得个人信息
-    public Observable<CollectListBean> loadCollectList(int uid,int pid){
-        return service.getCollectList(uid,pid);
+    public Observable<CollectListBean> loadCollectList(Map<String, String> param){
+        return service.getCollectList(param);
     }
-
+    //获得个人资料
+    public Observable<PersonalDataBean> loadPersonalData(int uid){
+        return service.getPersonalData(uid);
+    }
+    //修改个人资料
+    public Observable<RequestStatusBean> changePersonalData(Map<String,String> map) {
+        return service.changePersonalData(map);
+    }
+    //获得收货列表
+    public Observable<AddressListBean> loadAddressList(int uid){
+        return service.getAddressList(uid);
+    }
+    //新增收货地址
+    public Observable<RequestStatusBean> addAddress(Map<String,String> map){
+        return service.addAddress(map);
+    }
 }

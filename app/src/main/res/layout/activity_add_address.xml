@@ -24,11 +24,13 @@
         <TextView
             style="@style/TS.Theme.Widget.Text"
             android:text="收货人:"/>
+
         <EditText
+            android:id="@+id/consignee_address_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"/>
-        </LinearLayout>
+            android:background="@null" />
+    </LinearLayout>
         <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
             android:layout_below="@+id/addaddress_ll1"
             android:layout_marginLeft="@dimen/dp_10"
@@ -45,6 +47,7 @@
                 style="@style/TS.Theme.Widget.Text"
                 android:text="联系电话:"/>
             <EditText
+                android:id="@+id/phone_address_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"/>
@@ -88,6 +91,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:text="详细地址:"/>
         <EditText
+            android:id="@+id/detailaddress_address_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"/>
@@ -123,6 +127,7 @@
             android:layout_marginRight="@dimen/dp_10"
             />
         <TextView
+            android:id="@+id/sava_address_tv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:text="保存"

@@ -19,22 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.me.settin.SettinActivity" />
-        <activity android:name=".ui.me.settin.SetInfoActivity" />
-        <activity android:name=".ui.me.settin.changeinfo.ChangeUserNameActivity" />
-        <activity android:name=".ui.me.myorder.MyOrderAcitvity" />
-        <activity android:name=".ui.me.myorder.OrderDetailsActivity" />
-        <activity android:name=".ui.me.mycollect.MyCollectActivity" />
-        <activity android:name=".ui.me.myfootprint.MyFootprintActivity" />
-        <activity android:name=".ui.me.accountingcenter.AccountCenterActivity" />
-        <activity android:name=".ui.me.freesample.FreeSampleActivity" />
-        <activity android:name=".ui.me.myrating.MyRatingActivity" />
-        <activity android:name=".ui.me.contactus.ContactUsActivity" />
-        <activity android:name=".ui.me.abouttaosha.AboutActivity" />
-        <activity android:name=".ui.me.abouttaosha.AgreementStatementActivity" />
-        <activity android:name=".ui.me.manageaddress.MyAddressActivity" />
-        <activity android:name=".ui.me.manageaddress.AddAddressActivity" />
-        <activity android:name=".ui.login.PhoneLoginActivity" />
+        <activity android:name=".ui.me.activity.SettinActivity" />
+        <activity android:name=".ui.me.activity.SetInfoActivity" />
+        <activity android:name=".ui.me.activity.ChangeUserNameActivity" />
+        <activity android:name=".ui.me.activity.MyOrderAcitvity" />
+        <activity android:name=".ui.me.activity.OrderDetailsActivity" />
+        <activity android:name=".ui.me.activity.MyCollectActivity" />
+        <activity android:name=".ui.me.activity.MyFootprintActivity" />
+        <activity android:name=".ui.me.activity.AccountCenterActivity" />
+        <activity android:name=".ui.me.activity.FreeSampleActivity" />
+        <activity android:name=".ui.me.activity.MyRatingActivity" />
+        <activity android:name=".ui.me.activity.ContactUsActivity" />
+        <activity android:name=".ui.me.activity.AboutActivity" />
+        <activity android:name=".ui.me.activity.AgreementStatementActivity" />
+        <activity android:name=".ui.me.activity.MyAddressActivity" />
+        <activity android:name=".ui.me.activity.AddAddressActivity" />
         <activity android:name=".ui.login.LoginFragmentActivity"></activity>
         <activity android:name=".ui.home.SearchActivity"></activity>
         <activity android:name=".ui.home.selectyarn.SelectYarnActivity"></activity>

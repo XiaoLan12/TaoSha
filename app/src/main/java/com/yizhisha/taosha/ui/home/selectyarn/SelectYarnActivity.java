@@ -14,7 +14,6 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.home.SearchActivity;
 import com.yizhisha.taosha.ui.home.yran.ProductYarnFragnment;
-import com.yizhisha.taosha.ui.me.mycollect.MyCollectFragment;
 
 import java.util.ArrayList;
 
@@ -52,7 +51,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         //设置状态栏颜色
         StatusBarCompat.setStatusBarColor(SelectYarnActivity.this, this.getResources().getColor(R.color.red3));
         for (String title : mTitles) {
-            mFragments.add(MyCollectFragment.getInstance(title));
+            //mFragments.add(MyCollectFragment.getInstance(title));
         }
 
         for (int i = 0; i < mTitles.length; i++) {

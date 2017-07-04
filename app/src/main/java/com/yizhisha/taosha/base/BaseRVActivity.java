@@ -18,15 +18,15 @@ import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 import java.lang.reflect.Constructor;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by lan on 2017/6/23.
  * ecyclerView的BseActivity
  */
 public abstract class BaseRVActivity<P extends BasePresenter,T> extends BaseActivity<P> implements
 SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
-    @Bind(R.id.recyclerview)
     protected RecyclerView mRecyclerView;
-    //@Bind(R.id.swiperefreshlayout)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected BaseQuickAdapter<T,BaseViewHolder> mAdapter;
 
@@ -36,12 +36,20 @@ SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
      * 初始化配置
      */
     protected void initAdapter(boolean refreshable, boolean loadmoreable) {
+            mRecyclerView= ButterKnife.findById(this,R.id.recyclerview);
+        if (mRecyclerView != null) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setNestedScrollingEnabled(false);
+            mRecyclerView.setAdapter(mAdapter);
+        }
         if (mAdapter != null) {
             if (loadmoreable&&mRecyclerView!=null) {
                 mAdapter.setOnLoadMoreListener(this, mRecyclerView);
                 mAdapter.setLoadMoreView(new CustomLoadMoreView());
             }
-            if (refreshable && mSwipeRefreshLayout != null) {
+            if (refreshable) {
+                mSwipeRefreshLayout= ButterKnife.findById(this,R.id.swiperefreshlayout);
                 //改变加载显示的颜色
                 mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
                         RescourseUtil.getColor(R.color.red));
@@ -51,12 +59,7 @@ SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
             }
 
         }
-        if (mRecyclerView != null) {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setNestedScrollingEnabled(false);
-            mRecyclerView.setAdapter(mAdapter);
-        }
+
 
     }
 

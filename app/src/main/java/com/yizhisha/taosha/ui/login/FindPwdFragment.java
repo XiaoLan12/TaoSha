@@ -8,7 +8,6 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.ui.me.manageaddress.AddAddressActivity;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 

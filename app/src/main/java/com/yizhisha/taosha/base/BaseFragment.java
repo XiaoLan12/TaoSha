@@ -37,7 +37,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,mFragmentRootView);
+        ButterKnife.bind(this,view);
         mPresenter = TUtil.getT(this, 0);
         if(mPresenter!=null){
             mPresenter.mContext=activity;
