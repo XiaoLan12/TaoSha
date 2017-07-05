@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.me.presenter;
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.ui.me.contract.MyAddressContract;
 
 import java.util.Map;
@@ -33,5 +34,24 @@ public class MyAddressPresenter extends MyAddressContract.Presenter{
                    mView.loadFail(message);
             }
         });
+    }
+
+    @Override
+    public void deleteAddress(int id) {
+        addSubscrebe(Api.getInstance().deleteAddress(id),
+                new RxSubscriber<RequestStatusBean>(mContext,true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean requestStatusBean) {
+                        if(requestStatusBean.getStatus().equals("y")){
+                            mView.deleteAddress();
+                        }else{
+                            mView.deleteFail(requestStatusBean.getInfo());
+                        }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                            mView.deleteFail(message);
+                    }
+                });
     }
 }

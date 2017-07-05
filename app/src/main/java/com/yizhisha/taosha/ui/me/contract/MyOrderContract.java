@@ -2,21 +2,19 @@ package com.yizhisha.taosha.ui.me.contract;
 
 import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
-import com.yizhisha.taosha.bean.json.AddressListBean;
-import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.MyOrderListBean;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by lan on 2017/7/4.
+ * Created by lan on 2017/7/5.
  */
 
-public interface MyAddressContract {
+public interface MyOrderContract {
     interface View extends BaseView {
-        void loadAddressSuccess(List<AddressListBean.Address> data);
-
-        void deleteAddress();
+        void loadOrderSuccess(List<MyOrderListBean.Order> data);
 
         void showLoading();
 
@@ -25,14 +23,11 @@ public interface MyAddressContract {
         void showEmpty();
 
         void loadFail(String msg);
-
-        void deleteFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
-        public abstract void loadAddress(int uid,boolean isShowLoad);
-        public abstract void deleteAddress(int id);
+        public abstract void loadOrder(Map<String, String> param, boolean isShowLoad);
 
         @Override
         public void onStart() {

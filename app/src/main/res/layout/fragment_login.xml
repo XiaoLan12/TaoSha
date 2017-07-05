@@ -56,13 +56,14 @@
         android:textSize="@dimen/font_normal"
         android:textColorHint="@color/common_h2"
         android:hint="请输入登录密码"
+        android:password="true"
         android:drawableLeft="@drawable/icon_delete"/>
         <ImageView
             android:id="@+id/isShow_pwd_iv"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_delete" />
+            android:src="@drawable/icon_pwd_noshow" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:id="@+id/login_view2"

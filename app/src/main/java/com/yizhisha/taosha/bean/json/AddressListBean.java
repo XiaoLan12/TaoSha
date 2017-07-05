@@ -1,12 +1,13 @@
 package com.yizhisha.taosha.bean.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by lan on 2017/7/4.
  */
 
-public class AddressListBean {
+public class AddressListBean implements  Serializable{
     private List<Address> address ;
 
     public List<Address> getAddress() {
@@ -17,10 +18,10 @@ public class AddressListBean {
         this.address = address;
     }
 
-    public class Address {
-        private String id;
+    public class Address implements Serializable{
+        private int id;
 
-        private String uid;
+        private int uid;
 
         private String linkman;
 
@@ -30,16 +31,16 @@ public class AddressListBean {
 
         private String index;
 
-        public void setId(String id){
+        public void setId(int id){
             this.id = id;
         }
-        public String getId(){
+        public int getId(){
             return this.id;
         }
-        public void setUid(String uid){
+        public void setUid(int uid){
             this.uid = uid;
         }
-        public String getUid(){
+        public int getUid(){
             return this.uid;
         }
         public void setLinkman(String linkman){

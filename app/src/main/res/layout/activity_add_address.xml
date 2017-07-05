@@ -68,7 +68,14 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_centerVertical="true"
             android:text="所在地区:"/>
+        <TextView
+            android:id="@+id/area_address_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/area_address_iv"
+            />
         <ImageView
+            android:id="@+id/area_address_iv"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:src="@drawable/icon_right"

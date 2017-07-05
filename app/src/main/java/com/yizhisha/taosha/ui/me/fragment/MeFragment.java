@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.me.activity.AboutActivity;
 import com.yizhisha.taosha.ui.me.activity.AccountCenterActivity;
 import com.yizhisha.taosha.ui.me.activity.ContactUsActivity;
@@ -78,8 +79,8 @@ public class MeFragment extends BaseFragment{
                 startActivity(ContactUsActivity.class);
                 break;
             case R.id.abouttaosha_rl:
-                startActivity(AboutActivity.class);
-                //startActivity(LoginFragmentActivity.class);
+                //startActivity(AboutActivity.class);
+                startActivity(LoginFragmentActivity.class);
                 break;
         }
     }

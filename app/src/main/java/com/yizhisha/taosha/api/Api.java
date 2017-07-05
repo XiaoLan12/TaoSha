@@ -1,6 +1,8 @@
 package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
@@ -74,5 +76,33 @@ public class Api {
     //新增收货地址
     public Observable<RequestStatusBean> addAddress(Map<String,String> map){
         return service.addAddress(map);
+    }
+    //删除收货地址
+    public Observable<RequestStatusBean> deleteAddress(int id){
+        return service.deleteAddress(id);
+    }
+    //免费拿样
+    public Observable<FreeSampleBean> loadFreeSample(Map<String,String> map){
+        return service.getFreeSample(map);
+    }
+    //获得订单
+    public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
+        return service.getOrderList(map);
+    }
+    //登录
+    public Observable<RequestStatusBean> login(Map<String,String> map){
+        return service.Login(map);
+    }
+    //注册
+    public Observable<RequestStatusBean> register(Map<String,String> map){
+        return service.Register(map);
+    }
+    //找回密码
+    public Observable<RequestStatusBean> findPwd(Map<String,String> map){
+        return service.FindPwd(map);
+    }
+    //获取验证码
+    public Observable<RequestStatusBean> getCode(Map<String,String> map){
+        return service.getCode(map);
     }
 }

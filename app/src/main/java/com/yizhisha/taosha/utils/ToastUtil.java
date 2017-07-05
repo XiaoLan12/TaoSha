@@ -78,24 +78,28 @@ public class ToastUtil {
      * 显示在顶部的Short的Toast
      */
     public static  void showTopShortToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_SHORT)
-                .setGravity(Gravity.TOP,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP,0,0);
+        toast.show();
+
     }
     /**
      * @param msg
      * 显示在中间的Short的Toast
      */
     public static  void showCenterShortToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_SHORT)
-                .setGravity(Gravity.CENTER,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
     /**
      * @param msg
      * 显示在底部的Short的Toast
      */
     public static  void showbottomShortToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_SHORT)
-                .setGravity(Gravity.BOTTOM,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
     }
 
     /**
@@ -103,24 +107,28 @@ public class ToastUtil {
      * 显示在顶部的Short的Toast
      */
     public static  void showTopLongToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_LONG)
-                .setGravity(Gravity.TOP,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP,0,0);
+        toast.show();
+
     }
     /**
      * @param msg
      * 显示在中间的Short的Toast
      */
     public static  void showCenterLongToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_LONG)
-                .setGravity(Gravity.CENTER,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
     /**
      * @param msg
      * 显示在底部的Long的Toast
      */
     public static  void showbottomLongToast(String msg){
-        getSingleToast(msg, Toast.LENGTH_LONG)
-                .setGravity(Gravity.BOTTOM,0,0);
+        Toast toast=getSingleToast(msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
     }
 
 }

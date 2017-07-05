@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.ui.me.contract.AddAddressContract;
 import com.yizhisha.taosha.ui.me.presenter.AddAddressPresenter;
@@ -32,6 +34,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
     EditText mEtPhone;
     @Bind(R.id.detailaddress_address_et)
     EditText mEtDetailAddress;
+    @Bind(R.id.area_address_tv)
+    TextView mTvArea;
     @Bind(R.id.setnormal_addaddress_cb)
     CheckBox mCbNormal;
 
@@ -49,6 +53,10 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
         type=bundle.getInt("TYPE");
         if(type==1){
             toolbar.setTitle("修改地址");
+            AddressListBean.Address address= (AddressListBean.Address) bundle.getSerializable("DATA");
+            mEtConsignee.setText(address.getLinkman());
+            mEtPhone.setText(address.getMobile());
+            mEtDetailAddress.setText(address.getAddress());
         }
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
@@ -56,6 +64,7 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
                 ActivityManager.getActivityMar().finishActivity(AddAddressActivity.this);
             }
         });
+
     }
     @Override
     protected void initView() {
@@ -88,25 +97,24 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
         // 账号为空时提示
         if (consignee == null || consignee.trim().equals("")) {
             ToastUtil.showCenterShortToast("请填写收件人");
-        } else {
-            if (phone == null || phone.trim().equals("")) {
-                ToastUtil.showCenterShortToast("请输入手机号码");
-            }
-            else {
-                if (CheckUtils.isMobileNO(phone)) {
-                    ToastUtil.showCenterShortToast("请输入正确的手机号码");
-                }
-                else {
-                    if (detailaddress == null || detailaddress.trim().equals("")) {
-                        ToastUtil.showCenterShortToast("请输入详细的收货地址");
-                    } else {
-                        return true;
-                    }
-                }
-            }
-
+            return false;
         }
-        return false;
+        if (phone == null || phone.trim().equals("")) {
+            ToastUtil.showCenterShortToast("请输入手机号码");
+            return false;
+        }
+
+        if (!CheckUtils.isMobileNO(phone)) {
+            ToastUtil.showCenterShortToast("请输入正确的手机号码");
+            return false;
+        }
+
+        if (detailaddress == null || detailaddress.trim().equals("")) {
+            ToastUtil.showCenterShortToast("请输入详细的收货地址");
+            return false;
+        }
+
+        return true;
     }
     @OnClick({R.id.sava_address_tv})
     @Override

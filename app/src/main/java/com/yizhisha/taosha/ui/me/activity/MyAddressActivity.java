@@ -16,6 +16,7 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.ui.me.contract.MyAddressContract;
 import com.yizhisha.taosha.ui.me.presenter.MyAddressPresenter;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
@@ -56,7 +57,12 @@ public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,Address
                     case R.id.edit_myaddress_tv:
                         Bundle bundle=new Bundle();
                         bundle.putInt("TYPE",1);
+                        bundle.putSerializable("DATA",dataList.get(position));
                         startActivityForResult(AddAddressActivity.class,bundle,2);
+                        break;
+                    case R.id.delete_myaddress_tv:
+                        mPresenter.deleteAddress(dataList.get(position).getId());
+                        dataList.remove(position);
                         break;
                 }
             }
@@ -74,7 +80,16 @@ public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,Address
     public void loadAddressSuccess(List<AddressListBean.Address> data) {
         mSwipeRefreshLayout.setRefreshing(false);
         dataList.clear();
-        mAdapter.setNewData(data);
+        dataList.addAll(data);
+        mAdapter.setNewData(dataList);
+    }
+
+    @Override
+    public void deleteAddress() {
+        mAdapter.setNewData(dataList);
+        if(dataList.size()<=0){
+            mLoadingView.loadSuccess(true);
+        }
     }
 
     @Override
@@ -105,6 +120,12 @@ public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,Address
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
     }
+
+    @Override
+    public void deleteFail(String msg) {
+        ToastUtil.showbottomShortToast(msg);
+    }
+
     @OnClick({R.id.add_address_ll})
     @Override
     public void onClick(View v) {

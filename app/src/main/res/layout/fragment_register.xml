@@ -34,7 +34,7 @@
         android:layout_below="@+id/login_view1"
         android:gravity="center_vertical"
         >
-    <com.yizhisha.taosha.widget.ClearEditText
+    <EditText
         android:id="@+id/code_register_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,6 +72,7 @@
             android:hint="@string/hint_set_pwd"
             android:drawablePadding="@dimen/dp_5"
             android:padding="@dimen/dp_10"
+            android:password="true"
             android:textColorHint="@color/common_h2"
             android:drawableLeft="@drawable/icon_delete"/>
         <ImageView
@@ -79,7 +80,7 @@
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_delete" />
+            android:src="@drawable/icon_pwd_noshow" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -100,6 +101,7 @@
             android:textSize="@dimen/font_normal"
             android:hint="@string/hint_again_pwd"
             android:drawablePadding="@dimen/dp_5"
+            android:password="true"
             android:textColorHint="@color/common_h2"
             android:drawableLeft="@drawable/icon_delete"/>
         <ImageView
@@ -107,7 +109,7 @@
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_delete" />
+            android:src="@drawable/icon_pwd_noshow" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -154,6 +156,7 @@
             android:id="@+id/terms_register_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/terms_cb"
+            android:layout_toLeftOf="@+id/login_register_tv"
             android:text="我已同意(大浪淘沙服务条款)"/>
         <TextView
             android:id="@+id/login_register_tv"

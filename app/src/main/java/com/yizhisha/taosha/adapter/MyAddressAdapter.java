@@ -28,5 +28,6 @@ public class MyAddressAdapter extends BaseQuickAdapter<AddressListBean.Address,B
             helper.setChecked(R.id.seletaddress_myaddress_cb,false);
         }
         helper.addOnClickListener(R.id.edit_myaddress_tv);
+        helper.addOnClickListener(R.id.delete_myaddress_tv);
     }
 }
