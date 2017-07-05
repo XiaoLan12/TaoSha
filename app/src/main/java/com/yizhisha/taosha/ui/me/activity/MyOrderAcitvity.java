@@ -2,27 +2,13 @@ package com.yizhisha.taosha.ui.me.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
-import com.flyco.tablayout.listener.CustomTabEntity;
-import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
-import com.yizhisha.taosha.base.BaseRVActivity;
+import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.bean.MyOrderTabEntity;
-import com.yizhisha.taosha.bean.json.MyOrderListBean;
-import com.yizhisha.taosha.ui.me.fragment.FreeSampleFragment;
 import com.yizhisha.taosha.ui.me.fragment.MyOrderFragment;
 
 import java.util.ArrayList;
@@ -30,7 +16,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class MyOrderAcitvity extends BaseRVActivity {
+public class MyOrderAcitvity extends BaseActivity {
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.slidingtablayout)
@@ -56,9 +42,6 @@ public class MyOrderAcitvity extends BaseRVActivity {
     }
     @Override
     protected void initView() {
-        List<MyOrderListBean> list=new ArrayList<>();
-        MyOrderListBean myOrderListBean=new MyOrderListBean();
-        myOrderListBean.getOrder().get(0).getCompany();
         for (int type : mType) {
             mFragments.add(MyOrderFragment.getInstance(type));
         }
@@ -138,9 +121,4 @@ public class MyOrderAcitvity extends BaseRVActivity {
         return data;
     }
 
-    @Override
-    public void onLoadMoreRequested() {
-        super.onLoadMoreRequested();
-            mAdapter.loadMoreEnd();
-    }
 }

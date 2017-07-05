@@ -1,22 +1,19 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.base.BaseRVFragment;
 import com.yizhisha.taosha.bean.json.CollectListBean;
-import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.ui.home.yran.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 import com.yizhisha.taosha.ui.me.presenter.MyCollectPresenter;
+import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -31,10 +28,16 @@ import butterknife.Bind;
  * Created by lan on 2017/6/26.
  */
 
-public class MyCollectFragment extends BaseRVFragment<MyCollectPresenter,CollectListBean.Favorite> implements
- MyCollectConstract.View{
+public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implements
+ MyCollectConstract.View, SwipeRefreshLayout.OnRefreshListener{
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.swiperefreshlayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private MyCollectAdapter mAdapter;
     private int mType=0;
     private List<CollectListBean.Favorite> dataList=new ArrayList<>();
 
@@ -49,7 +52,26 @@ public class MyCollectFragment extends BaseRVFragment<MyCollectPresenter,Collect
     }
     @Override
     protected void initView() {
-        initAdapter(new MyCollectAdapter(dataList),true,false);
+        initAdapter();
+        dataList.clear();
+        if(mAdapter.getData().size()<=0){
+            load(mType,true);
+        }
+
+
+    }
+    private void initAdapter(){
+        mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
+                RescourseUtil.getColor(R.color.red));
+        //设置刷新出现的位置
+        mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        mAdapter=new MyCollectAdapter(dataList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -57,12 +79,6 @@ public class MyCollectFragment extends BaseRVFragment<MyCollectPresenter,Collect
                 startActivity(YarnActivity.class);
             }
         });
-        dataList.clear();
-        if(mAdapter.getData().size()<=0){
-            load(mType,true);
-        }
-
-
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
@@ -75,9 +91,9 @@ public class MyCollectFragment extends BaseRVFragment<MyCollectPresenter,Collect
 
     @Override
     public void onRefresh() {
-        super.onRefresh();
         load(mType,false);
     }
+
     @Override
     public void loadCollectSuccess(List<CollectListBean.Favorite> data) {
         mSwipeRefreshLayout.setRefreshing(false);

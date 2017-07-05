@@ -2,7 +2,7 @@ package com.yizhisha.taosha.ui.me.fragment;
 
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.base.BaseRVFragment;
+import com.yizhisha.taosha.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by lan on 2017/6/26.
  */
 
-public class MyFootprintFragment extends BaseRVFragment {
+public class MyFootprintFragment extends BaseFragment {
     private String mTitle;
     public static MyFootprintFragment getInstance(String title) {
         MyFootprintFragment sf = new MyFootprintFragment();

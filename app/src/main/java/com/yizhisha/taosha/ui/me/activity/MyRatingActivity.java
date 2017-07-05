@@ -15,7 +15,6 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.base.BaseRVActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.me.fragment.HaveRatingFragment;

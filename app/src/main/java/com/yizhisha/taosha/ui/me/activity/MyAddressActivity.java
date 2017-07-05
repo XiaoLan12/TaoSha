@@ -3,7 +3,8 @@ package com.yizhisha.taosha.ui.me.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,13 +12,15 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyAddressAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
-import com.yizhisha.taosha.base.BaseRVActivity;
+import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.ui.me.contract.MyAddressContract;
 import com.yizhisha.taosha.ui.me.presenter.MyAddressPresenter;
+import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
+import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +28,18 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,AddressListBean.Address> implements
-        MyAddressContract.View{
+public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implements
+        MyAddressContract.View,SwipeRefreshLayout.OnRefreshListener{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.swiperefreshlayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private MyAddressAdapter mAdapter;
     private List<AddressListBean.Address> dataList=new ArrayList<>();
     @Override
     protected int getLayoutId() {
@@ -49,7 +58,22 @@ public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,Address
 
     @Override
     protected void initView() {
-        initAdapter(new MyAddressAdapter(dataList),true,false);
+        initAdapter();
+        mPresenter.loadAddress(240,true);
+    }
+    private void initAdapter(){
+        mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
+                RescourseUtil.getColor(R.color.red));
+        //设置刷新出现的位置
+        mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        mAdapter=new MyAddressAdapter(dataList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -67,12 +91,9 @@ public class MyAddressActivity extends BaseRVActivity<MyAddressPresenter,Address
                 }
             }
         });
-        mPresenter.loadAddress(240,true);
     }
-
     @Override
     public void onRefresh() {
-        super.onRefresh();
         mPresenter.loadAddress(240,false);
     }
 

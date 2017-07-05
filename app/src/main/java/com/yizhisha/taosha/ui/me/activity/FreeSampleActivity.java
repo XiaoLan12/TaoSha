@@ -2,40 +2,28 @@ package com.yizhisha.taosha.ui.me.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
-import com.flyco.tablayout.listener.CustomTabEntity;
-import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
-import com.yizhisha.taosha.base.BaseRVActivity;
+import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.bean.FreeSmpleEntity;
-import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.me.fragment.FreeSampleFragment;
-import com.yizhisha.taosha.ui.me.fragment.MyCollectFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 
-public class FreeSampleActivity extends BaseRVActivity {
+public class FreeSampleActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.slidingtablayout)
     SlidingTabLayout slidingTabLayout;
     @Bind(R.id.vp)
     ViewPager viewPager;
-    private String[] mTitles = {"全部","待发货", "待收货","已完成"};
-    private int[] mType= {-1, 0, 1,2};
+    private String[] mTitles = {"全部","待发货","已完成"};
+    private int[] mType= {-1, 0, 1};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     @Override
