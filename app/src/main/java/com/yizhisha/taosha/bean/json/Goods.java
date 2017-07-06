@@ -1,10 +1,15 @@
 package com.yizhisha.taosha.bean.json;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.yizhisha.taosha.adapter.MyOrderAdapter;
+
 /**
  * Created by lan on 2017/7/5.
  */
 
-public class Goods {
+public class Goods{
+
+
     private int gid;
 
     private String title;
@@ -113,5 +118,22 @@ public class Goods {
 
     public void setIs_ship(int is_ship) {
         this.is_ship = is_ship;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "gid=" + gid +
+                ", title='" + title + '\'' +
+                ", pname='" + pname + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", litpic='" + litpic + '\'' +
+                ", detail='" + detail + '\'' +
+                ", totalprice=" + totalprice +
+                ", remark='" + remark + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", is_ship=" + is_ship +
+                '}';
     }
 }

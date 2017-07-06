@@ -4,6 +4,7 @@ import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.Order;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public interface MyOrderContract {
     interface View extends BaseView {
-        void loadOrderSuccess(List<MyOrderListBean.Order> data);
+        void loadOrderSuccess(List<Order> data);
 
         void showLoading();
 
