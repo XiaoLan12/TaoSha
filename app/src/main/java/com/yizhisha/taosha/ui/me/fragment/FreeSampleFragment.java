@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.FreeSampleAdapter;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
@@ -82,7 +83,7 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
-        bodyMap.put("uid",String.valueOf(240));
+        bodyMap.put("uid",String.valueOf(AppConstant.UID));
         if(type!=-1){
             bodyMap.put("status",String.valueOf(type));
         }

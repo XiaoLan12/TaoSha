@@ -20,7 +20,7 @@ public class MyCollectActivity extends BaseActivity {
     BaseToolbar toolbar;
     @Bind(R.id.slidingtablayout)
     SlidingTabLayout slidingTabLayout;
-    @Bind(R.id.vp)
+    @Bind(R.id.viewpager)
     ViewPager viewPager;
     private String[] mTitles = {"全部", "棉纺纱", "麻纺纱", "毛纺纱","化纤纱","混纺纱","花式纱"};
     private int[] mType= {0, 544, 539, 540,545,541,542};

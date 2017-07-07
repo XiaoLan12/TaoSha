@@ -2,6 +2,8 @@ package com.yizhisha.taosha.common.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.*;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,43 +18,48 @@ import com.yizhisha.taosha.R;
  */
 public class LoadingDialog {
     /** 加载数据对话框 */
-    private static Dialog mLoadingDialog;
+    private  Dialog mLoadingDialog;
+    private String msg;
+    private boolean isCancle;
+    private Context mcontext;
+    /**
+     * 显示加载对话框
+     * @param context 上下文
+     */
+    public LoadingDialog(Context context){
+       this(context,"加载中....",true);
+    }
     /**
      * 显示加载对话框
      * @param context 上下文
      * @param msg 对话框显示内容
      * @param cancelable 对话框是否可以取消
      */
-    public static Dialog showDialogForLoading(Activity context, String msg, boolean cancelable) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+    public LoadingDialog(Context context, String msg, boolean cancelable){
+        this.mcontext=context;
+        this.msg=msg;
+        this.isCancle=cancelable;
+        init();
+    }
+    private void init(){
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView)view.findViewById(R.id.id_tv_loading_dialog_text);
         loadingText.setText(msg);
 
-        mLoadingDialog = new Dialog(context, R.style.CustomProgressDialog);
-        mLoadingDialog.setCancelable(cancelable);
+        mLoadingDialog = new Dialog(mcontext, R.style.CustomProgressDialog);
+        mLoadingDialog.setCancelable(isCancle);
         mLoadingDialog.setCanceledOnTouchOutside(false);
         mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mLoadingDialog.show();
-        return  mLoadingDialog;
     }
-
-    public static Dialog showDialogForLoading(Activity context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
-        TextView loadingText = (TextView)view.findViewById(R.id.id_tv_loading_dialog_text);
-        loadingText.setText("加载中...");
-
-        mLoadingDialog = new Dialog(context, R.style.CustomProgressDialog);
-        mLoadingDialog.setCancelable(true);
-        mLoadingDialog.setCanceledOnTouchOutside(false);
-        mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mLoadingDialog.show();
-        return  mLoadingDialog;
+    public void show(){
+        if(mLoadingDialog != null) {
+            mLoadingDialog.show();
+        }
     }
-
     /**
      * 关闭加载对话框
      */
-    public static void cancelDialogForLoading() {
+    public  void cancelDialog() {
         if(mLoadingDialog != null) {
             mLoadingDialog.cancel();
         }

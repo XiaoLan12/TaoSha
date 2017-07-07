@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
@@ -40,7 +41,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
 
     @Override
     protected void initView() {
-        mPresenter.loadPersonalData(240);
+        mPresenter.loadPersonalData(AppConstant.UID);
     }
     @Override
     public void loadPersonalDataSuccess(PersonalDataBean personalDataBean) {
