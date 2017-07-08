@@ -2,6 +2,8 @@ package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.IndexPPTBean;
+import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
@@ -104,5 +106,15 @@ public class Api {
     //获取验证码
     public Observable<RequestStatusBean> getCode(Map<String,String> map){
         return service.getCode(map);
+    }
+
+    //首页轮播
+    public Observable<IndexPPTBean> getPPT(Map<String,String> map){
+        return service.getPPT(map);
+    }
+
+    //首页推荐纺纱6种
+    public Observable<IndexRecommendYarnBean> getRecommendYarn(Map<String,String> map){
+        return service.getRecommendYarn(map);
     }
 }

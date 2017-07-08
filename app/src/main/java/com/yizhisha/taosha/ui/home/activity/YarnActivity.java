@@ -1,4 +1,4 @@
-package com.yizhisha.taosha.ui.home.selectyarn;
+package com.yizhisha.taosha.ui.home.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,8 +12,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
-import com.yizhisha.taosha.ui.home.SearchActivity;
-import com.yizhisha.taosha.ui.home.yran.ProductYarnFragnment;
+import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
 
 import java.util.ArrayList;
 
@@ -25,10 +24,10 @@ import qiu.niorgai.StatusBarCompat;
  * Created by Administrator on 2017/7/2.
  */
 
-public class SelectYarnActivity extends BaseActivity implements View.OnClickListener{
+public class YarnActivity extends BaseActivity {
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-    private String[] mTitles = {"棉纱", "针型", "价格", "排序"};
+    private String[] mTitles = {"产品", "参数", "色卡", "详情","评论"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     @Bind(R.id.vp)
@@ -36,21 +35,23 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.img_back)
     ImageView img_back;
     private FragmentPagerAdapter mAdapter;
+
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_select_yarn;
+        return R.layout.activity_yarn;
     }
 
     @Override
     protected void initToolBar() {
 
     }
-
     @Override
     protected void initView() {
         //设置状态栏颜色
-        StatusBarCompat.setStatusBarColor(SelectYarnActivity.this, this.getResources().getColor(R.color.red3));
-        for (String title : mTitles) {
+        StatusBarCompat.setStatusBarColor(YarnActivity.this, this.getResources().getColor(R.color.gray1));
+        mFragments.add(new ProductYarnFragnment());
+        for (String title : new String[]{ "参数", "色卡", "详情","评论"}) {
+
             //mFragments.add(MyCollectFragment.getInstance(title));
         }
 
@@ -60,7 +61,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         commonTabLayout.setTabData(mTabEntities);
 
 
-        mAdapter = new FragmentPagerAdapter(SelectYarnActivity.this.getSupportFragmentManager()) {
+        mAdapter = new FragmentPagerAdapter(YarnActivity.this.getSupportFragmentManager()) {
             @Override
             public int getCount() {
                 return mFragments.size();
@@ -82,6 +83,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             }
 
             int lastPosition;
+
             @Override
             public void onPageSelected(int position) {
                 // 页面被选中
@@ -114,13 +116,14 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             }
         });
     }
+
     @OnClick({R.id.img_back})
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_back:
-                finish_Activity(SelectYarnActivity.this);
+                finish_Activity(YarnActivity.this);
                 break;
         }
     }

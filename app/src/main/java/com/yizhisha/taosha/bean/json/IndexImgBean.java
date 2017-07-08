@@ -4,7 +4,7 @@ package com.yizhisha.taosha.bean.json;
  * Created by Administrator on 2017/7/3.
  */
 
-public class IndexImg {
+public class IndexImgBean {
     private String img;
 
     public String getImg() {
@@ -17,7 +17,7 @@ public class IndexImg {
 
     @Override
     public String toString() {
-        return "IndexImg{" +
+        return "IndexImgBean{" +
                 "img='" + img + '\'' +
                 '}';
     }

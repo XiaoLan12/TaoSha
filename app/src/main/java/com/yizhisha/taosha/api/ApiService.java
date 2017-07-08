@@ -3,6 +3,8 @@ package com.yizhisha.taosha.api;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.IndexPPTBean;
+import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
@@ -71,4 +73,11 @@ public interface ApiService {
     Observable<RequestStatusBean> getCode(@QueryMap Map<String,String> map);
 
 
+    //首页轮播
+    @GET("ios/index/")
+    Observable<IndexPPTBean> getPPT(@QueryMap Map<String, String> param);
+
+    //首页推荐纺纱6种
+    @GET("ios/goods/goodsNew/")
+    Observable<IndexRecommendYarnBean> getRecommendYarn(@QueryMap Map<String, String> param);
 }

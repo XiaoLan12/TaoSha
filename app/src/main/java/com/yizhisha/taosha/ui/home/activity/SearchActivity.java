@@ -1,6 +1,5 @@
-package com.yizhisha.taosha.ui.home;
+package com.yizhisha.taosha.ui.home.activity;
 
-import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.HomeYarnTypeAdapter;
 import com.yizhisha.taosha.adapter.SearchAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.HomeYarnTypeEntity;

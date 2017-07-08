@@ -1,4 +1,4 @@
-package com.yizhisha.taosha.ui.home.yran;
+package com.yizhisha.taosha.ui.home.fragment;
 
 import android.view.View;
 import android.widget.ImageView;
