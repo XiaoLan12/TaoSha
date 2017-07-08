@@ -8,6 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
@@ -126,7 +127,7 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
                     return;
                 }
                 Map<String,String> map=new HashMap<>();
-                map.put("uid",String.valueOf(240));
+                map.put("uid",String.valueOf(AppConstant.UID));
                 map.put("index",String.valueOf(isNormal));
                 map.put("linkman",mEtConsignee.getText().toString());
                 map.put("area_app","广东省广州市");

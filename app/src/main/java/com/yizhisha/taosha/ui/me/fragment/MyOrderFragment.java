@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.bean.json.Goods;
+import com.yizhisha.taosha.bean.OrderDataHelper;
 import com.yizhisha.taosha.bean.json.Order;
-import com.yizhisha.taosha.bean.json.OrderBean;
 import com.yizhisha.taosha.ui.home.yran.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
@@ -23,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 
@@ -42,7 +39,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
 
     private MyOrderAdapter mAdapter;
     private int mType=0;
-    private ArrayList<Order> dataList=new ArrayList<>();
+    private ArrayList<Object> dataList=new ArrayList<>();
 
     public static MyOrderFragment getInstance(int type) {
         MyOrderFragment sf = new MyOrderFragment();
@@ -57,15 +54,17 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     @Override
     protected void initView() {
         initAdapter();
-        //if(mAdapter.getData().size()<=0){
+        if(mAdapter.getData().size()<=0){
             load(mType,true);
-        //}
+        }
     }
 
     private void load(int type,boolean isShowLoad){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(882));
-        map.put("status",String.valueOf(0));
+        if(type!=-1) {
+            map.put("status", String.valueOf(type));
+        }
         mPresenter.loadOrder(map,isShowLoad);
     }
     private void initAdapter(){
@@ -75,7 +74,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter=new MyOrderAdapter(dataList);
+        mAdapter=new MyOrderAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -86,25 +85,13 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     }
     @Override
     public void onRefresh() {
-
+        load(mType,false);
     }
     @Override
     public void loadOrderSuccess(List<Order> data) {
         dataList.clear();
-       /* for(int i=0;i<data.size();i++){
-            OrderBean orderBean=new OrderBean();
-            Order order=data.get(i);
-            orderBean.setOrder(order);
-            orderBean.setItemType(OrderBean.TYPE_1);
-            for(int j=0;j<order.getGoods().size();j++){
-                List<Goods> goodses=order.getGoods();
-
-            }
-            dataList.add(order);
-            order.setItemType(Order.TYPE_3);
-            dataList.add(order);
-        }*/
-        dataList.addAll(data);
+        mSwipeRefreshLayout.setRefreshing(false);
+        dataList=OrderDataHelper.getDataAfterHandle(data);
         mAdapter.setNewData(dataList);
 
     }

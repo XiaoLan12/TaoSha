@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyAddressAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
@@ -59,7 +60,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     @Override
     protected void initView() {
         initAdapter();
-        mPresenter.loadAddress(240,true);
+        mPresenter.loadAddress(AppConstant.UID,true);
     }
     private void initAdapter(){
         mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
@@ -94,7 +95,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     }
     @Override
     public void onRefresh() {
-        mPresenter.loadAddress(240,false);
+        mPresenter.loadAddress(AppConstant.UID,false);
     }
 
     @Override
@@ -133,7 +134,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
             @Override
             public void doRequestData() {
-                mPresenter.loadAddress(240,true);
+                mPresenter.loadAddress(AppConstant.UID,true);
             }
         });
         dataList.clear();
@@ -164,7 +165,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==2&&requestCode==2){
-            mPresenter.loadAddress(240,false);
+            mPresenter.loadAddress(AppConstant.UID,false);
         }
     }
 }

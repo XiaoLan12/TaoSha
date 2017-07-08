@@ -28,7 +28,7 @@ public class FreeSampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_order_acitvity;
+        return R.layout.activity_freesample;
     }
 
     @Override

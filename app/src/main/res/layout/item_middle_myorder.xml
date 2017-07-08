@@ -44,4 +44,5 @@
             android:text="￥33.50"
             android:textColor="@color/red1" />
     </RelativeLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
 </LinearLayout>

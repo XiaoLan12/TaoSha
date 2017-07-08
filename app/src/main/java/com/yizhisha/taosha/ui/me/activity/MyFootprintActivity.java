@@ -22,7 +22,7 @@ public class MyFootprintActivity extends BaseActivity {
     BaseToolbar toolbar;
     @Bind(R.id.slidingtablayout)
     SlidingTabLayout slidingTabLayout;
-    @Bind(R.id.vp)
+    @Bind(R.id.viewpager)
     ViewPager viewPager;
     private String[] mTitles = {"全部", "棉纺纱", "麻纺纱", "毛纺纱","化纤纱","混纺纱"};
     private ArrayList<Fragment> mFragments = new ArrayList<>();

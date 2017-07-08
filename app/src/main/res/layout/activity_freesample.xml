@@ -25,6 +25,7 @@
         tl:tl_indicator_color="@color/red1"
         tl:tl_textSelectColor="@color/red1"
         tl:tl_textBold="SELECT"
+        tl:tl_tab_space_equal="true"
         tl:tl_underline_color="@color/white"
         tl:tl_underline_height="1dp"/>
     <View

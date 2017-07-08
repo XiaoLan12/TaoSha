@@ -4,7 +4,7 @@ package com.yizhisha.taosha.bean.json;
  * Created by lan on 2017/7/6.
  */
 
-public class OrderHeadBean {
+public class OrderHeadBean{
     private int status;
     private String company;
 

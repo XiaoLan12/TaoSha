@@ -5,11 +5,9 @@ import com.yizhisha.taosha.bean.json.Order;
 import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.OrderHeadBean;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by admin on 2016/11/8.
@@ -25,8 +23,8 @@ public class OrderDataHelper {
      * @param resultList
      * @return
      */
-    public static List<Object> getDataAfterHandle(List<Order> resultList) {
-        List<Object> dataList = new ArrayList<Object>();
+    public static ArrayList<Object> getDataAfterHandle(List<Order> resultList) {
+        ArrayList<Object> dataList = new ArrayList<Object>();
 
         //遍历每一张大订单
         for (Order order : resultList) {
@@ -41,9 +39,11 @@ public class OrderDataHelper {
             //遍历每个大订单里面的小订单
             for (Goods orderGoodsItem : goodses) {
                 dataList.add(orderGoodsItem);
+
             }
             OrderFootBean orderFootBean=new OrderFootBean();
             orderFootBean.setTotalprice(order.getTotalprice());
+            orderFootBean.setStatus(order.getStatus());
             dataList.add(orderFootBean);
         }
         return dataList;

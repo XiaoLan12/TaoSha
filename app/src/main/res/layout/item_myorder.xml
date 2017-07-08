@@ -7,7 +7,5 @@
 
 
 
-    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_height="@dimen/dp_8"
-        />
+
 </LinearLayout>

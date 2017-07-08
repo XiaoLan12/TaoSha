@@ -16,6 +16,7 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     private Context mContext;
     private String msg;
     private boolean showDialog=true;
+    private LoadingDialog mLoadingDialog;
     public RxSubscriber(Context context, String msg, boolean showDialog){
         this.mContext = context;
         this.msg = msg;
@@ -33,7 +34,8 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
         super.onStart();
         if (showDialog) {
             try {
-                LoadingDialog.showDialogForLoading((Activity) mContext,msg,true);
+                mLoadingDialog=new LoadingDialog(mContext,msg,true);
+                mLoadingDialog.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,12 +45,19 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     @Override
     public void onCompleted(){
         if (showDialog)
-            LoadingDialog.cancelDialogForLoading();
+            if(mLoadingDialog!=null){
+                mLoadingDialog.cancelDialog();
+                mLoadingDialog=null;
+            }
     }
     @Override
     public void onError(Throwable e) {
-        if (showDialog)
-            LoadingDialog.cancelDialogForLoading();
+        if (showDialog){
+            if(mLoadingDialog!=null){
+                mLoadingDialog.cancelDialog();
+                mLoadingDialog=null;
+            }
+        }
         e.printStackTrace();
         //网络
         if (!NetWorkUtil.isNetConnected(App.getAppContext())) {

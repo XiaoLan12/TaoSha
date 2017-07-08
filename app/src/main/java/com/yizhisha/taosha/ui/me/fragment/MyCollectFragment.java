@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
@@ -82,7 +83,7 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
-        bodyMap.put("uid",String.valueOf(240));
+        bodyMap.put("uid",String.valueOf(AppConstant.UID));
         if(type!=0){
         bodyMap.put("pid",String.valueOf(type));
         }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -20,7 +21,7 @@
             android:textColor="@color/red1"
             android:layout_toLeftOf="@+id/tradelpaymentpay_myorder_tv"
             android:text="￥：33.50" />
-        <TextView
+        <!--<TextView
             android:id="@+id/tradeltotal_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/tradeltotal_myorder_tv"
@@ -30,7 +31,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_marginRight="@dimen/dp_5"
             android:layout_toLeftOf="@+id/tradeltotal_tv"
-            android:text="共1件商品" />
+            android:text="共1件商品" />-->
     </RelativeLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -97,4 +98,7 @@
             android:layout_marginRight="@dimen/dp_5"
             android:text="立即付款"/>
     </LinearLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+        android:layout_height="@dimen/dp_8"
+        />
 </LinearLayout>
