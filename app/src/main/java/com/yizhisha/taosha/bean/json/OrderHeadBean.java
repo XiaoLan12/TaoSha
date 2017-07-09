@@ -8,6 +8,16 @@ public class OrderHeadBean{
     private int status;
     private String company;
 
+    private String orderno;
+
+    public String getOrderno() {
+        return orderno;
+    }
+
+    public void setOrderno(String orderno) {
+        this.orderno = orderno;
+    }
+
     public int getStatus() {
         return status;
     }

@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,9 @@ import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.OrderDataHelper;
 import com.yizhisha.taosha.bean.json.Order;
+import com.yizhisha.taosha.bean.json.OrderHeadBean;
 import com.yizhisha.taosha.ui.home.yran.YarnActivity;
+import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
@@ -76,10 +79,31 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter=new MyOrderAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        /*mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+
+                if(dataList.get(position) instanceof OrderHeadBean) {
+                    OrderHeadBean orderHeadBean= (OrderHeadBean) dataList.get(position);
+                    orderno=orderHeadBean.getOrderno();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("ORDERNO",orderno);
+                    startActivity(OrderDetailsActivity.class,bundle);
+                }
+
+            }
+        });*/
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                String  orderno;
+                if(dataList.get(position) instanceof OrderHeadBean) {
+                    OrderHeadBean orderHeadBean= (OrderHeadBean) dataList.get(position);
+                    orderno=orderHeadBean.getOrderno();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("ORDERNO",orderno);
+                    startActivity(OrderDetailsActivity.class,bundle);
+                }
             }
         });
     }

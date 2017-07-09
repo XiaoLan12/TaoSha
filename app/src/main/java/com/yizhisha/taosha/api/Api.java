@@ -89,6 +89,10 @@ public class Api {
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
         return service.getOrderList(map);
     }
+    //获得订单详情
+    public Observable<MyOrderListBean> loadOrderDetails(Map<String,String> map){
+        return service.getOrderDetails(map);
+    }
     //登录
     public Observable<RequestStatusBean> login(Map<String,String> map){
         return service.Login(map);

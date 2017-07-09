@@ -11,386 +11,385 @@
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
         app:title="@string/oreder_details"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/img_full_screen">
-        <ImageView
-            android:id="@+id/paystate_orderdetails_iv"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_delete"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginLeft="@dimen/dp_16"
-            />
-        <TextView
-            android:id="@+id/paystate_orderdetails_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/paystate_orderdetails_iv"
-            android:layout_alignTop="@+id/paystate_orderdetails_iv"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
-            android:text="买家已付款,等待发货"/>
-        <TextView
-            android:id="@+id/shophint_orderdetails_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/paystate_orderdetails_iv"
-            android:layout_below="@+id/paystate_orderdetails_tv"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:textColor="@color/white"
-            android:text="请耐心等待，我们会尽快给您发货"/>
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/icon_delete"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_20"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_16"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_5"
-        >
-        <ImageView
-            android:id="@+id/consigneehead_iv"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_delete"/>
-        <TextView
-            android:id="@+id/consignee_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/consigneehead_iv"
-            android:text="收货人:"/>
-        <TextView
-            android:id="@+id/consignee_name_orderdetails_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/consignee_tv"
-            android:text="林先生"/>
-        <TextView
-            android:id="@+id/consignee_phone_orderdetails_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="1412523452345"/>
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/dp_16"
-        android:paddingLeft="@dimen/dp_10"
-        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/shippingaddress_head_tv"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_delete" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/img_full_screen">
 
-        <TextView
-            android:id="@+id/shippingaddress_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/shippingaddress_head_tv"
-            android:text="收货地址:" />
+                <ImageView
+                    android:id="@+id/paystate_orderdetails_iv"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:src="@drawable/icon_delete" />
 
-        <TextView
-            android:id="@+id/shippingaddress_details_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_toRightOf="@+id/shippingaddress_tv"
-            android:text="怪能够的男生设定发送但感觉卡死了的方法收到了看见过" />
-    </RelativeLayout>
-    <View
-        android:layout_height="@dimen/dp_10"
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_5">
+                <TextView
+                    android:id="@+id/paystate_orderdetails_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_alignTop="@+id/paystate_orderdetails_iv"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/paystate_orderdetails_iv"
+                    android:text="买家已付款,等待发货"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16" />
 
-        <TextView
-            android:id="@+id/company_myorder_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_5"
+                <TextView
+                    android:id="@+id/shophint_orderdetails_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_below="@+id/paystate_orderdetails_tv"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/paystate_orderdetails_iv"
+                    android:text="请耐心等待，我们会尽快给您发货"
+                    android:layout_toLeftOf="@+id/iv1"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:textColor="@color/white" />
 
-            android:drawableRight="@drawable/icon_right"
-            android:text="东莞市纺织有限公司" />
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:src="@drawable/icon_delete" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/paystate_myorder_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/red1"
-            android:layout_marginRight="@dimen/dp_5"
-            android:text="待付款" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_16">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/common_bg"
-        android:padding="@dimen/dp_5">
+                <ImageView
+                    android:id="@+id/consigneehead_iv"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:src="@drawable/icon_delete" />
 
-        <ImageView
-            android:id="@+id/tradehead_myorder_iv"
-            android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_80"
-            android:src="@drawable/icon_delete" />
-        <TextView
-            android:id="@+id/tradename_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/tradehead_myorder_iv"
-            android:textColor="@color/common_h1"
-            android:text="段染四经——纬  20%腈纶  80%尼龙" />
+                <TextView
+                    android:id="@+id/consignee_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/consigneehead_iv"
+                    android:text="收货人:" />
 
-        <TextView
-            android:id="@+id/tradecolor_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_below="@+id/tradename_myorder_tv"
-            android:layout_toRightOf="@+id/tradehead_myorder_iv"
-            android:text="颜色：" />
-        <TextView
-            android:id="@+id/tradecolor_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_below="@+id/tradename_myorder_tv"
-            android:layout_toRightOf="@+id/tradecolor_tv"
-            android:text="#f40" />
-        <TextView
-            android:id="@+id/tradeprice_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/tradehead_myorder_iv"
-            android:layout_alignBottom="@+id/tradehead_myorder_iv"
-            android:textColor="@color/red1"
-            android:text="$33.50" />
-    </RelativeLayout>
-    <View
-        android:layout_height="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_20"
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+                <TextView
+                    android:id="@+id/consignee_name_orderdetails_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/consignee_tv"
+                    android:text="林先生" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="订单编号:"/>
-        <TextView
-            android:id="@+id/orderno_orderdetail_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:text="32542354365362435:"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_16">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="下单时间:"/>
-        <TextView
-            android:id="@+id/ordertime_orderdetail_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:text="2017.06.25  14:09"/>
-    </LinearLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"/>
+                <TextView
+                    android:id="@+id/consignee_phone_orderdetails_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="1412523452345" />
+            </RelativeLayout>
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/dp_10"
-    android:paddingTop="@dimen/dp_10">
-    <TextView
-        style="@style/TS.Theme.Widget.Text"
-        android:text="支付方式:"/>
-    <TextView
-        android:id="@+id/payway_orderdetail_tv"
-        style="@style/TS.Theme.Widget.Text"
-        android:text="微信支付"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_16">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="支付时间:"/>
-        <TextView
-            android:id="@+id/paytime_orderdetail"
-            style="@style/TS.Theme.Widget.Text"
-            android:text="2017.06.25  14:09"/>
-    </LinearLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="配送方式:"/>
-        <TextView
-            android:id="@+id/distributionway_orderdetail_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:text="微信支付"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_16">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="配送时间:"/>
-        <TextView
-            android:id="@+id/distributionime_orderdetail"
-            style="@style/TS.Theme.Widget.Text"
-            android:text="2017.06.25  14:09"/>
-    </LinearLayout>
-    <View
-        android:layout_height="@dimen/dp_10"
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_10">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_10"
-        android:layout_marginTop="80dp"
-        android:paddingBottom="@dimen/dp_10">
-        <TextView
-            android:id="@+id/tradelpaymentpay_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_5"
-            android:text="(运费到付)" />
-        <TextView
-            android:id="@+id/tradeltotal_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:textColor="@color/red1"
-            android:layout_toLeftOf="@+id/tradelpaymentpay_myorder_tv"
-            android:text="￥：33.50" />
-        <TextView
-            android:id="@+id/tradeltotal_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toLeftOf="@+id/tradeltotal_myorder_tv"
-            android:text="合计:" />
-        <TextView
-            android:id="@+id/tradelnumber_total_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_marginRight="@dimen/dp_5"
-            android:layout_toLeftOf="@+id/tradeltotal_tv"
-            android:text="一共1件商品" />
-    </RelativeLayout>
-        <View
-            style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:background="@color/common_bg">
-        <TextView
-            android:id="@+id/contact_the_merchant_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/dp_8"
-            android:gravity="center"
-            android:background="@color/white"
-            android:drawableTop="@drawable/icon_delete"
-            android:text="联系商家"/>
+                <ImageView
+                    android:id="@+id/shippingaddress_head_tv"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:src="@drawable/icon_delete" />
 
-        <TextView
-            android:id="@+id/confirm_goods_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/dp_8"
-            android:drawableTop="@drawable/icon_delete"
-            android:background="@color/white"
-            android:layout_marginLeft="1dp"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text="确认收货"/>
+                <TextView
+                    android:id="@+id/shippingaddress_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/shippingaddress_head_tv"
+                    android:text="收货地址:" />
 
-        <TextView
-            android:id="@+id/immediate_evaluation_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/dp_8"
-            android:gravity="center"
-            android:drawableTop="@drawable/icon_delete"
-            android:background="@color/white"
-            android:layout_marginLeft="1dp"
-            android:visibility="gone"
-            android:text="立即评价"/>
+                <TextView
+                    android:id="@+id/shippingaddress_orderdetailss_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/shippingaddress_tv"
+                    android:text="怪能够的男生设定发送但感觉卡死了的方法收到了看见过" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/againbuy_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:padding="@dimen/dp_10"
-            android:background="@drawable/shape_redbtn_selector1"
-            android:drawableTop="@drawable/icon_delete"
-            android:layout_marginLeft="1dp"
-            android:gravity="center"
-            android:visibility="gone"
-            android:text="再次购买"/>
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_height="@dimen/dp_10" />
 
-        <TextView
-            android:id="@+id/cancel_the_order_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/dp_8"
-            android:drawableTop="@drawable/icon_delete"
-            android:background="@color/white"
-            android:layout_marginLeft="1dp"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text="取消订单"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5">
 
-        <TextView
-            android:id="@+id/immediate_payment_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/dp_18"
-            android:drawableTop="@drawable/icon_delete"
-            android:background="@drawable/shape_redbtn_selector1"
-            android:layout_marginLeft="1dp"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text="立即付款"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/company_orderdetails_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:drawableRight="@drawable/icon_right"
+
+                    android:gravity="center_vertical"
+                    android:text="东莞市纺织有限公司" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_bg"
+                android:padding="@dimen/dp_5">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_height="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="订单编号:" />
+
+                <TextView
+                    android:id="@+id/orderno_orderdetail_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="32542354365362435:" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="下单时间:" />
+
+                <TextView
+                    android:id="@+id/ordertime_orderdetail_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="2017.06.25  14:09" />
+            </LinearLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="支付方式:" />
+
+                <TextView
+                    android:id="@+id/payway_orderdetail_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="微信支付" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="支付时间:" />
+
+                <TextView
+                    android:id="@+id/paytime_orderdetail"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="2017.06.25  14:09" />
+            </LinearLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="配送方式:" />
+
+                <TextView
+                    android:id="@+id/distributionway_orderdetail_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="微信支付" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5">
+
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="配送时间:" />
+
+                <TextView
+                    android:id="@+id/distributiontime_orderdetail"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:text="2017.06.25  14:09" />
+            </LinearLayout>
+
+            <View
+                style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+                android:layout_height="@dimen/dp_10" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tradelpaymentpay_myorder_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:text="(运费到付)" />
+
+                <TextView
+                    android:id="@+id/tradeltotal_myorder_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toLeftOf="@+id/tradelpaymentpay_myorder_tv"
+                    android:text="￥：33.50"
+                    android:textColor="@color/red1" />
+
+                <TextView
+                    android:id="@+id/tradeltotal_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toLeftOf="@+id/tradeltotal_myorder_tv"
+                    android:text="合计:" />
+
+            </RelativeLayout>
+
+            <View style="@style/TS.Theme.Widget.Divider.Line.Vertical" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_bg"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/contact_the_merchant_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_8"
+                    android:text="联系商家" />
+
+                <TextView
+                    android:id="@+id/confirm_goods_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_8"
+                    android:text="确认收货"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/immediate_evaluation_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_8"
+                    android:text="立即评价"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/againbuy_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/shape_redbtn_selector1"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="再次购买"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/cancel_the_order_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_8"
+                    android:text="取消订单"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/immediate_payment_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_redbtn_selector1"
+                    android:drawableTop="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_18"
+                    android:text="立即付款"
+                    android:visibility="gone" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

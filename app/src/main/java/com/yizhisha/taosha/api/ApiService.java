@@ -54,6 +54,12 @@ public interface ApiService {
     @POST("ios/order/")
     Observable<MyOrderListBean> getOrderList(@QueryMap Map<String,String> map);
 
+    //获得订单详情
+    @POST("ios/order/detail")
+    Observable<MyOrderListBean> getOrderDetails(@QueryMap Map<String,String> map);
+
+
+
     //登录
     @POST("ios/user/dologin/")
     Observable<RequestStatusBean> Login(@QueryMap Map<String,String> map);
@@ -69,6 +75,8 @@ public interface ApiService {
     // 获取验证码
     @POST("ios/ajax/checkpost/")
     Observable<RequestStatusBean> getCode(@QueryMap Map<String,String> map);
+
+
 
 
 }

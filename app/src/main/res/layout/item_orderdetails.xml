@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:padding="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/tradehead_myorder_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:src="@drawable/icon_delete" />
+
+        <TextView
+            android:id="@+id/tradename_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:text="段染四经——纬  20%腈纶  80%尼龙"
+            android:textColor="@color/common_h1" />
+
+        <TextView
+            android:id="@+id/tradecolor_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_myorder_tv"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:text="颜色：" />
+
+        <TextView
+            android:id="@+id/tradecolor_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_myorder_tv"
+            android:layout_toRightOf="@+id/tradecolor_tv"
+            android:text="#f40" />
+
+        <TextView
+            android:id="@+id/tradeprice_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_myorder_iv"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:text="￥33.50"
+            android:textColor="@color/red1" />
+    </RelativeLayout>
+
+</LinearLayout>
