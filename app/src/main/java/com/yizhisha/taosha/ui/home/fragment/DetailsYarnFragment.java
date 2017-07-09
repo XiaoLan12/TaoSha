@@ -1,4 +1,4 @@
-package com.yizhisha.taosha.ui.home.yran;
+package com.yizhisha.taosha.ui.home.fragment;
 
 /**
  * Created by Administrator on 2017/7/2.

@@ -10,7 +10,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MainTabEntity;
-import com.yizhisha.taosha.ui.home.HomeFragment;
+import com.yizhisha.taosha.ui.home.fragment.HomeFragment;
 import com.yizhisha.taosha.ui.me.fragment.MeFragment;
 import com.yizhisha.taosha.ui.shoppcart.ShoppCartFragment;
 

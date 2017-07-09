@@ -11,7 +11,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.CollectListBean;
-import com.yizhisha.taosha.ui.home.yran.YarnActivity;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 import com.yizhisha.taosha.ui.me.presenter.MyCollectPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;

@@ -7,10 +7,9 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.adapter.RemainRatingAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.ui.home.yran.YarnActivity;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
