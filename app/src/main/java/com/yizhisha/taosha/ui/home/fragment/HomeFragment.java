@@ -25,6 +25,7 @@ import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.ui.home.activity.SearchActivity;
 import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.HomeContract;
 import com.yizhisha.taosha.ui.home.precenter.HomePresenter;
 import com.yizhisha.taosha.utils.ToastUtil;
@@ -186,6 +187,43 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         recycleview6.addItemDecoration(new SpacesItemDecoration(spacingInPixels2));
         adapter6=new HomeYarnRecommendAdapter(data6);
         recycleview6.setAdapter(adapter6);
+
+        adapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
+        adapter2.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
+        adapter3.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
+        adapter4.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
+        adapter5.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
+        adapter6.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
 
 
         Map<String,String> map=new HashMap<>();

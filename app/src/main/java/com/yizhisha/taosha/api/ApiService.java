@@ -7,7 +7,9 @@ import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
+import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
+import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
@@ -80,4 +82,15 @@ public interface ApiService {
     //首页推荐纺纱6种
     @GET("ios/goods/goodsNew/")
     Observable<IndexRecommendYarnBean> getRecommendYarn(@QueryMap Map<String, String> param);
+
+
+    // 搜索页搜索
+    @POST("ios/goods/lists/")
+    Observable<SearchBean> search(@QueryMap Map<String,String> map);
+
+
+    //商品详情
+    @GET("ios/goods/view/")
+    Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
+
 }

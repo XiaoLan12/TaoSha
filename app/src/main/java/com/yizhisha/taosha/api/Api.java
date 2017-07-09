@@ -5,9 +5,11 @@ import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
+import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
@@ -116,5 +118,15 @@ public class Api {
     //首页推荐纺纱6种
     public Observable<IndexRecommendYarnBean> getRecommendYarn(Map<String,String> map){
         return service.getRecommendYarn(map);
+    }
+
+    // 搜索页搜索
+    public Observable<SearchBean> search(Map<String,String> map){
+        return service.search(map);
+    }
+
+    // 商品详情
+    public Observable<ProductDetailBean> getProductDetail(Map<String,String> map){
+        return service.getProductDetail(map);
     }
 }
