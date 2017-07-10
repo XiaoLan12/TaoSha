@@ -10,6 +10,7 @@ import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
@@ -132,5 +133,9 @@ public class Api {
     // 商品详情
     public Observable<ProductDetailBean> getProductDetail(Map<String,String> map){
         return service.getProductDetail(map);
+    }
+    // 购物车
+    public Observable<ShopcartListBean> getShoppCart(int uid){
+        return service.getShoppCartList(uid);
     }
 }

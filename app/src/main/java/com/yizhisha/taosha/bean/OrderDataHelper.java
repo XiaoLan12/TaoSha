@@ -38,6 +38,7 @@ public class OrderDataHelper {
             List<Goods> goodses=order.getGoods();
             //遍历每个大订单里面的小订单
             for (Goods orderGoodsItem : goodses) {
+                orderGoodsItem.setOrderno(order.getOrderno());
                 dataList.add(orderGoodsItem);
 
             }

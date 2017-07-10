@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.presenter;
 
+import android.util.Log;
+
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
@@ -20,7 +22,7 @@ public class OrderDetailsPresenter extends OrderDetailsContract.Presenter{
           addSubscrebe(Api.getInstance().loadOrderDetails(param), new RxSubscriber<MyOrderListBean>(mContext,false) {
               @Override
               protected void onSuccess(MyOrderListBean myOrderListBean) {
-                      mView.hideLoading();
+                  mView.hideLoading();
                   if(myOrderListBean!=null&&myOrderListBean.getOrder().size()>0){
                       mView.loadoSuccess(myOrderListBean.getOrder());
                   }else{

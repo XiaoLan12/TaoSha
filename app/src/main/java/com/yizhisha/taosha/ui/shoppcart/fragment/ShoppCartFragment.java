@@ -1,23 +1,25 @@
-package com.yizhisha.taosha.ui.shoppcart;
+package com.yizhisha.taosha.ui.shoppcart.fragment;
 
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.bean.json.Shopcart;
+import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
+import com.yizhisha.taosha.ui.shoppcart.presenter.ShoppCartPresenter;
+import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +32,8 @@ import qiu.niorgai.StatusBarCompat;
 /**
  * Created by lan on 2017/6/22.
  */
-public class ShoppCartFragment extends BaseFragment{
+public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implements
+        ShoppCartContract.View{
     @Bind(R.id.expandableListView)
     ExpandableListView expandableListView;
     @Bind(R.id.id_cb_select_all)
@@ -42,6 +45,9 @@ public class ShoppCartFragment extends BaseFragment{
 
     @Bind(R.id.rlBottomBar)
     RelativeLayout rlBottomBar;
+
+    @Bind(R.id.loadingView)
+    CommonLoadingView mLoadingView;
 
     private ShoppCartAdapter adapter;
     //定义父列表项List数据集合
@@ -61,8 +67,8 @@ public class ShoppCartFragment extends BaseFragment{
     }
     @Override
     protected void initView() {
-        initCartData();
         initAdapter();
+        mPresenter.loadShoppCart(AppConstant.UID,true);
     }
 
     private void initAdapter(){
@@ -125,37 +131,63 @@ public class ShoppCartFragment extends BaseFragment{
             }
         });
     }
-    private void initCartData() {
+    @Override
+    public void loadSuccess(List<Shopcart> data) {
 
-
-        for (int i = 0; i < 4; i++) {
-            String store="东莞市草拟吗有限公司";
-            if(i%2==0){
-                store="东莞市大浪淘沙有限公司";
-            }
+        for (int i = 0; i < data.size(); i++) {
             //提供父列表的数据
             Map<String, Object> parentMap = new HashMap<String, Object>();
-
-            parentMap.put("parentName", new StoreBean("" + i, store + i, false, false));
-          /*  if (i%2==0) {
-                parentMap.put("parentIcon", R.mipmap.ic_launcher);
-            }else
-            {
-                parentMap.put("parentIcon", R.mipmap.louisgeek);
-            }*/
+            StoreBean store=new StoreBean();
+            store.setMzw_uid(data.get(i).getMzw_uid());
+            store.setCompany(data.get(i).getCompany());
+            store.setChecked(false);
+            store.setEditing(false);
             parentMapList.add(parentMap);
             //提供当前父列的子列数据
             List<Map<String, Object>> childMapList = new ArrayList<Map<String, Object>>();
             for (int j = 0; j < 3; j++) {
                 Map<String, Object> childMap = new HashMap<String, Object>();
 
-                GoodsBean goodsBean = new GoodsBean(i + "_" + j,"段染四经——纬  20%腈纶  80%尼龙", "url", 150,1, GoodsBean.STATUS_VALID, false, false);
+                GoodsBean goodsBean=new GoodsBean();
+                goodsBean.setGid(data.get(i).getGid());
+                goodsBean.setTitle(data.get(i).getTitle());
+                goodsBean.setPname(data.get(i).getPname());
+                goodsBean.setPrice(data.get(i).getPrice());
+                goodsBean.setLitpic(data.get(i).getLitpic());
+                goodsBean.setAmount(data.get(i).getAmount());
+                goodsBean.setDetail(data.get(i).getDetail());
+                goodsBean.setAddtime(data.get(i).getAddtime());
+                goodsBean.setChecked(false);
+                goodsBean.setEditing(false);
                 childMap.put("childName", goodsBean);
                 childMapList.add(childMap);
             }
             childMapList_list.add(childMapList);
         }
+        adapter.setNewData();
     }
+    @Override
+    public void deleteShoppCart() {
 
+    }
+    @Override
+    public void showLoading() {
+        mLoadingView.load();
+    }
+    @Override
+    public void hideLoading() {
+        mLoadingView.loadSuccess(true);
+    }
+    @Override
+    public void showEmpty() {
+        mLoadingView.loadSuccess(false, R.drawable.icon_delete,"购物车空空的");
+    }
+    @Override
+    public void loadFail(String msg) {
 
+    }
+    @Override
+    public void deleteFail(String msg) {
+
+    }
 }

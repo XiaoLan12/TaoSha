@@ -8,84 +8,82 @@ public class GoodsBean {
     public static final  int STATUS_INVALID=0;
     public static final  int STATUS_VALID=1;
     //===============================================
-    private String id;
-    private String name;
-    /** 商品宣传图片 */
-    private String imageLogo;
-    /** 原价，市场价 */
-    private double price;
+    private String gid;
 
-    private int count;
+    private String title;
+
+    private String pname;
+
+    private float price;
+
+    private String litpic;
+
+    private int amount;
+
+    private String detail;
+
+    private String addtime;
+
     /** 状态 */
     private int status;
-
-
-
     /** 是否被选中 */
     private boolean isChecked;
     /** 是否是编辑状态 */
     private boolean isEditing;
 
-
-
-    public GoodsBean(String id,String name,String imageLogo,double price, int count, int status, boolean isChecked, boolean isEditing) {
-        this.id = id;
-        this.name = name;
-        this.imageLogo = imageLogo;
-        this.price = price;
-        this.count = count;
-        this.status = status;
-        this.isChecked = isChecked;
-        this.isEditing = isEditing;
+    public String getGid() {
+        return gid;
     }
 
-    public GoodsBean(){
-
+    public void setGid(String gid) {
+        this.gid = gid;
     }
 
-
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getPname() {
+        return pname;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImageLogo() {
-        return imageLogo;
-    }
-
-    public void setImageLogo(String imageLogo) {
-        this.imageLogo = imageLogo;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
 
 
-    public double getPrice() {
-        return price;
+    public String getLitpic() {
+        return litpic;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setLitpic(String litpic) {
+        this.litpic = litpic;
     }
 
 
-    public int getCount() {
-        return count;
+
+    public String getDetail() {
+        return detail;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
+
+    public String getAddtime() {
+        return addtime;
+    }
+
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
+    }
+
+
 
     public int getStatus() {
         return status;
@@ -99,15 +97,31 @@ public class GoodsBean {
         return isChecked;
     }
 
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public boolean isEditing() {
         return isEditing;
     }
 
-    public void setIsEditing(boolean isEditing) {
-        this.isEditing = isEditing;
+    public void setEditing(boolean editing) {
+        isEditing = editing;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

@@ -10,6 +10,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
@@ -59,7 +60,7 @@ public interface ApiService {
     Observable<MyOrderListBean> getOrderList(@QueryMap Map<String,String> map);
 
     //获得订单详情
-    @POST("ios/order/detail")
+    @GET("ios/order/detail")
     Observable<MyOrderListBean> getOrderDetails(@QueryMap Map<String,String> map);
 
 
@@ -98,5 +99,9 @@ public interface ApiService {
     //商品详情
     @GET("ios/goods/view/")
     Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
+
+    //购物车
+    @GET("ios/ucenter/shopcart/")
+    Observable<ShopcartListBean> getShoppCartList(@Query("id") int id);
 
 }

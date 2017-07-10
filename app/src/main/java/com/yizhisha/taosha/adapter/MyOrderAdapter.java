@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.adapter;
 
 import android.util.Log;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -41,7 +42,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
 
 
     @Override
-    protected void convert(BaseViewHolder helper, Object item) {
+    protected void convert(final BaseViewHolder helper, Object item) {
         switch (helper.getItemViewType()){
             case ITEM_HEADER:
                 final OrderHeadBean order= (OrderHeadBean) item;
@@ -64,7 +65,13 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getRemark());
                 helper.setText(R.id.tradeprice_myorder_tv,"￥"+goods.getTotalprice());
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getDetail());
+                helper.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                           mOnItemClickListener.onItemClick(v,ITEM_CONTENT,helper.getLayoutPosition());
+                    }
+                });
                 break;
             case ITEM_FOOTER:
                 final OrderFootBean orderFootBean= (OrderFootBean) item;
@@ -82,7 +89,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
-                helper.setVisible(R.id.immediate_payment_tv,false);
                 break;
             case 1:
                 helper.setVisible(R.id.cancel_the_order_tv,true);
@@ -90,7 +96,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
-                helper.setVisible(R.id.immediate_payment_tv,false);
                 break;
             case 2:
                 helper.setVisible(R.id.cancel_the_order_tv,false);
@@ -98,7 +103,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,true);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
-                helper.setVisible(R.id.immediate_payment_tv,false);
                 break;
             case 3:
                 helper.setVisible(R.id.cancel_the_order_tv,false);
@@ -106,8 +110,14 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,true);
                 helper.setVisible(R.id.againbuy_tv,true);
-                helper.setVisible(R.id.immediate_payment_tv,false);
                 break;
         }
+    }
+    private OnItemTypeClickListener mOnItemClickListener;
+    public interface OnItemTypeClickListener{
+        void onItemClick(View view,int type, int position);
+    }
+    public void setOnItemTypeClickListener(OnItemTypeClickListener mOnItemClickListener){
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 }

@@ -142,7 +142,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             }
         });
 
-     LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getActivity());
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycleview1.setLayoutManager(linearLayoutManager1);
         //RecycleView 增加边距

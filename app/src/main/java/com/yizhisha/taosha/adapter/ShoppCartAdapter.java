@@ -61,7 +61,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         return childMapList_list.get(groupPosition).size();
     }
-
     //获取当前父item的数据
     @Override
     public Object getGroup(int groupPosition) {
@@ -113,7 +112,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         }
 
         StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-        final String parentName = storeBean.getName();
+        final String parentName = storeBean.getCompany();
         groupViewHolder.tv_title_parent.setText(parentName);
         //覆盖原有收起展开事件
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +176,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "商品：" + goodsBean.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "商品：" + goodsBean.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -188,11 +187,11 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 final boolean nowBeanChecked = goodsBean.isChecked();
                 //更新数据
-                goodsBean.setIsChecked(!nowBeanChecked);
+                goodsBean.setChecked(!nowBeanChecked);
 
                 boolean isOneParentAllChildIsChecked = dealOneParentAllChildIsChecked(groupPosition);
                 StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-                storeBean.setIsChecked(isOneParentAllChildIsChecked);
+                storeBean.setChecked(isOneParentAllChildIsChecked);
 
 
                 notifyDataSetChanged();
@@ -215,12 +214,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         for (int i = 0; i < parentMapList.size(); i++) {
             StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
-            storeBean.setIsChecked(isChecked);
+            storeBean.setChecked(isChecked);
 
             List<Map<String, Object>> childMapList = childMapList_list.get(i);
             for (int j = 0; j < childMapList.size(); j++) {
                 GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-                goodsBean.setIsChecked(isChecked);
+                goodsBean.setChecked(isChecked);
             }
         }
         notifyDataSetChanged();
@@ -229,12 +228,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
     private void setupOneParentAllChildChecked(boolean isChecked, int groupPosition) {
         StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-        storeBean.setIsChecked(isChecked);
+        storeBean.setChecked(isChecked);
 
         List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
         for (int j = 0; j < childMapList.size(); j++) {
             GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-            goodsBean.setIsChecked(isChecked);
+            goodsBean.setChecked(isChecked);
         }
         notifyDataSetChanged();
         dealPrice();
@@ -272,7 +271,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             List<Map<String, Object>> childMapList = childMapList_list.get(i);
             for (int j = 0; j < childMapList.size(); j++) {
                 GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-                int count = goodsBean.getCount();
+                int count = goodsBean.getAmount();
                 double price = goodsBean.getPrice();
                 if (goodsBean.isChecked()) {
                     totalCount++;//单品多数量只记1
@@ -330,14 +329,14 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     private void resetViewAfterDelete() {
         for (int i = 0; i < parentMapList.size(); i++) {
             StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
-            storeBean.setIsChecked(false);
-            storeBean.setIsEditing(false);
+            storeBean.setChecked(false);
+            storeBean.setEditing(false);
             List<Map<String, Object>> childMapList = childMapList_list.get(i);
 
             for (int j = 0; j < childMapList.size(); j++) {
                 GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-                goodsBean.setIsChecked(false);
-                goodsBean.setIsEditing(false);
+                goodsBean.setChecked(false);
+                goodsBean.setEditing(false);
             }
         }
     }
@@ -381,5 +380,8 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         TextView tv_items_child_desc;
         TextView id_tv_price;
         TextView id_tv_color;
+    }
+    public void setNewData(){
+        notifyDataSetChanged();
     }
 }

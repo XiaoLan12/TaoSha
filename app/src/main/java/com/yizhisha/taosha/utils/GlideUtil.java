@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.yizhisha.taosha.R;
@@ -114,15 +115,53 @@ public class GlideUtil {
      * @param context
      * @param path
      * @param imageView
+     * @param bitmapOrgif  加载普通图片 或者GIF图片 ，GIF图片设置bitmap显示第一帧
+     */
+    public void LoadContextBitmap(Context context, String path, ImageView imageView,String bitmapOrgif){
+        if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
+            Glide.with(context).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE )
+                    .placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).crossFade().into(imageView);
+        }else if(bitmapOrgif.equals(LOAD_GIF)){
+            Glide.with(context).load(path).asGif().skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
+        }
+    }
+    /**
+     * 使用Application上下文，Glide请求将不受Activity/Fragment生命周期控制
+     * 使用activity 会受到Activity生命周期控制
+     * 使用FragmentActivity 会受到FragmentActivity生命周期控制
+     * @param context
+     * @param path
+     * @param imageView
      * @param placeid 占位
      * @param errorid  错误
      * @param bitmapOrgif  加载普通图片 或者GIF图片 ，GIF图片设置bitmap显示第一帧
      */
     public void LoadContextBitmap(Context context, String path, ImageView imageView, int placeid, int errorid, String bitmapOrgif){
         if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
-            Glide.with(context).load(path).placeholder(placeid).error(errorid).crossFade().into(imageView);
+            Glide.with(context).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE )
+                    .placeholder(placeid).error(errorid).crossFade().into(imageView);
         }else if(bitmapOrgif.equals(LOAD_GIF)){
-            Glide.with(context).load(path).asGif().crossFade().into(imageView);
+            Glide.with(context).load(path).asGif().skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
+        }
+    }
+    /**
+     * Glide请求图片，会受到support.v4.app.Fragment生命周期控制。
+     * @param fragment
+     * @param path
+     * @param imageView
+     * @param bitmapOrgif  加载普通图片 或者GIF图片 ，GIF图片设置bitmap显示第一帧
+     */
+    public void LoadSupportv4FragmentBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView,String bitmapOrgif){
+        if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
+            Glide.with(fragment).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).crossFade().into(imageView);
+        }else if(bitmapOrgif.equals(LOAD_GIF)){
+            Glide.with(fragment).load(path).asGif().skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
         }
     }
     /**
@@ -136,9 +175,11 @@ public class GlideUtil {
      */
     public void LoadSupportv4FragmentBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView, int placeid, int errorid, String bitmapOrgif){
         if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
-            Glide.with(fragment).load(path).placeholder(placeid).error(errorid).crossFade().into(imageView);
+            Glide.with(fragment).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(placeid).error(errorid).crossFade().into(imageView);
         }else if(bitmapOrgif.equals(LOAD_GIF)){
-            Glide.with(fragment).load(path).asGif().crossFade().into(imageView);
+            Glide.with(fragment).load(path).asGif().skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
         }
     }
     //---------------------圆形图片-------------------
@@ -153,7 +194,24 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadContextCircleBitmap(Context context, String path, ImageView imageView){
-        Glide.with(context).load(path).bitmapTransform(new GlideCircleTransform(context)).into(imageView);
+        Glide.with(context).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).
+                bitmapTransform(new GlideCircleTransform(context)).into(imageView);
+    }
+    /**
+     * 加载设置圆形图片
+     * 使用Application上下文，Glide请求将不受Activity/Fragment生命周期控制
+     * <BR/>使用activity 会受到Activity生命周期控制
+     * <BR/>使用FragmentActivity 会受到FragmentActivity生命周期控制
+     * @param context
+     * @param path
+     * @param imageView
+     */
+    @SuppressWarnings("unchecked")
+    public void LoadContextCircleBitmap(Context context, String path, ImageView imageView,int placeid,int errorid){
+        Glide.with(context).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(placeid).error(errorid).
+                bitmapTransform(new GlideCircleTransform(context)).into(imageView);
     }
     /**
      * Glide请求图片设置圆形，会受到android.support.v4.app.Fragment生命周期控制，
@@ -175,7 +233,8 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadSupportv4FragmentCircleBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView, int placeid, int errorid){
-        Glide.with(fragment).load(path).placeholder(placeid).error(errorid).
+        Glide.with(fragment).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(placeid).error(errorid).
         bitmapTransform(new GlideCircleTransform(fragment.getActivity())).into(imageView);
     }
     //-----------------------圆角图片----------------------
@@ -192,9 +251,11 @@ public class GlideUtil {
     @SuppressWarnings("unchecked")
     public void LoadContextRoundBitmap(Context context, String path, ImageView imageView, int roundradius){
         if(roundradius<0){
-            Glide.with(context).load(path).bitmapTransform(new GlideRoundTransform(context)).into(imageView);
+            Glide.with(context).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new GlideRoundTransform(context)).into(imageView);
         }else{
-            Glide.with(context).load(path).bitmapTransform(new GlideRoundTransform(context,roundradius)).into(imageView);
+            Glide.with(context).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new GlideRoundTransform(context,roundradius)).into(imageView);
         }
     }
 
@@ -208,9 +269,11 @@ public class GlideUtil {
     @SuppressWarnings("unchecked")
     public void LoadSupportv4FragmentRoundBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView, int roundradius){
         if(roundradius<0){
-            Glide.with(fragment).load(path).bitmapTransform(new GlideRoundTransform(fragment.getActivity())).into(imageView);
+            Glide.with(fragment).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new GlideRoundTransform(fragment.getActivity())).into(imageView);
         }else{
-            Glide.with(fragment).load(path).bitmapTransform(new GlideRoundTransform(fragment.getActivity(),roundradius)).into(imageView);
+            Glide.with(fragment).load(path).skipMemoryCache( true )
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new GlideRoundTransform(fragment.getActivity(),roundradius)).into(imageView);
         }
     }
 
@@ -227,7 +290,8 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadContextRotateBitmap(Context context, String path, ImageView imageView, Float rotateRotationAngle){
-        Glide.with(context).load(path).bitmapTransform(new RotateTransformation(context, rotateRotationAngle)).into(imageView);
+        Glide.with(context).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new RotateTransformation(context, rotateRotationAngle)).into(imageView);
     }
     /**
      * Glide 加载旋转图片 会受到Fragment生命周期控制
@@ -238,7 +302,8 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadFragmentRotateBitmap(android.app.Fragment fragment, String path, ImageView imageView, Float rotateRotationAngle){
-        Glide.with(fragment).load(path).bitmapTransform(new RotateTransformation(fragment.getActivity(), rotateRotationAngle)).into(imageView);
+        Glide.with(fragment).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new RotateTransformation(fragment.getActivity(), rotateRotationAngle)).into(imageView);
     }
     /**
      * Glide 加载旋转图片 会受到support.v4.app.Fragment生命周期控制
@@ -249,7 +314,8 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadSupportv4FragmentRotateBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView, Float rotateRotationAngle){
-        Glide.with(fragment).load(path).bitmapTransform(new RotateTransformation(fragment.getActivity(), rotateRotationAngle)).into(imageView);
+        Glide.with(fragment).load(path).skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).bitmapTransform(new RotateTransformation(fragment.getActivity(), rotateRotationAngle)).into(imageView);
     }
     //----------------------旋转---------------------------
     /**

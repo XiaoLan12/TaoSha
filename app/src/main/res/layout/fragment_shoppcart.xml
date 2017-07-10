@@ -17,39 +17,14 @@
         style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:id="@+id/view"
         android:layout_below="@+id/toolber"/>
-    <RelativeLayout
-        android:id="@+id/rlShoppingCartEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/view"
-        android:background="@color/white"
-        android:visibility="invisible">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/icon_delete"/>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="购物车为空"/>
-    </RelativeLayout>
 
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
         android:layout_above="@+id/rlBottomBar"
+        android:layout_below="@+id/view"
         android:cacheColorHint="#00000000"
         android:divider="#ebebeb"
         android:groupIndicator="@null"
@@ -61,7 +36,7 @@
         android:id="@+id/rlBottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/view1"
+        android:layout_alignParentBottom="true"
         android:background="@color/white">
 
         <ImageView
@@ -135,9 +110,13 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_normal2"/>
         </LinearLayout>
-    </RelativeLayout>
-    <View
-        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:id="@+id/view1"
-        android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    <com.yizhisha.taosha.widget.CommonLoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/view"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        />
     </RelativeLayout>

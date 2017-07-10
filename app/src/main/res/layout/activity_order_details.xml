@@ -11,11 +11,14 @@
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
         app:title="@string/oreder_details"/>
-
+    <com.yizhisha.taosha.widget.CommonLoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,15 +26,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/img_full_screen">
-
+                android:layout_height="80dp"
+                android:background="@drawable/icon_myorderdetails_background">
                 <ImageView
                     android:id="@+id/paystate_orderdetails_iv"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
                     android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:src="@drawable/icon_delete" />
 
                 <TextView
@@ -51,18 +53,9 @@
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_toRightOf="@+id/paystate_orderdetails_iv"
                     android:text="请耐心等待，我们会尽快给您发货"
-                    android:layout_toLeftOf="@+id/iv1"
                     android:layout_marginRight="@dimen/dp_5"
                     android:textColor="@color/white" />
 
-                <ImageView
-                    android:id="@+id/iv1"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:src="@drawable/icon_delete" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -144,21 +137,12 @@
                     android:gravity="center_vertical"
                     android:text="东莞市纺织有限公司" />
             </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/common_bg"
-                android:padding="@dimen/dp_5">
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:padding="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
-            </RelativeLayout>
-
+                    />
             <View
                 style="@style/TS.Theme.Widget.Divider.Line.Vertical"
                 android:layout_height="@dimen/dp_10"
@@ -322,7 +306,7 @@
                     android:background="@color/white"
                     android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
-                    android:padding="@dimen/dp_8"
+
                     android:text="联系商家" />
 
                 <TextView
@@ -334,7 +318,6 @@
                     android:background="@color/white"
                     android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
-                    android:padding="@dimen/dp_8"
                     android:text="确认收货"
                     android:visibility="gone" />
 
@@ -347,7 +330,6 @@
                     android:background="@color/white"
                     android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
-                    android:padding="@dimen/dp_8"
                     android:text="立即评价"
                     android:visibility="gone" />
 
@@ -360,7 +342,7 @@
                     android:background="@drawable/shape_redbtn_selector1"
                     android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
-                    android:padding="@dimen/dp_10"
+                    android:textColor="@color/white"
                     android:text="再次购买"
                     android:visibility="gone" />
 
@@ -373,7 +355,6 @@
                     android:background="@color/white"
                     android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
-                    android:padding="@dimen/dp_8"
                     android:text="取消订单"
                     android:visibility="gone" />
 
@@ -385,11 +366,14 @@
                     android:layout_weight="1"
                     android:background="@drawable/shape_redbtn_selector1"
                     android:drawableTop="@drawable/icon_delete"
+                    android:textColor="@color/white"
                     android:gravity="center"
-                    android:padding="@dimen/dp_18"
                     android:text="立即付款"
                     android:visibility="gone" />
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
+    </com.yizhisha.taosha.widget.CommonLoadingView>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,10 @@ public class CommonLoadingView extends FrameLayout {
 
     //加载时显示文字
     protected TextView mLoadingTextTv;
+    //数据为空时的图片
+    protected ImageView mLoadingEmpyIv;
+    //数据为空时的文字
+    protected TextView mLoadingEmpyTv;
     public Context mContext;
     //加载错误视图
     protected LinearLayout mLoadErrorLl;
@@ -86,6 +91,8 @@ public class CommonLoadingView extends FrameLayout {
 
     private void initView(View rootView) {
         mLoadingTextTv = (TextView) rootView.findViewById(R.id.loading_text_tv);
+        mLoadingEmpyIv= (ImageView) rootView.findViewById(R.id.iv_empty);
+        mLoadingEmpyTv= (TextView) rootView.findViewById(R.id.tv_empty);
         mLoadErrorLl = (LinearLayout) rootView.findViewById(R.id.load_error_ll);
         mLoadErrorLl.setOnClickListener(new OnClickListener() {
             @Override
@@ -120,6 +127,18 @@ public class CommonLoadingView extends FrameLayout {
         loadingView.setVisibility(GONE);
         loadingErrorView.setVisibility(GONE);
         if (isEmpty) {
+            mLoadingEmpyIv.setImageResource(R.drawable.icon_delete);
+            emptyView.setVisibility(VISIBLE);
+        }else{
+            emptyView.setVisibility(GONE);
+        }
+    }
+    public void loadSuccess(boolean isEmpty,int image,String txt){
+        loadingView.setVisibility(GONE);
+        loadingErrorView.setVisibility(GONE);
+        if (isEmpty) {
+            mLoadingEmpyIv.setImageResource(image);
+            mLoadingEmpyTv.setText(txt);
             emptyView.setVisibility(VISIBLE);
         }else{
             emptyView.setVisibility(GONE);

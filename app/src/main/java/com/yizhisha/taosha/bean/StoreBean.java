@@ -5,53 +5,53 @@ package com.yizhisha.taosha.bean;
  */
 public class StoreBean {
     /** 店铺ID */
-    private String id;
+    private String mzw_uid;
     /** 店铺名称 */
-    private String name;
+    private String company;
+    /**总价*/
+    private float totalprice;
 
     private boolean isChecked;
 
     private boolean isEditing;
 
-    public StoreBean(String id, String name, boolean isChecked, boolean isEditing) {
-        this.id = id;
-        this.name = name;
-        this.isChecked = isChecked;
-        this.isEditing = isEditing;
+    public String getMzw_uid() {
+        return mzw_uid;
     }
 
-    public StoreBean() {
+    public void setMzw_uid(String mzw_uid) {
+        this.mzw_uid = mzw_uid;
     }
 
-    public String getId() {
-        return id;
+    public String getCompany() {
+        return company;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
-    public boolean isEditing() {
-        return isEditing;
+    public float getTotalprice() {
+        return totalprice;
     }
 
-    public void setIsEditing(boolean isEditing) {
-        this.isEditing = isEditing;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTotalprice(float totalprice) {
+        this.totalprice = totalprice;
     }
 
     public boolean isChecked() {
         return isChecked;
     }
 
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }

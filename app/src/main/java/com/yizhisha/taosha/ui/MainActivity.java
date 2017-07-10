@@ -12,7 +12,7 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MainTabEntity;
 import com.yizhisha.taosha.ui.home.fragment.HomeFragment;
 import com.yizhisha.taosha.ui.me.fragment.MeFragment;
-import com.yizhisha.taosha.ui.shoppcart.ShoppCartFragment;
+import com.yizhisha.taosha.ui.shoppcart.fragment.ShoppCartFragment;
 
 import java.util.ArrayList;
 
