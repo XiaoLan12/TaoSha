@@ -113,10 +113,9 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
             mLoadingView.loadSuccess(true);
         }
     }
-
     @Override
     public void showLoading() {
-        mLoadingView.load("");
+        mLoadingView.load();
     }
     @Override
     public void hideLoading() {

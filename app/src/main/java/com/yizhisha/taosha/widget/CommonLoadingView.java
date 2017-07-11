@@ -2,6 +2,7 @@ package com.yizhisha.taosha.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.utils.RescourseUtil;
 
 /**
  * 页面加载提示布局
@@ -127,7 +129,6 @@ public class CommonLoadingView extends FrameLayout {
         loadingView.setVisibility(GONE);
         loadingErrorView.setVisibility(GONE);
         if (isEmpty) {
-            mLoadingEmpyIv.setImageResource(R.drawable.icon_delete);
             emptyView.setVisibility(VISIBLE);
         }else{
             emptyView.setVisibility(GONE);
@@ -137,7 +138,9 @@ public class CommonLoadingView extends FrameLayout {
         loadingView.setVisibility(GONE);
         loadingErrorView.setVisibility(GONE);
         if (isEmpty) {
-            mLoadingEmpyIv.setImageResource(image);
+            Log.d("TTT","来这俩");
+            mLoadingEmpyIv.setImageResource(R.drawable.icon_delete);
+            mLoadingEmpyTv.setVisibility(VISIBLE);
             mLoadingEmpyTv.setText(txt);
             emptyView.setVisibility(VISIBLE);
         }else{

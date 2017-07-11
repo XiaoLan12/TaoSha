@@ -10,6 +10,8 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.SeckillBean;
+import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
@@ -53,6 +55,10 @@ public interface ApiService {
     //免费拿样
     @POST("ios/ucenter/active/")
     Observable<FreeSampleBean> getFreeSample(@QueryMap Map<String,String> map);
+
+    //取消拿样
+    @POST("ios/ucenter/active_delete/")
+    Observable<RequestStatusBean> cancelFreeSample(@QueryMap Map<String,String> map);
 
 
     //获得订单
@@ -102,6 +108,10 @@ public interface ApiService {
 
     //购物车
     @GET("ios/ucenter/shopcart/")
-    Observable<ShopcartListBean> getShoppCartList(@Query("id") int id);
+    Observable<ShopcartListBean> getShoppCartList(@Query("uid") int id);
 
+    //秒杀订单
+
+    @GET("ios/order/seckilling/")
+    Observable<SeckillListBean> getSeckillOrder(@QueryMap Map<String, String> param);
 }

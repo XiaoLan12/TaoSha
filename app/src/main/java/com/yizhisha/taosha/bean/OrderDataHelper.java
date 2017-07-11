@@ -45,6 +45,7 @@ public class OrderDataHelper {
             OrderFootBean orderFootBean=new OrderFootBean();
             orderFootBean.setTotalprice(order.getTotalprice());
             orderFootBean.setStatus(order.getStatus());
+            orderFootBean.setAmount(goodses.size());
             dataList.add(orderFootBean);
         }
         return dataList;

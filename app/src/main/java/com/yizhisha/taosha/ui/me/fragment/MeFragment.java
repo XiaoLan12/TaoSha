@@ -16,6 +16,7 @@ import com.yizhisha.taosha.ui.me.activity.MyCollectActivity;
 import com.yizhisha.taosha.ui.me.activity.MyFootprintActivity;
 import com.yizhisha.taosha.ui.me.activity.MyOrderAcitvity;
 import com.yizhisha.taosha.ui.me.activity.MyRatingActivity;
+import com.yizhisha.taosha.ui.me.activity.SecKillOrderActivity;
 import com.yizhisha.taosha.ui.me.activity.SettinActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
 
@@ -49,7 +50,8 @@ public class MeFragment extends BaseFragment{
 
     }
     @OnClick({R.id.set_me_iv,R.id.myorder_set_tv,R.id.mycollect_set_tv,R.id.myfootprint_set_tv,
-            R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl,R.id.abouttaosha_rl})
+            R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl
+            ,R.id.abouttaosha_rl,R.id.seckillorder_me_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -81,6 +83,9 @@ public class MeFragment extends BaseFragment{
             case R.id.abouttaosha_rl:
                 //startActivity(AboutActivity.class);
                 startActivity(LoginFragmentActivity.class);
+                break;
+            case R.id.seckillorder_me_rl:
+                startActivity(SecKillOrderActivity.class);
                 break;
         }
     }

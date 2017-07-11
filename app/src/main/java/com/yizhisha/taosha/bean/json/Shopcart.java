@@ -9,9 +9,9 @@ public class Shopcart {
 
     private String uid;
 
-    private String mzw_uid;
+    private int mzw_uid;
 
-    private String gid;
+    private int gid;
 
     private String title;
 
@@ -25,7 +25,7 @@ public class Shopcart {
 
     private String detail;
 
-    private String addtime;
+    private int addtime;
 
     private String company;
 
@@ -47,19 +47,19 @@ public class Shopcart {
         this.uid = uid;
     }
 
-    public String getMzw_uid() {
+    public int getMzw_uid() {
         return mzw_uid;
     }
 
-    public void setMzw_uid(String mzw_uid) {
+    public void setMzw_uid(int mzw_uid) {
         this.mzw_uid = mzw_uid;
     }
 
-    public String getGid() {
+    public int getGid() {
         return gid;
     }
 
-    public void setGid(String gid) {
+    public void setGid(int gid) {
         this.gid = gid;
     }
 
@@ -79,7 +79,13 @@ public class Shopcart {
         this.pname = pname;
     }
 
+    public float getPrice() {
+        return price;
+    }
 
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public String getLitpic() {
         return litpic;
@@ -89,6 +95,13 @@ public class Shopcart {
         this.litpic = litpic;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public String getDetail() {
         return detail;
@@ -98,11 +111,11 @@ public class Shopcart {
         this.detail = detail;
     }
 
-    public String getAddtime() {
+    public int getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
+    public void setAddtime(int addtime) {
         this.addtime = addtime;
     }
 
@@ -112,22 +125,6 @@ public class Shopcart {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public float getTotalprice() {

@@ -5,7 +5,7 @@ package com.yizhisha.taosha.bean;
  */
 public class StoreBean {
     /** 店铺ID */
-    private String mzw_uid;
+    private int mzw_uid;
     /** 店铺名称 */
     private String company;
     /**总价*/
@@ -15,11 +15,11 @@ public class StoreBean {
 
     private boolean isEditing;
 
-    public String getMzw_uid() {
+    public int getMzw_uid() {
         return mzw_uid;
     }
 
-    public void setMzw_uid(String mzw_uid) {
+    public void setMzw_uid(int mzw_uid) {
         this.mzw_uid = mzw_uid;
     }
 

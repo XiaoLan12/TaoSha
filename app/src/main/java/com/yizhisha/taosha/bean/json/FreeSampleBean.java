@@ -47,7 +47,7 @@ public class FreeSampleBean {
 
         private String linkman;
 
-        private int mobile;
+        private String mobile;
 
         public int getId() {
             return id;
@@ -169,11 +169,11 @@ public class FreeSampleBean {
             this.linkman = linkman;
         }
 
-        public int getMobile() {
+        public String getMobile() {
             return mobile;
         }
 
-        public void setMobile(int mobile) {
+        public void setMobile(String mobile) {
             this.mobile = mobile;
         }
     }

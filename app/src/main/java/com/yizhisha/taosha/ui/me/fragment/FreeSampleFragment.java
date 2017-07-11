@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.me.fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +16,7 @@ import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.FreeSampleContract;
 import com.yizhisha.taosha.ui.me.presenter.FreeSamplePresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by lan on 2017/7/5.
@@ -79,6 +82,19 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                 startActivity(YarnActivity.class);
             }
         });
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.cancel_the_order_tv:
+                        Map<String, String> bodyMap = new HashMap<>();
+                        bodyMap.put("uid",String.valueOf(AppConstant.UID));
+                        bodyMap.put("id",String.valueOf(dataList.get(position).getId()));
+                        mPresenter.cancleFreeSample(bodyMap);
+                        break;
+                }
+            }
+        });
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
@@ -97,7 +113,14 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
     public void loadFreeSampleSuccess(List<FreeSampleBean.Active> data) {
         mSwipeRefreshLayout.setRefreshing(false);
         dataList.clear();
+        dataList.addAll(data);
         mAdapter.setNewData(data);
+    }
+
+    @Override
+    public void cancleFreeSample(String msg) {
+        onRefresh();
+        ToastUtil.showCenterLongToast(msg);
     }
     @Override
     public void showLoading() {
@@ -108,7 +131,6 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
     public void hideLoading() {
         mLoadingView.loadSuccess();
     }
-
     @Override
     public void showEmpty() {
         dataList.clear();
@@ -131,5 +153,9 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
         mLoadingView.loadError();
     }
 
+    @Override
+    public void cancleFreeSampleFail(String msg) {
+
+    }
 
 }

@@ -176,11 +176,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
     @Override
     public void hideLoading() {
-        mLoadingView.loadSuccess(true);
+        mLoadingView.loadSuccess();
     }
     @Override
     public void showEmpty() {
-        mLoadingView.loadSuccess(false, R.drawable.icon_delete,"购物车空空的");
+        mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
     }
     @Override
     public void loadFail(String msg) {

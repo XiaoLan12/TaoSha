@@ -7,7 +7,7 @@ package com.yizhisha.taosha.bean.json;
 public class OrderFootBean{
     private float totalprice;
     private int status;
-
+    private int amount;
     public float getTotalprice() {
         return totalprice;
     }
@@ -24,4 +24,11 @@ public class OrderFootBean{
         this.totalprice = totalprice;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }

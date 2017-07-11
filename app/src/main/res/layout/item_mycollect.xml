@@ -12,8 +12,7 @@
         <ImageView
             android:id="@+id/shophead_mycollect_iv"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
+            android:layout_height="140dp"
             android:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/shopname_mycollect_tv"
@@ -22,7 +21,7 @@
             android:layout_alignTop="@+id/shophead_mycollect_iv"
             android:layout_marginLeft="@dimen/dp_5"
             android:textColor="@color/common_h1"
-            android:text="9/1羊毛冰岛毛20%羊毛80%腈纶"/>
+            />
         <TextView
             android:id="@+id/countspecifications_tv"
             style="@style/TS.Theme.Widget.Text"
@@ -54,7 +53,7 @@
             android:layout_below="@+id/countspecifications_mycollect_tv"
             android:layout_alignTop="@+id/composition_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:text="20%羊毛80%腈纶"/>
+            />
 
         <TextView
             android:id="@+id/fit_pittype_tv"
@@ -63,6 +62,7 @@
             android:layout_below="@+id/composition_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="适合针型:"/>
+
         <TextView
             android:id="@+id/fit_pittype_mycollect_tv"
             style="@style/TS.Theme.Widget.Text"
@@ -70,36 +70,38 @@
             android:layout_below="@+id/composition_mycollect_tv"
             android:layout_alignTop="@+id/fit_pittype_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:text="7G 12G 14G"/>
-
-        <TextView
-            android:id="@+id/totalprice_mycollect_tv"
-            style="@style/TS.Theme.Widget.Text"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/fit_pittype_mycollect_tv"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:textSize="@dimen/font_normal3"
-            android:textColor="@color/red1"
-            android:text="￥59"/>
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/totalprice_mycollect_tv"
-            android:layout_alignBottom="@+id/totalprice_mycollect_tv"
-            android:text="/公斤"/>
-
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toLeftOf="@+id/unitprice_mycollect_tv"
-            android:layout_alignBottom="@+id/totalprice_mycollect_tv"
-            android:textColor="@color/orange"
-            android:text="板毛:"/>
-        <TextView
-            android:id="@+id/unitprice_mycollect_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_alignBottom="@+id/totalprice_mycollect_tv"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/orange"
-            android:text="￥28/一份"/>
+            android:layout_marginLeft="@dimen/dp_5">
+                <TextView
+                    android:id="@+id/totalprice_mycollect_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:textSize="@dimen/font_normal3"
+                    android:gravity="top"
+                    android:textColor="@color/red1"
+                    />
+                <TextView
+                    android:id="@+id/tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:gravity="top"
+                    android:text="/公斤"/>
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:textColor="@color/orange"
+                    android:text="板毛:"/>
+                <TextView
+                    android:id="@+id/unitprice_mycollect_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:gravity="top"
+                    android:textColor="@color/orange"
+                    />
+            </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

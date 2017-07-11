@@ -119,6 +119,7 @@
                 android:layout_marginRight="@dimen/dp_10" />
 
             <RelativeLayout
+                android:id="@+id/seckillorder_me_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"

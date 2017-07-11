@@ -1,41 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5">
+        <TextView
+            android:id="@+id/company_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:drawableRight="@drawable/icon_right"
+            android:text="东莞市纺织有限公司" />
+        <TextView
+            android:id="@+id/paystate_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/red1"
+            android:layout_marginRight="@dimen/dp_5"
+            android:text="待付款" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:padding="@dimen/dp_5">
+        <ImageView
+            android:id="@+id/tradehead_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:src="@drawable/icon_delete" />
+        <TextView
+            android:id="@+id/tradename_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_iv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@color/common_h1" />
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_iv"
+            android:layout_toRightOf="@+id/tradehead_iv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@color/red1"
+            android:text="秒杀价：" />
+        <TextView
+            android:id="@+id/seckillprice_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_iv"
+            android:layout_toRightOf="@+id/tv1"
+            android:textColor="@color/red1" />
+        <TextView
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_iv"
+            android:layout_toLeftOf="@+id/marketprice_tv"
+            android:text="市场价：" />
+        <TextView
+            android:id="@+id/marketprice_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_iv"
+            android:layout_alignParentRight="true"
+            />
 
+    </RelativeLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dp_10"
+        android:background="@color/common_bg"
         android:paddingBottom="@dimen/dp_10">
         <TextView
-            android:id="@+id/tradelpaymentpay_myorder_tv"
+            android:id="@+id/tradelpaymentpay_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_5"
             android:text="(运费到付)" />
         <TextView
-            android:id="@+id/tradeltotal_myorder_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:textColor="@color/red1"
-            android:layout_toLeftOf="@+id/tradelpaymentpay_myorder_tv"
-             />
-        <TextView
             android:id="@+id/tradeltotal_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toLeftOf="@+id/tradeltotal_myorder_tv"
-            android:text="合计:" />
-        <TextView
-            android:id="@+id/tradelnumber_total_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_marginRight="@dimen/dp_5"
-            android:layout_toLeftOf="@+id/tradeltotal_tv"
+            android:textColor="@color/red1"
+            android:layout_toLeftOf="@+id/tradelpaymentpay_tv"
             />
+        <TextView
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toLeftOf="@+id/tradeltotal_tv"
+            android:text="合计:" />
     </RelativeLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"/>
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

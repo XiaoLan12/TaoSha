@@ -10,6 +10,7 @@ import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
@@ -90,6 +91,10 @@ public class Api {
     public Observable<FreeSampleBean> loadFreeSample(Map<String,String> map){
         return service.getFreeSample(map);
     }
+    //取消免费拿样
+    public Observable<RequestStatusBean> cancelFreeSample(Map<String,String> map){
+        return service.cancelFreeSample(map);
+    }
     //获得订单
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
         return service.getOrderList(map);
@@ -137,5 +142,9 @@ public class Api {
     // 购物车
     public Observable<ShopcartListBean> getShoppCart(int uid){
         return service.getShoppCartList(uid);
+    }
+    // 商品详情
+    public Observable<SeckillListBean> getSeckillOrder(Map<String,String> map){
+        return service.getSeckillOrder(map);
     }
 }

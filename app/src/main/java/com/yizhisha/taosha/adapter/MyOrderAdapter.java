@@ -2,15 +2,18 @@ package com.yizhisha.taosha.adapter;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
 import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.OrderHeadBean;
+import com.yizhisha.taosha.utils.GlideUtil;
 
 /**
  * Created by Administrator on 2017/6/25 0025.
@@ -60,11 +63,12 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 break;
             case ITEM_CONTENT:
                 Goods goods= (Goods) item;
-
                 helper.setText(R.id.tradename_myorder_tv,goods.getTitle());
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getRemark());
                 helper.setText(R.id.tradeprice_myorder_tv,"￥"+goods.getTotalprice());
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getDetail());
+                GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goods.getLitpic(),
+                        (ImageView) helper.getView(R.id.tradehead_myorder_iv),GlideUtil.LOAD_BITMAP);
                 helper.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -76,6 +80,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
             case ITEM_FOOTER:
                 final OrderFootBean orderFootBean= (OrderFootBean) item;
                 helper.setText(R.id.tradeltotal_myorder_tv,orderFootBean.getTotalprice()+"");
+                helper.setText(R.id.tradelnumber_total_tv,"共"+orderFootBean.getAmount()+"件商品");
                 switchState(orderFootBean.getStatus(),helper);
                 break;
         }

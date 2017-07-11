@@ -8,7 +8,7 @@ public class GoodsBean {
     public static final  int STATUS_INVALID=0;
     public static final  int STATUS_VALID=1;
     //===============================================
-    private String gid;
+    private int gid;
 
     private String title;
 
@@ -22,7 +22,7 @@ public class GoodsBean {
 
     private String detail;
 
-    private String addtime;
+    private int addtime;
 
     /** 状态 */
     private int status;
@@ -31,11 +31,11 @@ public class GoodsBean {
     /** 是否是编辑状态 */
     private boolean isEditing;
 
-    public String getGid() {
+    public int getGid() {
         return gid;
     }
 
-    public void setGid(String gid) {
+    public void setGid(int gid) {
         this.gid = gid;
     }
 
@@ -75,11 +75,11 @@ public class GoodsBean {
         this.detail = detail;
     }
 
-    public String getAddtime() {
+    public int getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
+    public void setAddtime(int addtime) {
         this.addtime = addtime;
     }
 

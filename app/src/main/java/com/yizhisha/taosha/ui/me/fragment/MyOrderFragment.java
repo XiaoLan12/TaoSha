@@ -128,7 +128,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     }
     @Override
     public void showLoading() {
-        mLoadingView.load("");
+        mLoadingView.load();
     }
 
     @Override
