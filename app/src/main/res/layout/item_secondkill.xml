@@ -48,7 +48,7 @@
             android:layout_toRightOf="@+id/tradehead_iv"
             android:layout_marginLeft="@dimen/dp_5"
             android:textColor="@color/red1"
-            android:text="秒杀价：" />
+            android:text="秒杀价:" />
         <TextView
             android:id="@+id/seckillprice_tv"
             style="@style/TS.Theme.Widget.Text"
@@ -59,12 +59,14 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_alignBottom="@+id/tradehead_iv"
             android:layout_toLeftOf="@+id/marketprice_tv"
-            android:text="市场价：" />
+            android:textColor="@color/common_h3"
+            android:text="市场价:" />
         <TextView
             android:id="@+id/marketprice_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_alignBottom="@+id/tradehead_iv"
             android:layout_alignParentRight="true"
+            android:textColor="@color/common_h3"
             />
 
     </RelativeLayout>

@@ -12,7 +12,8 @@
         <ImageView
             android:id="@+id/shophead_mycollect_iv"
             android:layout_width="100dp"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/shopname_mycollect_tv"
@@ -60,7 +61,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/composition_mycollect_tv"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_5"
             android:text="适合针型:"/>
 
         <TextView
@@ -71,37 +72,51 @@
             android:layout_alignTop="@+id/fit_pittype_tv"
             android:layout_marginLeft="@dimen/dp_5"
             />
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/fit_pittype_mycollect_tv"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_5">
+
                 <TextView
                     android:id="@+id/totalprice_mycollect_tv"
                     style="@style/TS.Theme.Widget.Text"
                     android:textSize="@dimen/font_normal3"
-                    android:gravity="top"
                     android:textColor="@color/red1"
+                    android:layout_gravity="top"
                     />
                 <TextView
                     android:id="@+id/tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:gravity="top"
+                    android:layout_gravity="top"
+                    android:layout_toRightOf="@+id/totalprice_mycollect_tv"
+                    android:layout_alignBottom="@+id/totalprice_mycollect_tv"
                     android:text="/公斤"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:gravity="right"
+                android:layout_alignTop="@+id/tv"
+                android:layout_toRightOf="@+id/tv"
+                >
                 <TextView
+                    android:id="@+id/tv1"
                     style="@style/TS.Theme.Widget.Text"
                     android:textColor="@color/orange"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:text="板毛:"/>
                 <TextView
                     android:id="@+id/unitprice_mycollect_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:gravity="top"
                     android:textColor="@color/orange"
+                    android:gravity="right"
+                    android:layout_toRightOf="@+id/tv1"
                     />
-            </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

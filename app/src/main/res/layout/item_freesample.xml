@@ -16,7 +16,6 @@
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_5"
-
             android:drawableRight="@drawable/icon_right"
             android:text="东莞市纺织有限公司" />
 
@@ -55,7 +54,7 @@
             android:layout_below="@+id/tradename_tv"
             android:layout_toRightOf="@+id/tradehead_iv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:text="运费：" />
+            android:text="运费:" />
 
         <TextView
             android:id="@+id/freight_tv"
