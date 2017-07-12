@@ -239,9 +239,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         List<HomeYarnTypeEntity> list=new ArrayList<>();
         String[] names= new String[] {
                 "毛纺纱",
-               "化纤纱","棉纺纱","花式纱","麻纺纱","混纺纱","快递信息","秒纱活动","信用贷","会员登录","会员登录"};
+               "化纤纱","棉纺纱","花式纱","麻纺纱","混纺纱","热门推荐","精品推荐","秒纱","信用贷",};
         int[] imgs=new int[]{R.drawable.index_mao,R.drawable.index_huaxian,R.drawable.index_mian,R.drawable.index_huashi,R.drawable.index_ma,
-                R.drawable.index_hun,R.drawable.index_jingpin,R.drawable.index_miaosha,R.drawable.index_xinyongdai,R.drawable.index_remen,R.drawable.index_remen};
+                R.drawable.index_hun,R.drawable.index_remen,R.drawable.index_jingpin,R.drawable.index_miaosha,R.drawable.index_xinyongdai};
         for(int i=0;i<10;i++){
             HomeYarnTypeEntity homeYarnTypeEntity=new HomeYarnTypeEntity();
             homeYarnTypeEntity.setName(names[i]);
