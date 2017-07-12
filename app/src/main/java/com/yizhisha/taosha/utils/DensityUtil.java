@@ -9,6 +9,10 @@ import android.widget.LinearLayout;
 
 import com.yizhisha.taosha.App;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by lan on 2017/6/21.
  */
@@ -208,6 +212,31 @@ public class DensityUtil {
         view.setLayoutParams(params);
     }
 
+    /*
+       * 将时间戳转换为时间
+       */
+    public static String stampToDate(long s) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    //时间格式转换
+    public static String timeChange(String time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        String str = format1.format(date);
+        return str;
+    }
 
 
 }

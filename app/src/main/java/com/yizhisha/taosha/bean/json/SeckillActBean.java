@@ -20,6 +20,8 @@ public class SeckillActBean {
     private String litpic;
 
     private String company;
+    private long nowtime;
+    private String counttime;
 
     public int getId() {
         return id;
@@ -83,5 +85,37 @@ public class SeckillActBean {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public long getNowtime() {
+        return nowtime;
+    }
+
+    public void setNowtime(long nowtime) {
+        this.nowtime = nowtime;
+    }
+
+    public String getCounttime() {
+        return counttime;
+    }
+
+    public void setCounttime(String counttime) {
+        this.counttime = counttime;
+    }
+
+    @Override
+    public String toString() {
+        return "SeckillActBean{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", market_price=" + market_price +
+                ", starttime=" + starttime +
+                ", endtime=" + endtime +
+                ", litpic='" + litpic + '\'' +
+                ", company='" + company + '\'' +
+                ", nowtime=" + nowtime +
+                ", counttime='" + counttime + '\'' +
+                '}';
     }
 }

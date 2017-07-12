@@ -1,10 +1,13 @@
 package com.yizhisha.taosha.ui.home.activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -41,6 +44,7 @@ implements SeckillActivityContract.View{
 
     private SeckillActivityAdapter mAdapter;
     private List<SeckillActBean> dataLists=new ArrayList<>();
+    MyThread   timeThread;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_seckill_activity;
@@ -81,6 +85,10 @@ implements SeckillActivityContract.View{
         //mSwipeRefreshLayout.setRefreshing(false);
         dataLists.addAll(data);
         mAdapter.setNewData(dataLists);
+
+           timeThread = new MyThread();
+        new Thread(timeThread).start();
+
     }
 
     @Override
@@ -107,5 +115,40 @@ implements SeckillActivityContract.View{
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataLists);
         mLoadingView.loadError();
+    }
+
+    Handler handler = new Handler(){
+        public void handleMessage(Message msg){
+            switch (msg.what){
+                case 1:
+                    //刷新适配器
+                    //    mRecommendActivitiesAdapter.notifyDataSetChanged();
+                    //优化刷新adapter的方法
+                    mAdapter.notifyDataSetChanged();
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+    class MyThread implements Runnable{
+        //用来停止线程
+        boolean endThread;
+
+        @Override
+        public void run() {
+            while(!endThread){
+                try{
+                    Thread.sleep(1000);
+                    Log.e("PIP","iiii");
+
+                    Message message = new Message();
+                    message.what = 1;
+                    //发送信息给handler
+                    handler.sendMessage(message);
+                }catch (Exception e){
+
+                }
+            }
+        }
     }
 }
