@@ -119,8 +119,8 @@ public class GlideUtil {
      */
     public void LoadContextBitmap(Context context, String path, ImageView imageView,String bitmapOrgif){
         if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
-            Glide.with(context).load(path).skipMemoryCache( true )
-                    .diskCacheStrategy(DiskCacheStrategy.NONE )
+            Glide.with(context).load(path).skipMemoryCache(false)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT )
                     .placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).crossFade().into(imageView);
         }else if(bitmapOrgif.equals(LOAD_GIF)){
             Glide.with(context).load(path).asGif().skipMemoryCache( true )

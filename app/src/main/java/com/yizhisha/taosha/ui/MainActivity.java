@@ -24,9 +24,9 @@ public class MainActivity extends BaseActivity {
 
     private String[] mTitles = {"首页", "购物车","个人中心"};
     private int[] mIconUnselectIds = {
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+            R.drawable.index_home_normal,R.drawable.index_gouwuche_normal,R.drawable.index_me_ormal};
     private int[] mIconSelectIds = {
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+            R.drawable.index_home,R.drawable.index_gouwuche, R.drawable.index_me};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private HomeFragment homeFragment;

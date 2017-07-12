@@ -24,6 +24,7 @@ import com.yizhisha.taosha.bean.json.IndexImgBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.ui.home.activity.SearchActivity;
+import com.yizhisha.taosha.ui.home.activity.SeckillActivityActivity;
 import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.HomeContract;
@@ -137,6 +138,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         homeYarnTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if(position==8){
+                    startActivity(SeckillActivityActivity.class);
+                    return;
+                }
                 startActivity(SelectYarnActivity.class);
                 ToastUtil.showShortToast(position+1+"");
             }

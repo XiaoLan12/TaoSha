@@ -21,7 +21,7 @@
         tl:tl_iconHeight="20dp"
         tl:tl_iconWidth="20dp"
         tl:tl_indicator_color="@color/gray"
-        tl:tl_textSelectColor="@color/green"
+        tl:tl_textSelectColor="@color/red1"
         tl:tl_textUnselectColor="@color/gray"
         tl:tl_textsize="11sp"
         tl:tl_underline_height="0dp" />

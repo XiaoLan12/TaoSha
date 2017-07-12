@@ -10,6 +10,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
@@ -114,4 +115,8 @@ public interface ApiService {
 
     @GET("ios/order/seckilling/")
     Observable<SeckillListBean> getSeckillOrder(@QueryMap Map<String, String> param);
+
+    //秒纱h活动
+    @GET("ios/goods/seckilling/")
+    Observable<SeckillActListBean> getSeckillActivity(@QueryMap Map<String, String> param);
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_5"
+    android:paddingBottom="@dimen/dp_5">
+
+    <ImageView
+        android:id="@+id/seckillact_photo_iv"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_margin="@dimen/dp_5"/>
+        <TextView
+            android:id="@+id/seckillact_title_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/seckillact_photo_iv"
+            android:layout_alignTop="@+id/seckillact_photo_iv"
+            android:textSize="@dimen/font_normal"
+            android:textColor="@color/common_h1"
+            tools:text="aaaa"/>
+    <TextView
+        android:id="@+id/seckillact_tv1"
+        style="@style/TS.Theme.Widget.Text"
+        android:layout_toRightOf="@+id/seckillact_photo_iv"
+        android:layout_below="@+id/seckillact_title_tv"
+        android:textColor="@color/common_h3"
+        android:text="市场价:"/>
+    <TextView
+        android:id="@+id/seckillact_market_price_tv1"
+        style="@style/TS.Theme.Widget.Text"
+        android:layout_toRightOf="@+id/seckillact_tv1"
+        android:layout_below="@+id/seckillact_title_tv"
+        android:textColor="@color/common_h3"
+        tools:text="12"/>
+
+    <TextView
+        android:id="@+id/seckillact_tv2"
+        style="@style/TS.Theme.Widget.Text"
+        android:layout_toRightOf="@+id/seckillact_photo_iv"
+        android:layout_alignBottom="@+id/seckillact_photo_iv"
+        android:textColor="@color/red1"
+        android:text="秒杀价:"/>
+    <TextView
+        android:id="@+id/seckillact_seckill_price_tv"
+        style="@style/TS.Theme.Widget.Text"
+        android:layout_toRightOf="@+id/seckillact_tv2"
+        android:layout_alignBottom="@+id/seckillact_photo_iv"
+        android:textColor="@color/red1"
+        tools:text="12"/>
+
+    <TextView
+        android:id="@+id/seckillact_activity_tv"
+        style="@style/TS.Theme.Widget.Text"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/yellow"
+        android:padding="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/red1"
+        android:text="活动已结束"/>
+
+</RelativeLayout>
