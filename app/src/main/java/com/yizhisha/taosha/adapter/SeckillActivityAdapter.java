@@ -19,15 +19,17 @@ import java.util.List;
  */
 
 public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,BaseViewHolder> {
+    private long endtime;
     public SeckillActivityAdapter(@Nullable List<SeckillActBean> data) {
         super(R.layout.item_seckillact,data);
+        this.endtime=System.currentTimeMillis()/1000+10;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
         item.setNowtime(System.currentTimeMillis()/1000);
 //        Log.e("PPP",item.getNowtime()+"--"+item.getEndtime());
-        item.setEndtime(1599886080);
+        item.setEndtime(endtime);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
         helper.setText(R.id.seckillact_seckill_price_tv,String.valueOf(item.getPrice()));
