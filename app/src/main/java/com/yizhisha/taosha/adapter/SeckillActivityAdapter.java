@@ -26,7 +26,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
         item.setNowtime(System.currentTimeMillis()/1000);
-        Log.e("PPP",item.getNowtime()+"--"+item.getEndtime());
+//        Log.e("PPP",item.getNowtime()+"--"+item.getEndtime());
         item.setEndtime(1599886080);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
@@ -39,7 +39,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
         }
 //        if(item.getNowtime()>item.getEndtime())
         else {
-            long counttime = item.getEndtime()-item.getNowtime();
+            long counttime = item.getEndtime()*1000-item.getNowtime()*1000;
             Log.e("PPP",counttime+"");
             long days = counttime / (1000 * 60 * 60 * 24);
             long hours = (counttime-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
