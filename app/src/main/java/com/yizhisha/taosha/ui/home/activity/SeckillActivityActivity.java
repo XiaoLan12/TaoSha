@@ -139,8 +139,6 @@ implements SeckillActivityContract.View{
             while(!endThread){
                 try{
                     Thread.sleep(1000);
-                    Log.e("PIP","iiii");
-
                     Message message = new Message();
                     message.what = 1;
                     //发送信息给handler

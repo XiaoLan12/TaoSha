@@ -34,7 +34,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
         helper.setText(R.id.seckillact_seckill_price_tv,String.valueOf(item.getPrice()));
 
-        if(item.getNowtime()>item.getEndtime()){
+        if(item.getStarttime()>=item.getEndtime()){
             helper.setText(R.id.seckillact_activity_tv,"活动已结束");
         } else if(item.getNowtime()<item.getStarttime()){
             helper.setText(R.id.seckillact_activity_tv,"活动未开始");
@@ -42,7 +42,6 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
 //        if(item.getNowtime()>item.getEndtime())
         else {
             long counttime = item.getEndtime()*1000-item.getNowtime()*1000;
-            Log.e("PPP",counttime+"");
             long days = counttime / (1000 * 60 * 60 * 24);
             long hours = (counttime-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
             long minutes = (counttime-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
