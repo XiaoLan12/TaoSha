@@ -11,11 +11,12 @@ import java.util.Date;
  */
 
 public class DateUtil {
-    private static SimpleDateFormat tempTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
     /*时间戳转换成字符窜*/
-    public static String getDateToString(Long time) {
-        Date d = new Date(time*1000);
-        return tempTime.format(d);
+        /*时间戳转换成字符窜*/
+        public static String getDateToString(long time) {
+            Date d = new Date(time);
+            return sdf.format(d);
     }
     public static String subDateTime(Long startdate, Long endDate) {
         String over="活动已结束";

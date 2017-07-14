@@ -20,6 +20,7 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.SeckillActBean;
 import com.yizhisha.taosha.ui.home.contract.SeckillActivityContract;
 import com.yizhisha.taosha.ui.home.precenter.SeckillActivityPresenter;
+import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;

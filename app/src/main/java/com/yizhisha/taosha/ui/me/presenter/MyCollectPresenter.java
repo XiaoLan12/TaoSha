@@ -23,10 +23,10 @@ public class MyCollectPresenter extends MyCollectConstract.Presenter{
         }
         addSubscrebe(Api.getInstance().loadCollectList(param), new RxSubscriber<CollectListBean>(mContext,false) {
             @Override
-            protected void onSuccess(CollectListBean collectListBean) {
+            protected void onSuccess(CollectListBean data) {
                 mView.hideLoading();
-                if(collectListBean.getData().size()>0){
-                    mView.loadCollectSuccess(collectListBean.getData());
+                if(data!=null&&data.getData().size()>0){
+                    mView.loadCollectSuccess(data.getData());
                 }else{
                     mView.showEmpty();
                 }

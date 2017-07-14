@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">TaoSha</string>
     <string name="home">首页</string>
     <string name="shoppcart">购物车</string>

@@ -20,10 +20,10 @@ public class MyAddressPresenter extends MyAddressContract.Presenter{
         }
         addSubscrebe(Api.getInstance().loadAddressList(uid), new RxSubscriber<AddressListBean>(mContext,false) {
             @Override
-            protected void onSuccess(AddressListBean addressListBean) {
+            protected void onSuccess(AddressListBean data) {
                 mView.hideLoading();
-                if(addressListBean.getAddress().size()>0){
-                    mView.loadAddressSuccess(addressListBean.getAddress());
+                if(data!=null&&data.getAddress().size()>0){
+                    mView.loadAddressSuccess(data.getAddress());
                 }else{
                     mView.showEmpty();
                 }

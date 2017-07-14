@@ -29,7 +29,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
         item.setNowtime(System.currentTimeMillis()/1000);
-        Log.e("PPP","石楠"+ DateUtil.getDateToString(System.currentTimeMillis()));
+
         item.setEndtime(endtime);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
@@ -51,7 +51,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
             String finaltime = days + "天" + hours + "时" + minutes + "分" + second + "秒";
             helper.setText(R.id.seckillact_activity_tv,finaltime);
         }
-//        String.valueOf(DensityUtil.stampToDate(item.getNowtime()*1000))
+        //String.valueOf(DensityUtil.stampToDate(item.getNowtime()*1000))
 //        helper.setText(R.id.seckillact_activity_tv,item.getNowtime()+"");
 
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),

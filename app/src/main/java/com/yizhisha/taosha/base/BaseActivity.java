@@ -30,6 +30,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        doBeforeSetcontentView();
         this.setContentView(getLayoutId());
         StatusBarCompat.setStatusBarColor(this, Color.WHITE,125);
         //添加注解
@@ -65,7 +66,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
     }
     /**
      * 通过Class跳转界面
