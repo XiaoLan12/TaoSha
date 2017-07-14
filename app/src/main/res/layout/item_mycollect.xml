@@ -14,6 +14,7 @@
             android:layout_width="100dp"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
             android:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/shopname_mycollect_tv"
@@ -30,6 +31,7 @@
             android:layout_marginTop="@dimen/dp_5"
             android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/font_small"
             android:text="支付规格:"/>
         <TextView
             android:id="@+id/countspecifications_mycollect_tv"
@@ -38,6 +40,7 @@
             android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_alignTop="@+id/countspecifications_tv"
             android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/font_small"
             android:text="9/1"/>
 
         <TextView
@@ -46,6 +49,7 @@
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/countspecifications_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/font_small"
             android:text="成分比例:"/>
         <TextView
             android:id="@+id/composition_mycollect_tv"
@@ -53,6 +57,7 @@
             android:layout_toRightOf="@+id/composition_tv"
             android:layout_below="@+id/countspecifications_mycollect_tv"
             android:layout_alignTop="@+id/composition_tv"
+            android:textSize="@dimen/font_small"
             android:layout_marginLeft="@dimen/dp_5"
             />
 
@@ -62,6 +67,7 @@
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/composition_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
+            android:textSize="@dimen/font_small"
             android:text="适合针型:"/>
 
         <TextView
@@ -70,6 +76,7 @@
             android:layout_toRightOf="@+id/fit_pittype_tv"
             android:layout_below="@+id/composition_mycollect_tv"
             android:layout_alignTop="@+id/fit_pittype_tv"
+            android:textSize="@dimen/font_small"
             android:layout_marginLeft="@dimen/dp_5"
             />
         <RelativeLayout

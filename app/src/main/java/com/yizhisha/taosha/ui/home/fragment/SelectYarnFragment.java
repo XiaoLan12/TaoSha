@@ -103,7 +103,9 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
 
     @Override
     public void showLoading() {
-        mLoadingView.load();
+        if(mLoadingView!=null) {
+            mLoadingView.load();
+        }
     }
 
     @Override
@@ -121,19 +123,20 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
 
     @Override
     public void loadFail(String msg) {
-        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
-            @Override
-            public void doRequestData() {
-            }
-        });
         dataList.clear();
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+                    @Override
+                    public void doRequestData() {
+                    }
+                });
+
     }
 
     @Override
     public void onRefresh() {
-
+        load(false);
     }
 }

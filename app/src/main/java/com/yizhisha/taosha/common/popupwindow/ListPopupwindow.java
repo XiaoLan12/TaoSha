@@ -25,6 +25,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.bean.PopupListBean;
 import com.yizhisha.taosha.utils.DensityUtil;
+import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class ListPopupwindow extends PopupWindow {
 
     // 定义列表对象
     private RecyclerView mRecyclerView;
+
+    private MyAdapter mAdapter;
 
     // 定义弹窗子类项列表
     private ArrayList<PopupListBean> mActionItemEntities = new ArrayList<PopupListBean>();
@@ -114,6 +117,7 @@ public class ListPopupwindow extends PopupWindow {
                 if (mItemOnClickListener != null)
                     mItemOnClickListener.onItemClick(mActionItemEntities.get(position),
                             position);
+                mAdapter.setPosition(position);
             }
         });
 
@@ -141,7 +145,8 @@ public class ListPopupwindow extends PopupWindow {
         mIsDirty = false;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext,RecyclerViewDriverLine.VERTICAL_LIST));
-        mRecyclerView.setAdapter(new MyAdapter(mActionItemEntities));
+        mAdapter=new MyAdapter(mActionItemEntities);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 
@@ -190,13 +195,24 @@ public class ListPopupwindow extends PopupWindow {
     }
 
     private class MyAdapter extends BaseQuickAdapter<PopupListBean,BaseViewHolder>{
-
+        private int position;
         public MyAdapter(@Nullable List<PopupListBean> data) {
             super(R.layout.item_popup_list,data);
         }
         @Override
         protected void convert(BaseViewHolder helper, PopupListBean item) {
             helper.setText(R.id.txt_title,item.getTitle());
+            if(position==helper.getAdapterPosition()){
+                helper.setBackgroundRes(R.id.txt_title,R.color.common_bg);
+                helper.setTextColor(R.id.txt_title, RescourseUtil.getColor(R.color.blue));
+            }else{
+                helper.setBackgroundRes(R.id.txt_title,R.color.white);
+                helper.setTextColor(R.id.txt_title,RescourseUtil.getColor(R.color.common_h1));
+            }
+        }
+        public void setPosition(int position){
+            this.position=position;
+            notifyDataSetChanged();
         }
     }
 }

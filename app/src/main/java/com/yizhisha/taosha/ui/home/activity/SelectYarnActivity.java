@@ -102,14 +102,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             int lastPosition;
             @Override
             public void onPageSelected(int position) {
-                // 页面被选中
 
-                // 修改position
-                position = position % mFragments.size();
-
-                // 替换位置
-                lastPosition = position;
                 commonTabLayout.setCurrentTab(position);
+                mFragment= (SelectYarnFragment) mFragments.get(position);
             }
 
             @Override
@@ -121,7 +116,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         commonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-
+                mFragment= (SelectYarnFragment) mFragments.get(position);
                 switch (position){
                     case 0:
                         if(mYarnPopup==null){
@@ -160,6 +155,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onTabReselect(int position) {
+                mFragment= (SelectYarnFragment) mFragments.get(position);
                 switch (position){
                     case 0:
                         if(mYarnPopup==null){
@@ -240,6 +236,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mPriceType=item.getId();
+                viewPager.setCurrentItem(index);
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -263,6 +260,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mNeedleType=item.getTitle();
+                viewPager.setCurrentItem(index);
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -286,6 +284,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mOrderByType=item.getId();
+                viewPager.setCurrentItem(index);
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
