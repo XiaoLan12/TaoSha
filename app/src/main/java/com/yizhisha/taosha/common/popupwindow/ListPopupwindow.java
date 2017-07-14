@@ -122,15 +122,15 @@ public class ListPopupwindow extends PopupWindow {
         });
 
     }
-
+    public void setItemSelected(int position){
+        mAdapter.position=position;
+    }
     /**
      * 显示弹窗列表界面
      */
     public void show(View view) {
         // 判断是否需要添加或更新列表子类项
-        if (mIsDirty) {
-            populateActions();
-        }
+
 
         // 显示弹窗的位置
 
@@ -157,6 +157,9 @@ public class ListPopupwindow extends PopupWindow {
         if (action != null) {
             mActionItemEntities.addAll(action);
             mIsDirty = true;
+        }
+        if (mIsDirty) {
+            populateActions();
         }
     }
 
@@ -195,7 +198,7 @@ public class ListPopupwindow extends PopupWindow {
     }
 
     private class MyAdapter extends BaseQuickAdapter<PopupListBean,BaseViewHolder>{
-        private int position;
+        public int position;
         public MyAdapter(@Nullable List<PopupListBean> data) {
             super(R.layout.item_popup_list,data);
         }

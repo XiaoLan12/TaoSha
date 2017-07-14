@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.home.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -67,6 +68,10 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initView() {
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null) {
+            mYarnType=bundle.getInt("YARNTYPE");
+        }
         //设置状态栏颜色
         StatusBarCompat.setStatusBarColor(SelectYarnActivity.this, this.getResources().getColor(R.color.red3));
         for (int i = 0; i < mTitles.length; i++) {
@@ -74,7 +79,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         }
 
         for (int i=0;i<mTitles.length;i++) {
-            mFragments.add(SelectYarnFragment.getInstance());
+            mFragments.add(SelectYarnFragment.getInstance(mYarnType));
         }
         commonTabLayout.setTabData(mTabEntities);
         mFragment= (SelectYarnFragment) mFragments.get(0);
@@ -194,7 +199,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         });
     }
     private void initPopup1(final int index) {
-
+        int position = 0;
         int[] id = new int[]{1, 539, 540, 544, 541, 542, 545};
         String[] title = new String[]{"全部数据", "麻纺纱", "毛纺纱", "棉纺纱", "混纺纱", "花式纱", "化纤纱"};
         ArrayList<PopupListBean> list = new ArrayList<>();
@@ -203,6 +208,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             popupListBean.setId(id[i]);
             popupListBean.setTitle(title[i]);
             list.add(popupListBean);
+            if (mYarnType==id[i]){
+                position=i;
+            }
         }
         // 实例化标题栏弹窗
         mYarnPopup = new ListPopupwindow(this, DensityUtil.getScreenWidth(this)/4-10,
@@ -213,11 +221,12 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                     mYarnType=item.getId();
                     viewPager.setCurrentItem(index);
                     mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
-
             }
         });
         // 给标题栏弹窗添加子类
+
         mYarnPopup.addAction(list);
+        mYarnPopup.setItemSelected(position);
     }
     private void initPopup2(final int index) {
         int[] id = new int[]{1, 2, 3, 4, 5, 6};

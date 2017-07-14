@@ -184,12 +184,47 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         homeYarnTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if(position==8){
-                    startActivity(SeckillActivityActivity.class);
-                    return;
+                switch (position){
+                    case 0:
+                        Bundle bundle=new Bundle();
+                        bundle.putInt("YARNTYPE",540);
+                        startActivity(SelectYarnActivity.class,bundle);
+                        break;
+                    case 1:
+                        Bundle bundle1=new Bundle();
+                        bundle1.putInt("YARNTYPE",545);
+                        startActivity(SelectYarnActivity.class,bundle1);
+                        break;
+                    case 2:
+                        Bundle bundle2=new Bundle();
+                        bundle2.putInt("YARNTYPE",544);
+                        startActivity(SelectYarnActivity.class,bundle2);
+                        break;
+                    case 3:
+                        Bundle bundle3=new Bundle();
+                        bundle3.putInt("YARNTYPE",542);
+                        startActivity(SelectYarnActivity.class,bundle3);
+                        break;
+                    case 4:
+                        Bundle bundle4=new Bundle();
+                        bundle4.putInt("YARNTYPE",539);
+                        startActivity(SelectYarnActivity.class,bundle4);
+                        break;
+                    case 5:
+                       /* Bundle bundle5=new Bundle();
+                        bundle5.putInt("YARNTYPE",541);*/
+                        startActivity(SelectYarnActivity.class);
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        startActivity(SeckillActivityActivity.class);
+                        break;
+                    case 9:
+                        break;
                 }
-                startActivity(SelectYarnActivity.class);
-                ToastUtil.showShortToast(position+1+"");
             }
         });
 

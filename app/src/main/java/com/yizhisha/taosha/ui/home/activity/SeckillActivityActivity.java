@@ -76,21 +76,16 @@ implements SeckillActivityContract.View{
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
-
     }
-
     @Override
     public void loadSuccess(List<SeckillActBean> data) {
         dataLists.clear();
         //mSwipeRefreshLayout.setRefreshing(false);
         dataLists.addAll(data);
         mAdapter.setNewData(dataLists);
-
-           timeThread = new MyThread();
+        timeThread = new MyThread();
         new Thread(timeThread).start();
-
     }
-
     @Override
     public void showLoading() {
         mLoadingView.load();

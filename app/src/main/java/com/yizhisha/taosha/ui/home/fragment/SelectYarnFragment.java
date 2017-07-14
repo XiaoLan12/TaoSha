@@ -48,8 +48,9 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
     private int mPriceType=1;
     private int mOrderByType=1;
 
-    public static SelectYarnFragment getInstance() {
+    public static SelectYarnFragment getInstance(int yarnType) {
         SelectYarnFragment sf = new SelectYarnFragment();
+        sf.mYarnType=yarnType;
         return sf;
     }
     @Override
@@ -77,6 +78,12 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(YarnActivity.class);
+            }
+        });
     }
     private void load(boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();

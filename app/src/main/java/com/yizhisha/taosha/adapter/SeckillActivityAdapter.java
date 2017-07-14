@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.SeckillActBean;
+import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.GlideUtil;
 
@@ -28,7 +29,7 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
         item.setNowtime(System.currentTimeMillis()/1000);
-//        Log.e("PPP",item.getNowtime()+"--"+item.getEndtime());
+        Log.e("PPP","石楠"+ DateUtil.getDateToString(System.currentTimeMillis()));
         item.setEndtime(endtime);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
