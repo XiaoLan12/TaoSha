@@ -57,13 +57,14 @@ implements SeckillActivityContract.View{
     @Override
     protected void initView() {
         initAdapter();
-       load(true);
+        load(true);
     }
+    //发送网络请求
     private void load(boolean isShowLoad){
         Map<String,String> map=new HashMap<>();
-
         mPresenter.loadSeckillActivity(map,isShowLoad);
     }
+
     private void initAdapter(){
       /*  mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
                 RescourseUtil.getColor(R.color.red));

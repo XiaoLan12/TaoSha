@@ -82,8 +82,8 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             mFragments.add(SelectYarnFragment.getInstance(mYarnType));
         }
         commonTabLayout.setTabData(mTabEntities);
-        mFragment= (SelectYarnFragment) mFragments.get(0);
 
+        mFragment= (SelectYarnFragment) mFragments.get(0);
         mAdapter = new FragmentPagerAdapter(SelectYarnActivity.this.getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -103,8 +103,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
-            int lastPosition;
             @Override
             public void onPageSelected(int position) {
 
@@ -197,11 +195,12 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                 }
             }
         });
+        initPopup1(0);
     }
     private void initPopup1(final int index) {
         int position = 0;
         int[] id = new int[]{1, 539, 540, 544, 541, 542, 545};
-        String[] title = new String[]{"全部数据", "麻纺纱", "毛纺纱", "棉纺纱", "混纺纱", "花式纱", "化纤纱"};
+        final String[] title = new String[]{"全部", "麻纺纱", "毛纺纱", "棉纺纱", "混纺纱", "花式纱", "化纤纱"};
         ArrayList<PopupListBean> list = new ArrayList<>();
         for (int i = 0; i < id.length; i++) {
             PopupListBean popupListBean = new PopupListBean();
@@ -220,6 +219,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(PopupListBean item, int position) {
                     mYarnType=item.getId();
                     viewPager.setCurrentItem(index);
+                    commonTabLayout.getTitleView(index).setText(item.getTitle());
                     mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -227,10 +227,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
         mYarnPopup.addAction(list);
         mYarnPopup.setItemSelected(position);
+        commonTabLayout.getTitleView(index).setText(title[position]);
     }
     private void initPopup2(final int index) {
-        int[] id = new int[]{1, 2, 3, 4, 5, 6};
-        String[] title = new String[]{"不限", "51~100", "101~200", "201~300", "301~500", ">500"};
+        int[] id = new int[]{0,1, 2, 3, 4, 5, 6};
+        String[] title = new String[]{"不限","1-50元","51-100元", "100-200元", "200-300元", "301-500元", "500元以上"};
         ArrayList<PopupListBean> list = new ArrayList<>();
         for (int i = 0; i < id.length; i++) {
             PopupListBean popupListBean = new PopupListBean();
@@ -246,6 +247,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(PopupListBean item, int position) {
                 mPriceType=item.getId();
                 viewPager.setCurrentItem(index);
+                commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -254,7 +256,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     }
     private void initPopup3(final int index) {
 
-        String[] title = new String[]{"3g", "6g"};
+        String[] title = new String[]{"全部","3G", "5G","7G","9G","12G","14G","16G"};
         ArrayList<PopupListBean> list = new ArrayList<>();
         for (int i = 0; i < title.length; i++) {
             PopupListBean popupListBean = new PopupListBean();
@@ -270,6 +272,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(PopupListBean item, int position) {
                 mNeedleType=item.getTitle();
                 viewPager.setCurrentItem(index);
+                commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -277,8 +280,8 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         mNeedlePopup.addAction(list);
     }
     private void initPopup4(final int index){
-        int[] id=new int[]{1,2,3,4};
-        String[] title=new String[]{"销量降序","点击降序","收藏降序","添加时间"};
+        int[] id=new int[]{1,2,3,4,5};
+        String[] title=new String[]{"不限","销量最高","浏览最多","收藏最多","最新上传"};
         ArrayList<PopupListBean> list=new ArrayList<>();
         for(int i=0;i<id.length;i++){
             PopupListBean popupListBean=new PopupListBean();
@@ -294,19 +297,13 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(PopupListBean item, int position) {
                 mOrderByType=item.getId();
                 viewPager.setCurrentItem(index);
+                commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
         // 给标题栏弹窗添加子类
         mOrderbyPopup.addAction(list);
     }
-
-    private ListPopupwindow.OnItemOnClickListener onitemClick=new ListPopupwindow.OnItemOnClickListener() {
-        @Override
-        public void onItemClick(PopupListBean item, int position) {
-
-        }
-    };
     @OnClick({R.id.img_back})
     @Override
     public void onClick(View v) {

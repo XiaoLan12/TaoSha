@@ -3,6 +3,7 @@ package com.yizhisha.taosha.adapter;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -25,11 +26,9 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
         super(R.layout.item_seckillact,data);
         this.endtime=System.currentTimeMillis()/1000+10;
     }
-
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
         item.setNowtime(System.currentTimeMillis()/1000);
-
         item.setEndtime(endtime);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
