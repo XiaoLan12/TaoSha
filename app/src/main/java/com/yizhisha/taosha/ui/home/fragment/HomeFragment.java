@@ -277,37 +277,49 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         adapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data1.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
         adapter2.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data2.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
         adapter3.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data3.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
         adapter4.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data4.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
         adapter5.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data5.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
         adapter6.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("id",data6.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
             }
         });
 
@@ -442,7 +454,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         banner.setImages(imgss, new Banner.OnLoadImageListener() {
             @Override
             public void OnLoadImage(ImageView view, Object url) {
+                view.setScaleType(ImageView.ScaleType.FIT_XY);
                 Glide.with(getActivity()).load(url)
+
 //                        .signature(new StringSignature(UUID.randomUUID().toString()))  // 重点在这行
                         .diskCacheStrategy( DiskCacheStrategy.NONE )//禁用磁盘缓存
                         .skipMemoryCache( true )//跳过内存缓存

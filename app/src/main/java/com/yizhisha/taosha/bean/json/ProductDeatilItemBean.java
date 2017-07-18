@@ -8,11 +8,16 @@ import java.util.List;
 
 public class ProductDeatilItemBean {
     private String id;
+    private String uid;
     private String mzw_uid;
     private String title;
+    private String pid;
     private String pname;
+    private String tid;
+    private String tname;
     private String code;
     private String litpic;
+    private String needle;
     private String needle_name;
     private String ingredient;
     private String yam;
@@ -20,7 +25,12 @@ public class ProductDeatilItemBean {
     private String price;
     private String price_real;
     private String price_real_detail;
+    private String weight;
+    private String minorder;
+    private String session;
     private String company;
+    private String skey;
+    private String likekey;
     private String is_show;
     private String is_c;
     private String is_banmao;
@@ -38,11 +48,11 @@ public class ProductDeatilItemBean {
     private String is_nayang;
     private String is_fanxian;
     private String session_name;
-    private List<ProductDetailImg> seka;
+    private List<String> seka;
     private String color;
     private String description;
-    private List<ProductDetailImg> content_;
-    private List<ProductDetailImg> album;
+    private List<String> content_;
+    private List<String> album;
 
     public String getId() {
         return id;
@@ -50,6 +60,14 @@ public class ProductDeatilItemBean {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getMzw_uid() {
@@ -68,12 +86,36 @@ public class ProductDeatilItemBean {
         this.title = title;
     }
 
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
     public String getPname() {
         return pname;
     }
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public String getTid() {
+        return tid;
+    }
+
+    public void setTid(String tid) {
+        this.tid = tid;
+    }
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
     }
 
     public String getCode() {
@@ -90,6 +132,14 @@ public class ProductDeatilItemBean {
 
     public void setLitpic(String litpic) {
         this.litpic = litpic;
+    }
+
+    public String getNeedle() {
+        return needle;
+    }
+
+    public void setNeedle(String needle) {
+        this.needle = needle;
     }
 
     public String getNeedle_name() {
@@ -148,12 +198,52 @@ public class ProductDeatilItemBean {
         this.price_real_detail = price_real_detail;
     }
 
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getMinorder() {
+        return minorder;
+    }
+
+    public void setMinorder(String minorder) {
+        this.minorder = minorder;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
     public String getCompany() {
         return company;
     }
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getSkey() {
+        return skey;
+    }
+
+    public void setSkey(String skey) {
+        this.skey = skey;
+    }
+
+    public String getLikekey() {
+        return likekey;
+    }
+
+    public void setLikekey(String likekey) {
+        this.likekey = likekey;
     }
 
     public String getIs_show() {
@@ -292,11 +382,11 @@ public class ProductDeatilItemBean {
         this.session_name = session_name;
     }
 
-    public List<ProductDetailImg> getSeka() {
+    public List<String> getSeka() {
         return seka;
     }
 
-    public void setSeka(List<ProductDetailImg> seka) {
+    public void setSeka(List<String> seka) {
         this.seka = seka;
     }
 
@@ -316,19 +406,19 @@ public class ProductDeatilItemBean {
         this.description = description;
     }
 
-    public List<ProductDetailImg> getContent_() {
+    public List<String> getContent_() {
         return content_;
     }
 
-    public void setContent_(List<ProductDetailImg> content_) {
+    public void setContent_(List<String> content_) {
         this.content_ = content_;
     }
 
-    public List<ProductDetailImg> getAlbum() {
+    public List<String> getAlbum() {
         return album;
     }
 
-    public void setAlbum(List<ProductDetailImg> album) {
+    public void setAlbum(List<String> album) {
         this.album = album;
     }
 
@@ -336,11 +426,16 @@ public class ProductDeatilItemBean {
     public String toString() {
         return "ProductDeatilItemBean{" +
                 "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
                 ", mzw_uid='" + mzw_uid + '\'' +
                 ", title='" + title + '\'' +
+                ", pid='" + pid + '\'' +
                 ", pname='" + pname + '\'' +
+                ", tid='" + tid + '\'' +
+                ", tname='" + tname + '\'' +
                 ", code='" + code + '\'' +
                 ", litpic='" + litpic + '\'' +
+                ", needle='" + needle + '\'' +
                 ", needle_name='" + needle_name + '\'' +
                 ", ingredient='" + ingredient + '\'' +
                 ", yam='" + yam + '\'' +
@@ -348,7 +443,12 @@ public class ProductDeatilItemBean {
                 ", price='" + price + '\'' +
                 ", price_real='" + price_real + '\'' +
                 ", price_real_detail='" + price_real_detail + '\'' +
+                ", weight='" + weight + '\'' +
+                ", minorder='" + minorder + '\'' +
+                ", session='" + session + '\'' +
                 ", company='" + company + '\'' +
+                ", skey='" + skey + '\'' +
+                ", likekey='" + likekey + '\'' +
                 ", is_show='" + is_show + '\'' +
                 ", is_c='" + is_c + '\'' +
                 ", is_banmao='" + is_banmao + '\'' +
