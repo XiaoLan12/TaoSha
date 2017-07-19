@@ -17,6 +17,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
+import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import qiu.niorgai.StatusBarCompat;
 public class YarnActivity extends BaseActivity {
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-    private String[] mTitles = {"产品", "参数", "色卡", "详情","评论"};
+    private String[] mTitles = {"产品", "参数", "详情","评论"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     @Bind(R.id.vp)
@@ -46,7 +47,7 @@ public class YarnActivity extends BaseActivity {
 
     private FragmentPagerAdapter mAdapter;
     private String id="";
-    private DetailsYarnFragment detailsYarnFragment=null;
+//    private DetailsYarnFragment detailsYarnFragment=null;
 
     @Override
     protected int getLayoutId() {
@@ -68,9 +69,10 @@ public class YarnActivity extends BaseActivity {
             id=bundle.getString("id");
         }
 
-        detailsYarnFragment=new DetailsYarnFragment();
+//        detailsYarnFragment=new DetailsYarnFragment();
         mFragments.add(ProductYarnFragnment.getInstance(id));
-        mFragments.add(detailsYarnFragment);
+        mFragments.add(new ParameterYarnFragment());
+        mFragments.add(new DetailsYarnFragment());
 //        mFragments.add(new DetailsYarnFragment());
 //        mFragments.add(new DetailsYarnFragment());
 //        mFragments.add(new DetailsYarnFragment());
