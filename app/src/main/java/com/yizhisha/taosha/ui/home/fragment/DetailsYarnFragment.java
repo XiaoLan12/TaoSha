@@ -37,8 +37,12 @@ public class DetailsYarnFragment extends BaseFragment{
 
                 isLoad=true;
                 List<String> content=new ArrayList<>();
+                List<String> content1=new ArrayList<>();
                 content=AppConstant.productDetailBean.getGoods().getContent_();
-                adapter=new ProductDetailImgAdapter(getActivity(),content);
+                for(int i=0;i<content.size();i++){
+                    content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+content.get(i));
+                }
+                adapter=new ProductDetailImgAdapter(getActivity(),content1);
                 recyclerView.setAdapter(adapter);
             }
 

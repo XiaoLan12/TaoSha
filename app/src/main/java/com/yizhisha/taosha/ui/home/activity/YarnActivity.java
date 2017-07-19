@@ -146,13 +146,19 @@ public class YarnActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.img_back})
+    @OnClick({R.id.img_back,R.id.tv_shopping_cart,R.id.tv_shopping})
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.img_back:
                 finish_Activity(YarnActivity.this);
+                break;
+            case R.id.tv_shopping_cart:
+                startActivity(SelectYarnColor.class);
+                break;
+            case R.id.tv_shopping:
+                startActivity(SelectYarnColor.class);
                 break;
         }
     }

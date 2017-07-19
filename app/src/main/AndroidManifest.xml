@@ -50,6 +50,8 @@
         <activity android:name=".ui.home.activity.SearchActivity" />
         <activity android:name=".ui.home.activity.SelectYarnActivity" />
         <activity android:name=".ui.home.activity.YarnActivity" />
+        <activity android:name=".ui.home.activity.SelectYarnColor" />
+
         <activity android:name=".ui.me.activity.AreaSelectActivity" />
         <activity android:name=".ui.me.activity.SecKillOrderActivity" />
         <activity android:name=".ui.home.activity.SeckillActivityActivity"></activity>
