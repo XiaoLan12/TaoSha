@@ -30,32 +30,22 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<String,BaseViewHold
             helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-
-                    try {
                         TextView tv_num=    (TextView)helper.getView(R.id.tv_num);
-                        Log.e("RRR",tv_num.getText().toString().trim()+"--");
-                        int num1=Integer.getInteger(tv_num.getText().toString().trim());
+                        int num1=Integer.parseInt(tv_num.getText().toString().trim());
                         num1++;
-                        ((TextView) helper.getView(R.id.tv_num)).setText(num1+"--");
-                    }catch (Exception e){
-
-                    }
+                        ((TextView) helper.getView(R.id.tv_num)).setText(num1+"");
 
                 }
             });
         helper.getView(R.id.tv_reduce).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                try {
                 TextView tv_num=    (TextView)helper.getView(R.id.tv_num);
                 String num=tv_num.getText().toString().trim();
-                int num1=Integer.getInteger(num);
+                int num1=Integer.parseInt(num);
                 if(num1!=1){
                     num1--;
                     ((TextView) helper.getView(R.id.tv_num)).setText(num1+"");
-                }
-                }catch (Exception e){
-
                 }
 
             }
