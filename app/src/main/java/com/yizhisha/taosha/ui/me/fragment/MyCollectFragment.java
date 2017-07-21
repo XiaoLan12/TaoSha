@@ -15,6 +15,7 @@ import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 import com.yizhisha.taosha.ui.me.presenter.MyCollectPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -40,6 +41,7 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
 
     private MyCollectAdapter mAdapter;
     private int mType=0;
+    private int position;
     private List<CollectListBean.Favorite> dataList=new ArrayList<>();
 
     public static MyCollectFragment getInstance(int type) {
@@ -80,6 +82,17 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
                 startActivity(YarnActivity.class);
             }
         });
+        mAdapter.setOnDelListener(new MyCollectAdapter.onSwipeListener() {
+            @Override
+            public void onDel(int pos) {
+                position=pos;
+                Map<String,String> map=new HashMap<String, String>();
+                map.put("gid",dataList.get(pos).getGid());
+                map.put("uid",String.valueOf(AppConstant.UID));
+                mPresenter.cacheCollect(map);
+                position=pos;
+            }
+        });
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
@@ -99,7 +112,13 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
     public void loadCollectSuccess(List<CollectListBean.Favorite> data) {
         mSwipeRefreshLayout.setRefreshing(false);
         dataList.clear();
+        dataList.addAll(data);
         mAdapter.setNewData(data);
+    }
+
+    @Override
+    public void cacheSuccess(String str) {
+        mAdapter.notifyItemRemoved(position);
     }
     @Override
     public void showLoading() {
@@ -132,5 +151,10 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
+    }
+
+    @Override
+    public void cacheFail(String msg) {
+        ToastUtil.showbottomShortToast(msg);
     }
 }

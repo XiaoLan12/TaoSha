@@ -17,21 +17,22 @@
         style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:id="@+id/view"
         android:layout_below="@+id/toolber"/>
-
-
+<android.support.v4.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/rlBottomBar"
+    android:layout_below="@+id/view">
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rlBottomBar"
-        android:layout_below="@+id/view"
         android:cacheColorHint="#00000000"
         android:divider="#ebebeb"
         android:groupIndicator="@null"
         android:scrollbars="none"
         android:dividerHeight="1dp"
         />
-
+</android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
         android:id="@+id/rlBottomBar"
         android:layout_width="match_parent"
@@ -116,7 +117,6 @@
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
         android:layout_below="@+id/view"
-        android:background="@color/white"
         android:layout_height="match_parent"
         />
     </RelativeLayout>

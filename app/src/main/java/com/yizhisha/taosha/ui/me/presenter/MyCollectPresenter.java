@@ -4,6 +4,7 @@ import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxApiCallback;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 import com.yizhisha.taosha.utils.LogUtil;
 
@@ -35,6 +36,24 @@ public class MyCollectPresenter extends MyCollectConstract.Presenter{
             protected void onFailure(String message) {
                     mView.hideLoading();
                     mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void cacheCollect(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().cacheCollect(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if("y".equals(requestStatusBean.getStatus())){
+                    mView.cacheSuccess(requestStatusBean.getInfo());
+                }else{
+                    mView.cacheFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                    mView.cacheFail(message);
             }
         });
     }

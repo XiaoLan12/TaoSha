@@ -18,6 +18,8 @@ public interface MyCollectConstract {
     interface View extends BaseView {
         void loadCollectSuccess(List<CollectListBean.Favorite> data);
 
+        void cacheSuccess(String str);
+
         void showLoading();
 
         void hideLoading();
@@ -25,11 +27,13 @@ public interface MyCollectConstract {
         void showEmpty();
 
         void loadFail(String msg);
+        void cacheFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void loadCollect(Map<String, String> param,boolean isShowLoad);
+        public abstract void cacheCollect(Map<String, String> param);
 
         @Override
         public void onStart() {

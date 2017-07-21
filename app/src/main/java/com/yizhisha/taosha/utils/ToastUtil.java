@@ -98,7 +98,6 @@ public class ToastUtil {
      */
     public static  void showbottomShortToast(String msg){
         Toast toast=getSingleToast(msg, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
     }
 
@@ -127,7 +126,6 @@ public class ToastUtil {
      */
     public static  void showbottomLongToast(String msg){
         Toast toast=getSingleToast(msg, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
     }
 

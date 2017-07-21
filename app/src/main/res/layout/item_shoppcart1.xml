@@ -34,13 +34,13 @@
             android:text="东莞市纺织有限公司" />
 
         <TextView
-            android:id="@+id/delete_shoppcart1_tv"
+            android:id="@+id/edit_shoppcart1_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_5"
-            android:text="删除" />
+            android:text="编辑" />
     </RelativeLayout>
 
 </LinearLayout>

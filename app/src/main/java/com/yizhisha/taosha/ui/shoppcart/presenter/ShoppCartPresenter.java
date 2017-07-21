@@ -6,6 +6,7 @@ import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
+import com.yizhisha.taosha.utils.LogUtil;
 
 /**
  * Created by lan on 2017/7/10.

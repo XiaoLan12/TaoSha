@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
@@ -163,7 +164,9 @@ public class RegisterFragment extends BaseFragment<LoginPresenter> implements Lo
                     return;
                 }
                 Map<String,String> map1=new HashMap<>();
+
                 map1.put("mobile",mEtAccount.getText().toString().trim());
+                map1.put("mobilecode",mEtCode.getText().toString().trim());
                 map1.put("password",mEtSetPwd.getText().toString().trim());
                 map1.put("company",mEtCompany.getText().toString().trim());
                 mPresenter.register(map1);

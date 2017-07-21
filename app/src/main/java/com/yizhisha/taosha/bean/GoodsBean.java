@@ -124,4 +124,21 @@ public class GoodsBean {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsBean{" +
+                "gid=" + gid +
+                ", title='" + title + '\'' +
+                ", pname='" + pname + '\'' +
+                ", price=" + price +
+                ", litpic='" + litpic + '\'' +
+                ", amount=" + amount +
+                ", detail='" + detail + '\'' +
+                ", addtime=" + addtime +
+                ", status=" + status +
+                ", isChecked=" + isChecked +
+                ", isEditing=" + isEditing +
+                '}';
+    }
 }

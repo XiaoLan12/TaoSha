@@ -54,4 +54,15 @@ public class StoreBean {
     public void setEditing(boolean editing) {
         isEditing = editing;
     }
+
+    @Override
+    public String toString() {
+        return "StoreBean{" +
+                "mzw_uid=" + mzw_uid +
+                ", company='" + company + '\'' +
+                ", totalprice=" + totalprice +
+                ", isChecked=" + isChecked +
+                ", isEditing=" + isEditing +
+                '}';
+    }
 }

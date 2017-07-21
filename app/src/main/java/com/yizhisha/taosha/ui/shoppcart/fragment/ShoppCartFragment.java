@@ -15,9 +15,12 @@ import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Shopcart;
+import com.yizhisha.taosha.bean.json.ShopcartGoods;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
 import com.yizhisha.taosha.ui.shoppcart.presenter.ShoppCartPresenter;
+import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
@@ -42,12 +45,15 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     TextView btnSettle;
     @Bind(R.id.tvCountMoney)
     TextView tvCountMoney;
-
     @Bind(R.id.rlBottomBar)
     RelativeLayout rlBottomBar;
 
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
+
+    RelativeLayout mRlNormal;
+    RelativeLayout mRlEdit;
+    TextView id_tv_edit_all;
 
     private ShoppCartAdapter adapter;
     //定义父列表项List数据集合
@@ -130,10 +136,17 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 //setupViewsShow(isHasGoods);
             }
         });
+        //删除单项商品
+        adapter.setOnDeleteShopListener(new ShoppCartAdapter.OnDeleteShopListener() {
+            @Override
+            public void onDeleteShop(int groupPosition, int childPosition) {
+                adapter.removeOneGood(groupPosition,childPosition);
+            }
+        });
+
     }
     @Override
     public void loadSuccess(List<Shopcart> data) {
-
         for (int i = 0; i < data.size(); i++) {
             //提供父列表的数据
             Map<String, Object> parentMap = new HashMap<String, Object>();
@@ -142,21 +155,23 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             store.setCompany(data.get(i).getCompany());
             store.setChecked(false);
             store.setEditing(false);
+            parentMap.put("parentName",store);
             parentMapList.add(parentMap);
             //提供当前父列的子列数据
             List<Map<String, Object>> childMapList = new ArrayList<Map<String, Object>>();
-            for (int j = 0; j < 3; j++) {
+            List<ShopcartGoods> goods=data.get(i).getGoods();
+            for (int j = 0; j < goods.size(); j++) {
                 Map<String, Object> childMap = new HashMap<String, Object>();
 
                 GoodsBean goodsBean=new GoodsBean();
-                goodsBean.setGid(data.get(i).getGid());
-                goodsBean.setTitle(data.get(i).getTitle());
-                goodsBean.setPname(data.get(i).getPname());
-                goodsBean.setPrice(data.get(i).getPrice());
-                goodsBean.setLitpic(data.get(i).getLitpic());
-                goodsBean.setAmount(data.get(i).getAmount());
-                goodsBean.setDetail(data.get(i).getDetail());
-                goodsBean.setAddtime(data.get(i).getAddtime());
+                goodsBean.setGid(goods.get(j).getGid());
+                goodsBean.setTitle(goods.get(j).getTitle());
+                goodsBean.setPname(goods.get(j).getPname());
+                goodsBean.setPrice(goods.get(j).getPrice());
+                goodsBean.setLitpic(goods.get(j).getLitpic());
+                goodsBean.setAmount(goods.get(j).getAmount());
+                goodsBean.setDetail(goods.get(j).getDetail());
+                goodsBean.setAddtime(goods.get(j).getAddtime());
                 goodsBean.setChecked(false);
                 goodsBean.setEditing(false);
                 childMap.put("childName", goodsBean);
@@ -164,7 +179,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             }
             childMapList_list.add(childMapList);
         }
-        adapter.setNewData();
+        //需要展开分组，才会刷新childView
+        for (int i = 0; i < parentMapList.size(); i++) {
+            expandableListView.expandGroup(i);
+        }
+        adapter.notifyDataSetChanged();
     }
     @Override
     public void deleteShoppCart() {

@@ -64,9 +64,13 @@ public class Api {
     public Observable<UserInfoBean> loadUserInfo(int uid){
         return service.getUserInfo(uid);
     }
-    //获得个人信息
+    //获得收藏k列表
     public Observable<CollectListBean> loadCollectList(Map<String, String> param){
         return service.getCollectList(param);
+    }
+    //获得收藏k列表
+    public Observable<RequestStatusBean> cacheCollect(Map<String, String> param){
+        return service.cacheCollect(param);
     }
     //获得个人资料
     public Observable<PersonalDataBean> loadPersonalData(int uid){
@@ -119,6 +123,10 @@ public class Api {
     //获取验证码
     public Observable<RequestStatusBean> getCode(Map<String,String> map){
         return service.getCode(map);
+    }
+    //修改密码
+    public Observable<RequestStatusBean> changePwd(Map<String,String> map){
+        return service.changePwd(map);
     }
 
     //首页轮播

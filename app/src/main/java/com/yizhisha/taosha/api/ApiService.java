@@ -37,6 +37,10 @@ public interface ApiService {
     //获得收藏列表
     @GET("ios/ucenter/favorite/")
     Observable<CollectListBean> getCollectList(@QueryMap Map<String, String> param);
+    //取消收藏
+    @GET("ios/ajax/goodsFavCancel/")
+    Observable<RequestStatusBean> cacheCollect(@QueryMap Map<String, String> param);
+
     //获得个人资料信息
     @GET("ios/ucenter/profile/")
     Observable<PersonalDataBean> getPersonalData(@Query("uid") int uid);
@@ -87,6 +91,10 @@ public interface ApiService {
     // 获取验证码
     @POST("ios/ajax/checkpost/")
     Observable<RequestStatusBean> getCode(@QueryMap Map<String,String> map);
+
+    //修改密码
+    @POST("ios/ucenter/password_save/")
+    Observable<RequestStatusBean> changePwd(@QueryMap Map<String,String> map);
 
 
     //首页轮播

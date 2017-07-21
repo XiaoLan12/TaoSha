@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         //初始化选项卡
         initTab();
     }

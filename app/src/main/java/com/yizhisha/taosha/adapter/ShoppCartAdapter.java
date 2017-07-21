@@ -7,15 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.utils.LogUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -34,8 +37,14 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     OnGoodsCheckedChangeListener onGoodsCheckedChangeListener;
     OnCheckHasGoodsListener onCheckHasGoodsListener;
 
+    public static final String EDITING = "编辑";
+    public static final String FINISH_EDITING = "完成";
+
     public void setOnCheckHasGoodsListener(OnCheckHasGoodsListener onCheckHasGoodsListener) {
         this.onCheckHasGoodsListener = onCheckHasGoodsListener;
+    }
+    public void setOnDeleteShopListener(OnDeleteShopListener monDeleteShopListener) {
+        this.onDeleteShopListener = monDeleteShopListener;
     }
     public void setOnGoodsCheckedChangeListener(OnGoodsCheckedChangeListener onGoodsCheckedChangeListener) {
         this.onGoodsCheckedChangeListener = onGoodsCheckedChangeListener;
@@ -99,8 +108,8 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             groupViewHolder = new GroupViewHolder();
             groupViewHolder.tv_title_parent = (TextView) convertView
                     .findViewById(R.id.company_shoppcart1_tv);
-            groupViewHolder.id_tv_delete = (TextView) convertView
-                    .findViewById(R.id.delete_shoppcart1_tv);
+            groupViewHolder.mTvEdit = (TextView) convertView
+                    .findViewById(R.id.edit_shoppcart1_tv);
             groupViewHolder.id_cb_select_parent = (CheckBox) convertView
                     .findViewById(R.id.groupshopp_cb);
             groupViewHolder.topDivider = (View) convertView
@@ -112,8 +121,14 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         }
 
         StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
+
         final String parentName = storeBean.getCompany();
         groupViewHolder.tv_title_parent.setText(parentName);
+        if (storeBean.isEditing()) {
+            groupViewHolder.mTvEdit.setText(FINISH_EDITING);
+        } else {
+            groupViewHolder.mTvEdit.setText(EDITING);
+        }
         //覆盖原有收起展开事件
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +136,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 Toast.makeText(context, "店铺：" + parentName, Toast.LENGTH_SHORT).show();
             }
         });
-
-
         groupViewHolder.id_cb_select_parent.setChecked(storeBean.isChecked());
         final boolean nowBeanChecked = storeBean.isChecked();
         groupViewHolder.id_cb_select_parent.setOnClickListener(new View.OnClickListener() {
@@ -133,10 +146,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 onAllCheckedBoxNeedChangeListener.onCheckedBoxNeedChange(dealAllParentIsChecked());
             }
         });
-        groupViewHolder.id_tv_delete.setOnClickListener(new View.OnClickListener() {
+        groupViewHolder.mTvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeGoods(groupPosition);
+                //onEditingTvChangeListener.onEditingTvChange(dealAllEditingIsEditing());
+                setupEditing(groupPosition);
+
             }
         });
         if (groupPosition == 0) {
@@ -156,6 +171,9 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             childViewHolder = new ChildViewHolder();
             childViewHolder.id_cb_select_child = (CheckBox) convertView
                     .findViewById(R.id.childshopp_cb);
+            childViewHolder.mRlNormal= (RelativeLayout) convertView.findViewById(R.id.shop_normal_rl);
+            childViewHolder.mRlEdit= (RelativeLayout) convertView.findViewById(R.id.shop_edit_rl);
+
             //常规下：
             childViewHolder.tv_items_child_desc = (TextView) convertView
                     .findViewById(R.id.tradename_shoppcar2_tv);
@@ -164,6 +182,10 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             childViewHolder.id_tv_color = (TextView) convertView
                     .findViewById(R.id.tradecolor_shoppcar2_tv);
 
+            //编辑下:
+            childViewHolder.mLlEdit= (LinearLayout) convertView.findViewById(R.id.shop_edit_ll);
+            childViewHolder.mTvEditShop= (TextView) convertView.findViewById(R.id.shoptitle_edit_tv);
+            childViewHolder.mBtnDelete= (Button) convertView.findViewById(R.id.delete_shop_btn);
 
             convertView.setTag(childViewHolder);
         } else {
@@ -173,6 +195,13 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         final GoodsBean goodsBean = (GoodsBean) childMapList_list.get(groupPosition).get(childPosition).get("childName");
 
+        if (goodsBean.isEditing()) {
+            childViewHolder.mRlNormal.setVisibility(View.GONE);
+            childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
+        } else {
+            childViewHolder.mRlNormal.setVisibility(View.VISIBLE);
+            childViewHolder.mRlEdit.setVisibility(View.GONE);
+        }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,6 +227,13 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 //控制总checkedbox 接口
                 onAllCheckedBoxNeedChangeListener.onCheckedBoxNeedChange(dealAllParentIsChecked());
                 dealPrice();
+            }
+        });
+        childViewHolder.mBtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //removeOneGood(groupPosition,childPosition);
+                onDeleteShopListener.onDeleteShop(groupPosition,childPosition);
             }
         });
 
@@ -283,7 +319,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         //计算回调
         onGoodsCheckedChangeListener.onGoodsCheckedChange(totalCount, totalPrice);
     }
-    //移除数据
+   /* //移除数据
     public void removeGoods(int groupPosition) {
         List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
         for (int j = childMapList.size()-1; j >=0; j--) {//倒过来遍历  remove
@@ -299,24 +335,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             parentMapList.remove(groupPosition);
             childMapList_list.remove(groupPosition);//！！！！因为parentMapList和childMapList_list是pos关联的  得保持一致
         }
-        // GoodsBean goodsBean = (GoodsBean) childMapList.get(childPosition).get("childName");
-/*
-        for (int i = parentMapList.size()-1; i>=0; i--) {//倒过来遍历  remove
-            StoreBean storeBean= (StoreBean) parentMapList.get(i).get("parentName");
-            if (storeBean.isChecked()){
-                parentMapList.remove(i);
-                childMapList_list.remove(i);
-            }else {
-                List<Map<String, Object>> childMapList = childMapList_list.get(i);
-                for (int j = childMapList.size()-1; j >=0; j--) {//倒过来遍历  remove
-                    GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-                    if (goodsBean.isChecked()) {
-                        childMapList.remove(j);
-                    }
-                }
-            }
-
-        }*/
         if (parentMapList != null && parentMapList.size() > 0) {
             onCheckHasGoodsListener.onCheckHasGoods(true);//
         } else {
@@ -324,6 +342,27 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         }
         notifyDataSetChanged();//
         dealPrice();//重新计算
+    }*/
+    public void removeOneGood(int groupPosition, int childPosition) {
+        //StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
+        List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
+        // GoodsBean goodsBean = (GoodsBean) childMapList.get(childPosition).get("childName");
+        childMapList.remove(childPosition);
+
+        //通过子项
+        if (childMapList!=null&&childMapList.size()>0){
+
+        }else {
+            parentMapList.remove(groupPosition);
+            childMapList_list.remove(groupPosition);//！！！！因为parentMapList和childMapList_list是pos关联的  得保持一致
+        }
+        if (parentMapList != null && parentMapList.size() > 0) {
+            onCheckHasGoodsListener.onCheckHasGoods(true);//
+        } else {
+            onCheckHasGoodsListener.onCheckHasGoods(false);//
+        }
+        notifyDataSetChanged();
+        dealPrice();
     }
 
     private void resetViewAfterDelete() {
@@ -350,7 +389,17 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
             }
         }
     }
-
+    public void setupEditing(int groupPosition) {
+        StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
+        boolean isEditing = !storeBean.isEditing();
+        storeBean.setEditing(isEditing);
+        List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
+        for (int j = 0; j < childMapList.size(); j++) {
+            GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+            goodsBean.setEditing(isEditing);
+        }
+        notifyDataSetChanged();
+    }
     public interface OnAllCheckedBoxNeedChangeListener {
         void onCheckedBoxNeedChange(boolean allParentIsChecked);
     }
@@ -358,7 +407,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     public interface OnEditingTvChangeListener {
         void onEditingTvChange(boolean allIsEditing);
     }
+    OnEditingTvChangeListener onEditingTvChangeListener;
 
+    public interface OnDeleteShopListener {
+        void onDeleteShop(int groupPosition,int childPosition);
+    }
+    OnDeleteShopListener onDeleteShopListener;
     public interface OnGoodsCheckedChangeListener {
         void onGoodsCheckedChange(int totalCount, double totalPrice);
     }
@@ -368,7 +422,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     }
     class GroupViewHolder {
         TextView tv_title_parent;
-        TextView id_tv_delete;
+        TextView mTvEdit;
         CheckBox id_cb_select_parent;
         View topDivider;
     }
@@ -376,12 +430,19 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     class ChildViewHolder {
         TextView tv_items_child;
         CheckBox id_cb_select_child;
+        RelativeLayout mRlNormal;
+        RelativeLayout mRlEdit;
 
         TextView tv_items_child_desc;
         TextView id_tv_price;
         TextView id_tv_color;
+
+        LinearLayout mLlEdit;
+        TextView mTvEditShop;
+        Button mBtnDelete;
     }
     public void setNewData(){
+
         notifyDataSetChanged();
     }
 }
