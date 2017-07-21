@@ -24,7 +24,7 @@ public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHol
     }
     @Override
     protected void convert(BaseViewHolder helper, String goods) {
-        GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.PRODUCT_DETAIL_CONTENT_IMG_URL+goods,
+        GlideUtil.getInstance().LoadContextBitmap(mContext, goods,
                 (ImageView) helper.getView(R.id.img), GlideUtil.LOAD_BITMAP);
     }
 }

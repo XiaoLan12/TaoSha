@@ -11,6 +11,8 @@ public class AppConstant {
     public static final String INDEX_RECOMMEND_TYPE_IMG_URL="http://www.taoshamall.com/data/attached/goods/300x300/";
     public static final String PRODUCT_DETAIL_ALBUM_IMG_URL="http://www.taoshamall.com/data/attached/goods/350x350/";
     public static final String PRODUCT_DETAIL_CONTENT_IMG_URL="http://www.taoshamall.com/";
+    public static final String PRODUCT_DETAIL_SEKA_IMG_URL="http://www.taoshamall.com";
+
     public static final int UID=882;
     public static ProductDetailBean productDetailBean =null;
 }

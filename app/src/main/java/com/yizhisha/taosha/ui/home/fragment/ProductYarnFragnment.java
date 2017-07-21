@@ -121,8 +121,12 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         }
 
         List<String> content=new ArrayList<>();
+        List<String> content1=new ArrayList<>();
         content=model.getGoods().getContent_();
-        adapter=new ProductDetailImgAdapter(getActivity(),content);
+        for(int i=0;i<content.size();i++){
+            content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+content.get(i));
+        }
+        adapter=new ProductDetailImgAdapter(getActivity(),content1);
         recyclerView.setAdapter(adapter);
 
 
