@@ -319,30 +319,33 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         //计算回调
         onGoodsCheckedChangeListener.onGoodsCheckedChange(totalCount, totalPrice);
     }
-   /* //移除数据
-    public void removeGoods(int groupPosition) {
-        List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
-        for (int j = childMapList.size()-1; j >=0; j--) {//倒过来遍历  remove
-            GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-            if (goodsBean.isChecked()) {
-                childMapList.remove(j);
+    public void removeGoods() {
+        for (int i = parentMapList.size()-1; i>=0; i--) {//倒过来遍历  remove
+            StoreBean storeBean= (StoreBean) parentMapList.get(i).get("parentName");
+            if (storeBean.isChecked()){
+                parentMapList.remove(i);
+                childMapList_list.remove(i);
+            }else {
+                List<Map<String, Object>> childMapList = childMapList_list.get(i);
+                for (int j = childMapList.size()-1; j >=0; j--) {//倒过来遍历  remove
+                    GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+                    if (goodsBean.isChecked()) {
+                        childMapList.remove(j);
+                    }
+                }
             }
-        }
-//通过子项
-        if (childMapList!=null&&childMapList.size()>0){
 
-        }else {
-            parentMapList.remove(groupPosition);
-            childMapList_list.remove(groupPosition);//！！！！因为parentMapList和childMapList_list是pos关联的  得保持一致
         }
+
         if (parentMapList != null && parentMapList.size() > 0) {
             onCheckHasGoodsListener.onCheckHasGoods(true);//
         } else {
             onCheckHasGoodsListener.onCheckHasGoods(false);//
         }
+        //showList("after@@@@@@@@@@@@@@@@@@@@@@@");
         notifyDataSetChanged();//
         dealPrice();//重新计算
-    }*/
+    }
     public void removeOneGood(int groupPosition, int childPosition) {
         //StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
         List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
@@ -397,6 +400,20 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         for (int j = 0; j < childMapList.size(); j++) {
             GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
             goodsBean.setEditing(isEditing);
+        }
+        notifyDataSetChanged();
+    }
+    //供总编辑按钮调用
+    public void setupEditingAll(boolean isEditingAll) {
+        for (int i = 0; i < parentMapList.size(); i++) {
+            StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
+            storeBean.setEditing(isEditingAll);
+
+            List<Map<String, Object>> childMapList = childMapList_list.get(i);
+            for (int j = 0; j < childMapList.size(); j++) {
+                GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+                goodsBean.setEditing(isEditingAll);
+            }
         }
         notifyDataSetChanged();
     }

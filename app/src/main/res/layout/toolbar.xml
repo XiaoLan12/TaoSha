@@ -41,6 +41,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="@dimen/dp_5"
+        android:textColor="@color/common_h2"
         android:visibility="gone"
         />
 

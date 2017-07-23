@@ -168,8 +168,6 @@ public class BaseToolbar extends Toolbar {
     public void setRightButtonText(String str) {
         if (mRightButton != null) {
             mRightButton.setText(str);
-            mRightButton.setTextColor(RescourseUtil.getColor(R.color.white));
-            mRightButton.setTextSize(16);
         }
     }
     //给右侧按钮设置文字，也可以在布局文件中直接引入

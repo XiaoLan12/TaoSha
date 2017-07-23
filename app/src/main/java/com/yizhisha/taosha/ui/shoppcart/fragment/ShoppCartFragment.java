@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
 import com.yizhisha.taosha.bean.json.Goods;
@@ -30,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
 
 /**
@@ -37,6 +40,8 @@ import qiu.niorgai.StatusBarCompat;
  */
 public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implements
         ShoppCartContract.View{
+    @Bind(R.id.toolbar)
+    BaseToolbar mToobar;
     @Bind(R.id.expandableListView)
     ExpandableListView expandableListView;
     @Bind(R.id.id_cb_select_all)
@@ -47,6 +52,10 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     TextView tvCountMoney;
     @Bind(R.id.rlBottomBar)
     RelativeLayout rlBottomBar;
+    @Bind(R.id.normal_shopbotton_ll)
+    LinearLayout mLlNormalBottom;
+    @Bind(R.id.deleteall_ll)
+    LinearLayout mLlDeleteAllBottom;
 
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
@@ -73,6 +82,20 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
     @Override
     protected void initView() {
+        mToobar.setRightButtonText("编辑");
+        mToobar.showRightButton();
+        mToobar.setRightButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mToobar.getRightButtonText().equals("编辑")){
+                    adapter.setupEditingAll(true);
+                   changeFootShowDeleteView(true);
+                }else{
+                    adapter.setupEditingAll(false);
+                    changeFootShowDeleteView(false);
+                }
+            }
+        });
         initAdapter();
         mPresenter.loadShoppCart(AppConstant.UID,true);
     }
@@ -133,6 +156,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         adapter.setOnCheckHasGoodsListener(new ShoppCartAdapter.OnCheckHasGoodsListener() {
             @Override
             public void onCheckHasGoods(boolean isHasGoods) {
+                if(isHasGoods){
+                    mLoadingView.loadSuccess();
+                }else{
+                    mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
+                }
                 //setupViewsShow(isHasGoods);
             }
         });
@@ -208,5 +236,26 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     @Override
     public void deleteFail(String msg) {
 
+    }
+    public void changeFootShowDeleteView(boolean showDeleteView) {
+
+        if (showDeleteView) {
+            mToobar.setRightButtonText("完成");
+            mLlNormalBottom.setVisibility(View.GONE);
+            mLlDeleteAllBottom.setVisibility(View.VISIBLE);
+        } else {
+            mToobar.setRightButtonText("编辑");
+            mLlNormalBottom.setVisibility(View.VISIBLE);
+            mLlDeleteAllBottom.setVisibility(View.GONE);
+        }
+    }
+    @OnClick({R.id.deleteall_btn})
+    @Override
+    public void onClick(View v) {
+       switch (v.getId()){
+           case R.id.deleteall_btn:
+               adapter.removeGoods();
+               break;
+       }
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SelectYarnAdapter extends BaseQuickAdapter<SearchDetailBean,BaseViewHolder>{
     public SelectYarnAdapter(@Nullable List<SearchDetailBean> data) {
-        super(R.layout.item_selectyarn,data);
+        super(R.layout.item_mycollect,data);
     }
     @Override
     protected void convert(BaseViewHolder helper, SearchDetailBean item) {

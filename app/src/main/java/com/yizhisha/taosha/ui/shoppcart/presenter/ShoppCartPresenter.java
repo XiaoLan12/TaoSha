@@ -24,7 +24,8 @@ public class ShoppCartPresenter extends ShoppCartContract.Presenter{
                     protected void onSuccess(ShopcartListBean shopcartListBean) {
                         mView.hideLoading();
                         if(shopcartListBean!=null&&shopcartListBean.getShopcart().size()>0){
-                            mView.loadSuccess(shopcartListBean.getShopcart());
+                            //mView.loadSuccess(shopcartListBean.getShopcart());
+                            mView.showEmpty();
                         }else{
                             mView.showEmpty();
                         }
