@@ -152,6 +152,10 @@ public class Api {
     public Observable<ShopcartListBean> getShoppCart(int uid){
         return service.getShoppCartList(uid);
     }
+    //删除购物车
+    public Observable<RequestStatusBean> deleteShoppCart(Map<String,String> map){
+        return service.deleteShoppCart(map);
+    }
     // 商品详情
     public Observable<SeckillListBean> getSeckillOrder(Map<String,String> map){
         return service.getSeckillOrder(map);

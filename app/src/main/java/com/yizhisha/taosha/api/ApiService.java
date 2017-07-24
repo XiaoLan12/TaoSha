@@ -119,6 +119,10 @@ public interface ApiService {
     @GET("ios/ucenter/shopcart/")
     Observable<ShopcartListBean> getShoppCartList(@Query("uid") int id);
 
+    //删除购物车商品
+    @GET("ios/ucenter/shopcart_delete/")
+    Observable<RequestStatusBean> deleteShoppCart(@QueryMap  Map<String, String> param);
+
     //秒杀订单
 
     @GET("ios/order/seckilling/")

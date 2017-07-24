@@ -8,6 +8,8 @@ public class GoodsBean {
     public static final  int STATUS_INVALID=0;
     public static final  int STATUS_VALID=1;
     //===============================================
+
+    private int sid;
     private int gid;
 
     private String title;
@@ -30,6 +32,14 @@ public class GoodsBean {
     private boolean isChecked;
     /** 是否是编辑状态 */
     private boolean isEditing;
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
 
     public int getGid() {
         return gid;

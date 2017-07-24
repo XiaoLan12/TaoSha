@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.ui.shoppcart.fragment;
 
 import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
 import com.yizhisha.taosha.ui.shoppcart.presenter.ShoppCartPresenter;
 import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
@@ -39,9 +41,11 @@ import qiu.niorgai.StatusBarCompat;
  * Created by lan on 2017/6/22.
  */
 public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implements
-        ShoppCartContract.View{
+        ShoppCartContract.View,SwipeRefreshLayout.OnRefreshListener{
     @Bind(R.id.toolbar)
     BaseToolbar mToobar;
+    @Bind(R.id.swiperefreshlayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.expandableListView)
     ExpandableListView expandableListView;
     @Bind(R.id.id_cb_select_all)
@@ -51,12 +55,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     @Bind(R.id.tvCountMoney)
     TextView tvCountMoney;
     @Bind(R.id.rlBottomBar)
-    RelativeLayout rlBottomBar;
+    RelativeLayout mRlBottomBar;
     @Bind(R.id.normal_shopbotton_ll)
     LinearLayout mLlNormalBottom;
     @Bind(R.id.deleteall_ll)
     LinearLayout mLlDeleteAllBottom;
-
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
 
@@ -101,6 +104,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
 
     private void initAdapter(){
+        mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
+                RescourseUtil.getColor(R.color.red));
+        //设置刷新出现的位置
+        mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         adapter= new ShoppCartAdapter(activity, parentMapList, childMapList_list);
         expandableListView.setAdapter(adapter);
         expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,14 +122,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         for (int i = 0; i < parentMapList.size(); i++) {
             expandableListView.expandGroup(i);
         }
-       /* ivSelectAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.removeGoods();
-                // Toast.makeText(MainActivity.this, "删除多选商品", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
+        //选择全部
         ivSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +132,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 }
             }
         });
-
+        //结算
         btnSettle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,8 +159,14 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             public void onCheckHasGoods(boolean isHasGoods) {
                 if(isHasGoods){
                     mLoadingView.loadSuccess();
+                    mToobar.showRightButton();
+                    changeFootShowDeleteView(false);
+                    mRlBottomBar.setVisibility(View.VISIBLE);
                 }else{
+                    mToobar.hideRightButton();
+                    changeFootShowDeleteView(true);
                     mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
+                    mRlBottomBar.setVisibility(View.GONE);
                 }
                 //setupViewsShow(isHasGoods);
             }
@@ -168,6 +175,11 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         adapter.setOnDeleteShopListener(new ShoppCartAdapter.OnDeleteShopListener() {
             @Override
             public void onDeleteShop(int groupPosition, int childPosition) {
+                final GoodsBean goodsBean = (GoodsBean) childMapList_list.get(groupPosition).get(childPosition).get("childName");
+                Map<String,String> map=new HashMap<>();
+                map.put("uid",String.valueOf(AppConstant.UID));
+                map.put("sid", String.valueOf(goodsBean.getSid()));
+                mPresenter.deleteOneShoppCart(map,groupPosition,childPosition);
                 adapter.removeOneGood(groupPosition,childPosition);
             }
         });
@@ -175,6 +187,9 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
     @Override
     public void loadSuccess(List<Shopcart> data) {
+        mSwipeRefreshLayout.setRefreshing(false);
+        parentMapList.clear();
+        childMapList_list.clear();
         for (int i = 0; i < data.size(); i++) {
             //提供父列表的数据
             Map<String, Object> parentMap = new HashMap<String, Object>();
@@ -192,6 +207,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 Map<String, Object> childMap = new HashMap<String, Object>();
 
                 GoodsBean goodsBean=new GoodsBean();
+                goodsBean.setSid(goods.get(j).getsId());
                 goodsBean.setGid(goods.get(j).getGid());
                 goodsBean.setTitle(goods.get(j).getTitle());
                 goodsBean.setPname(goods.get(j).getPname());
@@ -211,11 +227,24 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         for (int i = 0; i < parentMapList.size(); i++) {
             expandableListView.expandGroup(i);
         }
+        if (parentMapList != null && parentMapList.size() > 0) {
+
+            mToobar.showRightButton();
+            mRlBottomBar.setVisibility(View.VISIBLE);
+        } else {
+            mToobar.hideRightButton();
+            mRlBottomBar.setVisibility(View.GONE);
+
+        }
         adapter.notifyDataSetChanged();
     }
     @Override
-    public void deleteShoppCart() {
-
+    public void deleteShoppCart(String msg) {
+      adapter.removeGoods();
+    }
+    @Override
+    public void deleteOneShoppCart(String msg, int groupPosition, int childPosition) {
+        adapter.removeOneGood(groupPosition,childPosition);
     }
     @Override
     public void showLoading() {
@@ -227,11 +256,25 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
     @Override
     public void showEmpty() {
+        mSwipeRefreshLayout.setRefreshing(false);
+        parentMapList.clear();
+        childMapList_list.clear();
+        adapter.notifyDataSetChanged();
         mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
     }
     @Override
     public void loadFail(String msg) {
-
+        mSwipeRefreshLayout.setRefreshing(false);
+        parentMapList.clear();
+        childMapList_list.clear();
+        adapter.notifyDataSetChanged();
+        mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+            @Override
+            public void doRequestData() {
+                mPresenter.loadShoppCart(AppConstant.UID,true);
+            }
+        });
     }
     @Override
     public void deleteFail(String msg) {
@@ -254,8 +297,33 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     public void onClick(View v) {
        switch (v.getId()){
            case R.id.deleteall_btn:
-               adapter.removeGoods();
+               StringBuilder str=new StringBuilder();
+               for (int i = 0; i < parentMapList.size(); i++) {
+                   List<Map<String, Object>> childMapList = childMapList_list.get(i);
+                   for (int j = 0; j < childMapList.size(); j++) {
+                       GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+                       if(goodsBean.isChecked()){
+                           str.append(goodsBean.getSid());
+                           str.append(",");
+                       }
+                   }
+               }
+
+               if(str.length()==0){
+                   ToastUtil.showbottomLongToast("请选择");
+                  return;
+               }
+               Map<String,String> map=new HashMap<>();
+               map.put("uid",String.valueOf(AppConstant.UID));
+               map.put("sid", str.substring(0,str.length()-1).toString());
+               mPresenter.deleteShoppCart(map);
                break;
        }
+    }
+
+    @Override
+    public void onRefresh() {
+        ivSelectAll.setChecked(false);
+        mPresenter.loadShoppCart(AppConstant.UID,false);
     }
 }

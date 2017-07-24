@@ -5,7 +5,7 @@ package com.yizhisha.taosha.bean.json;
  */
 
 public class ShopcartGoods {
-    private int id;
+    private int sid;
 
     private int gid;
 
@@ -25,12 +25,12 @@ public class ShopcartGoods {
 
     private float totalprice;
 
-    public int getId() {
-        return id;
+    public int getsId() {
+        return sid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setsId(int id) {
+        this.sid = id;
     }
 
     public int getGid() {

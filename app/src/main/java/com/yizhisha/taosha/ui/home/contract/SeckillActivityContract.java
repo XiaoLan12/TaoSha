@@ -4,6 +4,7 @@ import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.SeckillActBean;
+import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public interface SeckillActivityContract {
     interface View extends BaseView {
-        void loadSuccess(List<SeckillActBean> data);
+        void loadSuccess(SeckillActListBean data);
 
         void showLoading();
 

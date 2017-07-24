@@ -18,11 +18,20 @@ public class DateUtil {
             Date d = new Date(time);
             return sdf.format(d);
     }
+    public static long getDateTimeDiff(Long startdate, Long endDate) {
+
+        //前的时间
+        Date fd = new Date(startdate*1000l);
+        //后的时间
+        Date td = new Date(endDate*1000l);
+        //两时间差,精确到毫秒
+        long diff = td.getTime() - fd.getTime();
+
+
+        return diff;
+    }
     public static String subDateTime(Long startdate, Long endDate) {
-        String over="活动已结束";
-        if (startdate.equals(endDate)) {
-            return over;
-        }
+
             //前的时间
             Date fd = new Date(startdate*1000l);
             //后的时间
@@ -39,5 +48,36 @@ public class DateUtil {
                 str.append(min).append(":");
                 str.append(seconds);
             return str.toString();
+    }
+
+    /**
+     * @param subdate 服务器时间
+     *                获得服务器和当前时间的差值
+     * @return
+     */
+    public static long DateTimeDiff(Long subdate) {
+
+        //前的时间
+        Date curDate = new Date();
+        //后的时间
+        Date subDate = new Date(subdate);
+        //两时间差,精确到毫秒
+        long diff = subDate.getTime() - curDate.getTime();
+        return diff;
+    }
+
+    /**
+     * @param diffdate 时间差
+     *                 计算本地时间与差值的和，得到北京时间
+     * @return
+     */
+    public static long DateTimeSum(Long diffdate) {
+
+        Date curDate = new Date();// 获取当前时间
+        //后的时间
+        Date subDate = new Date(diffdate);
+        //两时间差,精确到毫秒
+        long sum = curDate.getTime() + subDate.getTime();
+        return sum;
     }
 }

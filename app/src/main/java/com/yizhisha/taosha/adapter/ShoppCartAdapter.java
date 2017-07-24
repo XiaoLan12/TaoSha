@@ -15,9 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.LogUtil;
 
 import java.util.List;
@@ -173,7 +175,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                     .findViewById(R.id.childshopp_cb);
             childViewHolder.mRlNormal= (RelativeLayout) convertView.findViewById(R.id.shop_normal_rl);
             childViewHolder.mRlEdit= (RelativeLayout) convertView.findViewById(R.id.shop_edit_rl);
-
+            childViewHolder.mIvPic= (ImageView) convertView.findViewById(R.id.tradehead_shoppcar2_iv);
             //常规下：
             childViewHolder.tv_items_child_desc = (TextView) convertView
                     .findViewById(R.id.tradename_shoppcar2_tv);
@@ -211,6 +213,8 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         childViewHolder.id_tv_price.setText(String.format(context.getString(R.string.price), goodsBean.getPrice()+""));
         childViewHolder.id_cb_select_child.setChecked(goodsBean.isChecked());
+        GlideUtil.getInstance().LoadContextBitmap(context, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
+                (ImageView) childViewHolder.mIvPic,GlideUtil.LOAD_BITMAP);
         childViewHolder.id_cb_select_child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -368,30 +372,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         dealPrice();
     }
 
-    private void resetViewAfterDelete() {
-        for (int i = 0; i < parentMapList.size(); i++) {
-            StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
-            storeBean.setChecked(false);
-            storeBean.setEditing(false);
-            List<Map<String, Object>> childMapList = childMapList_list.get(i);
-
-            for (int j = 0; j < childMapList.size(); j++) {
-                GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-                goodsBean.setChecked(false);
-                goodsBean.setEditing(false);
-            }
-        }
-    }
-
-    void showList(String tempStr) {
-        for (int i = 0; i < parentMapList.size(); i++) {
-            StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
-            List<Map<String, Object>> childMapList = childMapList_list.get(i);
-            for (int j = 0; j < childMapList.size(); j++) {
-                GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-            }
-        }
-    }
     public void setupEditing(int groupPosition) {
         StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
         boolean isEditing = !storeBean.isEditing();
@@ -449,6 +429,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         CheckBox id_cb_select_child;
         RelativeLayout mRlNormal;
         RelativeLayout mRlEdit;
+        ImageView mIvPic;
 
         TextView tv_items_child_desc;
         TextView id_tv_price;

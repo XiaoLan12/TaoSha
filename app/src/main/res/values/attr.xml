@@ -11,4 +11,9 @@
         <attr name="ios" format="boolean"/>
         <attr name="leftSwipe" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="TimeView">
+        <attr name="titles" format="string"/>
+        <attr name="titleColors" format="color"/>
+        <attr name="titleSizes" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -9,6 +9,16 @@ import java.util.List;
 public class SeckillActListBean {
     private List<SeckillActBean> seckilling ;
 
+    private int nowtime;
+
+    public int getNowtime() {
+        return nowtime;
+    }
+
+    public void setNowtime(int nowtime) {
+        this.nowtime = nowtime;
+    }
+
     public List<SeckillActBean> getSeckilling() {
         return seckilling;
     }

@@ -18,6 +18,8 @@ import com.yizhisha.taosha.adapter.SeckillActivityAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.SeckillActBean;
+import com.yizhisha.taosha.bean.json.SeckillActListBean;
+import com.yizhisha.taosha.bean.json.SeckillGoodsBean;
 import com.yizhisha.taosha.ui.home.contract.SeckillActivityContract;
 import com.yizhisha.taosha.ui.home.precenter.SeckillActivityPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
@@ -80,13 +82,16 @@ implements SeckillActivityContract.View{
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
     }
     @Override
-    public void loadSuccess(List<SeckillActBean> data) {
+    public void loadSuccess(SeckillActListBean data) {
         dataLists.clear();
         //mSwipeRefreshLayout.setRefreshing(false);
-        dataLists.addAll(data);
+        dataLists.addAll(data.getSeckilling());
+        for(int i=0;i<dataLists.size();i++){
+            dataLists.get(i).setNowtime(data.getNowtime());
+        }
         mAdapter.setNewData(dataLists);
-        timeThread = new MyThread();
-        new Thread(timeThread).start();
+//        timeThread = new MyThread();
+//        new Thread(timeThread).start();
     }
     @Override
     public void showLoading() {
