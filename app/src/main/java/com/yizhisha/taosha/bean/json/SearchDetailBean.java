@@ -5,7 +5,7 @@ package com.yizhisha.taosha.bean.json;
  */
 
 public class SearchDetailBean {
-    private String id;
+    private int id;
     private String title;
     private String litpic;
     private String price;
@@ -14,11 +14,11 @@ public class SearchDetailBean {
     private String needle_name;
     private String yam;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -47,12 +47,12 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
 
 
     private ProductDetailImgAdapter adapter;
-    private String id="";
+    private int id;
 
 
-    public static ProductYarnFragnment getInstance(String yarnType) {
+    public static ProductYarnFragnment getInstance(int id) {
         ProductYarnFragnment sf = new ProductYarnFragnment();
-        sf.id=yarnType;
+        sf.id=id;
         return sf;
     }
     @Override
@@ -78,12 +78,9 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
 
-        if(!id.equals("")){
             Map map=new HashMap<>();
-            map.put("id",id);
+            map.put("id",String.valueOf(id));
             mPresenter.getProductDetail(map);
-        }
-
     }
 
     @Override

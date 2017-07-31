@@ -33,7 +33,7 @@ public class SettinActivity extends BaseActivity {
     }
 
     @OnClick({R.id.changepwd_rl,R.id.changephone_rl,R.id.changeoneinfo_rl,
-    R.id.managedeladdress_rl})
+    R.id.managedeladdress_rl,R.id.changeweixin_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -52,6 +52,11 @@ public class SettinActivity extends BaseActivity {
                 Bundle bundle2=new Bundle();
                 bundle2.putInt("TARGET",2);
                 startActivity(SetInfoActivity.class,bundle2);
+                break;
+            case R.id.changeweixin_rl:
+                Bundle bundle3=new Bundle();
+                bundle3.putInt("TARGET",3);
+                startActivity(SetInfoActivity.class,bundle3);
                 break;
             case R.id.managedeladdress_rl:
                 startActivity(MyAddressActivity.class);

@@ -74,17 +74,14 @@ public class RegisterFragment extends BaseFragment<LoginPresenter> implements Lo
     public void loginSuccess(String info) {
 
     }
-
     @Override
     public void registerSuccess(String info) {
         ToastUtil.showbottomShortToast(info);
     }
-
     @Override
     public void findPwdSuccess(String info) {
 
     }
-
     @Override
     public void getCodeSuccess(String info) {
         ToastUtil.showbottomShortToast(info);

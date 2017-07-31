@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
@@ -124,6 +125,15 @@ public class Api {
     public Observable<RequestStatusBean> getCode(Map<String,String> map){
         return service.getCode(map);
     }
+    //手机快捷登录获取验证码
+    public Observable<RequestStatusBean> getPhoneLoginCode(Map<String,String> map){
+        return service.getPhoneLoginCode(map);
+    }
+    //手机快捷登录
+    public Observable<RequestStatusBean> phoneLogin(Map<String,String> map){
+        return service.phoneLogin(map);
+    }
+
     //修改密码
     public Observable<RequestStatusBean> changePwd(Map<String,String> map){
         return service.changePwd(map);
@@ -144,6 +154,10 @@ public class Api {
         return service.search(map);
     }
 
+    //获得评论列表
+    public Observable<CommentListBean> getCommentList(Map<String,String> map){
+        return service.getCommentList(map);
+    }
     // 商品详情
     public Observable<ProductDetailBean> getProductDetail(Map<String,String> map){
         return service.getProductDetail(map);

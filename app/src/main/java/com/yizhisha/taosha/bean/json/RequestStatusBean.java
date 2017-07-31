@@ -9,6 +9,8 @@ public class RequestStatusBean {
 
     private String info;
 
+    private int uid;
+
     public void setStatus(String status){
         this.status = status;
     }
@@ -20,5 +22,13 @@ public class RequestStatusBean {
     }
     public String getInfo(){
         return this.info;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

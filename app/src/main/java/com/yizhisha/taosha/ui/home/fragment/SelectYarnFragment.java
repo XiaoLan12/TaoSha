@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnConstract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnPresenter;
 import com.yizhisha.taosha.ui.me.fragment.MyCollectFragment;
+import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
@@ -74,13 +76,14 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
 
         mAdapter=new SelectYarnAdapter(dataList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setNestedScrollingEnabled(false);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("id",dataList.get(position).getId());
                 startActivity(YarnActivity.class);
             }
         });
@@ -105,6 +108,7 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
     public void loadSuccess(List<SearchDetailBean> data) {
         mSwipeRefreshLayout.setRefreshing(false);
         dataList.clear();
+        dataList.addAll(data);
         mAdapter.setNewData(data);
     }
 

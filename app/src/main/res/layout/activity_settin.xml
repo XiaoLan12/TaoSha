@@ -93,6 +93,30 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"/>
     <RelativeLayout
+        android:id="@+id/changeweixin_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_selector"
+        android:padding="@dimen/dp_14">
+
+        <TextView
+            style="@style/TS.Theme.Widget.Text"
+            android:text="@string/change_weixin"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:src="@drawable/icon_right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <View
+        style="@style/TS.Theme.Widget.Divider.Line.Vertical"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"/>
+    <RelativeLayout
         android:id="@+id/managedeladdress_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

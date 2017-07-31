@@ -9,10 +9,12 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.ui.me.fragment.ChangeOneInfoFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangePhoneFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangePwdFragment;
+import com.yizhisha.taosha.ui.me.fragment.ChangeWeixinFragment;
 
 public class SetInfoActivity extends BaseActivity {
     private ChangePwdFragment changePwdFragment;
     private ChangePhoneFragment changePhoneFragment;
+    private ChangeWeixinFragment changeWeixinFragment;
     private ChangeOneInfoFragment changeOneInfoFragment;
     private int currTarget=0;
     @Override
@@ -54,6 +56,12 @@ public class SetInfoActivity extends BaseActivity {
                     changePhoneFragment =new ChangePhoneFragment();
                 }
                 switchFragment(changePhoneFragment);
+                break;
+            case 3:
+                if(changeWeixinFragment ==null){
+                    changeWeixinFragment =new ChangeWeixinFragment();
+                }
+                switchFragment(changeWeixinFragment);
                 break;
 
         }

@@ -259,6 +259,8 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         mSwipeRefreshLayout.setRefreshing(false);
         parentMapList.clear();
         childMapList_list.clear();
+        mToobar.hideRightButton();
+        mRlBottomBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
         mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
     }
@@ -267,6 +269,8 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         mSwipeRefreshLayout.setRefreshing(false);
         parentMapList.clear();
         childMapList_list.clear();
+        mToobar.hideRightButton();
+        mRlBottomBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
         mLoadingView.loadError();
         mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {

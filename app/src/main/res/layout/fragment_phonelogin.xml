@@ -10,7 +10,7 @@
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
-        app:title="忘记密码"/>
+        app:title="手机快捷登录"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
 
         <com.yizhisha.taosha.widget.ClearEditText

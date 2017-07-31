@@ -16,6 +16,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
+import com.yizhisha.taosha.ui.home.fragment.CommentYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
@@ -46,7 +47,7 @@ public class YarnActivity extends BaseActivity {
     TextView tv_shopping;
 
     private FragmentPagerAdapter mAdapter;
-    private String id="";
+    private int id;
 //    private DetailsYarnFragment detailsYarnFragment=null;
 
     @Override
@@ -66,13 +67,14 @@ public class YarnActivity extends BaseActivity {
 
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null){
-            id=bundle.getString("id");
+            id=bundle.getInt("id");
         }
 
 //        detailsYarnFragment=new DetailsYarnFragment();
         mFragments.add(ProductYarnFragnment.getInstance(id));
         mFragments.add(new ParameterYarnFragment());
         mFragments.add(new DetailsYarnFragment());
+        mFragments.add(CommentYarnFragment.getInstance(id));
 //        mFragments.add(new DetailsYarnFragment());
 //        mFragments.add(new DetailsYarnFragment());
 //        mFragments.add(new DetailsYarnFragment());

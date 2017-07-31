@@ -2,6 +2,7 @@ package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
@@ -92,6 +93,13 @@ public interface ApiService {
     @POST("ios/ajax/checkpost/")
     Observable<RequestStatusBean> getCode(@QueryMap Map<String,String> map);
 
+    // 手机快捷登录获取验证码
+    @POST("ios/ajax/logincheck/")
+    Observable<RequestStatusBean> getPhoneLoginCode(@QueryMap Map<String,String> map);
+    //手机快捷登录
+    @POST("ios/ajax/quicklogin/")
+    Observable<RequestStatusBean> phoneLogin(@QueryMap Map<String,String> map);
+
     //修改密码
     @POST("ios/ucenter/password_save/")
     Observable<RequestStatusBean> changePwd(@QueryMap Map<String,String> map);
@@ -114,6 +122,9 @@ public interface ApiService {
     //商品详情
     @GET("ios/goods/view/")
     Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
+    //商品评价列表
+    @POST("ios/goods/goodsComment/")
+    Observable<CommentListBean> getCommentList(@QueryMap Map<String, String> param);
 
     //购物车
     @GET("ios/ucenter/shopcart/")

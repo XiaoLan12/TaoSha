@@ -278,7 +278,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data1.get(position).getId());
+                bundle.putInt("id",data1.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
@@ -286,7 +286,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data2.get(position).getId());
+                bundle.putInt("id",data2.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
@@ -294,7 +294,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data3.get(position).getId());
+                bundle.putInt("id",data3.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
@@ -302,7 +302,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data4.get(position).getId());
+                bundle.putInt("id",data4.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
@@ -310,7 +310,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data5.get(position).getId());
+                bundle.putInt("id",data5.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
@@ -318,7 +318,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle =new Bundle();
-                bundle.putString("id",data6.get(position).getId());
+                bundle.putInt("id",data6.get(position).getId());
                 startActivity(YarnActivity.class,bundle);
             }
         });
