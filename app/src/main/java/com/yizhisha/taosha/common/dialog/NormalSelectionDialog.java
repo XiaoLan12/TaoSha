@@ -79,7 +79,6 @@ public class NormalSelectionDialog {
             title.setVisibility(View.GONE);
         }
         //设置底部“取消”按钮
-        bottomBtn.setTextColor(mBuilder.getItemTextColor());
         bottomBtn.setTextSize(mBuilder.getItemTextSize());
         LinearLayout.LayoutParams btnLp=new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                 mBuilder.getItemHeight());
@@ -176,6 +175,7 @@ public class NormalSelectionDialog {
         private float itemTextSize;
         //取消按钮属性
         private String cancleButtonText;
+        private int cancleTextColor;
         private boolean isTouchOutside;
 
 
@@ -205,6 +205,7 @@ public class NormalSelectionDialog {
             itemTextSize = 14;  //默认自体大小
 
             cancleButtonText = "取消";
+            cancleTextColor = ContextCompat.getColor(mContext, R.color.red1);
             isTouchOutside = true;
         }
         public Context getContext() {
@@ -309,6 +310,10 @@ public class NormalSelectionDialog {
 
         public Builder setCancleButtonText(String cancleButtonText) {
             this.cancleButtonText = cancleButtonText;
+            return this;
+        }
+        public Builder setCancleTextColor(int Color) {
+            this.cancleTextColor = Color;
             return this;
         }
         public NormalSelectionDialog build(){

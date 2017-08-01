@@ -45,7 +45,6 @@ public class SettingTextWatcher implements TextWatcher {
 			return;
 		}
 		String content = s.toString();
-//		Log.e("demo", "content:"+content);
 		if (isNumeric(content)) {
 			int num = Integer.parseInt(content);
 			if (num > maxValue || num < minValue) {

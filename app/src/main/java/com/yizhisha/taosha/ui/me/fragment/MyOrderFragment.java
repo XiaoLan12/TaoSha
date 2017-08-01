@@ -81,15 +81,13 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter=new MyOrderAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        /*mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+       /* mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if(dataList.get(position) instanceof OrderHeadBean) {
-                    OrderHeadBean orderHeadBean= (OrderHeadBean) dataList.get(position);
-                    orderno=orderHeadBean.getOrderno();
                     Bundle bundle=new Bundle();
-                    bundle.putString("ORDERNO",orderno);
+                    bundle.putString("ORDERNO",((OrderHeadBean) dataList.get(position)).getOrderno());
                     startActivity(OrderDetailsActivity.class,bundle);
                 }
 
@@ -107,8 +105,6 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                         Bundle bundle=new Bundle();
                         bundle.putString("ORDERNO",orderno);
                         startActivity(OrderDetailsActivity.class,bundle);
-
-
                     }
                 }
             }

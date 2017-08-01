@@ -6,10 +6,19 @@ import android.os.Bundle;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.event.ChangeUserInfoEvent;
 import com.yizhisha.taosha.ui.me.fragment.ChangeOneInfoFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangePhoneFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangePwdFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangeWeixinFragment;
+
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class SetInfoActivity extends BaseActivity {
     private ChangePwdFragment changePwdFragment;
@@ -17,6 +26,7 @@ public class SetInfoActivity extends BaseActivity {
     private ChangeWeixinFragment changeWeixinFragment;
     private ChangeOneInfoFragment changeOneInfoFragment;
     private int currTarget=0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_set_info;
@@ -66,4 +76,5 @@ public class SetInfoActivity extends BaseActivity {
 
         }
     }
+
 }

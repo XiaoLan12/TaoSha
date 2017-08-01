@@ -75,6 +75,9 @@ public interface ApiService {
     @GET("ios/order/detail")
     Observable<MyOrderListBean> getOrderDetails(@QueryMap Map<String,String> map);
 
+    //修改用户信息
+    @GET("ios/ucenter/profile_save/")
+    Observable<RequestStatusBean> changeUserInfo(@QueryMap Map<String,String> map);
 
 
     //登录
@@ -138,6 +141,10 @@ public interface ApiService {
 
     @GET("ios/order/seckilling/")
     Observable<SeckillListBean> getSeckillOrder(@QueryMap Map<String, String> param);
+
+    //秒杀订单详情
+    @GET("ios/order/detail_seckilling/")
+    Observable<SeckillListBean> getSeckillOrderDetails(@QueryMap Map<String, String> param);
 
     //秒纱h活动
     @GET("ios/goods/seckilling/")

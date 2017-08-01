@@ -24,7 +24,7 @@ public class FreeSampleAdapter extends BaseQuickAdapter<FreeSampleBean.Active,Ba
     @Override
     protected void convert(BaseViewHolder helper, FreeSampleBean.Active item) {
 
-        helper.setText(R.id.paystate_tv,item.getIs_ship()==0?"未发货":"已发货");
+        helper.setText(R.id.paystate_tv,item.getIs_ship()==0?"已发货":"未发货");
         helper.setText(R.id.company_tv,item.getCompany());
         helper.setText(R.id.tradename_tv,item.getTitle());
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),

@@ -44,7 +44,7 @@ public class Order implements MultiItemEntity {
 
         private String addtime;
 
-        private String paytime;
+        private int paytime;
 
         private String shiptime;
 
@@ -186,11 +186,11 @@ public class Order implements MultiItemEntity {
             this.addtime = addtime;
         }
 
-        public String getPaytime() {
+        public int getPaytime() {
             return paytime;
         }
 
-        public void setPaytime(String paytime) {
+        public void setPaytime(int paytime) {
             this.paytime = paytime;
         }
 

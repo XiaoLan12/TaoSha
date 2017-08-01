@@ -109,6 +109,14 @@ public class Api {
     public Observable<MyOrderListBean> loadOrderDetails(Map<String,String> map){
         return service.getOrderDetails(map);
     }
+    //修改密码
+    public Observable<RequestStatusBean> changePwd(Map<String,String> map){
+        return service.changePwd(map);
+    }
+    //修改用户信息
+    public Observable<RequestStatusBean> changeUserInfo(Map<String,String> map){
+        return service.changeUserInfo(map);
+    }
     //登录
     public Observable<RequestStatusBean> login(Map<String,String> map){
         return service.Login(map);
@@ -134,10 +142,7 @@ public class Api {
         return service.phoneLogin(map);
     }
 
-    //修改密码
-    public Observable<RequestStatusBean> changePwd(Map<String,String> map){
-        return service.changePwd(map);
-    }
+
 
     //首页轮播
     public Observable<IndexPPTBean> getPPT(Map<String,String> map){
@@ -170,9 +175,13 @@ public class Api {
     public Observable<RequestStatusBean> deleteShoppCart(Map<String,String> map){
         return service.deleteShoppCart(map);
     }
-    // 商品详情
+    // 秒杀订单
     public Observable<SeckillListBean> getSeckillOrder(Map<String,String> map){
         return service.getSeckillOrder(map);
+    }
+    // 秒杀订单详情
+    public Observable<SeckillListBean> getSeckillOrderDetail(Map<String,String> map){
+        return service.getSeckillOrderDetails(map);
     }
     //秒纱活动
     public Observable<SeckillActListBean> getSeckillActivity(Map<String,String> map){
