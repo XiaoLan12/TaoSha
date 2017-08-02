@@ -148,20 +148,20 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
                 break;
             case R.id.isShow_setpwd_iv:
                 if (isHidden1) {
-                    mIvIsShowSetPwd.setImageResource(R.drawable.icon_pwd_isshow);
+                    mIvIsShowSetPwd.setImageResource(R.drawable.icon_view);
                     mEtSetPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    mIvIsShowSetPwd.setImageResource(R.drawable.icon_pwd_noshow);
+                    mIvIsShowSetPwd.setImageResource(R.drawable.icon_close);
                     mEtSetPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 isHidden1 = !isHidden1;
                 break;
             case R.id.isShow_againpwd_iv:
                 if (isHidden2) {
-                    mIvIsShowAgainPwd.setImageResource(R.drawable.icon_pwd_isshow);
+                    mIvIsShowAgainPwd.setImageResource(R.drawable.icon_view);
                     mEtAgainPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    mIvIsShowAgainPwd.setImageResource(R.drawable.icon_pwd_noshow);
+                    mIvIsShowAgainPwd.setImageResource(R.drawable.icon_close);
                     mEtAgainPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 isHidden2 = !isHidden2;

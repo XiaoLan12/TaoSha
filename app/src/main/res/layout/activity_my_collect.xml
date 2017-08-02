@@ -12,7 +12,8 @@
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
         app:rightButtonIcon="@drawable/icon_delete"
-        app:title="@string/my_collect"/>
+        app:title="@string/my_collect"
+        />
     <View
         style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
     <com.flyco.tablayout.SlidingTabLayout

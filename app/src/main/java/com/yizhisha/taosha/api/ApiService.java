@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.api;
 
+import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
@@ -19,8 +20,14 @@ import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -52,60 +59,74 @@ public interface ApiService {
     @GET("ios/ucenter/address/")
     Observable<AddressListBean> getAddressList(@Query("uid") int uid);
     //新增收货地址
+    @FormUrlEncoded
     @POST("ios/ucenter/address_save/")
-    Observable<RequestStatusBean> addAddress(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> addAddress(@FieldMap Map<String,String> map);
     //删除收货地址
     @GET("ios/ucenter/address_delete/")
     Observable<RequestStatusBean> deleteAddress(@Query("id") int id);
 
     //免费拿样
+    @FormUrlEncoded
     @POST("ios/ucenter/active/")
-    Observable<FreeSampleBean> getFreeSample(@QueryMap Map<String,String> map);
+    Observable<FreeSampleBean> getFreeSample(@FieldMap Map<String,String> map);
 
     //取消拿样
+    @FormUrlEncoded
     @POST("ios/ucenter/active_delete/")
-    Observable<RequestStatusBean> cancelFreeSample(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> cancelFreeSample(@FieldMap Map<String,String> map);
 
 
     //获得订单
+    @FormUrlEncoded
     @POST("ios/order/")
-    Observable<MyOrderListBean> getOrderList(@QueryMap Map<String,String> map);
+    Observable<MyOrderListBean> getOrderList(@FieldMap Map<String,String> map);
 
     //获得订单详情
     @GET("ios/order/detail")
     Observable<MyOrderListBean> getOrderDetails(@QueryMap Map<String,String> map);
 
     //修改用户信息
-    @GET("ios/ucenter/profile_save/")
-    Observable<RequestStatusBean> changeUserInfo(@QueryMap Map<String,String> map);
+    @FormUrlEncoded
+    @POST("ios/ucenter/profile_save/")
+    Observable<RequestStatusBean> changeUserInfo(@FieldMap Map<String, String> map);
+
+    //手机号绑定
+    @GET("ios/ucenter/mobile_save/")
+    Observable<RequestStatusBean> bindPhone(@QueryMap Map<String,String> map);
+
 
 
     //登录
+    @FormUrlEncoded
     @POST("ios/user/dologin/")
-    Observable<RequestStatusBean> Login(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> Login(@FieldMap Map<String,String> map);
 
     //注册
+    @FormUrlEncoded
     @POST("ios/user/doreg/")
-    Observable<RequestStatusBean> Register(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> Register(@FieldMap Map<String,String> map);
 
     // 找回密码
     @POST("ios/user/getpassword/")
     Observable<RequestStatusBean> FindPwd(@QueryMap Map<String,String> map);
 
     // 获取验证码
-    @POST("ios/ajax/checkpost/")
+    @GET("ios/ajax/checkpost/")
     Observable<RequestStatusBean> getCode(@QueryMap Map<String,String> map);
 
     // 手机快捷登录获取验证码
-    @POST("ios/ajax/logincheck/")
+    @GET("ios/ajax/logincheck/")
     Observable<RequestStatusBean> getPhoneLoginCode(@QueryMap Map<String,String> map);
     //手机快捷登录
+    @FormUrlEncoded
     @POST("ios/ajax/quicklogin/")
-    Observable<RequestStatusBean> phoneLogin(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> phoneLogin(@FieldMap Map<String,String> map);
 
     //修改密码
+    @FormUrlEncoded
     @POST("ios/ucenter/password_save/")
-    Observable<RequestStatusBean> changePwd(@QueryMap Map<String,String> map);
+    Observable<RequestStatusBean> changePwd(@FieldMap Map<String,String> map);
 
 
     //首页轮播

@@ -11,18 +11,18 @@
         <TextView
             android:id="@+id/name_myaddress_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:text="林先生"/>
+            />
         <TextView
             android:id="@+id/phone_myaddress_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/name_myaddress_tv"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="16776754646456"/>
+            />
         <TextView
             android:id="@+id/address_myaddress_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_below="@+id/phone_myaddress_tv"
-            android:text="广东的那个奋斗水库奇偶IE就发我怕覅今儿我姐夫"/>
+            />
     </RelativeLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginTop="@dimen/dp_10"
@@ -50,14 +50,14 @@
             android:id="@+id/delete_myaddress_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_marginRight="@dimen/dp_10"
-            android:drawableLeft="@drawable/icon_delete"
+            android:drawableLeft="@drawable/icon_trash"
             android:layout_alignParentRight="true"
             android:text="删除"/>
         <TextView
             android:id="@+id/edit_myaddress_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_marginRight="@dimen/dp_10"
-            android:drawableLeft="@drawable/icon_delete"
+            android:drawableLeft="@drawable/icon_edit"
             android:layout_toLeftOf="@+id/delete_myaddress_tv"
             android:text="编辑"/>
     </RelativeLayout>

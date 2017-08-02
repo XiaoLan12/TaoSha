@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.utils.RescourseUtil;
 
 /**
  * 页面加载提示布局

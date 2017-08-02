@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.api;
 
+import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
@@ -20,10 +21,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -114,8 +117,12 @@ public class Api {
         return service.changePwd(map);
     }
     //修改用户信息
-    public Observable<RequestStatusBean> changeUserInfo(Map<String,String> map){
+    public Observable<RequestStatusBean> changeUserInfo(Map<String, String> map){
         return service.changeUserInfo(map);
+    }
+    //绑定微信号
+    public Observable<RequestStatusBean> bindPhone(Map<String, String> map){
+        return service.bindPhone(map);
     }
     //登录
     public Observable<RequestStatusBean> login(Map<String,String> map){

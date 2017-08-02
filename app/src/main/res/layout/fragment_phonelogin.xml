@@ -23,7 +23,7 @@
             android:textSize="@dimen/font_normal"
             android:drawablePadding="@dimen/dp_5"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_delete"
+            android:drawableLeft="@drawable/icon_user"
             android:padding="@dimen/dp_10" />
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -46,7 +46,7 @@
         android:drawablePadding="@dimen/dp_5"
         android:textColorHint="@color/common_h2"
         android:textSize="@dimen/font_normal"
-        android:drawableLeft="@drawable/icon_delete"/>
+        android:drawableLeft="@drawable/icon_shield"/>
         <TextView
             android:id="@+id/getcode_phonelogin_tv"
             style="@style/TS.Theme.Widget.Text"

@@ -1,29 +1,21 @@
 package com.yizhisha.taosha.ui.me.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.event.ChangeUserInfoEvent;
-import com.yizhisha.taosha.ui.me.contract.ChangeUserInfoContract;
-import com.yizhisha.taosha.ui.me.presenter.ChangeUserInfoPresenter;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.Bind;
 
-public class ChangeUserNameActivity extends BaseActivity<ChangeUserInfoPresenter>
-implements ChangeUserInfoContract.View{
+public class ChangeUserNameActivity extends BaseActivity{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.userinfo_et)
@@ -62,38 +54,34 @@ implements ChangeUserInfoContract.View{
             @Override
             public void onClick(View v) {
                 String value=mEtUserInfo.getText().toString().trim();
-                if(value == null || value.equals("")){
-                    ToastUtil.showbottomShortToast("请输入");
-                    return;
+                switch(type){
+                    case 1:
+                        if(value == null || value.equals("")){
+                            ToastUtil.showbottomShortToast("请输入您的用户名");
+                            return;
+                        }
+                        RxBus.$().postEvent(new ChangeUserInfoEvent(type,value));
+                        finish_Activity(ChangeUserNameActivity.this);
+                        break;
+                    case 2:
+                        if(value == null || value.equals("")){
+                            ToastUtil.showbottomShortToast("请输入您的真实姓名");
+                            return;
+                        }
+                        RxBus.$().postEvent(new ChangeUserInfoEvent(type,value));
+                        finish_Activity(ChangeUserNameActivity.this);
+                        break;
+                    case 3:
+                        if(value == null || value.equals("")){
+                            ToastUtil.showbottomShortToast("请输入您的邮箱");
+                            return;
+                        }
+                        RxBus.$().postEvent(new ChangeUserInfoEvent(type,value));
+                        finish_Activity(ChangeUserNameActivity.this);
+                        break;
                 }
-                load(type,value);
             }
         });
 
-    }
-    private void load(int type,String value){
-        Map<String,String> map=new HashMap<>();
-        map.put("uid", String.valueOf(AppConstant.UID));
-        switch (type){
-            case 1:
-                map.put("username",value);
-                break;
-            case 2:
-                map.put("linkman",value);
-                break;
-            case 3:
-                map.put("email",value);
-                break;
-        }
-        mPresenter.changeUserInfo(map);
-    }
-    @Override
-    public void changeSuccess(String msg) {
-        ToastUtil.showbottomShortToast(msg);
-        RxBus.$().postEvent(new ChangeUserInfoEvent(type,mEtUserInfo.getText().toString()));
-    }
-    @Override
-    public void loadFail(String msg) {
-        ToastUtil.showbottomShortToast(msg);
     }
 }

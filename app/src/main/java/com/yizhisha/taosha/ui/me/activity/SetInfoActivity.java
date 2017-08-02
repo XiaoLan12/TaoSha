@@ -6,24 +6,13 @@ import android.os.Bundle;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.base.rx.RxBus;
-import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.ui.me.fragment.ChangeBindFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangeOneInfoFragment;
-import com.yizhisha.taosha.ui.me.fragment.ChangePhoneFragment;
 import com.yizhisha.taosha.ui.me.fragment.ChangePwdFragment;
-import com.yizhisha.taosha.ui.me.fragment.ChangeWeixinFragment;
-
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 public class SetInfoActivity extends BaseActivity {
     private ChangePwdFragment changePwdFragment;
-    private ChangePhoneFragment changePhoneFragment;
-    private ChangeWeixinFragment changeWeixinFragment;
+    private ChangeBindFragment changeBindFragment;
     private ChangeOneInfoFragment changeOneInfoFragment;
     private int currTarget=0;
 
@@ -62,16 +51,18 @@ public class SetInfoActivity extends BaseActivity {
 
                 break;
             case 2:
-                if(changePhoneFragment ==null){
-                    changePhoneFragment =new ChangePhoneFragment();
-                }
-                switchFragment(changePhoneFragment);
+                changeBindFragment =new ChangeBindFragment();
+                Bundle bundle1=new Bundle();
+                bundle1.putInt("TYPE",1);
+                changeBindFragment.setArguments(bundle1);
+                switchFragment(changeBindFragment);
                 break;
             case 3:
-                if(changeWeixinFragment ==null){
-                    changeWeixinFragment =new ChangeWeixinFragment();
-                }
-                switchFragment(changeWeixinFragment);
+                changeBindFragment =new ChangeBindFragment();
+                Bundle bundle2=new Bundle();
+                bundle2.putInt("TYPE",2);
+                changeBindFragment.setArguments(bundle2);
+                switchFragment(changeBindFragment);
                 break;
 
         }

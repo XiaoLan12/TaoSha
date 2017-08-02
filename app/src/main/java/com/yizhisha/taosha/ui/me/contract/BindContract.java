@@ -2,23 +2,25 @@ package com.yizhisha.taosha.ui.me.contract;
 
 import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
+import com.yizhisha.taosha.bean.json.PersonalDataBean;
 
 import java.util.Map;
 
 /**
- * Created by lan on 2017/8/1.
+ * Created by lan on 2017/8/2.
  */
 
-public interface ChangeUserInfoContract {
+public interface BindContract {
     interface View extends BaseView {
-        void changeSuccess(String msg);
-
+        void bindSuccess(String msg);
+        void getCodeSuccess(String info);
         void loadFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
-        public abstract void changeUserInfo(Map<String, String> param);
+        public abstract void bing(Map<String, String> params);
+        public abstract void getCode(Map<String, String> map);
 
         @Override
         public void onStart() {

@@ -9,28 +9,30 @@
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
-        app:title="@string/change_weixin"/>
+        app:title="@string/change_phone"/>
     <LinearLayout
-        android:id="@+id/binded_weixin_ll"
+        android:id="@+id/binded_phone_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_14">
         <TextView
+            android:id="@+id/bind_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:text="已绑定微信号码:"/>
+            android:text="已绑定手机号码:"/>
         <TextView
-            android:id="@+id/binged_phone_tv"
+            android:id="@+id/bind_phone_tv"
             style="@style/TS.Theme.Widget.Text"
             android:text="18819283470"/>
 
     </LinearLayout>
     <com.yizhisha.taosha.widget.ClearEditText
+        android:id="@+id/phone_chagephone_et"
         style="@style/TS.Theme.Widget.EditText"
         android:background="@drawable/shape_edittext_gray_selector"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         android:gravity="center_vertical"
-        android:hint="@string/weinxin_number"/>
+        android:hint="@string/new_phone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +40,7 @@
         android:layout_marginTop="@dimen/dp_20">
 
         <EditText
-            android:id="@+id/code_chageweixin_et"
+            android:id="@+id/getcode_chagephone_et"
             style="@style/TS.Theme.Widget.EditText"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
@@ -50,7 +52,7 @@
             />
 
         <TextView
-            android:id="@+id/getcode_chageweixin_tv"
+            android:id="@+id/getcode_chagephone_tv"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="@dimen/dp_40"
@@ -62,7 +64,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/sava_chageweixin_btn"
+        android:id="@+id/sava_chagephone_btn"
        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:background="@drawable/shape_redbtn_selector"

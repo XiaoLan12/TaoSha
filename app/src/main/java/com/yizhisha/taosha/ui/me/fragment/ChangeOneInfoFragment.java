@@ -9,6 +9,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
@@ -16,12 +17,17 @@ import com.yizhisha.taosha.event.ChangeUserInfoEvent;
 import com.yizhisha.taosha.ui.me.activity.ChangeUserNameActivity;
 import com.yizhisha.taosha.ui.me.contract.ChangeOneInfoContract;
 import com.yizhisha.taosha.ui.me.presenter.ChangeOneInfoPresenter;
+import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -59,6 +65,15 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         sexDatas.add("男");
         sexDatas.add("女");
     }
+    private void load(){
+        Map<String,String> map=new HashMap<>();
+        map.put("uid", String.valueOf(AppConstant.UID));
+        map.put("linkman",mTvRealName.getText().toString().trim());
+        map.put("sex",mTvSex.getText().toString().trim());
+        map.put("email",mTvEmail.getText().toString().trim());
+        map.put("username",mTvUserName.getText().toString().trim());
+        mPresenter.changeUserInfo(map);
+    }
     @Override
     public void loadPersonalDataSuccess(PersonalDataBean personalDataBean) {
         if(personalDataBean==null){
@@ -69,11 +84,14 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         mTvSex.setText(personalDataBean.getSex());
         mTvEmail.setText(personalDataBean.getEmail());
         mTvCompanyName.setText(personalDataBean.getCompany());
-
+    }
+    @Override
+    public void changeSuccess(String msg) {
+        ToastUtil.showbottomShortToast(msg);
     }
     @Override
     public void loadFail(String msg) {
-
+        ToastUtil.showbottomShortToast(msg);
     }
     private void changeEvent(){
         subscription= RxBus.$().toObservable(ChangeUserInfoEvent.class)
@@ -95,7 +113,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                     }
                 });
     }
-    @OnClick({R.id.changeusernamee_rl,R.id.realname_rl,R.id.e_mail_rl,R.id.sex_rl})
+    @OnClick({R.id.changeusernamee_rl,R.id.realname_rl,R.id.e_mail_rl,R.id.sex_rl,R.id.save_userinfo_btn})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -131,6 +149,9 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                         .build();
                 dialog.setData(sexDatas);
                 dialog.show();
+                break;
+            case R.id.save_userinfo_btn:
+                load();
                 break;
 
         }

@@ -31,7 +31,7 @@
         android:textSize="@dimen/font_normal"
         android:textColorHint="@color/common_h2"
         android:hint="@string/hint_input_phone"
-        android:drawableLeft="@drawable/icon_delete"/>
+        android:drawableLeft="@drawable/icon_user"/>
         </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:id="@+id/login_view1"
@@ -45,25 +45,27 @@
         android:layout_below="@+id/login_view1"
         android:gravity="center_vertical"
         >
-    <com.yizhisha.taosha.widget.ClearEditText
-        android:id="@+id/pwd_login_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@null"
-        android:padding="@dimen/dp_10"
-        android:drawablePadding="@dimen/dp_5"
-        android:textSize="@dimen/font_normal"
-        android:textColorHint="@color/common_h2"
-        android:hint="请输入登录密码"
-        android:password="true"
-        android:drawableLeft="@drawable/icon_delete"/>
+
+        <com.yizhisha.taosha.widget.ClearEditText
+            android:id="@+id/pwd_login_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_lock"
+            android:drawablePadding="@dimen/dp_5"
+            android:hint="请输入登录密码"
+            android:padding="@dimen/dp_10"
+            android:password="true"
+            android:textColorHint="@color/common_h2"
+            android:textSize="@dimen/font_normal" />
+
         <ImageView
             android:id="@+id/isShow_pwd_iv"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_pwd_noshow" />
+            android:src="@drawable/icon_close" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:id="@+id/login_view2"
@@ -112,7 +114,7 @@
             <TextView
                 android:id="@+id/weixin_login_tv"
                 style="@style/TS.Theme.Widget.Text"
-                android:drawableTop="@drawable/icon_delete"
+                android:drawableTop="@drawable/icon_wechat"
                 android:text="微信登录"/>
         </LinearLayout>
         <LinearLayout
@@ -123,7 +125,7 @@
             <TextView
                 android:id="@+id/phone_login_tv"
                 style="@style/TS.Theme.Widget.Text"
-                android:drawableTop="@drawable/icon_delete"
+                android:drawableTop="@drawable/icon_phone"
                 android:text="手机快捷登录"/>
         </LinearLayout>
 

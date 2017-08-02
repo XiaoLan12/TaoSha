@@ -110,7 +110,7 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
     public boolean checkInput(String accout,String code) {
         // 账号为空时提示
         if (accout == null || accout.trim().equals("")) {
-            ToastUtil.showCenterShortToast("请输入账号");
+            ToastUtil.showCenterShortToast("请输入手机号码");
             return false;
         }
         if (!CheckUtils.isMobileNO(accout)) {

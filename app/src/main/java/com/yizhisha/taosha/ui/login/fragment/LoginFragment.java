@@ -133,10 +133,10 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                 break;
             case R.id.isShow_pwd_iv:
                 if (isHidden) {
-                    mIvIsShowPwd.setImageResource(R.drawable.icon_pwd_isshow);
+                    mIvIsShowPwd.setImageResource(R.drawable.icon_view);
                     mEtPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    mIvIsShowPwd.setImageResource(R.drawable.icon_pwd_noshow);
+                    mIvIsShowPwd.setImageResource(R.drawable.icon_close);
                     mEtPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 isHidden = !isHidden;

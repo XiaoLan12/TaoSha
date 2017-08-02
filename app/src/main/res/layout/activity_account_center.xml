@@ -19,7 +19,7 @@
             android:id="@+id/head_accoutcenter_iv"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon_delete"
+            android:src="@drawable/icon_trash"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"/>
         <TextView

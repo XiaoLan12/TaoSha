@@ -27,7 +27,7 @@
             android:hint="@string/hint_input_phone"
             android:drawablePadding="@dimen/dp_5"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_delete"
+            android:drawableLeft="@drawable/icon_account"
             android:padding="@dimen/dp_10" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
@@ -50,7 +50,7 @@
         android:padding="@dimen/dp_10"
         android:drawablePadding="@dimen/dp_5"
         android:textColorHint="@color/common_h2"
-        android:drawableLeft="@drawable/icon_delete"/>
+        android:drawableLeft="@drawable/icon_shield"/>
         <TextView
             android:id="@+id/getcode_findpwd_tv"
             style="@style/TS.Theme.Widget.Text"
@@ -79,13 +79,13 @@
             android:drawablePadding="@dimen/dp_5"
             android:password="true"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_delete"/>
+            android:drawableLeft="@drawable/icon_lock"/>
         <ImageView
             android:id="@+id/isShow_setpwd_iv"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_pwd_noshow" />
+            android:src="@drawable/icon_close" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -108,13 +108,13 @@
             android:drawablePadding="@dimen/dp_5"
             android:password="true"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_delete"/>
+            android:drawableLeft="@drawable/icon_lock_sure"/>
         <ImageView
             android:id="@+id/isShow_againpwd_iv"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:paddingRight="@dimen/dp_10"
-            android:src="@drawable/icon_pwd_noshow" />
+            android:src="@drawable/icon_close" />
     </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
