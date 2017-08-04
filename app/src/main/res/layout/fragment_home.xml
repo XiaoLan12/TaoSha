@@ -152,19 +152,24 @@
                 android:src="@drawable/index_2"/>
         </LinearLayout>
     </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
-            </LinearLayout>
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
 
+            <com.yizhisha.taosha.widget.SquareIndexLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_bg"
+                >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/common_bg"
+                android:src="@drawable/recommend_ma"/>
+            </com.yizhisha.taosha.widget.SquareIndexLayout>
+</LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -175,17 +180,23 @@
                     android:layout_height="wrap_content"
                     android:background="@color/common_bg"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
+
+                <com.yizhisha.taosha.widget.SquareIndexLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                   >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_mao"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -200,17 +211,23 @@
                     android:background="@color/common_bg"/>
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
+
+                <com.yizhisha.taosha.widget.SquareIndexLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_mian"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -225,17 +242,23 @@
                     android:background="@color/common_bg"/>
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
+
+                <com.yizhisha.taosha.widget.SquareIndexLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_hun"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -254,15 +277,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
-            </LinearLayout>
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
 
+                <com.yizhisha.taosha.widget.SquareIndexLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_huashi"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -275,19 +304,24 @@
                     android:background="@color/common_bg"/>
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:background="@color/white"
-                    android:src="@mipmap/ic_launcher"/>
-            </LinearLayout>
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
 
+                <com.yizhisha.taosha.widget.SquareIndexLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_huaqian"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
