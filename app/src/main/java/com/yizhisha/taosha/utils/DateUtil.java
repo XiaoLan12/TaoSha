@@ -12,11 +12,16 @@ import java.util.Date;
 
 public class DateUtil {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
-    /*时间戳转换成字符窜*/
+    private static SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
         /*时间戳转换成字符窜*/
         public static String getDateToString(long time) {
             Date d = new Date(time);
             return sdf.format(d);
+        }
+              /*时间戳转换成字符窜*/
+    public static String getDateToString1(long time) {
+        Date d = new Date(time);
+        return sdf1.format(d);
     }
     public static long getDateTimeDiff(Long startdate, Long endDate) {
 
@@ -79,5 +84,13 @@ public class DateUtil {
         //两时间差,精确到毫秒
         long sum = curDate.getTime() + subDate.getTime();
         return sum;
+    }
+    public static int getTimeintervalDay(long time1,long time2){
+        //前的时间
+        Date date1 = new Date(time1*1000);
+        //后的时间
+        Date date2 = new Date(time2*1000);
+        int days = (int)((date1.getTime() - date2.getTime())/(1000 * 60 * 60 * 24));
+        return days;
     }
 }

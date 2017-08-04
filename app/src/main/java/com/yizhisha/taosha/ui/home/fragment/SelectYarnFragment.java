@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -84,7 +85,8 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",dataList.get(position).getId());
-                startActivity(YarnActivity.class);
+
+                startActivity(YarnActivity.class,bundle);
             }
         });
     }

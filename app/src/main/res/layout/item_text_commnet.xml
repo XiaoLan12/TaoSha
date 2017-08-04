@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -10,54 +11,84 @@
         >
         <ImageView
             android:id="@+id/head_comment_iv"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_delete"/>
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            tools:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/name_comment_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/head_comment_iv"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:layout_centerVertical="true"
-            android:text="张三"/>
+            android:layout_toLeftOf="@+id/time_comment_tv"
+            android:layout_marginLeft="@dimen/dp_8"
+            tools:text="aaaa"
+            />
         <TextView
             android:id="@+id/time_comment_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="2017.06.19"/>
+            tools:text="2017.06.19"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/detail_comment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aaaaaaaaaaaaaaaaaaa"
+        tools:text="aaa"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_gravity=""/>
+        />
+    <LinearLayout
+        android:id="@+id/addcomment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+        <TextView
+            android:id="@+id/time_addcomment_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:textColor="@color/red1"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/font_normal2"
+            tools:text="用户当天追评"/>
+        <TextView
+            android:id="@+id/detail_addcomment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="aaaaaaaaaaaaaaaaaaa"
+
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10">
+
         <TextView
+            android:id="@+id/detail_shop_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="商品详情"/>
+            tools:text="商品详情" />
+
         <TextView
             android:id="@+id/like_comment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/icon_delete"
             android:gravity="center_vertical"
-            android:text="19"/>
+            tools:text="19" />
+
         <TextView
-        android:id="@+id/comment_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/icon_delete"
-        android:gravity="center_vertical"
+            android:id="@+id/comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-        android:text="19"/>
+            android:drawableLeft="@drawable/icon_delete"
+            android:gravity="center_vertical"
+            tools:text="19" />
 
     </LinearLayout>
 

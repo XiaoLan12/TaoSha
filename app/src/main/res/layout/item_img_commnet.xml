@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,28 +14,29 @@
             android:id="@+id/head_comment_img_iv"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
-            android:src="@drawable/icon_delete"/>
+            tools:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/name_comment_img_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/head_comment_iv"
-            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_toRightOf="@+id/head_comment_img_iv"
+            android:layout_toLeftOf="@+id/time_comment_img_tv"
+            android:layout_marginLeft="@dimen/dp_8"
             android:layout_centerVertical="true"
-            android:text="张三"/>
+            tools:text="张三"/>
         <TextView
             android:id="@+id/time_comment_img_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="2017.06.19"/>
+            tools:text="2017.06.19"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/detail_comment_img_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aaaaaaaaaaaaaaaaaaa"
+        tools:text="aaaaaaaaaaaaaaaaaaa"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_gravity=""/>
+        />
     <!-- 不同的地方 -->
 
     <com.yizhisha.taosha.widget.MultiImageView
@@ -44,21 +47,46 @@
         >
     </com.yizhisha.taosha.widget.MultiImageView>
     <LinearLayout
+        android:id="@+id/addcomment_img_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+        <TextView
+            android:id="@+id/time_addcomment_img_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:textColor="@color/red1"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/font_normal2"
+            tools:text="用户当天追评"/>
+        <TextView
+            android:id="@+id/detail_addcomment_img_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="aaaaaaaaaaaaaaaaaaa"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10">
         <TextView
+            android:id="@+id/detail_shop_img_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="商品详情"/>
+            tools:text="商品"/>
         <TextView
             android:id="@+id/like_comment_img_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/icon_delete"
             android:gravity="center_vertical"
-            android:text="19"/>
+            tools:text="19"/>
         <TextView
         android:id="@+id/comment_img_tv"
         android:layout_width="wrap_content"
@@ -66,7 +94,7 @@
         android:drawableLeft="@drawable/icon_delete"
         android:gravity="center_vertical"
         android:layout_marginLeft="@dimen/dp_10"
-        android:text="19"/>
+        tools:text="19"/>
 
     </LinearLayout>
 

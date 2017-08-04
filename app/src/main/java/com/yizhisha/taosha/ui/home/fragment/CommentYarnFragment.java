@@ -71,17 +71,25 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     }
     private void load(int id, boolean isShowLoad) {
         Map<String, String> bodyMap = new HashMap<>();
-        bodyMap.put("id", String.valueOf(id));
+        bodyMap.put("id", String.valueOf(982));
         mPresenter.loadCommentList(bodyMap, isShowLoad);
     }
 
     @Override
     public void loadCommentListSuccess(List<CommentBean> data) {
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).getComment_photos().size() == 0) {
-                data.get(i).setItemType(CommentBean.TEXT_TYPE);
-                }else {
+
+            if (data.get(i).getComment_photos()!= null||!"".equals(data.get(i).getComment_photos())) {
+                String date[]=data.get(i).getComment_photos().split(",");
+                List<String> list=new ArrayList<>();
+                for (int j = 0; j < date.length; j++) {
+                    list.add(date[j]);
+                }
+                data.get(i).setcommentPhotos(list);
                 data.get(i).setItemType(CommentBean.IMGS_TYPE);
+                }else {
+
+                data.get(i).setItemType(CommentBean.TEXT_TYPE);
                 }
             }
         dataList.clear();

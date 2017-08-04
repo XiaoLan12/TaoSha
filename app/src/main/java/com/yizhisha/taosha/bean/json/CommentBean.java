@@ -21,7 +21,8 @@ public class CommentBean implements MultiItemEntity {
 
     private String comment_detail;
 
-    private List<String> comment_photos;
+    private List<String> commentPhotos;
+    private String comment_photos;
 
     private int comment_addtime;
 
@@ -74,13 +75,20 @@ public class CommentBean implements MultiItemEntity {
     public void setComment_detail(String comment_detail) {
         this.comment_detail = comment_detail;
     }
-
-    public List<String> getComment_photos() {
-        return comment_photos;
+    public List<String> getcommentPhotos() {
+        return commentPhotos;
     }
 
-    public void setComment_photos(List<String> comment_photos) {
+    public void setcommentPhotos(List<String> comment_photos) {
+        this.commentPhotos = comment_photos;
+    }
+
+    public void setComment_photos(String comment_photos) {
         this.comment_photos = comment_photos;
+    }
+
+    public String getComment_photos() {
+        return comment_photos;
     }
 
     public int getComment_addtime() {

@@ -137,7 +137,6 @@ public class CommonLoadingView extends FrameLayout {
         loadingView.setVisibility(GONE);
         loadingErrorView.setVisibility(GONE);
         if (isEmpty) {
-            Log.d("TTT","来这俩");
             mLoadingEmpyIv.setImageResource(R.drawable.icon_delete);
             mLoadingEmpyTv.setVisibility(VISIBLE);
             mLoadingEmpyTv.setText(txt);

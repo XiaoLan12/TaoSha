@@ -7,9 +7,11 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.GlideUtil;
+import com.yizhisha.taosha.utils.LogUtil;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
  * @Description: 显示1~N张图片的View
  */
 
-public class MultiImageView extends LinearLayout {
+public class  MultiImageView extends LinearLayout {
 	public static int MAX_WIDTH = 0;
 
 	// 照片的Url列表
@@ -38,6 +40,8 @@ public class MultiImageView extends LinearLayout {
 	private LayoutParams rowPara;
 
 	private OnItemClickListener mOnItemClickListener;
+
+	private final String URL="http://www.taoshamall.com/data/attached/comment/";
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener){
 		mOnItemClickListener = onItemClickListener;
 	}
@@ -186,7 +190,8 @@ public class MultiImageView extends LinearLayout {
 		imageView.setTag(R.id.image_tag,position);
 		imageView.setId(url.hashCode());
 		imageView.setOnClickListener(mImageViewOnClickListener);
-		GlideUtil.getInstance().LoadContextBitmap(imageView.getContext(),url,imageView,GlideUtil.LOAD_BITMAP);
+		LogUtil.i("TTT","图片"+URL+url);
+		GlideUtil.getInstance().LoadContextBitmap(imageView.getContext(),AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+url,imageView,GlideUtil.LOAD_BITMAP);
 		return imageView;
 	}
 
