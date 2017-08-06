@@ -38,6 +38,7 @@
                 android:hint="请输入关键字"
                 />
             <ImageView
+                android:id="@+id/img_yuyin"
                 android:layout_width="@dimen/dp_16"
                 android:layout_height="@dimen/dp_16"
                 android:layout_marginRight="6dp"

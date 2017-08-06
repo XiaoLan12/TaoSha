@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Bind(R.id.tv_search)
     TextView tv_search;
     @Bind(R.id.img_yuyin)
-            ImageView img_yuyin;
+    ImageView img_yuyin;
 
 
     //设置图片资源:url或本地资源

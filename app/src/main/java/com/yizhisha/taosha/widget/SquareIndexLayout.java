@@ -31,8 +31,7 @@ public class SquareIndexLayout extends RelativeLayout {
   
         // Children are just made to fill our space.  
         int childWidthSize = getMeasuredWidth();  
-        int childHeightSize = getMeasuredHeight();  
-        
+        int childHeightSize = getMeasuredHeight();
 //        <span style="color: rgb(153, 153, 153); font-family: Monaco, MonacoRegular, 'Courier New', monospace;  line-height: 15px; white-space: pre; background-color: rgb(248, 248, 255);">
 //</span>  
           widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
