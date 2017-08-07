@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.adapter.SelectYarnColorAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
     TextView tv_continue_add;
     private ProductDetailImgAdapter adapter;
     private SelectYarnColorAdapter adapter1;
-    private List<String> list=new ArrayList<>();
+    private List<SelectYarnBean> list=new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -51,9 +53,20 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColor.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
-        list.add("");
+        SelectYarnBean selectYarnBean=new SelectYarnBean("",1);
+        list.add(selectYarnBean);
         adapter1=new SelectYarnColorAdapter(SelectYarnColor.this,list);
         recyclerView1.setAdapter(adapter1);
+        adapter1.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.img_delete:
+                        adapter1.remove(position);
+                        break;
+                }
+            }
+        });
 
 
 
@@ -82,7 +95,8 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
                     ToastUtil.showShortToast("一个订单最多八组");
                     return;
                 }
-                list.add("");
+                SelectYarnBean selectYarnBean=new SelectYarnBean("",1);
+                list.add(selectYarnBean);
                 adapter1.notifyDataSetChanged();
                 break;
         }
