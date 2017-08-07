@@ -53,6 +53,12 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 }else{
                     helper.setVisible(R.id.addcomment_ll,false);
                 }
+                if(item.getComment_redetail()!=null||!item.getComment_redetail().equals("")){
+                    helper.setVisible(R.id.business_reply_ll,true);
+                    helper.setText(R.id.business_reply_tv,item.getComment_redetail());
+                }else{
+                    helper.setVisible(R.id.business_reply_ll,false);
+                }
                 break;
             case CommentBean.IMGS_TYPE:
                 ImageView imageView1=helper.getView(R.id.head_comment_img_iv);
@@ -79,6 +85,12 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
 
                 }else{
                     helper.setVisible(R.id.addcomment_ll,false);
+                }
+                if(item.getComment_redetail()!=null||!item.getComment_redetail().equals("")){
+                    helper.setVisible(R.id.business_reply_img_ll,true);
+                    helper.setText(R.id.business_reply_img_tv,item.getComment_redetail());
+                }else{
+                    helper.setVisible(R.id.business_reply_img_ll,false);
                 }
                 MultiImageView multiImageView = helper.getView(R.id.cilrcleimgMv_img);
                 final List<String> photos = item.getcommentPhotos();

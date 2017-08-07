@@ -52,6 +52,7 @@
         <activity android:name=".ui.me.activity.SecKillOrderActivity" />
         <activity android:name=".ui.home.activity.SeckillActivityActivity" />
         <activity android:name=".ui.me.activity.SecKillOrderDetailActivity" />
+        <activity android:name=".ui.ShowImageActivity" />
         <activity android:name=".ui.ClipHeaderActivity" />
         <!--图片选择器-->
         <activity

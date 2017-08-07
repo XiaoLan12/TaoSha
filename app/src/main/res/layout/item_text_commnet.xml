@@ -58,8 +58,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             tools:text="aaaaaaaaaaaaaaaaaaa"
-
             />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/business_reply_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/im_distribute_comm_bg"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="掌柜回复:"/>
+        <TextView
+            android:id="@+id/business_reply_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="啥工会管理的时间赶快来山东科技公司了解贵金属了"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

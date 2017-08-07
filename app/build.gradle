@@ -63,6 +63,6 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
     compile 'com.youth.banner:banner:1.1.5'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
+    compile 'com.commit451:PhotoView:1.2.4'
     compile project(':pictureselector')
 }
