@@ -39,6 +39,7 @@ public class OrderDataHelper {
             //遍历每个大订单里面的小订单
             for (Goods orderGoodsItem : goodses) {
                 orderGoodsItem.setOrderno(order.getOrderno());
+
                 dataList.add(orderGoodsItem);
 
             }
@@ -46,6 +47,8 @@ public class OrderDataHelper {
             orderFootBean.setTotalprice(order.getTotalprice());
             orderFootBean.setStatus(order.getStatus());
             orderFootBean.setAmount(goodses.size());
+            orderFootBean.setId(order.getId());
+            orderFootBean.setMzw_uid(order.getMzw_uid());
             dataList.add(orderFootBean);
         }
         return dataList;

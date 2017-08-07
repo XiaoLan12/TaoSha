@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.ui.login.fragment.FindPwdFragment;
 import com.yizhisha.taosha.ui.login.fragment.LoginFragment;
 import com.yizhisha.taosha.ui.login.fragment.PhoneLoginFragment;
@@ -19,6 +20,7 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
     private RegisterFragment registerFragment;
     private LoginFragment loginFragment;
     private PhoneLoginFragment phoneLoginFragment;
+    private Fragment currentFragment;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login_fragment;
@@ -33,17 +35,29 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         loginFragment=new LoginFragment();
         transaction.add(R.id.fragment,loginFragment).commit();
+        currentFragment=loginFragment;
 
     }
     /**
      * hide和show切换Fragment
-     *
-     * @param fragment
      */
-    private void switchFragment(Fragment fragment,String tag)
-    {
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment,fragment,tag).addToBackStack(null).commit();
+    private void switchFragment(Fragment targetFragment, String tag) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (!targetFragment.isAdded()) {
+            if(currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction
+                    .add(R.id.fragment, targetFragment,tag).addToBackStack(null)
+                    .commit();
+        } else {
+            transaction
+                    .hide(currentFragment)
+                    .show(targetFragment)
+                    .commit();
+        }
+        currentFragment = targetFragment;
     }
 
     @Override

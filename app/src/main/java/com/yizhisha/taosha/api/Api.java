@@ -20,6 +20,7 @@ import com.yizhisha.taosha.bean.json.UserInfoBean;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -119,6 +120,10 @@ public class Api {
     //修改用户信息
     public Observable<RequestStatusBean> changeUserInfo(Map<String, String> map){
         return service.changeUserInfo(map);
+    }
+    //修改用户头像
+    public Observable<String> changeUserHead(MultipartBody.Part body){
+        return service.changeUserHead(body);
     }
     //绑定微信号
     public Observable<RequestStatusBean> bindPhone(Map<String, String> map){

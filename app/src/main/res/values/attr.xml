@@ -16,4 +16,14 @@
         <attr name="titleColors" format="color"/>
         <attr name="titleSizes" format="dimension"/>
     </declare-styleable>
+    !--自定星级控件-->
+    <declare-styleable name="StarView">
+        <attr name="mImageWidth" format="dimension"/>
+        <attr name="mImageHeight" format="dimension" />
+        <attr name="mDefaultImageId" format="reference" />
+        <attr name="mClickImageId" format="reference" />
+        <attr name="mMargin" format="dimension" />
+        <attr name="mStarNum" format="integer" />
+        <attr name="mStarChoose" format="integer" />
+    </declare-styleable>
 </resources>

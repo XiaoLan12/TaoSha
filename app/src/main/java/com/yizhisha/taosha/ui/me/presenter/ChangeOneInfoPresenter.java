@@ -9,6 +9,7 @@ import com.yizhisha.taosha.ui.me.contract.ChangeOneInfoContract;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
@@ -42,6 +43,20 @@ public class ChangeOneInfoPresenter extends ChangeOneInfoContract.Presenter{
                         mView.loadFail(info.getInfo());
                     }
                 }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void changeHeadSuccess(MultipartBody.Part body) {
+        addSubscrebe(Api.getInstance().changeUserHead(body),new RxSubscriber<String>(mContext,true){
+            @Override
+            protected void onSuccess(String info) {
+               mView.changeHeadSuccess(info);
             }
             @Override
             protected void onFailure(String message) {

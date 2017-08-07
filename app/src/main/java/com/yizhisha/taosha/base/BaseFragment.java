@@ -3,6 +3,7 @@ package com.yizhisha.taosha.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -117,5 +118,16 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onClick(View v) {
 
+    }
+    /**
+     * Android M运行时权限请求封装
+     * @param permissionDes 权限描述
+     * @param runnable 请求权限回调
+     * @param permissions 请求的权限（数组类型），直接从Manifest中读取相应的值，比如Manifest.permission.WRITE_CONTACTS
+     */
+    public void performCodeWithPermission(@NonNull String permissionDes, BaseActivity.PermissionCallback runnable, @NonNull String... permissions){
+        if(getActivity()!=null && getActivity() instanceof BaseActivity){
+            ((BaseActivity) getActivity()).performCodeWithPermission(permissionDes,runnable,permissions);
+        }
     }
 }

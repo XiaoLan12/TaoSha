@@ -51,7 +51,27 @@
         <activity android:name=".ui.me.activity.AreaSelectActivity" />
         <activity android:name=".ui.me.activity.SecKillOrderActivity" />
         <activity android:name=".ui.home.activity.SeckillActivityActivity" />
-        <activity android:name=".ui.me.activity.SecKillOrderDetailActivity"></activity>
+        <activity android:name=".ui.me.activity.SecKillOrderDetailActivity" />
+        <activity android:name=".ui.ClipHeaderActivity" />
+        <!--图片选择器-->
+        <activity
+            android:name="com.lidong.photopicker.PhotoPickerActivity"
+            android:theme="@style/PhotoPickerTheme"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.lidong.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme"/>
+        <!-- 适配7.0调用系统控件 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.taosha.takephoto.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".ui.me.activity.AddCommentActivity"></activity>
     </application>
 
 </manifest>

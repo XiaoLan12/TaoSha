@@ -13,7 +13,7 @@ import java.util.List;
 public class Order implements MultiItemEntity {
 
         private int id;
-
+        private int mzw_uid;
         private String orderno;
 
         private int status;
@@ -242,6 +242,13 @@ public class Order implements MultiItemEntity {
             this.mobile_company = mobile_company;
         }
 
+    public int getMzw_uid() {
+        return mzw_uid;
+    }
+
+    public void setMzw_uid(int mzw_uid) {
+        this.mzw_uid = mzw_uid;
+    }
 
     @Override
     public int getItemType() {

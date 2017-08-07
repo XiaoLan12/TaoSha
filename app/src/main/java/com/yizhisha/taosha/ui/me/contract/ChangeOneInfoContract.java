@@ -7,6 +7,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
@@ -17,6 +18,7 @@ public interface ChangeOneInfoContract {
     interface View extends BaseView {
         void loadPersonalDataSuccess(PersonalDataBean personalDataBean);
         void changeSuccess(String msg);
+        void changeHeadSuccess(String msg);
 
         void loadFail(String msg);
     }
@@ -25,6 +27,7 @@ public interface ChangeOneInfoContract {
 
         public abstract void loadPersonalData(int uid);
         public abstract void changeUserInfo(Map<String, String> params);
+        public abstract void changeHeadSuccess(MultipartBody.Part body);
 
         @Override
         public void onStart() {

@@ -1,16 +1,22 @@
 package com.yizhisha.taosha.bean.json;
 
+import android.content.ServiceConnection;
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
+
+import java.io.Serializable;
 
 /**
  * Created by lan on 2017/7/5.
  */
 
-public class Goods{
+public class Goods implements Serializable{
 
-
+    private int id;
     private int gid;
+
+    private int mzw_uid;
 
     private String title;
 
@@ -128,6 +134,22 @@ public class Goods{
 
     public void setIs_ship(int is_ship) {
         this.is_ship = is_ship;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getMzw_uid() {
+        return mzw_uid;
+    }
+
+    public void setMzw_uid(int mzw_uid) {
+        this.mzw_uid = mzw_uid;
     }
 
     @Override

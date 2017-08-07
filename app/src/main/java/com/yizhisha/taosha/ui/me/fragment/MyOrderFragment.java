@@ -15,13 +15,16 @@ import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.OrderDataHelper;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
+import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.OrderHeadBean;
+import com.yizhisha.taosha.ui.me.activity.AddCommentActivity;
 import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +109,18 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                         bundle.putString("ORDERNO",orderno);
                         startActivity(OrderDetailsActivity.class,bundle);
                     }
+                }
+            }
+        });
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.immediate_evaluation_tv:
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("SHOPIFNO", (OrderFootBean) dataList.get(position));
+                            startActivity(AddCommentActivity.class);
+                        break;
                 }
             }
         });
