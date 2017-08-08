@@ -11,8 +11,8 @@
         >
         <ImageView
             android:id="@+id/head_comment_iv"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             tools:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/name_comment_tv"
@@ -25,8 +25,8 @@
         <TextView
             android:id="@+id/time_comment_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
+            android:layout_below="@+id/head_comment_iv"
+            android:layout_marginTop="@dimen/dp_5"
             tools:text="2017.06.19"/>
     </RelativeLayout>
     <TextView
@@ -36,6 +36,32 @@
         tools:text="aaa"
         android:layout_marginLeft="@dimen/dp_10"
         />
+    <RelativeLayout
+        android:id="@+id/business_reply_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/im_distribute_comm_bg">
+        <TextView
+            android:id="@+id/business_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="掌柜回复:"/>
+        <TextView
+            android:id="@+id/business_reply_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/business_reply"
+            tools:text="啥工会管理的时间"/>
+        <TextView
+            android:id="@+id/business_reply_time_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/business_reply_content_tv"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="2017.06.19"/>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/addcomment_ll"
         android:layout_width="match_parent"
@@ -60,36 +86,18 @@
             tools:text="aaaaaaaaaaaaaaaaaaa"
             />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/business_reply_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
-        android:visibility="gone"
-        android:layout_margin="@dimen/dp_5"
-        android:background="@drawable/im_distribute_comm_bg"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="掌柜回复:"/>
-        <TextView
-            android:id="@+id/business_reply_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="啥工会管理的时间赶快来山东科技公司了解贵金属了"/>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10">
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/detail_shop_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="商品详情" />
+            tools:text="商品详情" />-->
 
         <TextView
             android:id="@+id/like_comment_tv"

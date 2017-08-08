@@ -84,18 +84,6 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter=new MyOrderAdapter();
         mRecyclerView.setAdapter(mAdapter);
-       /* mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                if(dataList.get(position) instanceof OrderHeadBean) {
-                    Bundle bundle=new Bundle();
-                    bundle.putString("ORDERNO",((OrderHeadBean) dataList.get(position)).getOrderno());
-                    startActivity(OrderDetailsActivity.class,bundle);
-                }
-
-            }
-        });*/
         mAdapter.setOnItemTypeClickListener(new MyOrderAdapter.OnItemTypeClickListener() {
             @Override
             public void onItemClick(View view, int type, int position) {
@@ -117,9 +105,29 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.immediate_evaluation_tv:
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("SHOPIFNO", (OrderFootBean) dataList.get(position));
-                            startActivity(AddCommentActivity.class);
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                            OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            Bundle bundle=new Bundle();
+                            bundle.putString("ORDERNO",orderFootBean.getOrderno());
+                            startActivity(OrderDetailsActivity.class,bundle);
+                        }
+
+                        break;
+                    case R.id.immediate_payment_tv:
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                            OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            Bundle bundle=new Bundle();
+                            bundle.putString("ORDERNO",orderFootBean.getOrderno());
+                            startActivity(OrderDetailsActivity.class,bundle);
+                        }
+                        break;
+                    case R.id.additional_comments_tv:
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                            OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            Bundle bundle=new Bundle();
+                            bundle.putString("ORDERNO",orderFootBean.getOrderno());
+                            startActivity(OrderDetailsActivity.class,bundle);
+                        }
                         break;
                 }
             }

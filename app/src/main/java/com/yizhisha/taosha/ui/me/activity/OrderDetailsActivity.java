@@ -17,6 +17,7 @@ import com.yizhisha.taosha.adapter.MyOrderDetailsAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
+import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.ui.me.contract.OrderDetailsContract;
 import com.yizhisha.taosha.ui.me.presenter.OrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> implements OrderDetailsContract.View{
     @Bind(R.id.paystate_orderdetails_tv)
@@ -67,6 +69,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
     TextView mTvConfirmGoods;
     @Bind(R.id.immediate_evaluation_tv)
     TextView mTvImmediateEvaluation;
+    @Bind(R.id.additional_comments_tv)
+    TextView mTvAddItionalComment;
     @Bind(R.id.againbuy_tv)
     TextView mTvAgeinBuy;
     @Bind(R.id.cancel_the_order_tv)
@@ -162,6 +166,40 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
 
         mLoadingView.loadError();
     }
+    @OnClick({R.id.cancel_the_order_tv,R.id.contact_the_merchant_tv,R.id.confirm_goods_tv,
+            R.id.immediate_evaluation_tv,R.id.againbuy_tv,R.id.immediate_payment_tv,R.id.additional_comments_tv})
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cancel_the_order_tv:
+                break;
+            case R.id.contact_the_merchant_tv:
+                break;
+            case R.id.confirm_goods_tv:
+                break;
+            case R.id.immediate_evaluation_tv:
+                Bundle commentbundle = new Bundle();
+                commentbundle.putInt("TYPE",1);
+                commentbundle.putInt("ORDERID",order.getId());
+                commentbundle.putInt("MZWUIID",order.getMzw_uid());
+                startActivity(AddCommentActivity.class,commentbundle);
+                break;
+            case R.id.againbuy_tv:
+                break;
+            case R.id.immediate_payment_tv:
+                break;
+            case R.id.additional_comments_tv:
+                Bundle addCommentbundle = new Bundle();
+                addCommentbundle.putInt("TYPE",2);
+                addCommentbundle.putInt("ORDERID",order.getId());
+                addCommentbundle.putInt("MZWUIID",order.getMzw_uid());
+                startActivity(AddCommentActivity.class,addCommentbundle);
+                break;
+        }
+    }
+
+
+
 
     /**根据交易状态，切换布局显示
      * @param paystate
@@ -179,6 +217,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 mTvImmediatePayment.setVisibility(View.VISIBLE);
                 mTvConfirmGoods.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 1:
@@ -187,6 +226,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 2:
@@ -195,6 +235,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.VISIBLE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 3:
@@ -203,6 +244,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.VISIBLE);
+                mTvAddItionalComment.setVisibility(View.GONE);
+                mTvAgeinBuy.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                mIvPayState.setImageResource(R.drawable.icon_jiaoyiwancheng);
+                mTvCancelTheOrder.setVisibility(View.GONE);
+                mTvImmediatePayment.setVisibility(View.GONE);
+                mTvConfirmGoods.setVisibility(View.GONE);
+                mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.VISIBLE);
                 mTvAgeinBuy.setVisibility(View.VISIBLE);
                 break;
         }

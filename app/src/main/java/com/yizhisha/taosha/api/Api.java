@@ -3,6 +3,7 @@ package com.yizhisha.taosha.api;
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
+import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
@@ -15,6 +16,7 @@ import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 import java.util.Map;
@@ -122,7 +124,7 @@ public class Api {
         return service.changeUserInfo(map);
     }
     //修改用户头像
-    public Observable<String> changeUserHead(MultipartBody.Part body){
+    public Observable<UserHeadBean> changeUserHead(MultipartBody.Part body){
         return service.changeUserHead(body);
     }
     //绑定微信号
@@ -198,5 +200,17 @@ public class Api {
     //秒纱活动
     public Observable<SeckillActListBean> getSeckillActivity(Map<String,String> map){
         return service.getSeckillActivity(map);
+    }
+    //发布评论
+    public Observable<RequestStatusBean> addComment(Map<String,String> map){
+        return service.addComment(map);
+    }
+    //发布追评
+    public Observable<RequestStatusBean> addAddComment(Map<String,String> map){
+        return service.addAddComment(map);
+    }
+    //添加评论图片
+    public Observable<CommentPicBean> addCommentPic(MultipartBody.Part body){
+        return service.addCommentPic(body);
     }
 }

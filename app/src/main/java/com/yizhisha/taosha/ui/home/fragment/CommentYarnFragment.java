@@ -29,6 +29,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/7/2.
@@ -44,6 +45,7 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     private List<CommentBean> dataList=new ArrayList<>();
     private CommentYarnAdapter mAdapter;
     private int id;
+    private int type;
 
     public static CommentYarnFragment getInstance(int id) {
         CommentYarnFragment sf = new CommentYarnFragment();
@@ -58,7 +60,7 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     @Override
     protected void initView() {
         initAdapter();
-        load(id, true);
+        load(id,0, true);
     }
     private void initAdapter(){
         mAdapter=new CommentYarnAdapter(dataList);
@@ -69,9 +71,12 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
 
     }
-    private void load(int id, boolean isShowLoad) {
+    private void load(int id, int type,boolean isShowLoad) {
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("id", String.valueOf(982));
+        if(type!=0) {
+            bodyMap.put("type", String.valueOf(type));
+        }
         mPresenter.loadCommentList(bodyMap, isShowLoad);
     }
 
@@ -119,25 +124,38 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
         mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
             @Override
             public void doRequestData() {
-                load(id,true);
+                load(id,type,true);
             }
         });
         dataList.clear();
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
     }
-
+    @OnClick({R.id.allcoment_tv,R.id.goodcoment_tv,R.id.mediumcomment_tv,
+            R.id.badcomment_tv, R.id.havepiccomment_tv})
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.allcoment_tv:
+                type=0;
+                load(id,type,false);
+                break;
+            case R.id.goodcoment_tv:
+                type=1;
+                load(id,type,false);
+                break;
+            case R.id.mediumcomment_tv:
+                type=2;
+                load(id,type,false);
+                break;
+            case R.id.badcomment_tv:
+                type=3;
+                load(id,type,false);
+                break;
+            case R.id.havepiccomment_tv:
+                type=4;
+                load(id,type,false);
+                break;
+        }
     }
 }

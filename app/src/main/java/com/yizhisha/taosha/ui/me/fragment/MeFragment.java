@@ -5,8 +5,11 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.yizhisha.taosha.App;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.me.activity.AboutActivity;
 import com.yizhisha.taosha.ui.me.activity.AccountCenterActivity;
@@ -18,6 +21,8 @@ import com.yizhisha.taosha.ui.me.activity.MyOrderAcitvity;
 import com.yizhisha.taosha.ui.me.activity.MyRatingActivity;
 import com.yizhisha.taosha.ui.me.activity.SecKillOrderActivity;
 import com.yizhisha.taosha.ui.me.activity.SettinActivity;
+import com.yizhisha.taosha.ui.me.contract.MeContract;
+import com.yizhisha.taosha.ui.me.presenter.MePresenter;
 import com.yizhisha.taosha.utils.GlideUtil;
 
 import butterknife.Bind;
@@ -27,7 +32,7 @@ import qiu.niorgai.StatusBarCompat;
 /**
  * Created by lan on 2017/6/22.
  */
-public class MeFragment extends BaseFragment{
+public class MeFragment extends BaseFragment<MePresenter> implements MeContract.View{
     @Bind(R.id.head_me_iv)
     ImageView mIvHead;
     @Bind(R.id.username_me_tv)
@@ -47,6 +52,21 @@ public class MeFragment extends BaseFragment{
 
     @Override
     protected void initView() {
+        load();
+    }
+    private void load(){
+        mPresenter.getUserInfo(AppConstant.UID);
+    }
+    @Override
+    public void getUserInfoSuccess(UserInfoBean info) {
+        String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
+        if(info!=null){
+            GlideUtil.getInstance().LoadContextCircleBitmap(getActivity(),url+info.getAvatar(),mIvHead);
+            mTVUserName.setText(info.getUsername());
+        }
+    }
+    @Override
+    public void loadFail(String msg) {
 
     }
     @OnClick({R.id.set_me_iv,R.id.myorder_set_tv,R.id.mycollect_set_tv,R.id.myfootprint_set_tv,
@@ -89,4 +109,6 @@ public class MeFragment extends BaseFragment{
                 break;
         }
     }
+
+
 }

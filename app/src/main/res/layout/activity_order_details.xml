@@ -330,6 +330,17 @@
                     android:gravity="center"
                     android:text="立即评价"
                     android:visibility="gone" />
+                <TextView
+                    android:id="@+id/additional_comments_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/icon_evaluate"
+                    android:gravity="center"
+                    android:text="追加评论"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/againbuy_tv"

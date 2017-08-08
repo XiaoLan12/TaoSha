@@ -24,7 +24,8 @@ import java.util.List;
  */
 
 public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,BaseViewHolder>{
-    private final String URL="http://www.taoshamall.com/data/attached/avatar/";
+    private final String AVATARURL="http://www.taoshamall.com/data/attached/avatar/";
+
     public CommentYarnAdapter(List<CommentBean> data) {
         super(data);
         addItemType(CommentBean.TEXT_TYPE, R.layout.item_text_commnet);
@@ -35,12 +36,11 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
         switch (helper.getItemViewType()){
             case CommentBean.TEXT_TYPE:
                 ImageView imageView=helper.getView(R.id.head_comment_iv);
-                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,URL+item.getAvatar(),imageView);
+                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView);
                 helper.setText(R.id.name_comment_tv,item.getMobile());
                 helper.setText(R.id.time_comment_tv, DateUtil.getDateToString1(item.getComment_addtime_add()*1000));
                 helper.setText(R.id.detail_comment_tv,item.getComment_detail());
-                helper.setText(R.id.detail_shop_tv,item.getDetail());
-                if(item.getComment_detail_add()!=null||!item.getComment_detail_add().equals("")){
+                if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_ll,true);
                     helper.setText(R.id.detail_addcomment_tv,item.getComment_detail_add());
 
@@ -53,27 +53,27 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 }else{
                     helper.setVisible(R.id.addcomment_ll,false);
                 }
-                if(item.getComment_redetail()!=null||!item.getComment_redetail().equals("")){
+                if(item.getComment_redetail()!=null&&!item.getComment_redetail().equals("")){
                     helper.setVisible(R.id.business_reply_ll,true);
-                    helper.setText(R.id.business_reply_tv,item.getComment_redetail());
+                    helper.setText(R.id.business_reply_content_tv,item.getComment_redetail());
+                    helper.setText(R.id.business_reply_time_tv, DateUtil.getDateToString1(item.getComment_retime()*1000));
                 }else{
                     helper.setVisible(R.id.business_reply_ll,false);
                 }
                 break;
             case CommentBean.IMGS_TYPE:
                 ImageView imageView1=helper.getView(R.id.head_comment_img_iv);
-                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,URL+item.getAvatar(),imageView1);
+                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView1);
                 helper.setText(R.id.name_comment_img_tv,item.getMobile());
                 helper.setText(R.id.time_comment_img_tv,DateUtil.getDateToString1(item.getComment_addtime_add()*1000));
                 helper.setText(R.id.detail_comment_img_tv,item.getComment_detail());
-                helper.setText(R.id.detail_shop_img_tv,item.getDetail());
                 if(item.getComment_detail()==null||item.getComment_detail().length()==0){
                     helper.setVisible(R.id.detail_comment_img_tv,false);
                 }else{
                     helper.setVisible(R.id.detail_comment_img_tv,true);
                     helper.setText(R.id.detail_comment_img_tv,item.getComment_detail());
                 }
-                if(item.getComment_detail_add()!=null||!item.getComment_detail_add().equals("")){
+                if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_img_ll,true);
                     helper.setText(R.id.detail_addcomment_img_tv,item.getComment_detail_add());
                     int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add(),item.getComment_addtime());
@@ -84,11 +84,12 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                     }
 
                 }else{
-                    helper.setVisible(R.id.addcomment_ll,false);
+                    helper.setVisible(R.id.addcomment_img_ll,false);
                 }
-                if(item.getComment_redetail()!=null||!item.getComment_redetail().equals("")){
+                if(item.getComment_redetail()!=null&&!item.getComment_redetail().equals("")){
                     helper.setVisible(R.id.business_reply_img_ll,true);
-                    helper.setText(R.id.business_reply_img_tv,item.getComment_redetail());
+                    helper.setText(R.id.business_reply_content_img_tv,item.getComment_redetail());
+                    helper.setText(R.id.business_reply_time_img_tv, DateUtil.getDateToString1(item.getComment_retime()*1000));
                 }else{
                     helper.setVisible(R.id.business_reply_img_ll,false);
                 }

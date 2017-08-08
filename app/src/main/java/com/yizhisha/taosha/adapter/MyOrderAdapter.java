@@ -59,6 +59,9 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 }else if(order.getStatus()==3){
                     helper.setText(R.id.paystate_myorder_tv,"已完成");
                 }
+                else if(order.getStatus()==4){
+                    helper.setText(R.id.paystate_myorder_tv,"已评价");
+                }
 
                 break;
             case ITEM_CONTENT:
@@ -72,7 +75,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                            mOnItemClickListener.onItemClick(v,ITEM_CONTENT,helper.getLayoutPosition());
                     }
                 });
@@ -83,6 +85,8 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setText(R.id.tradelnumber_total_tv,"共"+orderFootBean.getAmount()+"件商品");
                 switchState(orderFootBean.getStatus(),helper);
                 helper.addOnClickListener(R.id.immediate_evaluation_tv);
+                helper.addOnClickListener(R.id.immediate_payment_tv);
+                helper.addOnClickListener(R.id.additional_comments_tv);
                 break;
         }
 
@@ -94,6 +98,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.immediate_payment_tv,true);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
+                helper.setVisible(R.id.additional_comments_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 1:
@@ -101,6 +106,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
+                helper.setVisible(R.id.additional_comments_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 2:
@@ -108,6 +114,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,true);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
+                helper.setVisible(R.id.additional_comments_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 3:
@@ -115,6 +122,15 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,true);
+                helper.setVisible(R.id.additional_comments_tv,false);
+                helper.setVisible(R.id.againbuy_tv,true);
+                break;
+            case 4:
+                helper.setVisible(R.id.cancel_the_order_tv,false);
+                helper.setVisible(R.id.immediate_payment_tv,false);
+                helper.setVisible(R.id.confirm_goods_tv,false);
+                helper.setVisible(R.id.immediate_evaluation_tv,false);
+                helper.setVisible(R.id.additional_comments_tv,true);
                 helper.setVisible(R.id.againbuy_tv,true);
                 break;
         }

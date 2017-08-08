@@ -23,13 +23,13 @@ public class SelectYarnAdapter extends BaseQuickAdapter<SearchDetailBean,BaseVie
     }
     @Override
     protected void convert(BaseViewHolder helper, SearchDetailBean item) {
-        helper.setText(R.id.unitprice_mycollect_tv,"￥"+item.getPrice()+"/份");
-        helper.setText(R.id.shopname_mycollect_tv,item.getTitle());
-        helper.setText(R.id.composition_mycollect_tv,item.getIngredient());
-        helper.setText(R.id.fit_pittype_mycollect_tv,item.getNeedle_name());
-        helper.setText(R.id.totalprice_mycollect_tv,"￥"+item.getPrice());
+        helper.setText(R.id.unitprice_selectyarn_tv,"￥"+item.getPrice()+"/份");
+        helper.setText(R.id.shopname_selectyarn_tv,item.getTitle());
+        helper.setText(R.id.composition_selectyarn_tv,item.getIngredient());
+        helper.setText(R.id.fit_pittype_selectyarn_tv,item.getNeedle_name());
+        helper.setText(R.id.totalprice_selectyarn_tv,"￥"+item.getPrice());
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),
-                (ImageView) helper.getView(R.id.shophead_mycollect_iv),GlideUtil.LOAD_BITMAP);
+                (ImageView) helper.getView(R.id.shophead_selectyarn_iv),GlideUtil.LOAD_BITMAP);
 
     }
 }

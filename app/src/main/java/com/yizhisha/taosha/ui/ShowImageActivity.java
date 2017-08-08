@@ -125,7 +125,6 @@ public class ShowImageActivity extends BaseActivity {
                 loading.setLayoutParams(loadingLayoutParams);
                 ((FrameLayout)view).addView(loading);
                 loading.setVisibility(View.VISIBLE);
-                Log.d("TTT","马丹"+URL+datas.get(position));
                 Glide.with(context).load(AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+datas.get(position))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.drawable.loading_dialog_progressbar)

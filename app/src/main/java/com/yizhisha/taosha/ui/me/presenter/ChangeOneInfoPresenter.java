@@ -5,6 +5,7 @@ import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.ui.me.contract.ChangeOneInfoContract;
 
 import java.util.Map;
@@ -53,10 +54,14 @@ public class ChangeOneInfoPresenter extends ChangeOneInfoContract.Presenter{
 
     @Override
     public void changeHeadSuccess(MultipartBody.Part body) {
-        addSubscrebe(Api.getInstance().changeUserHead(body),new RxSubscriber<String>(mContext,true){
+        addSubscrebe(Api.getInstance().changeUserHead(body),new RxSubscriber<UserHeadBean>(mContext,true){
             @Override
-            protected void onSuccess(String info) {
-               mView.changeHeadSuccess(info);
+            protected void onSuccess(UserHeadBean info) {
+                if(info!=null) {
+                    mView.changeHeadSuccess(info.getAvatar());
+                } else{
+                    mView.loadFail("头像修改失败");
+                    }
             }
             @Override
             protected void onFailure(String message) {

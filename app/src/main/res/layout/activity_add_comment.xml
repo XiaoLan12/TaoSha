@@ -13,101 +13,22 @@
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_right"
         app:title="发表评论"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp_10">
-        <ImageView
-            android:id="@+id/pic_addcomment_iv"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            tools:src="@drawable/icon_delete"
-            />
-        <TextView
-            android:id="@+id/title_addcomment_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            tools:text="商品"/>
-    </LinearLayout>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
 
-    <EditText
-        android:id="@+id/content_addcomment_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@null"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5"
-        android:gravity="top"
-        android:paddingBottom="@dimen/dp_5"
-        android:textColorHint="@color/common_h3"
-        android:hint="宝贝满足你的期待吗？说说你的使用心得 分享给想买的他们吧"
-
-        android:minHeight="100dp" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"
-        android:background="@color/common_divider_narrow"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp_10">
-        <ImageView
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:src="@drawable/icon_delete"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:text="店铺评分"/>
-    </LinearLayout>
-    <LinearLayout
+        android:id="@+id/quality_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:padding="@dimen/dp_10">
         <TextView
             style="@style/TS.Theme.Widget.Text"
-            android:text="质量评价"/>
-       <com.yizhisha.taosha.widget.StarView
-           android:layout_alignParentRight="true"
-           android:layout_marginLeft="5dp"
-           android:layout_marginRight="10dp"
-           android:id="@+id/startview_quality_sv"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           fresco:mClickImageId="@drawable/icon_ratingbar"
-           fresco:mDefaultImageId="@drawable/icon_ratingbar_normal"
-           fresco:mImageHeight="@dimen/dp_25"
-           fresco:mImageWidth="@dimen/dp_25"
-           fresco:mMargin="2dp"
-           fresco:mStarChoose="0"
-           fresco:mStarNum="5"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp_10">
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:text="物流评价"/>
+            android:text="宝贝与描述相符:"/>
         <com.yizhisha.taosha.widget.StarView
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/startview_logistics_sv"
+            android:id="@+id/startview_quality_sv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fresco:mClickImageId="@drawable/icon_ratingbar"
@@ -117,15 +38,55 @@
             fresco:mMargin="2dp"
             fresco:mStarChoose="0"
             fresco:mStarNum="5"/>
+        <TextView
+            android:id="@+id/quality_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_gravity="center_vertical"
+            android:text="请评论"/>
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/logistics_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            style="@style/TS.Theme.Widget.Text"
+            android:text="物流服务的质量:" />
+
+        <com.yizhisha.taosha.widget.StarView
+            android:id="@+id/startview_logistics_sv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            fresco:mClickImageId="@drawable/icon_ratingbar"
+            fresco:mDefaultImageId="@drawable/icon_ratingbar_normal"
+            fresco:mImageHeight="@dimen/dp_25"
+            fresco:mImageWidth="@dimen/dp_25"
+            fresco:mMargin="2dp"
+            fresco:mStarChoose="0"
+            fresco:mStarNum="5" />
+
+        <TextView
+            android:id="@+id/logistics_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_gravity="center_vertical"
+            android:text="请评论" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/serve_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:padding="@dimen/dp_10">
         <TextView
             style="@style/TS.Theme.Widget.Text"
-            android:text="服务评价"/>
+            android:text="卖家的服务态度:"/>
         <com.yizhisha.taosha.widget.StarView
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
@@ -140,5 +101,39 @@
             fresco:mMargin="2dp"
             fresco:mStarChoose="0"
             fresco:mStarNum="5"/>
+        <TextView
+            android:id="@+id/serve_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_gravity="center_vertical"
+            android:text="请评论"/>
     </LinearLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+    <EditText
+        android:id="@+id/content_addcomment_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@null"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5"
+        android:gravity="top"
+        android:paddingBottom="@dimen/dp_5"
+        android:maxLength="300"
+        android:textSize="@dimen/font_normal2"
+        android:textColorHint="@color/common_h3"
+        android:hint="商品满足你的期待吗? 留下您宝贵的评语/建议吧"
+        android:minHeight="120dp" />
+    <TextView
+        android:id="@+id/textnum_addcomment_tv"
+       style="@style/TS.Theme.Widget.Text"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/dp_10"
+        android:text="0/300"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"/>
+
 </LinearLayout>

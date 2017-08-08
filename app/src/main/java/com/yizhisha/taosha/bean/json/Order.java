@@ -13,7 +13,9 @@ import java.util.List;
 public class Order implements MultiItemEntity {
 
         private int id;
+
         private int mzw_uid;
+
         private String orderno;
 
         private int status;

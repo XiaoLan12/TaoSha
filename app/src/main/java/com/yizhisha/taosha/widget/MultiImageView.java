@@ -41,7 +41,7 @@ public class  MultiImageView extends LinearLayout {
 
 	private OnItemClickListener mOnItemClickListener;
 
-	private final String URL="http://www.taoshamall.com/data/attached/comment/";
+	private final String COMMENTURL="http://www.taoshamall.com/data/attached/comment/";
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener){
 		mOnItemClickListener = onItemClickListener;
 	}
@@ -190,8 +190,7 @@ public class  MultiImageView extends LinearLayout {
 		imageView.setTag(R.id.image_tag,position);
 		imageView.setId(url.hashCode());
 		imageView.setOnClickListener(mImageViewOnClickListener);
-		LogUtil.i("TTT","图片"+URL+url);
-		GlideUtil.getInstance().LoadContextBitmap(imageView.getContext(),AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+url,imageView,GlideUtil.LOAD_BITMAP);
+		GlideUtil.getInstance().LoadContextBitmap(imageView.getContext(),COMMENTURL+url,imageView,GlideUtil.LOAD_BITMAP);
 		return imageView;
 	}
 

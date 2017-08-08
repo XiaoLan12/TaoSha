@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.api;
 
-import com.yizhisha.taosha.bean.ChangeUserInfoBody;
+import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
@@ -13,7 +14,6 @@ import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
-import com.yizhisha.taosha.bean.json.SeckillBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
@@ -21,15 +21,12 @@ import com.yizhisha.taosha.bean.json.UserInfoBean;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -96,7 +93,7 @@ public interface ApiService {
     //修改用户头像
     @Multipart
     @POST("ios/ajax/uploadAvatarPic/")
-    Observable<String> changeUserHead(@Part MultipartBody.Part file);
+    Observable<UserHeadBean> changeUserHead(@Part MultipartBody.Part file);
 
     //手机号绑定
     @GET("ios/ucenter/mobile_save/")
@@ -146,16 +143,18 @@ public interface ApiService {
 
 
     // 搜索页搜索
+    @FormUrlEncoded
     @POST("ios/goods/lists/")
-    Observable<SearchBean> search(@QueryMap Map<String,String> map);
+    Observable<SearchBean> search(@FieldMap Map<String,String> map);
 
 
     //商品详情
     @GET("ios/goods/view/")
     Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
     //商品评价列表
+    @FormUrlEncoded
     @POST("ios/goods/goodsComment/")
-    Observable<CommentListBean> getCommentList(@QueryMap Map<String, String> param);
+    Observable<CommentListBean> getCommentList(@FieldMap Map<String, String> param);
 
     //购物车
     @GET("ios/ucenter/shopcart/")
@@ -177,4 +176,19 @@ public interface ApiService {
     //秒纱h活动
     @GET("ios/goods/seckilling/")
     Observable<SeckillActListBean> getSeckillActivity(@QueryMap Map<String, String> param);
+
+    //发布评论
+    @FormUrlEncoded
+    @POST("/ios/ucenter/commentSave/")
+    Observable<RequestStatusBean> addComment(@FieldMap Map<String, String> param);
+
+    //发布追评
+    @FormUrlEncoded
+    @POST("ios/ucenter/commentAddSave/")
+    Observable<RequestStatusBean> addAddComment(@FieldMap Map<String, String> param);
+
+    //上传评论图片
+    @Multipart
+    @POST("/ios/ajax/uploadCommentPic/")
+    Observable<CommentPicBean> addCommentPic(@Part MultipartBody.Part file);
 }

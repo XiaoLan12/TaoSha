@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.bean.json;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by lan on 2017/7/6.
@@ -8,11 +9,9 @@ import java.io.Serializable;
 
 public class OrderFootBean implements Serializable{
     private float totalprice;
+    private String orderno;
     private int status;
     private int amount;
-    private int id;
-
-    private int mzw_uid;
     public float getTotalprice() {
         return totalprice;
     }
@@ -37,19 +36,21 @@ public class OrderFootBean implements Serializable{
         this.amount = amount;
     }
 
-    public int getId() {
-        return id;
+
+    public String getOrderno() {
+        return orderno;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderno(String orderno) {
+        this.orderno = orderno;
     }
 
-    public int getMzw_uid() {
-        return mzw_uid;
-    }
-
-    public void setMzw_uid(int mzw_uid) {
-        this.mzw_uid = mzw_uid;
+    @Override
+    public String toString() {
+        return "OrderFootBean{" +
+                "totalprice=" + totalprice +
+                ", status=" + status +
+                ", amount=" + amount +
+                '}';
     }
 }

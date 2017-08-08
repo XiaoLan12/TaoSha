@@ -43,9 +43,9 @@ public class ChoosePhotoListAdapter extends BaseQuickAdapter<String,BaseViewHold
         holder.addOnClickListener(R.id.delete_img_iv);
         if(photoInfo.equals("selectpic")){
             ivPhoto.setImageResource(R.drawable.icon_add_pic);
-            holder.setVisible(R.id.delete_img_iv,false);
+            //holder.setVisible(R.id.delete_img_iv,false);
         }else {
-            holder.setVisible(R.id.delete_img_iv,true);
+            //holder.setVisible(R.id.delete_img_iv,true);
             GlideUtil.getInstance().LoadContextBitmap(mContext, photoInfo, ivPhoto, GlideUtil.LOAD_BITMAP);
         }
     }

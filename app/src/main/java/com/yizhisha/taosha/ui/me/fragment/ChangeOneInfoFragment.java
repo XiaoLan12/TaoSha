@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -144,7 +145,8 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
 
     @Override
     public void changeHeadSuccess(String msg) {
-        LogUtil.i("TTT","修改成功");
+        GlideUtil.getInstance().LoadContextCircleBitmap(activity,AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+msg,mIvHead);
+        ToastUtil.showbottomShortToast("头像修改成功");
     }
     @Override
     public void loadFail(String msg) {
@@ -206,19 +208,6 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         intent.setData(uri);
         intent.putExtra("side_length", 200);//裁剪图片宽高
         startActivityForResult(intent, CROP_PHOTO);
-
-        //调用系统的裁剪
-//        Intent intent = new Intent("com.android.camera.action.CROP");
-//        intent.setDataAndType(uri, "image/*");
-//        intent.putExtra("crop", "true");
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        // outputX outputY 是裁剪图片宽高
-//        intent.putExtra("outputX", crop);
-//        intent.putExtra("outputY", crop);
-//        intent.putExtra("return-data", true);
-//        intent.putExtra("noFaceDetection", true);
-//        startActivityForResult(intent, CROP_PHOTO);
     }
 
     private void setPicToView(Intent picdata) {
@@ -228,7 +217,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
             return;
         }
         String path = ImageUtils.getRealFilePathFromUri(activity.getApplicationContext(), uri);
-        GlideUtil.getInstance().LoadContextCircleBitmap(activity,path,mIvHead);
+
         uploadPic(path);
     }
 

@@ -70,6 +70,16 @@
             android:visibility="gone"
             android:text="立即评价"/>
         <TextView
+            android:id="@+id/additional_comments_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_8"
+            android:background="@drawable/shape_edittext_gray_selector"
+            android:layout_marginRight="@dimen/dp_8"
+            android:visibility="gone"
+            android:text="追加评论"
+            />
+        <TextView
             android:id="@+id/againbuy_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
