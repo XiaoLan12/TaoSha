@@ -18,7 +18,7 @@ public class AddressListBean implements  Serializable{
         this.address = address;
     }
 
-    public class Address implements Serializable{
+    public class Address implements Serializable {
         private int id;
 
         private int uid;
@@ -29,58 +29,66 @@ public class AddressListBean implements  Serializable{
 
         private String address;
 
+        private String area_app;
+
         private String index;
 
-        public void setId(int id){
+        public void setId(int id) {
             this.id = id;
         }
-        public int getId(){
+
+        public int getId() {
             return this.id;
         }
-        public void setUid(int uid){
+
+        public void setUid(int uid) {
             this.uid = uid;
         }
-        public int getUid(){
+
+        public int getUid() {
             return this.uid;
         }
-        public void setLinkman(String linkman){
+
+        public void setLinkman(String linkman) {
             this.linkman = linkman;
         }
-        public String getLinkman(){
+
+        public String getLinkman() {
             return this.linkman;
         }
-        public void setMobile(String mobile){
+
+        public void setMobile(String mobile) {
             this.mobile = mobile;
         }
-        public String getMobile(){
+
+        public String getMobile() {
             return this.mobile;
         }
-        public void setAddress(String address){
+
+        public void setAddress(String address) {
             this.address = address;
         }
-        public String getAddress(){
+
+        public String getAddress() {
             return this.address;
         }
-        public void setIndex(String index){
+
+        public void setIndex(String index) {
             this.index = index;
         }
-        public String getIndex(){
+
+        public String getIndex() {
             return this.index;
         }
 
-        @Override
-        public String toString() {
-            return "Address{" +
-                    "id='" + id + '\'' +
-                    ", uid='" + uid + '\'' +
-                    ", linkman='" + linkman + '\'' +
-                    ", mobile='" + mobile + '\'' +
-                    ", address='" + address + '\'' +
-                    ", index='" + index + '\'' +
-                    '}';
+        public String getArea_app() {
+            return area_app;
+        }
+
+        public void setArea_app(String area_app) {
+            this.area_app = area_app;
         }
     }
-
     @Override
     public String toString() {
         return "AddressListBean{" +

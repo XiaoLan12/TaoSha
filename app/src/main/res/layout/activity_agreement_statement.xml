@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="协议声明"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
     <TextView

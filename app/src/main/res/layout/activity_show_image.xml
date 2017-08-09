@@ -15,7 +15,7 @@
             android:id="@+id/show_img_back_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/icon_back" />
 
         <TextView
             android:id="@+id/show_img_page_tv"

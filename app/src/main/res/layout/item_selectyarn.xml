@@ -23,7 +23,6 @@
             android:layout_toRightOf="@+id/shophead_selectyarn_iv"
             android:layout_alignTop="@+id/shophead_selectyarn_iv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:singleLine="true"
             android:textColor="@color/common_h1"
             />
         <TextView
@@ -68,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/shophead_selectyarn_iv"
             android:layout_below="@+id/fit_pittype_selectyarn_tv"
-            android:layout_alignBottom="@+id/shophead_selectyarn_iv"
             android:gravity="bottom"
             android:layout_marginLeft="@dimen/dp_5">
 

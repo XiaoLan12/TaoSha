@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/oreder_details"/>
     <com.yizhisha.taosha.widget.CommonLoadingView
         android:id="@+id/loadingView"
@@ -330,29 +330,28 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:background="@color/common_bg"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/contact_the_merchant_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_contact_us"
                     android:gravity="center"
-
                     android:text="联系商家" />
 
                 <TextView
                     android:id="@+id/confirm_goods_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_confirm_goods"
                     android:gravity="center"
                     android:text="确认收货"
                     android:visibility="gone" />
@@ -360,11 +359,11 @@
                 <TextView
                     android:id="@+id/immediate_evaluation_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_evaluate"
                     android:gravity="center"
                     android:text="立即评价"
                     android:visibility="gone" />
@@ -372,11 +371,10 @@
                 <TextView
                     android:id="@+id/againbuy_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="2"
                     android:background="@drawable/shape_redbtn_selector1"
-                    android:drawableTop="@drawable/icon_delete"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:text="再次购买"
@@ -385,11 +383,11 @@
                 <TextView
                     android:id="@+id/cancel_the_order_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_cancel_order"
                     android:gravity="center"
                     android:text="取消订单"
                     android:visibility="gone" />
@@ -397,11 +395,10 @@
                 <TextView
                     android:id="@+id/immediate_payment_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_redbtn_selector1"
-                    android:drawableTop="@drawable/icon_delete"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:text="立即付款"

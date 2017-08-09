@@ -9,8 +9,8 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
-        app:title="忘记密码"/>
+        app:leftButtonIcon="@drawable/icon_back"
+        app:title="注册"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
 
         <com.yizhisha.taosha.widget.ClearEditText
@@ -23,7 +23,7 @@
             android:drawablePadding="@dimen/dp_5"
             android:hint="@string/hint_input_phone"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_account"
+            android:drawableLeft="@drawable/icon_phone"
             android:padding="@dimen/dp_10" />
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"
         android:layout_marginLeft="@dimen/dp_10"
@@ -103,7 +103,7 @@
             android:drawablePadding="@dimen/dp_5"
             android:password="true"
             android:textColorHint="@color/common_h2"
-            android:drawableLeft="@drawable/icon_lock_sure"/>
+            android:drawableLeft="@drawable/icon_lock"/>
         <ImageView
             android:id="@+id/againpwd_register_iv"
             android:layout_width="@dimen/dp_25"

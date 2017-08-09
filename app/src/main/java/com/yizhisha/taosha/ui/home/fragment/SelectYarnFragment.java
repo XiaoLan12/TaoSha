@@ -98,6 +98,15 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
         bodyMap.put("orderby",String.valueOf(mOrderByType));
         mPresenter.loadSearch(bodyMap,isShowLoad);
     }
+    public void search(String key){
+        Map<String, String> bodyMap = new HashMap<>();
+        bodyMap.put("pid",String.valueOf(mYarnType));
+        bodyMap.put("price",String.valueOf(mPriceType));
+        bodyMap.put("needle",mNeedleType);
+        bodyMap.put("orderby",String.valueOf(mOrderByType));
+        bodyMap.put("key",key);
+        mPresenter.loadSearch(bodyMap,false);
+    }
 
     public void loadSearch(int yarn,int price,String needle,int orderby){
         this.mYarnType=yarn;

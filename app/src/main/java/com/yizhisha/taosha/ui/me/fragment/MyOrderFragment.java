@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,25 +11,26 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.OrderDataHelper;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
 import com.yizhisha.taosha.bean.json.OrderFootBean;
-import com.yizhisha.taosha.bean.json.OrderHeadBean;
-import com.yizhisha.taosha.ui.me.activity.AddCommentActivity;
 import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by lan on 2017/7/5.
@@ -61,6 +61,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
 
     @Override
     protected void initView() {
+
         initAdapter();
         if(mAdapter.getData().size()<=0){
             load(mType,true);
@@ -74,6 +75,15 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
             map.put("status", String.valueOf(type));
         }
         mPresenter.loadOrder(map,isShowLoad);
+    }
+    public void search(String key){
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(AppConstant.UID));
+        if(mType!=-1) {
+            map.put("status", String.valueOf(mType));
+        }
+        map.put("key",key);
+        mPresenter.loadOrder(map,false);
     }
     private void initAdapter(){
         mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
@@ -169,4 +179,5 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
     }
+
 }

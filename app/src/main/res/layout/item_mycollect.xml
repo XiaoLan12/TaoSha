@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/shophead_mycollect_iv"
             android:layout_width="100dp"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
             android:src="@drawable/icon_delete"/>
@@ -29,30 +29,12 @@
             android:layout_marginLeft="@dimen/dp_5"
             android:textColor="@color/common_h1"
             />
-        <TextView
-            android:id="@+id/countspecifications_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/shophead_mycollect_iv"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_below="@+id/shopname_mycollect_tv"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:textSize="@dimen/font_small"
-            android:text="支付规格:"/>
-        <TextView
-            android:id="@+id/countspecifications_mycollect_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/countspecifications_tv"
-            android:layout_below="@+id/shopname_mycollect_tv"
-            android:layout_alignTop="@+id/countspecifications_tv"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:textSize="@dimen/font_small"
-            android:text="9/1"/>
 
         <TextView
             android:id="@+id/composition_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/shophead_mycollect_iv"
-            android:layout_below="@+id/countspecifications_mycollect_tv"
+            android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
             android:textSize="@dimen/font_small"
             android:text="成分比例:"/>
@@ -60,12 +42,11 @@
             android:id="@+id/composition_mycollect_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/composition_tv"
-            android:layout_below="@+id/countspecifications_mycollect_tv"
+            android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_alignTop="@+id/composition_tv"
             android:textSize="@dimen/font_small"
             android:layout_marginLeft="@dimen/dp_5"
             />
-
         <TextView
             android:id="@+id/fit_pittype_tv"
             style="@style/TS.Theme.Widget.Text"

@@ -132,6 +132,10 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         if(personalDataBean==null){
             return;
         }
+        if(AppConstant.infoBean!=null){
+            String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
+            GlideUtil.getInstance().LoadContextCircleBitmap(activity,url+AppConstant.infoBean.getAvatar(),mIvHead);
+        }
         mTvUserName.setText(personalDataBean.getUsername());
         mTvRealName.setText(personalDataBean.getLinkman());
         mTvSex.setText(personalDataBean.getSex());

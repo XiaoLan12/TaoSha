@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:visibility="gone"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/icon_back"
         android:scaleType="fitStart"
         android:layout_margin="@dimen/dp_5"
         />

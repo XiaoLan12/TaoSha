@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.airsaid.pickerviewlibrary.CityPickerView;
+import com.airsaid.pickerviewlibrary.listener.OnSimpleCitySelectListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.yizhisha.taosha.AppConstant;
@@ -42,6 +44,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
 
     private MyAddressAdapter mAdapter;
     private List<AddressListBean.Address> dataList=new ArrayList<>();
+    private CityPickerView mCityPickerView;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_address;
@@ -82,7 +85,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
                     case R.id.edit_myaddress_tv:
                         Bundle bundle=new Bundle();
                         bundle.putInt("TYPE",1);
-                        bundle.putSerializable("DATA",dataList.get(position));
+                        bundle.putInt("ID",dataList.get(position).getId());
                         startActivityForResult(AddAddressActivity.class,bundle,2);
                         break;
                     case R.id.delete_myaddress_tv:

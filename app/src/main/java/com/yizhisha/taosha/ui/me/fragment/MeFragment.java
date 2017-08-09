@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -37,6 +39,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
     ImageView mIvHead;
     @Bind(R.id.username_me_tv)
     TextView mTVUserName;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_me;
@@ -61,6 +64,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
     public void getUserInfoSuccess(UserInfoBean info) {
         String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
         if(info!=null){
+            AppConstant.infoBean=info;
             GlideUtil.getInstance().LoadContextCircleBitmap(getActivity(),url+info.getAvatar(),mIvHead);
             mTVUserName.setText(info.getUsername());
         }

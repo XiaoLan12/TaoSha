@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/contact_us"/>
     <ScrollView
         android:layout_width="match_parent"
@@ -24,11 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
-        android:background="@drawable/img_full_screen">
+        android:background="@drawable/icon_bg">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:src="@drawable/icon_trash"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

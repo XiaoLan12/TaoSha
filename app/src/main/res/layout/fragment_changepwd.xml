@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/change_pwd"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
     <com.yizhisha.taosha.widget.ClearEditText

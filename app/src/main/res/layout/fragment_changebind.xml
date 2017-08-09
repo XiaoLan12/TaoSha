@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/change_phone"/>
     <LinearLayout
         android:id="@+id/binded_phone_ll"

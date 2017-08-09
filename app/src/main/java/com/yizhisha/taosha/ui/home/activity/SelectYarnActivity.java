@@ -11,10 +11,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -67,6 +70,10 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     ViewPager viewPager;
     @Bind(R.id.img_back)
     ImageView img_back;
+    @Bind(R.id.img_yuyin)
+    ImageView img_yuyin;
+    @Bind(R.id.search_selectyarn_et)
+    EditText searchYarnEt;
 
     private String[] mTitles = {"棉纱", "针型", "价格", "排序"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -82,13 +89,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     private String mNeedleType="3g";
     private int mPriceType=1;
     private int mOrderByType=1;
-
-
-
-
     private static String TAG = SelectYarnActivity.class.getSimpleName();
-    @Bind(R.id.img_yuyin)
-    ImageView img_yuyin;
 
     // 语音听写对象
     private SpeechRecognizer mIat;
@@ -245,18 +246,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         });
         initPopup1(0);
 
-
-
-
-
-
-
-
-
-
-
-
-
         // 初始化识别无UI识别对象
         // 使用SpeechRecognizer对象，可根据回调消息自定义界面；
         mIat = SpeechRecognizer.createRecognizer(SelectYarnActivity.this, mInitListener);
@@ -279,6 +268,21 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                 }else {
                     startRecord();
                 }
+
+            }
+        });
+        searchYarnEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                SelectYarnFragment selectYarnFragment= (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                selectYarnFragment.search(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

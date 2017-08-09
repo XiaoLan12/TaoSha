@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/secondkill_activity"/>
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/slidingtablayout"

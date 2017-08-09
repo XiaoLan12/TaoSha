@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="登录"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
     <RelativeLayout
@@ -125,7 +125,7 @@
             <TextView
                 android:id="@+id/phone_login_tv"
                 style="@style/TS.Theme.Widget.Text"
-                android:drawableTop="@drawable/icon_phone"
+                android:drawableTop="@drawable/icon_mobile"
                 android:text="手机快捷登录"/>
         </LinearLayout>
 

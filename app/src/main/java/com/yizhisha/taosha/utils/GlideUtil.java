@@ -121,7 +121,7 @@ public class GlideUtil {
         if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
             Glide.with(context).load(path).skipMemoryCache(false)
                     .diskCacheStrategy(DiskCacheStrategy.RESULT )
-                    .placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).crossFade().into(imageView);
+                    .placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).crossFade().into(imageView);
         }else if(bitmapOrgif.equals(LOAD_GIF)){
             Glide.with(context).load(path).asGif().skipMemoryCache( true )
                     .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
@@ -158,7 +158,7 @@ public class GlideUtil {
     public void LoadSupportv4FragmentBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView,String bitmapOrgif){
         if(bitmapOrgif==null||bitmapOrgif.equals(LOAD_BITMAP)){
             Glide.with(fragment).load(path).skipMemoryCache( true )
-                    .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).crossFade().into(imageView);
+                    .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).crossFade().into(imageView);
         }else if(bitmapOrgif.equals(LOAD_GIF)){
             Glide.with(fragment).load(path).asGif().skipMemoryCache( true )
                     .diskCacheStrategy(DiskCacheStrategy.NONE ).crossFade().into(imageView);
@@ -195,7 +195,7 @@ public class GlideUtil {
     @SuppressWarnings("unchecked")
     public void LoadContextCircleBitmap(Context context, String path, ImageView imageView){
         Glide.with(context).load(path).skipMemoryCache( true )
-                .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_delete).error(R.drawable.icon_delete).
+                .diskCacheStrategy(DiskCacheStrategy.NONE ).placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).
                 bitmapTransform(new GlideCircleTransform(context)).into(imageView);
     }
     /**
@@ -223,7 +223,7 @@ public class GlideUtil {
      */
     @SuppressWarnings("unchecked")
     public void LoadSupportv4FragmentCircleBitmap(android.support.v4.app.Fragment fragment, String path, ImageView imageView){
-            LoadSupportv4FragmentCircleBitmap(fragment,path,imageView,R.drawable.icon_delete,R.drawable.icon_delete);
+            LoadSupportv4FragmentCircleBitmap(fragment,path,imageView,R.drawable.icon_glide_loading,R.drawable.icon_glide_failed);
     }
     /**
      * Glide请求图片设置圆形，会受到android.support.v4.app.Fragment生命周期控制

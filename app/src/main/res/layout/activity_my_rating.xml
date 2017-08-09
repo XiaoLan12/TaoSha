@@ -10,17 +10,16 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/my_rating"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/img_full_screen">
+        android:background="@drawable/icon_bg">
     <ImageView
         android:id="@+id/userhead_myrating_iv"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/icon_delete"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_5"/>
         <TextView

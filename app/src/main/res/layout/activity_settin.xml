@@ -8,18 +8,17 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/setting"/>
         <RelativeLayout
             android:id="@+id/changeoneinfo_rl"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@drawable/img_full_screen">
+            android:background="@drawable/icon_bg">
             <ImageView
                 android:id="@+id/head_set_iv"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/icon_delete"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_16"/>
             <TextView
@@ -28,12 +27,14 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/head_set_iv"
                 android:layout_marginLeft="@dimen/dp_5"
+                android:textColor="@color/white"
                 android:text="隔壁家的老王"/>
             <TextView
                 style="@style/TS.Theme.Widget.Text"
                 android:layout_toLeftOf="@+id/set_right_iv"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_5"
+                android:textColor="@color/white"
                 android:text="修改个人资料"/>
             <ImageView
                 android:id="@+id/set_right_iv"

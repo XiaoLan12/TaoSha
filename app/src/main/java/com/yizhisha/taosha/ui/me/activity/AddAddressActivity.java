@@ -2,12 +2,16 @@ package com.yizhisha.taosha.ui.me.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.airsaid.pickerviewlibrary.CityPickerView;
+import com.airsaid.pickerviewlibrary.listener.OnSimpleCitySelectListener;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
@@ -20,6 +24,7 @@ import com.yizhisha.taosha.ui.me.presenter.AddAddressPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +48,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
     private int isNormal;
 
     private int type=0;
+
+    private CityPickerView mCityPickerView;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_add_address;
@@ -54,10 +61,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
         type=bundle.getInt("TYPE");
         if(type==1){
             toolbar.setTitle("修改地址");
-            AddressListBean.Address address= (AddressListBean.Address) bundle.getSerializable("DATA");
-            mEtConsignee.setText(address.getLinkman());
-            mEtPhone.setText(address.getMobile());
-            mEtDetailAddress.setText(address.getAddress());
+            int id=bundle.getInt("ID");
+            load(id);
         }
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
@@ -79,15 +84,32 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
                 }
             }
         });
+        mCityPickerView = new CityPickerView(this);
+    }
+    private void load(int id){
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(AppConstant.UID));
+        map.put("id",String.valueOf(id));
+        mPresenter.loadOneAddress(map);
     }
     @Override
     public void addAddressSuccess(RequestStatusBean data) {
         setResult(2);
         ActivityManager.getActivityMar().finishActivity(this);
     }
+
+    @Override
+    public void loadOneAddressSuccess(AddressListBean.Address address) {
+
+        mEtConsignee.setText(address.getLinkman());
+        mEtPhone.setText(address.getMobile());
+        mEtDetailAddress.setText(address.getAddress());
+        mTvArea.setText(address.getArea_app());
+    }
+
     @Override
     public void loadFail(String msg) {
-
+        ToastUtil.showbottomShortToast(msg);
     }
     /**
      * 检查输入
@@ -117,7 +139,37 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
 
         return true;
     }
-    @OnClick({R.id.sava_address_tv})
+    public void selectCity(){
+        // 设置点击外部是否消失
+//        mCityPickerView.setCancelable(true);
+        // 设置滚轮字体大小
+//        mCityPickerView.setTextSize(18f);
+        // 设置标题
+//        mCityPickerView.setTitle("我是标题");
+        // 设置取消文字
+//        mCityPickerView.setCancelText("我是取消文字");
+        // 设置取消文字颜色
+//        mCityPickerView.setCancelTextColor(Color.GRAY);
+        // 设置取消文字大小
+//        mCityPickerView.setCancelTextSize(14f);
+        // 设置确定文字
+//        mCityPickerView.setSubmitText("我是确定文字");
+        // 设置确定文字颜色
+//        mCityPickerView.setSubmitTextColor(Color.BLACK);
+        // 设置确定文字大小
+//        mCityPickerView.setSubmitTextSize(14f);
+        // 设置头部背景
+//        mCityPickerView.setHeadBackgroundColor(Color.RED);
+        mCityPickerView.setOnCitySelectListener(new OnSimpleCitySelectListener(){
+            @Override
+            public void onCitySelect(String str) {
+                // 一起获取
+                mTvArea.setText(str);
+            }
+        });
+        mCityPickerView.show();
+    }
+    @OnClick({R.id.sava_address_tv,R.id.addaddress_ll3})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -130,10 +182,13 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
                 map.put("uid",String.valueOf(AppConstant.UID));
                 map.put("index",String.valueOf(isNormal));
                 map.put("linkman",mEtConsignee.getText().toString());
-                map.put("area_app","广东省广州市");
+                map.put("area_app",mTvArea.getText().toString());
                 map.put("mobile",mEtPhone.getText().toString());
                 map.put("address",mEtDetailAddress.getText().toString());
                 mPresenter.addAddress(map);
+                break;
+            case R.id.addaddress_ll3:
+                selectCity();
                 break;
         }
     }

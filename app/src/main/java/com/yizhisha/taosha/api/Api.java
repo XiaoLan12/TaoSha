@@ -91,6 +91,10 @@ public class Api {
     public Observable<AddressListBean> loadAddressList(int uid){
         return service.getAddressList(uid);
     }
+    //获得单个收货地址
+    public Observable<AddressListBean.Address> loadOneAddress(Map<String,String> map){
+        return service.getOneAddress(map);
+    }
     //新增收货地址
     public Observable<RequestStatusBean> addAddress(Map<String,String> map){
         return service.addAddress(map);

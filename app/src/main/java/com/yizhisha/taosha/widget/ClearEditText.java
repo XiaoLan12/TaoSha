@@ -43,7 +43,7 @@ public class ClearEditText extends EditText implements View.OnFocusChangeListene
         //获得EditText的右边图标，没有，则设置我们的图标
         mClearDrawable=getCompoundDrawables()[2];
         if(mClearDrawable==null){
-            mClearDrawable= RescourseUtil.getDrawable(R.drawable.icon_delete);
+            mClearDrawable= RescourseUtil.getDrawable(R.drawable.icon_edit_delete);
         }
         //不设置这句话，图片不会显示
         mClearDrawable.setBounds(0,0,mClearDrawable.getIntrinsicWidth(),mClearDrawable.getIntrinsicHeight());

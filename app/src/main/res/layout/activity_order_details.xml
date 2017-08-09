@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/oreder_details"/>
     <com.yizhisha.taosha.widget.CommonLoadingView
         android:id="@+id/loadingView"
@@ -305,7 +305,7 @@
                     android:background="@color/white"
                     android:drawableTop="@drawable/icon_contact_us"
                     android:gravity="center"
-                    android:text="联系商家" />
+                    android:text="联系卖家" />
 
                 <TextView
                     android:id="@+id/confirm_goods_tv"

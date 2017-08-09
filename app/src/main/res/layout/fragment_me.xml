@@ -19,13 +19,14 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/img_full_screen"
+                android:layout_height="150dp"
+                android:background="@drawable/icon_bg"
                 android:fitsSystemWindows="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp_20">
 
                     <ImageView
                         android:id="@+id/set_me_iv"
@@ -40,13 +41,14 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_above="@+id/username_me_tv"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        />
 
                     <TextView
                         android:id="@+id/username_me_tv"
                         style="@style/TS.Theme.Widget.Text"
-                        android:layout_below="@+id/head_me_iv"
+                        android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:text="隔壁家的老"
                         android:textColor="@color/white"
@@ -67,7 +69,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_order"
                     android:gravity="center"
                     android:text="我的订单" />
 
@@ -76,7 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_favorite"
                     android:gravity="center"
                     android:text="我的收藏" />
 
@@ -85,7 +87,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_delete"
+                    android:drawableTop="@drawable/icon_footprint"
                     android:gravity="center"
                     android:text="我的足迹" />
             </LinearLayout>

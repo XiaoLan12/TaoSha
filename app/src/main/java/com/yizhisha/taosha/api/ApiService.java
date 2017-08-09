@@ -57,6 +57,9 @@ public interface ApiService {
     //获得收货地址
     @GET("ios/ucenter/address/")
     Observable<AddressListBean> getAddressList(@Query("uid") int uid);
+    //获得单个收货地址
+    @GET("ios/ucenter/address_each/")
+    Observable<AddressListBean.Address> getOneAddress(@QueryMap Map<String, String> param);
     //新增收货地址
     @FormUrlEncoded
     @POST("ios/ucenter/address_save/")

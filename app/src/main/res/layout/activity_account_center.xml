@@ -8,18 +8,17 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/account_center"/>
     <RelativeLayout
         android:id="@+id/changeoneinfo_rl"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/img_full_screen">
+        android:background="@drawable/icon_bg">
         <ImageView
             android:id="@+id/head_accoutcenter_iv"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon_trash"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"/>
         <TextView

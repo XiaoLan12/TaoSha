@@ -1,6 +1,7 @@
 package com.yizhisha.taosha;
 
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 /**
  * Created by lan on 2017/6/22.
@@ -15,4 +16,5 @@ public class AppConstant {
 
     public static final int UID=882;
     public static ProductDetailBean productDetailBean =null;
+    public static UserInfoBean infoBean=null;
 }

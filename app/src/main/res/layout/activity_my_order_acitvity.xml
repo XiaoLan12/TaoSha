@@ -10,8 +10,50 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
-        app:leftButtonIcon="@drawable/icon_right"
+        app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/myorder"/>
+    <LinearLayout
+        android:id="@+id/search_myorder_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_10"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <com.yizhisha.taosha.widget.ClearEditText
+            android:id="@+id/search_myorder_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="请输入商品名"
+            android:textColorHint="@color/common_h3"
+            android:textSize="@dimen/font_normal"
+            android:background="@drawable/shape_edittext_gray_selector" />
+        <TextView
+            android:id="@+id/search_myorder_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/yellow1"
+            android:padding="@dimen/dp_10"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="搜索"/>
+        <TextView
+            android:id="@+id/cacel_myorder_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/red1"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/white"
+            android:text="取消"/>
+    </LinearLayout>
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/slidingtablayout"
         android:layout_width="match_parent"
