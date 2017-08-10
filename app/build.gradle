@@ -41,16 +41,12 @@ dependencies {
     compile project(':library')
     compile project(':StatusBarlibrary')
     //网络框架
-
     //view注解
-
     //微信开发平台
-
     //循环滚动
     compile files('libs/Msc.jar')
     compile files('libs/Sunflower.jar')
     compile project(':pictureselector')
-    compile project(':pickerview')
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
