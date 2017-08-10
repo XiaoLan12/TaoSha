@@ -178,6 +178,12 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+            @Override
+            public void doRequestData() {
+                load(mType,true);
+            }
+        });
     }
 
 }

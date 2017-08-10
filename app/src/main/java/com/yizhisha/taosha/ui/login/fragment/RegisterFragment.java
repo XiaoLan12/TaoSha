@@ -13,6 +13,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
@@ -86,6 +87,17 @@ public class RegisterFragment extends BaseFragment<LoginPresenter> implements Lo
     public void getCodeSuccess(String info) {
         ToastUtil.showbottomShortToast(info);
     }
+
+    @Override
+    public void loadWeChatData(WechatBean wechatBean) {
+
+    }
+
+    @Override
+    public void weChatLogin(String info) {
+
+    }
+
     @Override
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);

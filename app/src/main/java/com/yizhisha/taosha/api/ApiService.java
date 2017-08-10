@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.api;
 
+import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
@@ -17,6 +18,7 @@ import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
+import com.yizhisha.taosha.bean.json.WechatBean;
 
 import java.util.Map;
 
@@ -29,6 +31,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -135,7 +138,18 @@ public interface ApiService {
     @POST("ios/ucenter/password_save/")
     Observable<RequestStatusBean> changePwd(@FieldMap Map<String,String> map);
 
+    //获得微信登录的数据
+    @GET()
+    Observable<WechatBean> getWeChatLoginData(@Url String url);
 
+    //微信登录
+    @FormUrlEncoded
+    @POST("ios/user/wxlogin/")
+    Observable<RequestStatusBean> weChatLogin(@FieldMap Map<String,String> map);
+
+    //绑定微信号
+    @GET("ios/user/wxreg/")
+    Observable<RequestStatusBean> bindWeChat(@QueryMap Map<String, String> param);
     //首页轮播
     @GET("ios/index/")
     Observable<IndexPPTBean> getPPT(@QueryMap Map<String, String> param);
@@ -194,4 +208,8 @@ public interface ApiService {
     @Multipart
     @POST("/ios/ajax/uploadCommentPic/")
     Observable<CommentPicBean> addCommentPic(@Part MultipartBody.Part file);
+
+    //账务中心
+    @GET("ios/ucenter/finance/")
+    Observable<AccountBean> loadAccount(@Query("uid") int id);
 }

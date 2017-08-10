@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class DateUtil {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
-    private static SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
+    private static SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
         /*时间戳转换成字符窜*/
         public static String getDateToString(long time) {
             Date d = new Date(time);

@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui;
 
+import android.support.annotation.BoolRes;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
@@ -11,8 +12,10 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MainTabEntity;
 import com.yizhisha.taosha.ui.home.fragment.HomeFragment;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.me.fragment.MeFragment;
 import com.yizhisha.taosha.ui.shoppcart.fragment.ShoppCartFragment;
+import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
@@ -51,6 +54,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         //初始化选项卡
+        if(SharedPreferencesUtil.getValue(this,"ISLOGIN", Boolean.class)!=null) {
+            AppConstant.isLogin = (boolean) SharedPreferencesUtil.getValue(this, "ISLOGIN", Boolean.class);
+        }
+
         initTab();
     }
     /**
@@ -65,10 +72,18 @@ public class MainActivity extends BaseActivity {
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+                if(position==1||position==2){
+                    if(AppConstant.isLogin==false){
+                        startActivity(LoginFragmentActivity.class);
+                        tabLayout.setCurrentTab(0);
+                        return;
+                    }
+                }
                 SwitchTo(position);
             }
             @Override
             public void onTabReselect(int position) {
+
             }
         });
     }

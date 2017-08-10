@@ -17,15 +17,15 @@
         android:background="@drawable/icon_bg">
         <ImageView
             android:id="@+id/head_accoutcenter_iv"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"/>
         <TextView
             android:id="@+id/username_accountcenter_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/head_accoutcenter_iv"
-            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:textColor="@color/white"
             android:textSize="@dimen/font_normal2"
@@ -37,6 +37,7 @@
             android:layout_toRightOf="@+id/head_accoutcenter_iv"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginLeft="@dimen/dp_10"
             android:textColor="@color/white"
             android:text="余额:"/>
         <TextView
@@ -55,6 +56,7 @@
             android:layout_toRightOf="@+id/head_accoutcenter_iv"
             android:layout_marginRight="@dimen/dp_5"
             android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/dp_10"
             android:text="积分:"/>
         <TextView
             android:id="@+id/integral_accountcenter_tv"

@@ -8,19 +8,29 @@
         style="@style/TS.Theme.Widget.Text"
         android:textSize="@dimen/font_normal2"
         android:textColor="@color/common_h1"
-        android:text="毛织网会员活动返现"/>
+        />
     <TextView
         android:id="@+id/time_accountcenter_tv"
         style="@style/TS.Theme.Widget.Text"
         android:layout_below="@+id/title_accountcenter_tv"
         android:layout_marginTop="@dimen/dp_5"
-        android:text="2017-09-13 17:04"/>
+        />
+
+        <TextView
+            android:id="@+id/deduct_accountcenter_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/common_h1"
+            android:layout_alignTop="@+id/title_accountcenter_tv"
+            />
     <TextView
         android:id="@+id/total_accountcenter_tv"
         style="@style/TS.Theme.Widget.Text"
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:text="+1000.00元"/>
-
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_below="@+id/deduct_accountcenter_tv"
+        android:textColor="@color/common_h1"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>

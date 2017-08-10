@@ -37,7 +37,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     //菜单栏
     compile project(':library')
     compile project(':StatusBarlibrary')
@@ -50,6 +49,8 @@ dependencies {
     //循环滚动
     compile files('libs/Msc.jar')
     compile files('libs/Sunflower.jar')
+    compile project(':pictureselector')
+    compile project(':pickerview')
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
@@ -68,6 +69,5 @@ dependencies {
     compile 'com.youth.banner:banner:1.1.5'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.chrisbanes.photoview:library:+'
-    compile project(':pictureselector')
-    compile project(':pickerview')
+    testCompile 'junit:junit:4.12'
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
  * Created by lan on 2017/6/22.
@@ -20,5 +22,9 @@ public class App extends Application{
     }
     public static Context getAppContext() {
         return context;
+    }
+
+    private void registToWX() {
+
     }
 }

@@ -156,4 +156,10 @@
         <item name="android:textSize">@dimen/action_text_size</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <style name="NoTitleTranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

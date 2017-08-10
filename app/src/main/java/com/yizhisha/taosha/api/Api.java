@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
+import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
@@ -18,6 +19,7 @@ import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
+import com.yizhisha.taosha.bean.json.WechatBean;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -159,9 +161,18 @@ public class Api {
     public Observable<RequestStatusBean> phoneLogin(Map<String,String> map){
         return service.phoneLogin(map);
     }
-
-
-
+    //获得微信登录的数据
+    public Observable<WechatBean> getWeChatLoginData(String url){
+        return service.getWeChatLoginData(url);
+    }
+    //微信登录
+    public Observable<RequestStatusBean> weChatLogin(Map<String,String> map){
+        return service.weChatLogin(map);
+    }
+    //绑定微信号
+    public Observable<RequestStatusBean> bindWeChat(Map<String,String> map){
+        return service.bindWeChat(map);
+    }
     //首页轮播
     public Observable<IndexPPTBean> getPPT(Map<String,String> map){
         return service.getPPT(map);
@@ -216,5 +227,9 @@ public class Api {
     //添加评论图片
     public Observable<CommentPicBean> addCommentPic(MultipartBody.Part body){
         return service.addCommentPic(body);
+    }
+    //账务中心
+    public Observable<AccountBean> loadAccount(int uid){
+        return service.loadAccount(uid);
     }
 }

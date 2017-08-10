@@ -7,13 +7,22 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
+import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -22,6 +31,9 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by lan on 2017/6/27.
@@ -38,6 +50,9 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     ImageView mIvIsShowPwd;
     private boolean isHidden = true;
     public  switchFragmentListener switchFragmentListener;
+    private IWXAPI api;
+    private static final String APP_SECRET ="74595b3e89da0f0816e5e0f3ab441462";
+    private Subscription subscription;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -60,11 +75,20 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                 ActivityManager.getActivityMar().finishActivity(getActivity());
             }
         });
+
+
+        //AppConst.WEIXIN.APP_ID是指你应用在微信开放平台上的AppID，记得替换。
+        api = WXAPIFactory.createWXAPI(getActivity(), AppConstant.WEIXIN_APP_ID, false);
+        // 将该app注册到微信
+        api.registerApp(AppConstant.WEIXIN_APP_ID);
+        event();
     }
 
     @Override
     public void loginSuccess(String info) {
-
+        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        AppConstant.isLogin=true;
+        activity.finish();
     }
     @Override
     public void registerSuccess(String info) {
@@ -78,6 +102,21 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     public void getCodeSuccess(String info) {
 
     }
+
+    @Override
+    public void loadWeChatData(WechatBean wechatBean) {
+        Map<String,String> map=new HashMap<>();
+        map.put("openid",wechatBean.getOpenid());
+        mPresenter.weChatLogin(map);
+    }
+
+    @Override
+    public void weChatLogin(String info) {
+        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        AppConstant.isLogin=true;
+        activity.finish();
+    }
+
     @Override
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
@@ -106,8 +145,25 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         }
         return true;
     }
+    private void event(){
+        subscription= RxBus.$().toObservable(WeChatEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<WeChatEvent>() {
+                    @Override
+                    public void call(WeChatEvent event) {
+                        String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid="
+                                + AppConstant.WEIXIN_APP_ID
+                                + "&secret="
+                                + APP_SECRET
+                                + "&code="
+                                + event.getCode()
+                                + "&grant_type=authorization_code";
+                       mPresenter.loadWeChatData(url);
+                    }
+                });
+    }
     @OnClick({R.id.findpwd_tv,R.id.register_tv,R.id.phone_login_tv,R.id.login_btn,
-    R.id.isShow_pwd_iv})
+    R.id.isShow_pwd_iv,R.id.weixin_login_tv})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -141,6 +197,23 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                 }
                 isHidden = !isHidden;
                 break;
+            case R.id.weixin_login_tv:
+                if (!api.isWXAppInstalled()) {
+                    ToastUtil.showbottomShortToast("您还未安装微信客户端");
+                    return;
+                }
+                final SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "taosha_wx_login";
+                api.sendReq(req);
+                break;
+        }
+    } @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (subscription != null&&!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
         }
     }
+
 }
