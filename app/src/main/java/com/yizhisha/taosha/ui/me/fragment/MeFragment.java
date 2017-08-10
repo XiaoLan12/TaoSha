@@ -105,8 +105,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                 startActivity(ContactUsActivity.class);
                 break;
             case R.id.abouttaosha_rl:
-                //startActivity(AboutActivity.class);
-                startActivity(LoginFragmentActivity.class);
+                startActivity(AboutActivity.class);
                 break;
             case R.id.seckillorder_me_rl:
                 startActivity(SecKillOrderActivity.class);
