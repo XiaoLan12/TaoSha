@@ -1,8 +1,12 @@
 package com.yizhisha.taosha.ui.shoppcart.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
@@ -19,6 +23,7 @@ import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
 import com.yizhisha.taosha.bean.json.Shopcart;
 import com.yizhisha.taosha.bean.json.ShopcartGoods;
+import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
 import com.yizhisha.taosha.ui.shoppcart.presenter.ShoppCartPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
@@ -180,6 +185,32 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 adapter.removeOneGood(groupPosition,childPosition);
             }
         });
+        adapter.setOnGoodsEditChangeListenr(new ShoppCartAdapter.OnGoodsEditChangeListenr() {
+            @Override
+            public void onEditChange(GoodsBean goodsBean) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("gid",goodsBean.getGid());
+                bundle.putInt("sid",goodsBean.getSid());
+                startActivityForResult(SingleShopCartActivity.class,bundle,100);
+            }
+        });
+        expandableListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                boolean enable = false;
+                if(expandableListView != null && expandableListView.getChildCount() > 0){
+                    boolean firstItemVisible = expandableListView.getFirstVisiblePosition() == 0;
+                    boolean topOfFirstItemVisible = expandableListView.getChildAt(0).getTop() == 0;
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                mSwipeRefreshLayout.setEnabled(enable);
+            }
+        });
 
     }
     @Override
@@ -326,5 +357,13 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     public void onRefresh() {
         ivSelectAll.setChecked(false);
         mPresenter.loadShoppCart(AppConstant.UID,false);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100&&resultCode==2){
+            onRefresh();
+        }
     }
 }

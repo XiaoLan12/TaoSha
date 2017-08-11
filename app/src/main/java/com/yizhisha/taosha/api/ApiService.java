@@ -2,6 +2,7 @@ package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
@@ -168,6 +169,7 @@ public interface ApiService {
     //商品详情
     @GET("ios/goods/view/")
     Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
+
     //商品评价列表
     @FormUrlEncoded
     @POST("ios/goods/goodsComment/")
@@ -177,6 +179,14 @@ public interface ApiService {
     @GET("ios/ucenter/shopcart/")
     Observable<ShopcartListBean> getShoppCartList(@Query("uid") int id);
 
+    //加载单个购物车
+    @GET("ios/ucenter/shopcart_show/")
+    Observable<ShopCartBean> loadSingleShpCart(@QueryMap Map<String, String> param);
+
+    //修改购物车
+    @FormUrlEncoded
+    @POST("ios/ucenter/shopcart_update/")
+    Observable<RequestStatusBean> changeShopCart(@FieldMap Map<String, String> param);
     //删除购物车商品
     @GET("ios/ucenter/shopcart_delete/")
     Observable<RequestStatusBean> deleteShoppCart(@QueryMap  Map<String, String> param);

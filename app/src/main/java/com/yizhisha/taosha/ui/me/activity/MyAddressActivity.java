@@ -166,7 +166,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==2&&requestCode==2){
+        if(requestCode==2&&resultCode==2){
             mPresenter.loadAddress(AppConstant.UID,false);
         }
     }
