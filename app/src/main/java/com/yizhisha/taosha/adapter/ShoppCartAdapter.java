@@ -1,7 +1,9 @@
 package com.yizhisha.taosha.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.LogUtil;
 
@@ -55,7 +58,9 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     public void setOnAllCheckedBoxNeedChangeListener(OnAllCheckedBoxNeedChangeListener onAllCheckedBoxNeedChangeListener) {
         this.onAllCheckedBoxNeedChangeListener = onAllCheckedBoxNeedChangeListener;
     }
-
+    public void setOnGoodsEditChangeListenr(OnGoodsEditChangeListenr onGoodsEditChangeListenr) {
+        this.onGoodsEditChangeListenr = onGoodsEditChangeListenr;
+    }
     public ShoppCartAdapter(Context context, List<Map<String, Object>> parentMapList, List<List<Map<String, Object>>> childMapList_list) {
         this.parentMapList = parentMapList;
         this.childMapList_list = childMapList_list;
@@ -213,6 +218,8 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         childViewHolder.id_tv_price.setText(String.format(context.getString(R.string.price), goodsBean.getPrice()+""));
         childViewHolder.id_cb_select_child.setChecked(goodsBean.isChecked());
+        childViewHolder.tv_items_child_desc.setText(goodsBean.getTitle());
+        childViewHolder.id_tv_color.setText(goodsBean.getDetail());
         GlideUtil.getInstance().LoadContextBitmap(context, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
                 (ImageView) childViewHolder.mIvPic,GlideUtil.LOAD_BITMAP);
         childViewHolder.id_cb_select_child.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +247,19 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 onDeleteShopListener.onDeleteShop(groupPosition,childPosition);
             }
         });
+        childViewHolder.mLlEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onGoodsEditChangeListenr.onEditChange(goodsBean);
 
+            }
+        });
+        childViewHolder.mRlEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return convertView;
     }
 
@@ -346,7 +365,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         } else {
             onCheckHasGoodsListener.onCheckHasGoods(false);//
         }
-        //showList("after@@@@@@@@@@@@@@@@@@@@@@@");
         notifyDataSetChanged();//
         dealPrice();//重新计算
     }
@@ -410,12 +428,17 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         void onDeleteShop(int groupPosition,int childPosition);
     }
     OnDeleteShopListener onDeleteShopListener;
+
     public interface OnGoodsCheckedChangeListener {
         void onGoodsCheckedChange(int totalCount, double totalPrice);
     }
 
     public interface OnCheckHasGoodsListener {
         void onCheckHasGoods(boolean isHasGoods);
+    }
+    OnGoodsEditChangeListenr onGoodsEditChangeListenr;
+    public interface OnGoodsEditChangeListenr{
+        void onEditChange(GoodsBean goodsBean);
     }
     class GroupViewHolder {
         TextView tv_title_parent;

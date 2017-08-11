@@ -75,12 +75,8 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
         recyclerView1.setLayoutManager(linearLayoutManager);
         if(AppConstant.productDetailBean!=null){
             List<String> content=new ArrayList<>();
-            List<String> content1=new ArrayList<>();
             content=AppConstant.productDetailBean.getGoods().getSeka();
-            for(int i=0;i<content.size();i++){
-                content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+content.get(i));
-            }
-            adapter=new ProductDetailImgAdapter(SelectYarnColor.this,content1);
+            adapter=new ProductDetailImgAdapter(SelectYarnColor.this,content);
             recyclerView.setAdapter(adapter);
 
         }

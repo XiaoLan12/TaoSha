@@ -68,7 +68,8 @@ public class NormalSelectionDialog {
             title.setTextColor(mBuilder.getTitleTextColor());
             title.setTextSize(mBuilder.getTitleTextSize());
             LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) title.getLayoutParams();
-            lp.height=DensityUtil.dip2px(mBuilder.getItemHeight());
+            lp.height=mBuilder.getItemHeight();
+
             title.setLayoutParams(lp);
             if(datas.size()!=0){
                 title.setBackgroundResource(R.drawable.selector_widget_actiondialog_top);
@@ -195,13 +196,13 @@ public class NormalSelectionDialog {
             boolTitle = false;
             titleHeight = 65;
             titleText = "请选择";
-            titleTextColor = ContextCompat.getColor(mContext, R.color.common_h1);
+            titleTextColor = ContextCompat.getColor(mContext, R.color.common_h2);
             titleTextSize = 13;
             //item的默认属性
             onItemListener = null;
             itemHeight = DensityUtil.dip2px(45); // 默认item高度
             itemWidth = 0.92f;
-            itemTextColor = ContextCompat.getColor(mContext, R.color.common_h1); // 默认字体颜色
+            itemTextColor = ContextCompat.getColor(mContext, R.color.common_h2); // 默认字体颜色
             itemTextSize = 14;  //默认自体大小
 
             cancleButtonText = "取消";

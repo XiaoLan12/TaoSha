@@ -16,6 +16,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
@@ -199,6 +200,14 @@ public class Api {
     // 购物车
     public Observable<ShopcartListBean> getShoppCart(int uid){
         return service.getShoppCartList(uid);
+    }
+    //加载单个购物车
+    public Observable<ShopCartBean> loadSingleShpCart(Map<String,String> map){
+        return service.loadSingleShpCart(map);
+    }
+    //修改购物车
+    public Observable<RequestStatusBean> changeShopCart(Map<String,String> map){
+        return service.changeShopCart(map);
     }
     //删除购物车
     public Observable<RequestStatusBean> deleteShoppCart(Map<String,String> map){

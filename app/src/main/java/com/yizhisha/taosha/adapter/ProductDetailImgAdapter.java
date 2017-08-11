@@ -2,6 +2,7 @@ package com.yizhisha.taosha.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
+    private String url="http://www.taoshamall.com";
     private Context mContext;
     public ProductDetailImgAdapter(Context context, @Nullable List<String> data) {
         super(R.layout.item_fragment_product_img,data);
@@ -24,7 +26,7 @@ public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHol
     }
     @Override
     protected void convert(BaseViewHolder helper, String goods) {
-        GlideUtil.getInstance().LoadContextBitmap(mContext, goods,
+        GlideUtil.getInstance().LoadContextBitmap(mContext, url+goods,
                 (ImageView) helper.getView(R.id.img), GlideUtil.LOAD_BITMAP);
     }
 }

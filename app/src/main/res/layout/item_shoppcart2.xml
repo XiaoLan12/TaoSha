@@ -37,35 +37,35 @@
         <RelativeLayout
             android:id="@+id/shop_normal_rl"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:layout_toRightOf="@+id/childshopp_rl"
             android:background="@color/white"
-            android:padding="@dimen/dp_5">
-
+            android:padding="@dimen/dp_5"
+            >
             <TextView
                 android:id="@+id/tradename_shoppcar2_tv"
                 style="@style/TS.Theme.Widget.Text"
-                android:text="段染四经——纬  20%腈纶  80%尼龙"
                 android:textColor="@color/common_h1" />
 
             <TextView
                 android:id="@+id/tradecolor_tv"
                 style="@style/TS.Theme.Widget.Text"
                 android:layout_below="@+id/tradename_shoppcar2_tv"
-                android:text="颜色：" />
+                android:text="色号：" />
 
             <TextView
                 android:id="@+id/tradecolor_shoppcar2_tv"
                 style="@style/TS.Theme.Widget.Text"
                 android:layout_below="@+id/tradename_shoppcar2_tv"
                 android:layout_toRightOf="@+id/tradecolor_tv"
-                android:text="#f40" />
+                android:singleLine="true"
+                />
 
             <TextView
                 android:id="@+id/tradeprice_shoppcar2_tv"
                 style="@style/TS.Theme.Widget.Text"
                 android:layout_alignParentBottom="true"
-                android:text="￥33.50"
+                android:text="aa"
                 android:textColor="@color/red1" />
         </RelativeLayout>
 

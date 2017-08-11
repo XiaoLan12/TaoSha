@@ -72,13 +72,13 @@ public class MainActivity extends BaseActivity {
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                if(position==1||position==2){
+                /*if(position==1||position==2){
                     if(AppConstant.isLogin==false){
                         startActivity(LoginFragmentActivity.class);
                         tabLayout.setCurrentTab(0);
                         return;
                     }
-                }
+                }*/
                 SwitchTo(position);
             }
             @Override
