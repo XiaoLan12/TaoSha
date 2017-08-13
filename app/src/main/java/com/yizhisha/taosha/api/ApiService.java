@@ -2,6 +2,7 @@ package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
@@ -81,6 +82,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("ios/ucenter/active_delete/")
     Observable<RequestStatusBean> cancelFreeSample(@FieldMap Map<String,String> map);
+
+    //我的评论
+    @GET("ios/ucenter/commentList/")
+    Observable<MyCommentBean> loadMyComment(@Query("uid") int uid);
 
 
     //获得订单

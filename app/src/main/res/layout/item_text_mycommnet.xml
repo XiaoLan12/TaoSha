@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        >
+        <ImageView
+            android:id="@+id/head_comment_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            tools:src="@drawable/icon_delete"/>
+        <TextView
+            android:id="@+id/name_comment_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/head_comment_iv"
+            android:layout_toLeftOf="@+id/time_comment_tv"
+            android:layout_marginLeft="@dimen/dp_8"
+            tools:text="aaaa"
+            />
+        <TextView
+            android:id="@+id/time_comment_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/head_comment_iv"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="2017.06.19"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/detail_comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="aaa"
+        android:layout_marginLeft="@dimen/dp_10"
+        />
+    <RelativeLayout
+        android:id="@+id/business_reply_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/im_distribute_comm_bg">
+        <TextView
+            android:id="@+id/business_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="掌柜回复:"/>
+        <TextView
+            android:id="@+id/business_reply_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/business_reply"
+            tools:text="啥工会管理的时间"/>
+        <TextView
+            android:id="@+id/business_reply_time_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/business_reply_content_tv"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="2017.06.19"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/addcomment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+        <TextView
+            android:id="@+id/time_addcomment_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:textColor="@color/red1"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/font_normal2"
+            tools:text="用户当天追评"/>
+        <TextView
+            android:id="@+id/detail_addcomment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            tools:text="aaaaaaaaaaaaaaaaaaa"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:padding="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/tradehead_myorder_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:src="@drawable/icon_delete" />
+
+        <TextView
+            android:id="@+id/tradename_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@color/common_h1" />
+
+        <TextView
+            android:id="@+id/tradecolor_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_myorder_tv"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="颜色：" />
+
+        <TextView
+            android:id="@+id/tradecolor_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_below="@+id/tradename_myorder_tv"
+            android:layout_toRightOf="@+id/tradecolor_tv"
+            />
+
+        <TextView
+            android:id="@+id/tradeprice_myorder_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_myorder_iv"
+            android:layout_toRightOf="@+id/tradehead_myorder_iv"
+            android:text="￥33.50"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@color/red1" />
+    </RelativeLayout>
+
+</LinearLayout>

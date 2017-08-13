@@ -8,6 +8,7 @@ import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
@@ -113,6 +114,10 @@ public class Api {
     //取消免费拿样
     public Observable<RequestStatusBean> cancelFreeSample(Map<String,String> map){
         return service.cancelFreeSample(map);
+    }
+    //我的评论
+    public Observable<MyCommentBean> loadMyComment(int uid){
+        return service.loadMyComment(uid);
     }
     //获得订单
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){

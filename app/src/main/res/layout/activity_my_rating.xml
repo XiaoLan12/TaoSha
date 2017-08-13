@@ -14,37 +14,25 @@
         app:title="@string/my_rating"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/icon_bg">
-    <ImageView
-        android:id="@+id/userhead_myrating_iv"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_5"/>
-        <TextView
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/userhead_myrating_iv"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_normal2"
-            android:text="隔壁家的老王"/>
+        android:layout_height="match_parent"
+        >
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefreshlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:padding="@dimen/dp_10">
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <com.yizhisha.taosha.widget.CommonLoadingView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
-    <com.flyco.tablayout.CommonTabLayout
-        android:id="@+id/commontablayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        tl:tl_indicator_color="@color/red1"
-        tl:tl_textSelectColor="@color/red1"
-        tl:tl_textUnselectColor="@color/common_h2"
-        tl:tl_underline_color="@color/white"
-        tl:tl_underline_height="1dp"/>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </LinearLayout>

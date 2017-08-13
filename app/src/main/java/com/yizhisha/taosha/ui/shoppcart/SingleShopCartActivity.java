@@ -1,24 +1,25 @@
 package com.yizhisha.taosha.ui.shoppcart;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.AccountCenterAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.adapter.ShopCartAddShopAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
+import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.ui.shoppcart.contract.SingleShopCartContract;
 import com.yizhisha.taosha.ui.shoppcart.presenter.SingleShopCartPresenter;
-import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
@@ -29,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter>
@@ -81,6 +81,14 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         mProductDetailImgAdapter = new ProductDetailImgAdapter(this,imgList);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerview.setAdapter(mProductDetailImgAdapter);
+        mProductDetailImgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String url="http://www.taoshamall.com";
+                PicShowDialog dialog=new PicShowDialog(SingleShopCartActivity.this,url+imgList.get(position),position);
+                dialog.show();
+            }
+        });
 
         mShopCartAddShopAdapter = new ShopCartAddShopAdapter(dataList);
         mRecycleview1.setLayoutManager(new LinearLayoutManager(mContext));
