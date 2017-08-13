@@ -1,11 +1,9 @@
 package com.yizhisha.taosha.ui.home.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -158,10 +156,10 @@ public class YarnActivity extends BaseActivity {
                 finish_Activity(YarnActivity.this);
                 break;
             case R.id.tv_shopping_cart:
-                startActivity(SelectYarnColor.class);
+                startActivity(SelectYarnColorActivity.class);
                 break;
             case R.id.tv_shopping:
-                startActivity(SelectYarnColor.class);
+                startActivity(SelectYarnColorActivity.class);
                 break;
         }
     }
