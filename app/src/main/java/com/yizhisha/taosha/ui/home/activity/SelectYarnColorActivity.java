@@ -13,6 +13,7 @@ import com.yizhisha.taosha.adapter.SelectYarnColorAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.SelectYarnBean;
+import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/7/19.
  */
 
-public class SelectYarnColor extends BaseActivity implements View.OnClickListener{
+public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActivity implements SelectYarnColorContract.View,View.OnClickListener{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.recyclerview)
@@ -50,12 +51,12 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initView() {
-        LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColor.this);
+        LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
         SelectYarnBean selectYarnBean=new SelectYarnBean("",1);
         list.add(selectYarnBean);
-        adapter1=new SelectYarnColorAdapter(SelectYarnColor.this,list);
+        adapter1=new SelectYarnColorAdapter(SelectYarnColorActivity.this,list);
         recyclerView1.setAdapter(adapter1);
         adapter1.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -70,13 +71,13 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
 
 
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColor.this);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
         if(AppConstant.productDetailBean!=null){
             List<String> content=new ArrayList<>();
             content=AppConstant.productDetailBean.getGoods().getSeka();
-            adapter=new ProductDetailImgAdapter(SelectYarnColor.this,content);
+            adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,content);
             recyclerView.setAdapter(adapter);
 
         }
@@ -96,6 +97,31 @@ public class SelectYarnColor extends BaseActivity implements View.OnClickListene
                 adapter1.notifyDataSetChanged();
                 break;
         }
+
+    }
+
+    @Override
+    public void changeShopCartSuccess(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void loadFail(String msg) {
 
     }
 }
