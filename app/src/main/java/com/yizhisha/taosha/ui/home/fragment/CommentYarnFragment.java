@@ -46,6 +46,8 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     private CommentYarnAdapter mAdapter;
     private int id;
     private int type;
+    private final String COMMENTURL="http://www.taoshamall.com/data/attached/comment/";
+
 
     public static CommentYarnFragment getInstance(int id) {
         CommentYarnFragment sf = new CommentYarnFragment();
@@ -84,11 +86,11 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     public void loadCommentListSuccess(List<CommentBean> data) {
         for (int i = 0; i < data.size(); i++) {
 
-            if (data.get(i).getComment_photos()!= null||!"".equals(data.get(i).getComment_photos())) {
+            if (data.get(i).getComment_photos()!= null&&!"".equals(data.get(i).getComment_photos())) {
                 String date[]=data.get(i).getComment_photos().split(",");
                 List<String> list=new ArrayList<>();
                 for (int j = 0; j < date.length; j++) {
-                    list.add(date[j]);
+                    list.add(COMMENTURL+date[j]);
                 }
                 data.get(i).setcommentPhotos(list);
                 data.get(i).setItemType(CommentBean.IMGS_TYPE);

@@ -14,10 +14,13 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
+import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -26,7 +29,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/7/19.
  */
 
-public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActivity implements SelectYarnColorContract.View,View.OnClickListener{
+public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresenter> implements SelectYarnColorContract.View,View.OnClickListener{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.recyclerview)
@@ -39,6 +42,9 @@ public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActiv
     private ProductDetailImgAdapter adapter;
     private SelectYarnColorAdapter adapter1;
     private List<SelectYarnBean> list=new ArrayList<>();
+    private List<String> imgList=new ArrayList<>();
+    private int gid;
+    private int sid;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -68,21 +74,19 @@ public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActiv
                 }
             }
         });
-
-
-
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
-        if(AppConstant.productDetailBean!=null){
-            List<String> content=new ArrayList<>();
-            content=AppConstant.productDetailBean.getGoods().getSeka();
-            adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,content);
-            recyclerView.setAdapter(adapter);
-
-        }
+         adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,imgList);
+         recyclerView.setAdapter(adapter);
     }
-    @OnClick({R.id.tv_continue_add})
+    private void load(boolean isShowLoad){
+        Map<String,String> map=new HashMap<>();
+        map.put("gid",String.valueOf(gid));
+        map.put("sid",String.valueOf(sid));
+        mPresenter.changeShopCart(map);
+    }
+    @OnClick({R.id.tv_continue_add,R.id.sure_btn})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -96,6 +100,9 @@ public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActiv
                 list.add(selectYarnBean);
                 adapter1.notifyDataSetChanged();
                 break;
+            case R.id.sure_btn:
+                startActivity(SureOrderActivity.class);
+                break;
         }
 
     }
@@ -104,7 +111,6 @@ public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActiv
     public void changeShopCartSuccess(String msg) {
 
     }
-
     @Override
     public void showLoading() {
 
@@ -119,7 +125,6 @@ public class SelectYarnColorActivity<SelectYarnColorPresenter> extends BaseActiv
     public void showEmpty() {
 
     }
-
     @Override
     public void loadFail(String msg) {
 

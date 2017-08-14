@@ -1,70 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_10"
     xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
-        >
-        <ImageView
-            android:id="@+id/head_comment_iv"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            tools:src="@drawable/icon_delete"/>
-        <TextView
-            android:id="@+id/name_comment_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/head_comment_iv"
-            android:layout_toLeftOf="@+id/time_comment_tv"
-            android:layout_marginLeft="@dimen/dp_8"
-            tools:text="aaaa"
-            />
-        <TextView
-            android:id="@+id/time_comment_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_below="@+id/head_comment_iv"
-            android:layout_marginTop="@dimen/dp_5"
-            tools:text="2017.06.19"/>
-    </RelativeLayout>
     <TextView
-        android:id="@+id/detail_comment_tv"
+        android:id="@+id/detail_comment_mycomment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="aaa"
+        tools:text="aaaaaaaaaaaaaaaaaaa"
         android:layout_marginLeft="@dimen/dp_10"
         />
     <RelativeLayout
-        android:id="@+id/business_reply_ll"
+        android:id="@+id/business_reply_mycomment_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="@dimen/dp_5"
-        android:background="@drawable/im_distribute_comm_bg">
+        android:background="@drawable/im_distribute_comm_bg"
+        >
         <TextView
-            android:id="@+id/business_reply"
+            android:id="@+id/business_reply_mycomment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="掌柜回复:"/>
         <TextView
-            android:id="@+id/business_reply_content_tv"
+            android:id="@+id/business_reply_content_mycomment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/business_reply"
+            android:layout_toRightOf="@+id/business_reply_mycomment"
             tools:text="啥工会管理的时间"/>
         <TextView
-            android:id="@+id/business_reply_time_tv"
+            android:id="@+id/business_reply_time_mycomment_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_below="@+id/business_reply_content_tv"
+            android:layout_below="@+id/business_reply_content_mycomment_tv"
             android:layout_marginTop="@dimen/dp_5"
             tools:text="2017.06.19"/>
     </RelativeLayout>
+    <!-- 不同的地方 -->
+
+    <com.yizhisha.taosha.widget.MultiImageView
+        android:id="@+id/cilrcleimgMv_mycomment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:visibility="gone"
+        >
+    </com.yizhisha.taosha.widget.MultiImageView>
     <LinearLayout
-        android:id="@+id/addcomment_ll"
+        android:id="@+id/addcomment_mycomment_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_10"
@@ -72,7 +59,7 @@
         android:orientation="vertical">
         <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
         <TextView
-            android:id="@+id/time_addcomment_tv"
+            android:id="@+id/time_addcomment_mycomment_tv"
             style="@style/TS.Theme.Widget.Text"
             android:textColor="@color/red1"
             android:layout_gravity="left"
@@ -80,11 +67,12 @@
             android:textSize="@dimen/font_normal2"
             tools:text="用户当天追评"/>
         <TextView
-            android:id="@+id/detail_addcomment_tv"
+            android:id="@+id/detail_addcomment_mycomment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             tools:text="aaaaaaaaaaaaaaaaaaa"
             />
+
     </LinearLayout>
 </LinearLayout>

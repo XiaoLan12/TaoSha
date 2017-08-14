@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.yizhisha.taosha.base.BaseToolbar
+        android:id="@+id/toolbar"
+        style="@style/basetoolbarStyle"
+        android:layout_alignParentTop="true"
+        app:isShowSearchView="false"
+        app:leftButtonIcon="@drawable/icon_back"
+        app:title="确认下单"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:background="@color/white"
+                android:paddingTop="@dimen/dp_16">
+
+                <TextView
+                    android:id="@+id/consignee_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/consigneehead_iv"
+                    android:text="收货人:" />
+
+                <TextView
+                    android:id="@+id/consignee_name_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/consignee_tv"
+                    android:text="林先生" />
+
+                <TextView
+                    android:id="@+id/consignee_phone_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="1412523452345" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/shippingaddress_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/shippingaddress_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/shippingaddress_iv"
+                    android:text="怪能够的男生设定发送但感觉卡死了的方法收到了看见过" />
+                <ImageView
+                    android:id="@+id/shippingaddress_iv"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:background="@color/white"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:padding="@dimen/dp_5">
+
+                <ImageView
+                    android:id="@+id/tradehead_iv"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:src="@drawable/icon_delete" />
+
+                <TextView
+                    android:id="@+id/tradename_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_toRightOf="@+id/tradehead_iv"
+                    android:text="段染四经——纬  20%腈纶  80%尼龙"
+                    android:textColor="@color/common_h1" />
+
+                <TextView
+                    android:id="@+id/tradecolor"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_below="@+id/tradename_tv"
+                    android:layout_toRightOf="@+id/tradehead_iv"
+                    android:text="颜色：" />
+
+                <TextView
+                    android:id="@+id/tradecolor_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_below="@+id/tradename_tv"
+                    android:layout_toRightOf="@+id/tradecolor"
+                    android:text="#f40" />
+
+                <TextView
+                    android:id="@+id/tradeprice_tv"
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_alignBottom="@+id/tradehead_iv"
+                    android:layout_toRightOf="@+id/tradehead_iv"
+                    android:text="￥33.50"
+                    android:textColor="@color/red1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="配送方式"/>
+                <TextView
+                    android:id="@+id/distribution_way_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/distribution_way_iv"
+                    android:text="快递发货"/>
+                <ImageView
+                    android:id="@+id/distribution_way_iv"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right"/>
+            </RelativeLayout>
+            <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_centerVertical="true"
+                    android:text="支付方式"/>
+                <TextView
+                    android:id="@+id/pay_way_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/pay_way_iv"
+                    android:text="微信支付"/>
+                <ImageView
+                    android:id="@+id/pay_way_iv"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right"/>
+            </RelativeLayout>
+            <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+                <TextView
+                    style="@style/TS.Theme.Widget.Text"
+                    android:gravity="top"
+                    android:text="买家说明:"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_60"
+                    android:hint="请输入您对本次交易的要求(选填)"
+                    android:textColorHint="@color/common_h3"
+                    android:textSize="@dimen/font_normal"
+                    android:background="@null"/>
+            </LinearLayout>
+            </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_contact_us"
+            android:textColor="@color/blue"
+            android:layout_alignParentBottom="true"
+            android:text="联系我们"/>
+        <TextView
+            android:id="@+id/cost_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:layout_marginRight="@dimen/dp_2"
+            android:layout_toLeftOf="@+id/ishave_freight_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:text="合计:Y"/>
+        <TextView
+            android:id="@+id/ishave_freight_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/common_h3"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_toLeftOf="@+id/sureorder_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:text="(不含运费)"/>
+        <TextView
+            android:id="@+id/sureorder_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:gravity="center"
+            android:background="@color/yellow1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:text="提交订单"/>
+    </RelativeLayout>
+    </RelativeLayout>

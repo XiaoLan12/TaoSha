@@ -85,7 +85,6 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",dataList.get(position).getId());
-
                 startActivity(YarnActivity.class,bundle);
             }
         });

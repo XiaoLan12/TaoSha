@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +13,12 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.base.rx.RxBus;
-import com.yizhisha.taosha.bean.OrderDataHelper;
+import com.yizhisha.taosha.bean.DataHelper;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
 import com.yizhisha.taosha.bean.json.OrderFootBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
@@ -28,9 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * Created by lan on 2017/7/5.
@@ -139,6 +139,35 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                             startActivity(OrderDetailsActivity.class,bundle);
                         }
                         break;
+                    case R.id.contact_the_merchant_tv:
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                            final OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            new NormalAlertDialog.Builder(activity)
+                                    .setBoolTitle(false)
+                                    .setContentText(orderFootBean.getMobile_company())
+                                     .setContentTextColor(R.color.blue)
+                                    .setLeftText("取消")
+                                    .setLeftTextColor(R.color.blue)
+                                    .setRightText("确认")
+                                    .setRightTextColor(R.color.blue)
+                                    .setWidth(0.75f)
+                                    .setHeight(0.33f)
+                                    .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                        @Override
+                                        public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                            dialog.dismiss();
+                                        }
+
+                                        @Override
+                                        public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                            Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + orderFootBean.getMobile_company()));
+                                            startActivity(phoneIneten);
+                                            dialog.dismiss();
+
+                                        }
+                                    }).build().show();
+                        }
+                        break;
                 }
             }
         });
@@ -151,7 +180,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     public void loadOrderSuccess(List<Order> data) {
         dataList.clear();
         mSwipeRefreshLayout.setRefreshing(false);
-        dataList=OrderDataHelper.getDataAfterHandle(data);
+        dataList= DataHelper.getDataAfterHandle(data);
         mAdapter.setNewData(dataList);
 
     }

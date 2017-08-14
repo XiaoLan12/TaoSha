@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg"
+    android:background="@color/white"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.yizhisha.taosha.base.BaseToolbar
@@ -11,8 +11,14 @@
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
-        app:title="@string/my_rating"/>
+        app:rightButtonIcon="@drawable/icon_delete"
+        app:title="我的足迹"
+        />
+    <View
+        style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -26,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                >
+                android:padding="@dimen/dp_10">
             </android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
         <com.yizhisha.taosha.widget.CommonLoadingView

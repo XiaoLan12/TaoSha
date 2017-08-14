@@ -26,11 +26,11 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_normal3" />
     </LinearLayout>
-        <android.support.v4.view.ViewPager
+        <com.yizhisha.taosha.widget.HackyViewPager
             android:id="@+id/load_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/show_img_ll_title"
             >
-        </android.support.v4.view.ViewPager>
+        </com.yizhisha.taosha.widget.HackyViewPager>
 </RelativeLayout>

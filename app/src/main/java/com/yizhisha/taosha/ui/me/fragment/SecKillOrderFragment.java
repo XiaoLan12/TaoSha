@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,9 +11,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.SecondKillOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.bean.OrderDataHelper;
 import com.yizhisha.taosha.bean.json.SeckillBean;
-import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.activity.SecKillOrderDetailActivity;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.SecKillOrderPresenter;
@@ -87,6 +84,15 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
             map.put("status", String.valueOf(type));
         }
         mPresenter.loadSeckillOrder(map,isShowLoad);
+    }
+    public void search(String key){
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(AppConstant.UID));
+        if(mType!=-1) {
+            map.put("status", String.valueOf(mType));
+        }
+        map.put("key",key);
+        mPresenter.loadSeckillOrder(map,false);
     }
     @Override
     public void loadSuccess(List<SeckillBean> data) {

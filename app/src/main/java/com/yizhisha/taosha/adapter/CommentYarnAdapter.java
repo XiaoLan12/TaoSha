@@ -1,18 +1,16 @@
 package com.yizhisha.taosha.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.CommentBean;
+import com.yizhisha.taosha.ui.ShowImageActivity;
 import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.GlideUtil;
-import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.MultiImageView;
 
@@ -100,8 +98,10 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                     multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            ToastUtil.showbottomLongToast("点击了图片");
-
+                            Intent intent = new Intent(mContext, ShowImageActivity.class);
+                            intent.putExtra("list", (Serializable) photos);
+                            intent.putExtra("number", position);
+                            mContext.startActivity(intent);
                         }
                     });
                 }

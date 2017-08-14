@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+        <TextView
+            android:id="@+id/orderno_tv"
+           style="@style/TS.Theme.Widget.Text"
+            android:text="单号:"/>
+        <TextView
+            android:id="@+id/orderno_mycomment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/orderno_tv"
+            android:layout_toLeftOf="@+id/time_mycomment_tv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="东莞市纺织有限公司" />
+
+        <TextView
+            android:id="@+id/time_mycomment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            />
+    </RelativeLayout>
+</LinearLayout>

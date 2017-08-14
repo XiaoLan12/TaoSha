@@ -87,6 +87,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.addOnClickListener(R.id.immediate_evaluation_tv);
                 helper.addOnClickListener(R.id.immediate_payment_tv);
                 helper.addOnClickListener(R.id.additional_comments_tv);
+                helper.addOnClickListener(R.id.contact_the_merchant_tv);
                 break;
         }
 

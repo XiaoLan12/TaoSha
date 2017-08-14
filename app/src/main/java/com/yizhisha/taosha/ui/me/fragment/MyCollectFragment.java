@@ -102,7 +102,6 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
         }
         mPresenter.loadCollect(bodyMap,isShowLoad);
     }
-
     @Override
     public void onRefresh() {
         load(mType,false);

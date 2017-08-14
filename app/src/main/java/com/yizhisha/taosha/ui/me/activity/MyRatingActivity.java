@@ -11,6 +11,7 @@ import com.yizhisha.taosha.adapter.HaveRatingAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.DataHelper;
 import com.yizhisha.taosha.bean.json.MyCommentListBean;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyRatingContract;
@@ -36,7 +37,7 @@ public class MyRatingActivity extends BaseActivity<MyRatingPresenter> implements
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private HaveRatingAdapter mAdapter;
-    private List<MyCommentListBean> dataList=new ArrayList<>();
+    private ArrayList<Object> dataList=new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_rating;
@@ -63,18 +64,12 @@ public class MyRatingActivity extends BaseActivity<MyRatingPresenter> implements
         mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        mAdapter=new HaveRatingAdapter(dataList);
+        mAdapter=new HaveRatingAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
-            }
-        });
+
     }
     private void load(boolean isShowLoad){
         mPresenter.loadComment(AppConstant.UID,isShowLoad);
@@ -86,7 +81,10 @@ public class MyRatingActivity extends BaseActivity<MyRatingPresenter> implements
 
     @Override
     public void loadCommentSuccess(List<MyCommentListBean> data) {
-
+        dataList.clear();
+        mSwipeRefreshLayout.setRefreshing(false);
+        dataList= DataHelper.getCommentDataAfterHandle(data);
+        mAdapter.setNewData(dataList);
     }
     @Override
     public void showLoading() {
@@ -113,7 +111,7 @@ public class MyRatingActivity extends BaseActivity<MyRatingPresenter> implements
         mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
             @Override
             public void doRequestData() {
-                load(mType,true);
+               // load(mType,true);
             }
         });
     }

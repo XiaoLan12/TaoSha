@@ -1,34 +1,29 @@
 package com.yizhisha.taosha.ui.me.activity;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.flyco.tablayout.SlidingTabLayout;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.ui.me.fragment.MyFootprintFragment;
-
-import java.util.ArrayList;
+import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import butterknife.Bind;
 
 public class MyFootprintActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
-    @Bind(R.id.slidingtablayout)
-    SlidingTabLayout slidingTabLayout;
-    @Bind(R.id.viewpager)
-    ViewPager viewPager;
-    private String[] mTitles = {"全部", "棉纺纱", "麻纺纱", "毛纺纱","化纤纱","混纺纱"};
-    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    @Bind(R.id.loadingView)
+    CommonLoadingView mLoadingView;
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.swiperefreshlayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_collect;
+        return R.layout.acticity_my_footprint;
     }
 
     @Override
@@ -43,9 +38,6 @@ public class MyFootprintActivity extends BaseActivity {
     }
     @Override
     protected void initView() {
-        for (String title : mTitles) {
-            mFragments.add(MyFootprintFragment.getInstance(title));
-        }
-        slidingTabLayout.setViewPager(viewPager,mTitles,this,mFragments);
+
     }
 }

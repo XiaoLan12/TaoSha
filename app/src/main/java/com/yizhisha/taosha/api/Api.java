@@ -5,11 +5,13 @@ import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
@@ -118,6 +120,10 @@ public class Api {
     //我的评论
     public Observable<MyCommentBean> loadMyComment(int uid){
         return service.loadMyComment(uid);
+    }
+    //我的足迹
+    public Observable<FootpringBean> loadFootprint(int uid){
+        return service.loadFootprint(uid);
     }
     //获得订单
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
@@ -245,5 +251,9 @@ public class Api {
     //账务中心
     public Observable<AccountBean> loadAccount(int uid){
         return service.loadAccount(uid);
+    }
+    //订单确认吧
+    public Observable<OrderSureBean> orderSure(Map<String,String> map){
+        return service.orderSure(map);
     }
 }

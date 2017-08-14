@@ -181,6 +181,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 new NormalAlertDialog.Builder(this)
                         .setBoolTitle(false)
                         .setContentText(order.getMobile_company())
+                        .setContentTextColor(R.color.blue)
                         .setLeftText("取消")
                         .setLeftTextColor(R.color.blue)
                         .setRightText("确认")

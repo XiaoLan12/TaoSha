@@ -47,7 +47,6 @@ public class ShowImageActivity extends BaseActivity {
     @Bind(R.id.load_viewPager)
     ViewPager viewPager;
     private ArrayList<String> pathList = new ArrayList<String>();
-    private final String URL="http://www.taoshamall.com/data/attached/comment/";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -125,7 +124,7 @@ public class ShowImageActivity extends BaseActivity {
                 loading.setLayoutParams(loadingLayoutParams);
                 ((FrameLayout)view).addView(loading);
                 loading.setVisibility(View.VISIBLE);
-                Glide.with(context).load(AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+datas.get(position))
+                Glide.with(context).load(datas.get(position))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.drawable.loading_dialog_progressbar)
                         .thumbnail(0.1f)

@@ -12,6 +12,16 @@ public class OrderFootBean implements Serializable{
     private String orderno;
     private int status;
     private int amount;
+    private String mobile_company;
+
+    public String getMobile_company() {
+        return mobile_company;
+    }
+
+    public void setMobile_company(String mobile_company) {
+        this.mobile_company = mobile_company;
+    }
+
     public float getTotalprice() {
         return totalprice;
     }

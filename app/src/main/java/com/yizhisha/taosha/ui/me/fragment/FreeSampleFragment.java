@@ -104,7 +104,15 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
         }
         mPresenter.loadFreeSample(bodyMap,isShowLoad);
     }
-
+    public void search(String key){
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(AppConstant.UID));
+        if(mType!=-1) {
+            map.put("status", String.valueOf(mType));
+        }
+        map.put("key",key);
+        mPresenter.loadFreeSample(map,false);
+    }
     @Override
     public void onRefresh() {
         load(mType,false);

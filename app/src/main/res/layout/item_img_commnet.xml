@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
     xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -101,29 +102,6 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_marginTop="@dimen/dp_5"
             tools:text="2017.06.19"/>-->
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:padding="@dimen/dp_10">
-        <TextView
-            android:id="@+id/like_comment_img_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_delete"
-            android:gravity="center_vertical"
-            tools:text="19"/>
-        <TextView
-            android:id="@+id/comment_img_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_delete"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_10"
-            tools:text="19"/>
-
     </LinearLayout>
 
 </LinearLayout>

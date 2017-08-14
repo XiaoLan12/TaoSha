@@ -53,6 +53,15 @@ public class MyCommentListBean implements MultiItemEntity {
         private String remark;
         private String mobile;
         private String is_ship;
+        private String orderno;
+
+        public String getOrderno() {
+            return orderno;
+        }
+
+        public void setOrderno(String orderno) {
+            this.orderno = orderno;
+        }
 
         public String getGid() {
             return gid;
@@ -154,11 +163,12 @@ public class MyCommentListBean implements MultiItemEntity {
             private String comment_stars_service;
             private String comment_detail;
             private String comment_photos;
-            private String comment_addtime;
+            private List<String> commentPhotos;
+            private long comment_addtime;
             private String comment_redetail;
-            private String comment_retime;
+            private int comment_retime;
             private String comment_detail_add;
-            private String comment_addtime_add;
+            private int comment_addtime_add;
 
         public String getComment_id() {
             return comment_id;
@@ -248,11 +258,19 @@ public class MyCommentListBean implements MultiItemEntity {
             this.comment_photos = comment_photos;
         }
 
-        public String getComment_addtime() {
+        public List<String> getCommentPhotos() {
+            return commentPhotos;
+        }
+
+        public void setCommentPhotos(List<String> commentPhotos) {
+            this.commentPhotos = commentPhotos;
+        }
+
+        public long getComment_addtime() {
             return comment_addtime;
         }
 
-        public void setComment_addtime(String comment_addtime) {
+        public void setComment_addtime(long comment_addtime) {
             this.comment_addtime = comment_addtime;
         }
 
@@ -264,11 +282,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.comment_redetail = comment_redetail;
         }
 
-        public String getComment_retime() {
+        public int getComment_retime() {
             return comment_retime;
         }
 
-        public void setComment_retime(String comment_retime) {
+        public void setComment_retime(int comment_retime) {
             this.comment_retime = comment_retime;
         }
 
@@ -280,11 +298,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.comment_detail_add = comment_detail_add;
         }
 
-        public String getComment_addtime_add() {
+        public int getComment_addtime_add() {
             return comment_addtime_add;
         }
 
-        public void setComment_addtime_add(String comment_addtime_add) {
+        public void setComment_addtime_add(int comment_addtime_add) {
             this.comment_addtime_add = comment_addtime_add;
         }
     }

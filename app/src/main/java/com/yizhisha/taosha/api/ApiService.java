@@ -2,7 +2,9 @@ package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
+import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
@@ -87,6 +89,9 @@ public interface ApiService {
     @GET("ios/ucenter/commentList/")
     Observable<MyCommentBean> loadMyComment(@Query("uid") int uid);
 
+    //我的足迹
+    @GET("ios/ucenter/history/")
+    Observable<FootpringBean> loadFootprint(@Query("uid") int uid);
 
     //获得订单
     @FormUrlEncoded
@@ -211,7 +216,7 @@ public interface ApiService {
 
     //发布评论
     @FormUrlEncoded
-    @POST("/ios/ucenter/commentSave/")
+    @POST("ios/ucenter/commentSave/")
     Observable<RequestStatusBean> addComment(@FieldMap Map<String, String> param);
 
     //发布追评
@@ -221,10 +226,15 @@ public interface ApiService {
 
     //上传评论图片
     @Multipart
-    @POST("/ios/ajax/uploadCommentPic/")
+    @POST("ios/ajax/uploadCommentPic/")
     Observable<CommentPicBean> addCommentPic(@Part MultipartBody.Part file);
 
     //账务中心
     @GET("ios/ucenter/finance/")
     Observable<AccountBean> loadAccount(@Query("uid") int id);
+
+    //订单确定
+    @Multipart
+    @POST("ios/order/confirm/")
+    Observable<OrderSureBean> orderSure(@FieldMap Map<String, String> param);
 }
