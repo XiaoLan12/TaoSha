@@ -6,6 +6,7 @@ import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
+import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
@@ -91,7 +92,12 @@ public interface ApiService {
 
     //我的足迹
     @GET("ios/ucenter/history/")
-    Observable<FootpringBean> loadFootprint(@Query("uid") int uid);
+    Observable<FootpringBean> loadFootprint(@QueryMap Map<String,String> map);
+
+    //删除足迹
+    @FormUrlEncoded
+    @POST("ios/ucenter/historyClear/")
+    Observable<RequestStatusBean> clearFootPrint(@FieldMap Map<String,String> map);
 
     //获得订单
     @FormUrlEncoded
@@ -234,7 +240,12 @@ public interface ApiService {
     Observable<AccountBean> loadAccount(@Query("uid") int id);
 
     //订单确定
-    @Multipart
+    @FormUrlEncoded
     @POST("ios/order/confirm/")
     Observable<OrderSureBean> orderSure(@FieldMap Map<String, String> param);
+
+    //购物车下单确认
+    @FormUrlEncoded
+    @POST("ios/order/confirm_shopcart/")
+    Observable<ShopCartOrderSureBean> shopCartOrderSure(@FieldMap Map<String, String> param);
 }

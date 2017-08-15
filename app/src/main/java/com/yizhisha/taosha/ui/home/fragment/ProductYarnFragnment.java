@@ -1,23 +1,26 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.yizhisha.taosha.App;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
-import com.yizhisha.taosha.bean.json.ProductDetailImg;
+import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
+import com.yizhisha.taosha.utils.GlideUtil;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -26,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/7/2.
@@ -44,6 +49,18 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     TextView tv_company;
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
+    @Bind(R.id.comment_amount_tv)
+    TextView commentAmountTv;
+    @Bind(R.id.userhead_iv)
+    ImageView userheadIv;
+    @Bind(R.id.userphone_tv)
+    TextView userphoneTv;
+    @Bind(R.id.comment_details_tv)
+    TextView commentDetailsTv;
+    @Bind(R.id.look_allcomment_tv)
+    TextView lookAllcommentTv;
+    @Bind(R.id.comment_rl)
+    RelativeLayout commentRl;
 
 
     private ProductDetailImgAdapter adapter;
@@ -52,7 +69,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
 
     public static ProductYarnFragnment getInstance(int id) {
         ProductYarnFragnment sf = new ProductYarnFragnment();
-        sf.id=id;
+        sf.id = id;
         return sf;
     }
     @Override
@@ -74,13 +91,16 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         //所有设置参数方法都放在此方法之前执行
         //banner.setImages(images);
 
-        LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getActivity());
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
 
-            Map map=new HashMap<>();
-            map.put("id",String.valueOf(id));
-            mPresenter.getProductDetail(map);
+        Map map = new HashMap<>();
+        map.put("id", String.valueOf(id));
+        if (AppConstant.UID != 0) {
+            map.put("uid", String.valueOf(AppConstant.UID));
+        }
+        mPresenter.getProductDetail(map);
     }
 
     @Override
@@ -102,30 +122,27 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     public void getProductDetailFail(String msg) {
 
     }
-
     @Override
     public void getProductDetailSuccess(ProductDetailBean model) {
-        AppConstant.productDetailBean=model;
+        AppConstant.productDetailBean = model;
         tv_title.setText(model.getGoods().getTitle());
-        tv_price.setText("￥"+model.getGoods().getPrice());
-        tv_price_real.setText("板毛:￥"+model.getGoods().getPrice_real()+"/份");
+        tv_price.setText("￥" + model.getGoods().getPrice());
+        tv_price_real.setText("板毛:￥" + model.getGoods().getPrice_real() + "/份");
         tv_company.setText(model.getGoods().getCompany());
 
-        List<String> productDetailImg=new ArrayList<>();
-        for(int i=0;i<model.getGoods().getAlbum().size();i++){
-            Log.e("TTT",i+"--"+model.getGoods().getAlbum().size());
-            productDetailImg.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL+model.getGoods().getAlbum().get(i));
+        List<String> productDetailImg = new ArrayList<>();
+        for (int i = 0; i < model.getGoods().getAlbum().size(); i++) {
+            productDetailImg.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + model.getGoods().getAlbum().get(i));
         }
 
-        List<String> content=new ArrayList<>();
-        List<String> content1=new ArrayList<>();
-        content=model.getGoods().getContent_();
-        for(int i=0;i<content.size();i++){
-            content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+content.get(i));
+        List<String> content = new ArrayList<>();
+        List<String> content1 = new ArrayList<>();
+        content = model.getGoods().getContent_();
+        for (int i = 0; i < content.size(); i++) {
+            content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + content.get(i));
         }
-        adapter=new ProductDetailImgAdapter(getActivity(),content1);
+        adapter = new ProductDetailImgAdapter(getActivity(), content1);
         recyclerView.setAdapter(adapter);
-
 
 
         //自定义图片加载框架
@@ -144,5 +161,32 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
                 Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
             }
         });
+        //加载评论
+        if(model.getComment()!=null&&model.getComment().getCount()>0){
+            ProductDetailBean.Comment comment=model.getComment();
+            commentAmountTv.setText("产品评价("+comment.getCount()+")");
+            GlideUtil.getInstance().LoadContextCircleBitmap(activity,AppConstant.AVATARURL+comment.getAvatar(),userheadIv);
+            userphoneTv.setText(comment.getMobile());
+            commentDetailsTv.setText(comment.getComment_detail());
+        }else{
+            commentRl.setVisibility(View.GONE);
+            commentAmountTv.setText("暂无评价(0)");
+        }
+    }
+    @OnClick({R.id.look_allcomment_tv,R.id.comment_ll})
+    @Override
+    public void onClick(View v) {
+       switch (v.getId()){
+           case R.id.look_allcomment_tv:
+            Bundle bundle=new Bundle();
+               bundle.putInt("ID",id);
+               startActivity(CommentYarnActivity.class,bundle);
+               break;
+           case R.id.comment_ll:
+               Bundle bundle1=new Bundle();
+               bundle1.putInt("ID",id);
+               startActivity(CommentYarnActivity.class,bundle1);
+               break;
+       }
     }
 }

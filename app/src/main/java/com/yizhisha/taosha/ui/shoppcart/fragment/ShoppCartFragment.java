@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.iflytek.cloud.thirdparty.S;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ShoppCartAdapter;
@@ -23,6 +24,7 @@ import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
 import com.yizhisha.taosha.bean.json.Shopcart;
 import com.yizhisha.taosha.bean.json.ShopcartGoods;
+import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
 import com.yizhisha.taosha.ui.shoppcart.presenter.ShoppCartPresenter;
@@ -138,7 +140,25 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         btnSettle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "click：结算", Toast.LENGTH_SHORT).show();
+                StringBuilder str=new StringBuilder();
+                for (int i = 0; i < parentMapList.size(); i++) {
+                    StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
+                    List<Map<String, Object>> childMapList = childMapList_list.get(i);
+                    for (int j = 0; j < childMapList.size(); j++) {
+                        GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
+                        if(goodsBean.isChecked()){
+                            str.append(goodsBean.getGid()).append(",");
+                        }
+                    }
+                }
+                if(str.length()<=0){
+                    ToastUtil.showShortToast("请选择购买的商品");
+                    return;
+                }
+                Bundle bundle=new Bundle();
+                bundle.putInt("ORDERTYPE",2);
+                bundle.putString("gid",str.substring(0,str.length()-1));
+                startActivity(SureOrderActivity.class,bundle);
             }
         });
         adapter.setOnGoodsCheckedChangeListener(new ShoppCartAdapter.OnGoodsCheckedChangeListener() {
@@ -324,7 +344,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             mLlDeleteAllBottom.setVisibility(View.GONE);
         }
     }
-    @OnClick({R.id.deleteall_btn})
+    @OnClick({R.id.deleteall_btn,R.id.btnSettle})
     @Override
     public void onClick(View v) {
        switch (v.getId()){
@@ -349,6 +369,10 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                map.put("uid",String.valueOf(AppConstant.UID));
                map.put("sid", str.substring(0,str.length()-1).toString());
                mPresenter.deleteShoppCart(map);
+               break;
+           case R.id.btnSettle:
+
+
                break;
        }
     }

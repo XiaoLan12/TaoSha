@@ -15,13 +15,6 @@ import java.util.Map;
 public interface SelectYarnColorContract {
     interface View extends BaseView {
         void changeShopCartSuccess(String msg);
-
-        void showLoading();
-
-        void hideLoading();
-
-        void showEmpty();
-
         void loadFail(String msg);
     }
 

@@ -13,6 +13,8 @@ public class AppConstant {
     public static final String PRODUCT_DETAIL_ALBUM_IMG_URL="http://www.taoshamall.com/data/attached/goods/350x350/";
     public static final String PRODUCT_DETAIL_CONTENT_IMG_URL="http://www.taoshamall.com/";
     public static final String PRODUCT_DETAIL_SEKA_IMG_URL="http://www.taoshamall.com";
+    //头像链接
+    public static final String AVATARURL="http://www.taoshamall.com/data/attached/avatar/";
 
     public static final int UID=882;
     public static ProductDetailBean productDetailBean =null;

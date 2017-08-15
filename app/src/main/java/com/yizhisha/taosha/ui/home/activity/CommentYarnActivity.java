@@ -1,24 +1,17 @@
-package com.yizhisha.taosha.ui.home.fragment;
+package com.yizhisha.taosha.ui.home.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.CommentYarnAdapter;
-import com.yizhisha.taosha.adapter.MyCollectAdapter;
-import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.json.CommentBean;
-import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.CommentYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.CommentYarnPresenter;
-import com.yizhisha.taosha.utils.LogUtil;
-import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -28,16 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by Administrator on 2017/7/2.
- */
-
-public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> implements
-        CommentYarnContract.View {
-
+public class CommentYarnActivity extends BaseActivity<CommentYarnPresenter> implements
+        CommentYarnContract.View  {
     @Bind(R.id.comment_rv)
     RecyclerView mRecyclerView;
     @Bind(R.id.loadingView)
@@ -47,20 +34,20 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
     private int id;
     private int type;
     private final String COMMENTURL="http://www.taoshamall.com/data/attached/comment/";
-
-
-    public static CommentYarnFragment getInstance(int id) {
-        CommentYarnFragment sf = new CommentYarnFragment();
-        sf.id = id;
-        return sf;
-    }
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_commentyarn;
+        return R.layout.activity_comment_yarn;
     }
+    @Override
+    protected void initToolBar() {
 
+    }
     @Override
     protected void initView() {
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null){
+            id=bundle.getInt("ID");
+        }
         initAdapter();
         load(id,0, true);
     }
@@ -81,7 +68,6 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
         }
         mPresenter.loadCommentList(bodyMap, isShowLoad);
     }
-
     @Override
     public void loadCommentListSuccess(List<CommentBean> data) {
         for (int i = 0; i < data.size(); i++) {
@@ -94,16 +80,15 @@ public class CommentYarnFragment extends BaseFragment<CommentYarnPresenter> impl
                 }
                 data.get(i).setcommentPhotos(list);
                 data.get(i).setItemType(CommentBean.IMGS_TYPE);
-                }else {
+            }else {
 
                 data.get(i).setItemType(CommentBean.TEXT_TYPE);
-                }
             }
+        }
         dataList.clear();
         dataList.addAll(data);
         mAdapter.setNewData(dataList);
     }
-
     @Override
     public void showLoading() {
         mLoadingView.load();

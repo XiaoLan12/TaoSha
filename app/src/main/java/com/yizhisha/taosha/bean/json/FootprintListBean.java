@@ -50,7 +50,7 @@ public class FootprintListBean {
 
         private String litpic;
 
-        private String price;
+        private float price;
 
         public void setTitle(String title){
             this.title = title;
@@ -64,10 +64,10 @@ public class FootprintListBean {
         public String getLitpic(){
             return this.litpic;
         }
-        public void setPrice(String price){
+        public void setPrice(float price){
             this.price = price;
         }
-        public String getPrice(){
+        public float getPrice(){
             return this.price;
         }
 

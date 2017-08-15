@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:padding="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/tradehead_iv"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            />
+
+        <TextView
+            android:id="@+id/tradename_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_toRightOf="@+id/tradehead_iv"
+            android:layout_toLeftOf="@+id/delete_tv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_alignTop="@+id/tradehead_iv"
+            android:layout_marginRight="@dimen/dp_5"
+            android:textColor="@color/common_h1" />
+
+        <TextView
+            android:id="@+id/tradeprice_tv"
+            style="@style/TS.Theme.Widget.Text"
+            android:layout_alignBottom="@+id/tradehead_iv"
+            android:layout_toRightOf="@+id/tradehead_iv"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:textColor="@color/red1" />
+        <TextView
+            android:id="@+id/delete_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tradehead_iv"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="删除"/>
+    </RelativeLayout>
+    <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
+</LinearLayout>

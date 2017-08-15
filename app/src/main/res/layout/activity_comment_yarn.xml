@@ -2,43 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.yizhisha.taosha.base.BaseToolbar
+        android:id="@+id/toolbar"
+        style="@style/basetoolbarStyle"
+        app:isShowSearchView="false"
+        app:leftButtonIcon="@drawable/icon_back"
+        app:title="评价"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/dp_10"
         >
-            <TextView
-                android:id="@+id/allcoment_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="全部评论"/>
+        <TextView
+            android:id="@+id/allcoment_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="全部评论"/>
 
-            <TextView
-                android:id="@+id/goodcoment_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="好评"/>
+        <TextView
+            android:id="@+id/goodcoment_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="好评"/>
 
-            <TextView
-                android:id="@+id/mediumcomment_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="中评"/>
-            <TextView
-                android:id="@+id/badcomment_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="差评"/>
+        <TextView
+            android:id="@+id/mediumcomment_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="中评"/>
+        <TextView
+            android:id="@+id/badcomment_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="差评"/>
         <TextView
             android:id="@+id/havepiccomment_tv"
             android:layout_width="0dp"

@@ -4,6 +4,7 @@ import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
+import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.ui.home.contract.SureOrderContract;
 
 import java.util.Map;
@@ -22,12 +23,29 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             @Override
             protected void onSuccess(OrderSureBean bean) {
                 if(bean!=null){
-                    mView.loadSuccess(bean);
+                    mView.loadOrderSuccess(bean);
                 }else{
                     mView.loadFail("数据加载失败");
                 }
             }
+            @Override
+            protected void onFailure(String message) {
+                mView.loadFail(message);
+            }
+        });
+    }
 
+    @Override
+    public void loadShopCartOrderSure(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().shopCartOrderSure(param), new RxSubscriber<ShopCartOrderSureBean>(mContext, false) {
+            @Override
+            protected void onSuccess(ShopCartOrderSureBean bean) {
+                if(bean!=null){
+                    mView.loadShopCartOrderSuccess(bean);
+                }else{
+                    mView.loadFail("数据加载失败");
+                }
+            }
             @Override
             protected void onFailure(String message) {
                 mView.loadFail(message);

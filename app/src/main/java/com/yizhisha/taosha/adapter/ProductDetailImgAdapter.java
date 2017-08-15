@@ -20,12 +20,13 @@ import java.util.List;
 public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
     private String url="http://www.taoshamall.com";
     private Context mContext;
-    public ProductDetailImgAdapter(Context context, @Nullable List<String> data) {
+    public ProductDetailImgAdapter(Context context,@Nullable List<String> data) {
         super(R.layout.item_fragment_product_img,data);
         this.mContext=context;
     }
     @Override
     protected void convert(BaseViewHolder helper, String goods) {
+        Log.d("TTT","妈妈"+goods);
         GlideUtil.getInstance().LoadContextBitmap(mContext, url+goods,
                 (ImageView) helper.getView(R.id.img), GlideUtil.LOAD_BITMAP);
     }

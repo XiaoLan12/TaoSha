@@ -237,57 +237,58 @@
                 android:layout_height="20dp"
                 android:background="@color/common_bg"></LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="6dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="产品评价（999）"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/ic_launcher"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="13512345611"/>
-            </LinearLayout>
-            <LinearLayout
+                android:id="@+id/comment_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_marginTop="6dp">
                 <TextView
+                    android:id="@+id/comment_amount_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="产品评价（999）"/>
+                <RelativeLayout
+                    android:id="@+id/comment_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="十分骄傲了会计师会计法律是经济来看撒娇法律数据反馈说两句"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+                    <ImageView
+                        android:id="@+id/userhead_iv"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:src="@mipmap/ic_launcher"/>
+                    <TextView
+                        android:id="@+id/userphone_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/userhead_iv"
+                        android:layout_marginLeft="10dp"
+                        android:text="13512345611"/>
+                    <TextView
+                        android:id="@+id/comment_details_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userhead_iv"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="十分骄傲了会计师会计法律是经济来看撒娇法律数据反馈说两句"/>
+                    <TextView
+                        android:id="@+id/look_allcomment_tv"
+                        android:layout_width="140dp"
+                        android:layout_height="30dp"
+                        android:textColor="@color/red3"
+                        android:background="@drawable/red_shap"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/comment_details_tv"
+                        android:text="查看全部评价"/>
+                </RelativeLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="140dp"
-                    android:layout_height="30dp"
-                    android:textColor="@color/red3"
-                    android:background="@drawable/red_shap"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:text="查看全部评价"/>
-            </LinearLayout>
+           <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -298,7 +299,6 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-
                     android:src="@mipmap/ic_launcher"/>
                 <TextView
                     android:id="@+id/tv_company"

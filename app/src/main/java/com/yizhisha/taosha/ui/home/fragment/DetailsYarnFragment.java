@@ -53,7 +53,6 @@ public class DetailsYarnFragment extends BaseFragment{
 
     @Override
     protected void initView() {
-        Log.e("YY","---");
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(getActivity());
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);

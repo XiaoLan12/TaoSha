@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.home.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.yizhisha.taosha.adapter.SelectYarnColorAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.SelectYarnBean;
+import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
 import com.yizhisha.taosha.utils.ToastUtil;
@@ -42,9 +44,9 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     private ProductDetailImgAdapter adapter;
     private SelectYarnColorAdapter adapter1;
     private List<SelectYarnBean> list=new ArrayList<>();
-    private List<String> imgList=new ArrayList<>();
-    private int gid;
-    private int sid;
+    private ProductDetailBean productDetailBean=null;
+
+    private int type;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -52,11 +54,18 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
 
     @Override
     protected void initToolBar() {
-        toolbar.setTitle("立即购买");
+        Bundle bundle=getIntent().getExtras();
+        type=bundle.getInt("TYPE");
+        if(type==1) {
+            toolbar.setTitle("立即购买");
+        }else{
+            toolbar.setTitle("加入购物车");
+        }
     }
 
     @Override
     protected void initView() {
+
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
@@ -74,17 +83,18 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                 }
             }
         });
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
-         adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,imgList);
-         recyclerView.setAdapter(adapter);
-    }
-    private void load(boolean isShowLoad){
-        Map<String,String> map=new HashMap<>();
-        map.put("gid",String.valueOf(gid));
-        map.put("sid",String.valueOf(sid));
-        mPresenter.changeShopCart(map);
+        if(AppConstant.productDetailBean!=null){
+            List<String> content=new ArrayList<>();
+            productDetailBean=AppConstant.productDetailBean;
+            content=productDetailBean.getGoods().getSeka();
+            adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,content);
+            recyclerView.setAdapter(adapter);
+
+        }
     }
     @OnClick({R.id.tv_continue_add,R.id.sure_btn})
     @Override
@@ -98,35 +108,58 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                 }
                 SelectYarnBean selectYarnBean=new SelectYarnBean("",1);
                 list.add(selectYarnBean);
-                adapter1.notifyDataSetChanged();
+                adapter1.notifyItemChanged(list.size()-1);
                 break;
             case R.id.sure_btn:
-                startActivity(SureOrderActivity.class);
+                if(type==1) {
+                    StringBuilder str = new StringBuilder();
+                    int amount = 0;
+                    String detail = "";
+                    for (int i = 0; i < list.size(); i++) {
+                        str.append(list.get(i).getColor()).append("#");
+                        str.append(list.get(i).getNum()).append("，");
+                        amount += list.get(i).getNum();
+                    }
+                    if (str.length() > 0) {
+                        detail = str.substring(0, str.length() - 1);
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("gid", Integer.valueOf(productDetailBean.getGoods().getId()));
+                    bundle.putInt("ORDERTYPE", 1);
+                    bundle.putString("detail", detail);
+                    bundle.putString("type", "order");
+                    bundle.putInt("amount", amount);
+                    startActivity(SureOrderActivity.class, bundle);
+                }else{
+                    StringBuilder str=new StringBuilder();
+                    int amount=0;
+                    for(int i=0;i<list.size();i++){
+                        str.append(list.get(i).getColor()).append("#");
+                        str.append(list.get(i).getNum()).append("，");
+                        amount+=list.get(i).getNum();
+                    }
+                    if(str.length()<=0){
+                        ToastUtil.showShortToast("请选择商品");
+                    }
+                    Map<String,String> map=new HashMap<>();
+                    map.put("gid",String.valueOf(productDetailBean.getGoods().getId()));
+                    map.put("uid",String.valueOf(AppConstant.UID));
+                    map.put("savetype","add");
+                    map.put("amount",String.valueOf(amount));
+                    map.put("detail",str.substring(0,str.length()-1));
+                    mPresenter.changeShopCart(map);
+                }
                 break;
         }
-
     }
-
     @Override
     public void changeShopCartSuccess(String msg) {
-
-    }
-    @Override
-    public void showLoading() {
-
+        ToastUtil.showShortToast("商品已添加到购物车");
+        finish_Activity(this);
     }
 
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showEmpty() {
-
-    }
     @Override
     public void loadFail(String msg) {
-
+        ToastUtil.showShortToast(msg);
     }
 }

@@ -78,6 +78,15 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent=new Intent();
+                intent.putExtra("ADDRESS",dataList.get(position));
+                setResult(2,intent);
+                finish_Activity(MyAddressActivity.this);
+            }
+        });
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -91,6 +100,13 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
                     case R.id.delete_myaddress_tv:
                         mPresenter.deleteAddress(dataList.get(position).getId());
                         dataList.remove(position);
+                        break;
+                    case R.id.seletaddress_myaddress_cb:
+                        for(int i=0;i<dataList.size();i++){
+                            dataList.get(i).setIndex("0");
+                        }
+                        dataList.get(position).setIndex("1");
+                        mAdapter.setNewData(dataList);
                         break;
                 }
             }

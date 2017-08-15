@@ -15,7 +15,6 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
-import com.yizhisha.taosha.ui.home.fragment.CommentYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
@@ -33,7 +32,7 @@ import qiu.niorgai.StatusBarCompat;
 public class YarnActivity extends BaseActivity {
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-    private String[] mTitles = {"产品", "参数", "详情","评论"};
+    private String[] mTitles = {"产品", "参数", "详情"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     @Bind(R.id.vp)
@@ -68,19 +67,9 @@ public class YarnActivity extends BaseActivity {
         if(bundle!=null){
             id=bundle.getInt("id");
         }
-
-//        detailsYarnFragment=new DetailsYarnFragment();
         mFragments.add(ProductYarnFragnment.getInstance(id));
         mFragments.add(new ParameterYarnFragment());
         mFragments.add(new DetailsYarnFragment());
-        mFragments.add(CommentYarnFragment.getInstance(id));
-//        mFragments.add(new DetailsYarnFragment());
-//        mFragments.add(new DetailsYarnFragment());
-//        mFragments.add(new DetailsYarnFragment());
-        for (String title : new String[]{ "参数", "色卡", "详情","评论"}) {
-
-            //mFragments.add(MyCollectFragment.getInstance(title));
-        }
 
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));
@@ -156,10 +145,14 @@ public class YarnActivity extends BaseActivity {
                 finish_Activity(YarnActivity.this);
                 break;
             case R.id.tv_shopping_cart:
-                startActivity(SelectYarnColorActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("TYPE",2);
+                startActivity(SelectYarnColorActivity.class,bundle);
                 break;
             case R.id.tv_shopping:
-                startActivity(SelectYarnColorActivity.class);
+                Bundle bundle1=new Bundle();
+                bundle1.putInt("TYPE",1);
+                startActivity(SelectYarnColorActivity.class,bundle1);
                 break;
         }
     }

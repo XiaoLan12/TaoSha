@@ -32,11 +32,6 @@ public class ParameterYarnFragment extends BaseFragment{
     @Bind(R.id.tv_brand)
     TextView tv_brand;
 
-
-
-
-
-
     private boolean isLoad=false;
     @Override
     protected int getLayoutId() {

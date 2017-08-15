@@ -71,17 +71,13 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     private void load(int type,boolean isShowLoad){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(AppConstant.UID));
-        if(type!=-1) {
-            map.put("status", String.valueOf(type));
-        }
+        map.put("status", String.valueOf(type));
         mPresenter.loadOrder(map,isShowLoad);
     }
     public void search(String key){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(AppConstant.UID));
-        if(mType!=-1) {
-            map.put("status", String.valueOf(mType));
-        }
+        map.put("status", String.valueOf(mType));
         map.put("key",key);
         mPresenter.loadOrder(map,false);
     }

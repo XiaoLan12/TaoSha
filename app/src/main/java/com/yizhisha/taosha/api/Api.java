@@ -20,6 +20,7 @@ import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
+import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
@@ -122,8 +123,12 @@ public class Api {
         return service.loadMyComment(uid);
     }
     //我的足迹
-    public Observable<FootpringBean> loadFootprint(int uid){
-        return service.loadFootprint(uid);
+    public Observable<FootpringBean> loadFootprint(Map<String,String> map){
+        return service.loadFootprint(map);
+    }
+    //删除我的足迹
+    public Observable<RequestStatusBean> clearFootPrint(Map<String,String> map){
+        return service.clearFootPrint(map);
     }
     //获得订单
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
@@ -252,8 +257,12 @@ public class Api {
     public Observable<AccountBean> loadAccount(int uid){
         return service.loadAccount(uid);
     }
-    //订单确认吧
+    //订单确认
     public Observable<OrderSureBean> orderSure(Map<String,String> map){
         return service.orderSure(map);
+    }
+    //订单确认
+    public Observable<ShopCartOrderSureBean> shopCartOrderSure(Map<String,String> map){
+        return service.shopCartOrderSure(map);
     }
 }

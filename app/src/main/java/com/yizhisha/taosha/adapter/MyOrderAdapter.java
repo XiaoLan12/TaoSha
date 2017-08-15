@@ -57,7 +57,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 }else if(order.getStatus()==2){
                     helper.setText(R.id.paystate_myorder_tv,"待收货");
                 }else if(order.getStatus()==3){
-                    helper.setText(R.id.paystate_myorder_tv,"已完成");
+                    helper.setText(R.id.paystate_myorder_tv,"待评价");
                 }
                 else if(order.getStatus()==4){
                     helper.setText(R.id.paystate_myorder_tv,"已评价");
@@ -88,6 +88,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.addOnClickListener(R.id.immediate_payment_tv);
                 helper.addOnClickListener(R.id.additional_comments_tv);
                 helper.addOnClickListener(R.id.contact_the_merchant_tv);
+                switchState(orderFootBean.getStatus(),helper);
                 break;
         }
 

@@ -170,17 +170,19 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
                 mShopCartAddShopAdapter.notifyItemChanged(dataList.size()-1);
                 break;
             case R.id.sure_btn:
+                StringBuilder str=new StringBuilder();
+                for(int i=0;i<dataList.size();i++){
+                    str.append(dataList.get(i).getDetail()).append("#");
+                    str.append(dataList.get(i).getAmount()).append("，");
+                }
+                if(str.length()<=0){
+                    ToastUtil.showShortToast("请选择商品");
+                }
                 Map<String,String> map=new HashMap<>();
                 map.put("gid",String.valueOf(gid));
                 map.put("uid",String.valueOf(AppConstant.UID));
                 map.put("savetype","edit");
                 map.put("amount",String.valueOf(dataList.size()));
-                StringBuilder str=new StringBuilder();
-                for(int i=0;i<dataList.size();i++){
-                    str.append(dataList.get(i).getDetail()).append("#");
-                    str.append(dataList.get(i).getAmount()).append("，");
-
-                }
                 map.put("detail",str.substring(0,str.length()-1));
                 mPresenter.changeShopCart(map);
                 break;

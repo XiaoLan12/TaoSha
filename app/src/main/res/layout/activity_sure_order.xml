@@ -20,36 +20,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/shippingaddress_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/dp_5"
-                android:paddingLeft="@dimen/dp_10"
-                android:background="@color/white"
-                android:paddingTop="@dimen/dp_16">
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/dp_16">
 
-                <TextView
-                    android:id="@+id/consignee_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_toRightOf="@+id/consigneehead_iv"
-                    android:text="收货人:" />
+                    <TextView
+                        android:id="@+id/consignee_tv"
+                        style="@style/TS.Theme.Widget.Text"
+                        android:text="收货人:" />
 
-                <TextView
-                    android:id="@+id/consignee_name_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_toRightOf="@+id/consignee_tv"
-                    android:text="林先生" />
+                    <TextView
+                        android:id="@+id/consignee_name_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="林先生" />
 
-                <TextView
-                    android:id="@+id/consignee_phone_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="1412523452345" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/consignee_phone_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:gravity="right"
+                        android:text="1412523452345" />
+                </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/shippingaddress_ll"
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -57,67 +63,31 @@
                 >
                 <TextView
                     android:id="@+id/shippingaddress_tv"
-                    style="@style/TS.Theme.Widget.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/shippingaddress_iv"
-                    android:text="怪能够的男生设定发送但感觉卡死了的方法收到了看见过" />
+                    />
                 <ImageView
                     android:id="@+id/shippingaddress_iv"
                     android:layout_width="@dimen/dp_25"
                     android:layout_height="@dimen/dp_25"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:src="@drawable/icon_right"/>
-            </RelativeLayout>
+            </LinearLayout>
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_20"
                 android:background="@color/white"/>
 
-
-            <RelativeLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="match_parent"
                 android:background="@color/white"
-                android:padding="@dimen/dp_5">
-
-                <ImageView
-                    android:id="@+id/tradehead_iv"
-                    android:layout_width="@dimen/dp_80"
-                    android:layout_height="@dimen/dp_80"
-                    android:src="@drawable/icon_delete" />
-
-                <TextView
-                    android:id="@+id/tradename_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_toRightOf="@+id/tradehead_iv"
-                    android:text="段染四经——纬  20%腈纶  80%尼龙"
-                    android:textColor="@color/common_h1" />
-
-                <TextView
-                    android:id="@+id/tradecolor"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_below="@+id/tradename_tv"
-                    android:layout_toRightOf="@+id/tradehead_iv"
-                    android:text="颜色：" />
-
-                <TextView
-                    android:id="@+id/tradecolor_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_below="@+id/tradename_tv"
-                    android:layout_toRightOf="@+id/tradecolor"
-                    android:text="#f40" />
-
-                <TextView
-                    android:id="@+id/tradeprice_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_alignBottom="@+id/tradehead_iv"
-                    android:layout_toRightOf="@+id/tradehead_iv"
-                    android:text="￥33.50"
-                    android:textColor="@color/red1" />
-            </RelativeLayout>
+                android:layout_marginTop="@dimen/dp_10"
+                >
+            </android.support.v7.widget.RecyclerView>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -210,7 +180,7 @@
             android:layout_toLeftOf="@+id/ishave_freight_tv"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp_16"
-            android:text="合计:Y"/>
+            android:text="合计:￥"/>
         <TextView
             android:id="@+id/ishave_freight_tv"
             android:layout_width="wrap_content"
