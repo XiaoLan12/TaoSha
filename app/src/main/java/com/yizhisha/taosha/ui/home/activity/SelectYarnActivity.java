@@ -1,6 +1,8 @@
 package com.yizhisha.taosha.ui.home.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -35,6 +38,7 @@ import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.iflytek.sunflower.FlowerCollector;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseFragment;
@@ -74,6 +78,10 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     ImageView img_yuyin;
     @Bind(R.id.search_selectyarn_et)
     EditText searchYarnEt;
+    @Bind(R.id.img_scan)
+    ImageView img_scan;
+    @Bind(R.id.ll_scan)
+    LinearLayout ll_scan;
 
     private String[] mTitles = {"棉纱", "针型", "价格", "排序"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -117,9 +125,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initView() {
-        Bundle bundle=getIntent().getExtras();
-        if(bundle!=null) {
-            mYarnType=bundle.getInt("YARNTYPE");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mYarnType = bundle.getInt("YARNTYPE");
         }
         //设置状态栏颜色
         StatusBarCompat.setStatusBarColor(SelectYarnActivity.this, this.getResources().getColor(R.color.red3));
@@ -127,17 +135,18 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));
         }
 
-        for (int i=0;i<mTitles.length;i++) {
+        for (int i = 0; i < mTitles.length; i++) {
             mFragments.add(SelectYarnFragment.getInstance(mYarnType));
         }
         commonTabLayout.setTabData(mTabEntities);
 
-        mFragment= (SelectYarnFragment) mFragments.get(0);
+        mFragment = (SelectYarnFragment) mFragments.get(0);
         mAdapter = new FragmentPagerAdapter(SelectYarnActivity.this.getSupportFragmentManager()) {
             @Override
             public int getCount() {
                 return mFragments.size();
             }
+
             @Override
             public Fragment getItem(int position) {
                 return mFragments.get(position);
@@ -152,11 +161,12 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
+
             @Override
             public void onPageSelected(int position) {
 
                 commonTabLayout.setCurrentTab(position);
-                mFragment= (SelectYarnFragment) mFragments.get(position);
+                mFragment = (SelectYarnFragment) mFragments.get(position);
             }
 
             @Override
@@ -168,76 +178,78 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         commonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                mFragment= (SelectYarnFragment) mFragments.get(position);
-                switch (position){
+                mFragment = (SelectYarnFragment) mFragments.get(position);
+                switch (position) {
                     case 0:
-                        if(mYarnPopup==null){
+                        if (mYarnPopup == null) {
                             initPopup1(position);
                         }
-                        if(!mYarnPopup.isShowing()){
+                        if (!mYarnPopup.isShowing()) {
                             mYarnPopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 1:
-                        if(mNeedlePopup==null){
+                        if (mNeedlePopup == null) {
                             initPopup3(position);
                         }
-                        if(!mNeedlePopup.isShowing()){
+                        if (!mNeedlePopup.isShowing()) {
                             mNeedlePopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 2:
-                        if(mPricePopup==null){
+                        if (mPricePopup == null) {
                             initPopup2(position);
                         }
-                        if(!mPricePopup.isShowing()){
+                        if (!mPricePopup.isShowing()) {
                             mPricePopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 3:
-                        if(mOrderbyPopup==null){
+                        if (mOrderbyPopup == null) {
                             initPopup4(position);
                         }
-                        if(!mOrderbyPopup.isShowing()){
+                        if (!mOrderbyPopup.isShowing()) {
                             mOrderbyPopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                 }
-              }
+
+
+            }
 
             @Override
             public void onTabReselect(int position) {
-                mFragment= (SelectYarnFragment) mFragments.get(position);
-                switch (position){
+                mFragment = (SelectYarnFragment) mFragments.get(position);
+                switch (position) {
                     case 0:
-                        if(mYarnPopup==null){
+                        if (mYarnPopup == null) {
                             initPopup1(position);
                         }
-                        if(!mYarnPopup.isShowing()){
+                        if (!mYarnPopup.isShowing()) {
                             mYarnPopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 1:
-                        if(mNeedlePopup==null){
+                        if (mNeedlePopup == null) {
                             initPopup3(position);
                         }
-                        if(!mNeedlePopup.isShowing()){
+                        if (!mNeedlePopup.isShowing()) {
                             mNeedlePopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 2:
-                        if(mPricePopup==null){
+                        if (mPricePopup == null) {
                             initPopup2(position);
                         }
-                        if(!mPricePopup.isShowing()){
+                        if (!mPricePopup.isShowing()) {
                             mPricePopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
                     case 3:
-                        if(mOrderbyPopup==null){
+                        if (mOrderbyPopup == null) {
                             initPopup4(position);
                         }
-                        if(!mOrderbyPopup.isShowing()){
+                        if (!mOrderbyPopup.isShowing()) {
                             mOrderbyPopup.show(commonTabLayout.getTitleView(position));
                         }
                         break;
@@ -258,14 +270,14 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         img_yuyin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SelectYarnActivity.this,"sfsfs",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectYarnActivity.this, "sfsfs", Toast.LENGTH_SHORT).show();
 
                 //⑧申请录制音频的动态权限
-                if(ContextCompat.checkSelfPermission(SelectYarnActivity.this, android.Manifest.permission.RECORD_AUDIO)
-                        != PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(SelectYarnActivity.this,new String[]{
-                            android.Manifest.permission.RECORD_AUDIO},1);
-                }else {
+                if (ContextCompat.checkSelfPermission(SelectYarnActivity.this, android.Manifest.permission.RECORD_AUDIO)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(SelectYarnActivity.this, new String[]{
+                            android.Manifest.permission.RECORD_AUDIO}, 1);
+                } else {
                     startRecord();
                 }
 
@@ -276,17 +288,48 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                SelectYarnFragment selectYarnFragment= (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
                 selectYarnFragment.search(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
     }
+        //扫描二维码
+        //https://cli.im/text?2dd0d2b267ea882d797f03abf5b97d88二维码生成网站
+    public void scan() {
+        // 扫描功能
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //申请CAMERA权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
+        } else {
+
+            Intent intent=  new Intent(this, CaptureActivity.class);
+            startActivityForResult(intent,0);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode==RESULT_OK&&data!=null){
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String result=bundle.getString("result");
+//                ToastUtils.showSingleToast("二维码结果："+result+"  金额"+money);
+            searchYarnEt.setText(result);
+            }
+        }
+
+    }
+
 
     int ret = 0; // 函数调用返回值
     private void startRecord(){
@@ -422,11 +465,14 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         // 给标题栏弹窗添加子类
         mOrderbyPopup.addAction(list);
     }
-    @OnClick({R.id.img_back})
+    @OnClick({R.id.img_back,R.id.ll_scan})
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
+            case R.id.ll_scan:
+                scan();
+                break;
             case R.id.img_back:
                 finish_Activity(SelectYarnActivity.this);
                 break;
@@ -539,7 +585,8 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         for (String key : mIatResults.keySet()) {
             resultBuffer.append(mIatResults.get(key));
         }
-        Toast.makeText(SelectYarnActivity.this,resultBuffer.toString(),Toast.LENGTH_SHORT).show();
+        searchYarnEt.setText(resultBuffer.toString());
+//        Toast.makeText(SelectYarnActivity.this,resultBuffer.toString(),Toast.LENGTH_SHORT).show();
 //        mResultText.setText(resultBuffer.toString());
 //        mResultText.setSelection(mResultText.length());
     }
@@ -630,7 +677,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         mIat.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString("iat_vadeos_preference", "1000"));
 
         // 设置标点符号,设置为"0"返回结果无标点,设置为"1"返回结果有标点
-        mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("iat_punc_preference", "1"));
+        mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("iat_punc_preference", "0"));
 
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
@@ -686,6 +733,16 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             startRecord();
         }else {
             Toast.makeText(SelectYarnActivity.this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+        }
+
+        if (3 == requestCode) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Intent intent=  new Intent(this, CaptureActivity.class);
+                startActivityForResult(intent,0);
+            } else {
+                // 未授权
+            }
         }
 
     }

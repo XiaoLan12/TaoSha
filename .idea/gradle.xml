@@ -8,10 +8,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/StatusBarlibrary" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/libzxing" />
+            <option value="$PROJECT_DIR$/pickerview" />
             <option value="$PROJECT_DIR$/pictureselector" />
+            <option value="$PROJECT_DIR$/statusbarlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

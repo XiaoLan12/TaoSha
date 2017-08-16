@@ -91,6 +91,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     RecyclerView recycleview5;
     @Bind(R.id.recycleview6)
     RecyclerView recycleview6;
+    @Bind(R.id.recycleview7)
+    RecyclerView recycleview7;
     @Bind(R.id.ll_search)
     LinearLayout ll_search;
 
@@ -120,6 +122,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     HomeYarnRecommendAdapter adapter6;
     List<IndexDeatailYarnBean> data6=new ArrayList<>();
+
+    HomeYarnRecommendAdapter adapter7;
+    List<IndexDeatailYarnBean> data7=new ArrayList<>();
 
 
 
@@ -259,6 +264,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         adapter6 = new HomeYarnRecommendAdapter(data6);
         recycleview6.setAdapter(adapter6);
 
+        LinearLayoutManager linearLayoutManager7 = new LinearLayoutManager(getActivity());
+        linearLayoutManager7.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycleview7.setLayoutManager(linearLayoutManager7);
+        recycleview7.addItemDecoration(new SpacesItemDecoration(spacingInPixels2));
+        adapter7 = new HomeYarnRecommendAdapter(data7);
+        recycleview7.setAdapter(adapter7);
+
         adapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -300,6 +312,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             }
         });
         adapter6.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", data6.get(position).getId());
+                startActivity(YarnActivity.class, bundle);
+            }
+        });
+        adapter7.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
@@ -429,6 +449,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         data6=model.getHuaxiansha();
         adapter6.setNewData(data6);
+
+        data7.add(data1.get(0));
+        data7.add(data2.get(0));
+        data7.add(data3.get(0));
+        data7.add(data4.get(0));
+        data7.add(data5.get(0));
+        data7.add(data6.get(0));
+        adapter7.setNewData(data7);
 
     }
 

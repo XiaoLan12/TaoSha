@@ -306,6 +306,36 @@
                     android:layout_height="wrap_content"
                     android:background="@color/common_bg"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/common_bg">
+
+                <com.yizhisha.taosha.widget.SquareIndexLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/common_bg"
+                        android:src="@drawable/recommend_hot"/>
+                </com.yizhisha.taosha.widget.SquareIndexLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="2dp">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleview7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

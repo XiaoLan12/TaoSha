@@ -58,14 +58,25 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     TextView commentDetailsTv;
     @Bind(R.id.look_allcomment_tv)
     TextView lookAllcommentTv;
-    @Bind(R.id.tv_title)
-    TextView tvTitle;
-    @Bind(R.id.tv_privce)
-    TextView tvPrivce;
-    @Bind(R.id.tv_price_real)
-    TextView tvPriceReal;
-    @Bind(R.id.tv_company)
-    TextView tvCompany;
+    @Bind(R.id.tv_fanxian)
+    TextView tv_fanxian;
+    @Bind(R.id.tv_lijian)
+    TextView tv_lijian;
+    @Bind(R.id.tv_banjiabanmao)
+    TextView tv_banjiabanmao;
+    @Bind(R.id.tv_free_sample)
+    TextView tv_free_sample;
+    @Bind(R.id.tv_favorite_num)
+    TextView tv_favorite_num;
+
+//    @Bind(R.id.tv_title)
+//    TextView tvTitle;
+//    @Bind(R.id.tv_privce)
+//    TextView tvPrivce;
+//    @Bind(R.id.tv_price_real)
+//    TextView tvPriceReal;
+//    @Bind(R.id.tv_company)
+//    TextView tvCompany;
 
 
     private ProductDetailImgAdapter adapter;
@@ -132,6 +143,28 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     @Override
     public void getProductDetailSuccess(ProductDetailBean model) {
         AppConstant.productDetailBean = model;
+        if(model.getGoods().getIs_fanxian().equals("1")){
+            tv_fanxian.setVisibility(View.VISIBLE);
+        }else{
+            tv_fanxian.setVisibility(View.GONE);
+        }
+        if(model.getGoods().getIs_nayang().equals("1")){
+            tv_free_sample.setVisibility(View.VISIBLE);
+        }else{
+            tv_free_sample.setVisibility(View.GONE);
+        }
+        if(model.getGoods().getIs_dunjian().equals("1")){
+            tv_lijian.setVisibility(View.VISIBLE);
+        }else{
+            tv_lijian.setVisibility(View.GONE);
+        }
+       /* if(model.getGoods().getIs_fanxian().equals("1")){
+            tv_fanxian.setVisibility(View.VISIBLE);
+        }else{
+            tv_fanxian.setVisibility(View.GONE);
+        }*/
+
+        tv_favorite_num.setText(model.getGoods().getFavorite());
         tv_title.setText(model.getGoods().getTitle());
         tv_price.setText("￥" + model.getGoods().getPrice());
         tv_price_real.setText("板毛:￥" + model.getGoods().getPrice_real() + "/份");
