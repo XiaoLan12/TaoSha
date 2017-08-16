@@ -7,6 +7,15 @@ package com.yizhisha.taosha.bean;
 public class SelectYarnBean {
     private String color;
     private int num;
+    private boolean isAdd;
+
+    public boolean isAdd() {
+        return isAdd;
+    }
+
+    public void setAdd(boolean add) {
+        isAdd = add;
+    }
 
     public String getColor() {
         return color;
@@ -32,8 +41,5 @@ public class SelectYarnBean {
                 '}';
     }
 
-    public SelectYarnBean(String color, int num) {
-        this.color = color;
-        this.num = num;
-    }
+
 }

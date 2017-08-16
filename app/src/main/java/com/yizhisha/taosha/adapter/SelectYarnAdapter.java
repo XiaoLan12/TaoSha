@@ -23,7 +23,7 @@ public class SelectYarnAdapter extends BaseQuickAdapter<SearchDetailBean,BaseVie
     }
     @Override
     protected void convert(BaseViewHolder helper, SearchDetailBean item) {
-        helper.setText(R.id.unitprice_selectyarn_tv,"￥"+item.getPrice()+"/份");
+        helper.setText(R.id.unitprice_selectyarn_tv,"￥"+item.getPrice_real()+"/份");
         helper.setText(R.id.shopname_selectyarn_tv,item.getTitle());
         helper.setText(R.id.composition_selectyarn_tv,item.getIngredient());
         helper.setText(R.id.fit_pittype_selectyarn_tv,item.getNeedle_name());

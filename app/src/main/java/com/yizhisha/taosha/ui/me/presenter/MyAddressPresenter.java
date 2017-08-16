@@ -37,6 +37,25 @@ public class MyAddressPresenter extends MyAddressContract.Presenter{
     }
 
     @Override
+    public void changeAddress(Map<String, String> map) {
+        addSubscrebe(Api.getInstance().changeNormalAddress(map),
+                new RxSubscriber<RequestStatusBean>(mContext,true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean requestStatusBean) {
+                        if(requestStatusBean.getStatus().equals("y")){
+                            mView.changeAddressSuccess(requestStatusBean.getInfo());
+                        }else{
+                            mView.deleteFail(requestStatusBean.getInfo());
+                        }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.deleteFail(message);
+                    }
+                });
+    }
+
+    @Override
     public void deleteAddress(int id) {
         addSubscrebe(Api.getInstance().deleteAddress(id),
                 new RxSubscriber<RequestStatusBean>(mContext,true) {

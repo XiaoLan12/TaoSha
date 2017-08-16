@@ -28,6 +28,7 @@ import com.yizhisha.taosha.bean.json.WechatBean;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -72,10 +73,14 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("ios/ucenter/address_save/")
     Observable<RequestStatusBean> addAddress(@FieldMap Map<String,String> map);
+
     //删除收货地址
     @GET("ios/ucenter/address_delete/")
     Observable<RequestStatusBean> deleteAddress(@Query("id") int id);
 
+    //修改默认地址
+    @GET("ios/ucenter/address_default/")
+    Observable<RequestStatusBean> changeNormalAddress(@QueryMap Map<String, String> param);
     //免费拿样
     @FormUrlEncoded
     @POST("ios/ucenter/active/")
@@ -116,7 +121,7 @@ public interface ApiService {
     //修改用户头像
     @Multipart
     @POST("ios/ajax/uploadAvatarPic/")
-    Observable<UserHeadBean> changeUserHead(@Part MultipartBody.Part file);
+    Observable<UserHeadBean> changeUserHead(@Part("uid") RequestBody uid, @Part MultipartBody.Part file);
 
     //手机号绑定
     @GET("ios/ucenter/mobile_save/")

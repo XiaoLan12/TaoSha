@@ -15,6 +15,8 @@ public class AppConstant {
     public static final String PRODUCT_DETAIL_SEKA_IMG_URL="http://www.taoshamall.com";
     //头像链接
     public static final String AVATARURL="http://www.taoshamall.com/data/attached/avatar/";
+    //用户头像链接
+    public static final String USERHEAD="http://www.taoshamall.com/data/attached/avatar/100x100/";
 
     public static final int UID=882;
     public static ProductDetailBean productDetailBean =null;

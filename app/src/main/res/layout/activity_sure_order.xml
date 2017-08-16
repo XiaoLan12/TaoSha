@@ -89,6 +89,7 @@
                 >
             </android.support.v7.widget.RecyclerView>
             <RelativeLayout
+                android:id="@+id/distribution_way_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -115,6 +116,7 @@
             </RelativeLayout>
             <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
             <RelativeLayout
+                android:id="@+id/pay_way_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -165,11 +167,13 @@
         android:layout_alignParentBottom="true"
         >
         <TextView
+            android:id="@+id/call_us_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/icon_contact_us"
             android:textColor="@color/blue"
             android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp_5"
             android:text="联系我们"/>
         <TextView
             android:id="@+id/cost_tv"
@@ -194,9 +198,9 @@
         <TextView
             android:id="@+id/sureorder_tv"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
-            android:paddingLeft="@dimen/dp_16"
-            android:paddingRight="@dimen/dp_16"
+            android:layout_height="50dp"
+            android:paddingLeft="@dimen/dp_25"
+            android:paddingRight="@dimen/dp_25"
             android:gravity="center"
             android:background="@color/yellow1"
             android:layout_alignParentRight="true"

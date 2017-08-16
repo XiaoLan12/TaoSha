@@ -82,6 +82,8 @@ public class ShopCartBean {
 
         private int amount;
 
+        private boolean isAdd;
+
         public String getDetail() {
             return detail;
         }
@@ -96,6 +98,14 @@ public class ShopCartBean {
 
         public void setAmount(int amount) {
             this.amount = amount;
+        }
+
+        public boolean isAdd() {
+            return isAdd;
+        }
+
+        public void setAdd(boolean add) {
+            isAdd = add;
         }
 
         @Override

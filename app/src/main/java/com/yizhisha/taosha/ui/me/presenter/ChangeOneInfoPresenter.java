@@ -53,14 +53,14 @@ public class ChangeOneInfoPresenter extends ChangeOneInfoContract.Presenter{
     }
 
     @Override
-    public void changeHeadSuccess(MultipartBody.Part body) {
-        addSubscrebe(Api.getInstance().changeUserHead(body),new RxSubscriber<UserHeadBean>(mContext,true){
+    public void changeHeadSuccess(RequestBody uid,MultipartBody.Part body) {
+        addSubscrebe(Api.getInstance().changeUserHead(uid,body),new RxSubscriber<UserHeadBean>(mContext,true){
             @Override
             protected void onSuccess(UserHeadBean info) {
-                if(info!=null) {
-                    mView.changeHeadSuccess(info.getAvatar());
+                if(info.getStatus().equals("y")) {
+                    mView.changeHeadSuccess(info);
                 } else{
-                    mView.loadFail("头像修改失败");
+                    mView.loadFail(info.getInfo());
                     }
             }
             @Override

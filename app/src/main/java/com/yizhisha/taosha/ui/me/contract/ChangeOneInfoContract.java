@@ -4,6 +4,7 @@ import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface ChangeOneInfoContract {
     interface View extends BaseView {
         void loadPersonalDataSuccess(PersonalDataBean personalDataBean);
         void changeSuccess(String msg);
-        void changeHeadSuccess(String msg);
+        void changeHeadSuccess(UserHeadBean msg);
 
         void loadFail(String msg);
     }
@@ -27,7 +28,7 @@ public interface ChangeOneInfoContract {
 
         public abstract void loadPersonalData(int uid);
         public abstract void changeUserInfo(Map<String, String> params);
-        public abstract void changeHeadSuccess(MultipartBody.Part body);
+        public abstract void changeHeadSuccess(RequestBody uid,MultipartBody.Part body);
 
         @Override
         public void onStart() {

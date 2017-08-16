@@ -31,8 +31,13 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<SelectYarnBean,Base
     @Override
     protected void convert(final BaseViewHolder helper, final SelectYarnBean goods) {
         helper.addOnClickListener(R.id.img_delete);
+        if(goods.isAdd()){
+            helper.setImageResource(R.id.img_delete,R.drawable.icon_addimage);
+        }else{
+            helper.setImageResource(R.id.img_delete,R.drawable.icon_shanchushuxing);
+        }
         helper.setText(R.id.tv_num,goods.getNum()+"");
-        helper.setText(R.id.et_color,goods.getColor());
+
         final EditText et_color=(EditText) helper.getView(R.id.et_color);
         if(et_color.getTag() instanceof TextWatcher) {
             et_color.removeTextChangedListener((TextWatcher)et_color.getTag());
@@ -54,7 +59,6 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<SelectYarnBean,Base
         et_color.addTextChangedListener(watcher);
         et_color.setTag(watcher);
         et_color.setText(goods.getColor());
-
             helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {

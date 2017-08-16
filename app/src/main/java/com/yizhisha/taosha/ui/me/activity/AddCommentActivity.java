@@ -233,8 +233,8 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
     private void uploadComment(String photo){
         Map<String,String> body=new HashMap<>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        body.put("mzw_uid",String.valueOf(orderId));
-        body.put("order_id",String.valueOf(mzwuId));
+        body.put("mzw_uid",String.valueOf(mzwuId));
+        body.put("order_id",String.valueOf(orderId));
         body.put("quality",String.valueOf(qualityNum));
         body.put("logistics",String.valueOf(logisticsNum));
         body.put("service",String.valueOf(serveNum));
@@ -244,7 +244,7 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
     }
     private void uploadAddComment(String photo){
         Map<String,String> body=new HashMap<>();
-        body.put("cid",String.valueOf(mzwuId));
+        body.put("oid",String.valueOf(orderId));
         body.put("detail",contentAddcommentEt.getText().toString());
         body.put("photo",photo);
         mPresenter.addAddComment(body);

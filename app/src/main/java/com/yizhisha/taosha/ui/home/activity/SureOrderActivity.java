@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.ui.home.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
@@ -21,9 +23,13 @@ import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.OrderSureGoodBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.ui.home.contract.SureOrderContract;
 import com.yizhisha.taosha.ui.home.precenter.SureOrderPresenter;
 import com.yizhisha.taosha.ui.me.activity.MyAddressActivity;
+import com.yizhisha.taosha.ui.me.activity.SetInfoActivity;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
@@ -60,6 +66,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     TextView costTv;
     @Bind(R.id.ishave_freight_tv)
     TextView ishaveFreightTv;
+
 
     private OrderSureAdapter mAdapter;
     private List<OrderSureGoodBean> dataList=new ArrayList<>();
@@ -163,12 +170,105 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     public void loadFail(String msg) {
         ToastUtil.showShortToast(msg);
     }
-    @OnClick({R.id.shippingaddress_ll})
+    @OnClick({R.id.shippingaddress_ll,R.id.distribution_way_rl,R.id.pay_way_rl,
+    R.id.call_us_tv})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.shippingaddress_ll:
                 startActivityForResult(MyAddressActivity.class,2);
+                break;
+            case R.id.distribution_way_rl:
+                final List<String> mDatas=new ArrayList<>();
+                mDatas.add("快递发货(到付)");
+                mDatas.add("物流发货(到付)");
+                NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
+                        .setBoolTitle(true)
+                        .setTitleText("温馨提示\n订单完成后请与供应商联系具体发什么快递/物流")
+                        .setTitleHeight(55)
+                        .setItemHeight(45)
+                        .setItemTextColor(R.color.blue)
+                        .setItemTextSize(14)
+                        .setItemWidth(0.95f)
+                        .setCancleButtonText("取消")
+                        .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                            @Override
+                            public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                distributionWayTv.setText(mDatas.get(position));
+                                switch (position){
+                                    case 0:
+                                        distributionWayTv.setText("快递发货");
+                                        break;
+                                    case 1:
+                                        distributionWayTv.setText("物流发货");
+                                        break;
+                                }
+                                dialog.dismiss();
+                            }
+                        }).setTouchOutside(true)
+                        .build();
+                dialog.setData(mDatas);
+                dialog.show();
+                break;
+            case R.id.pay_way_rl:
+                final List<String> mDatas1=new ArrayList<>();
+                mDatas1.add("微信支付(小额支付建议选此项)");
+                mDatas1.add("支付宝支付(小额支付建议选此项)");
+                mDatas1.add("货到付款(与商家联系付款及发货方式)");
+                NormalSelectionDialog dialog1=new NormalSelectionDialog.Builder(this)
+                        .setBoolTitle(true)
+                        .setTitleText("温馨提示\n请选择您所需要的支付方式")
+                        .setTitleHeight(55)
+                        .setItemHeight(45)
+                        .setItemTextColor(R.color.blue)
+                        .setItemTextSize(14)
+                        .setItemWidth(0.95f)
+                        .setCancleButtonText("取消")
+                        .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                            @Override
+                            public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                switch (position){
+                                    case 0:
+                                        payWayTv.setText("微信支付");
+                                        break;
+                                    case 1:
+                                        payWayTv.setText("支付宝支付");
+                                        break;
+                                    case 2:
+                                        payWayTv.setText("货到付款");
+                                        break;
+                                }
+                                dialog.dismiss();
+                            }
+                        }).setTouchOutside(true)
+                        .build();
+                dialog1.setData(mDatas1);
+                dialog1.show();
+                break;
+            case R.id.call_us_tv:
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText("2142142354")
+                        .setContentTextColor(R.color.blue)
+                        .setLeftText("取消")
+                        .setLeftTextColor(R.color.blue)
+                        .setRightText("确认")
+                        .setRightTextColor(R.color.blue)
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + "1241234"));
+                                startActivity(phoneIneten);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
                 break;
         }
     }

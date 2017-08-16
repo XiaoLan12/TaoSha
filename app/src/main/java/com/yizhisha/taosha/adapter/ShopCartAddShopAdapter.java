@@ -21,12 +21,16 @@ import java.util.List;
  */
 
 public class ShopCartAddShopAdapter extends BaseQuickAdapter<ShopCartBean.ShopcartList,BaseViewHolder> {
-    private Context mContext;
     public ShopCartAddShopAdapter(@Nullable List<ShopCartBean.ShopcartList> data) {
         super(R.layout.item_select_yarn_color,data);
     }
     @Override
     protected void convert(final BaseViewHolder helper, final ShopCartBean.ShopcartList item) {
+        if(item.isAdd()){
+            helper.setImageResource(R.id.img_delete,R.drawable.icon_addimage);
+        }else{
+            helper.setImageResource(R.id.img_delete,R.drawable.icon_shanchushuxing);
+        }
         helper.addOnClickListener(R.id.img_delete);
         helper.setText(R.id.tv_num,item.getAmount()+"");
        final EditText et_color=(EditText) helper.getView(R.id.et_color);

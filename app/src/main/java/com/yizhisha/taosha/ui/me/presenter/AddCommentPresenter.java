@@ -64,10 +64,11 @@ public class AddCommentPresenter extends AddCommentContract.Presenter{
                 new RxSubscriber<CommentPicBean>(mContext, false) {
                     @Override
                     protected void onSuccess(CommentPicBean commentPicBean) {
-                        mView.hideLoading();
+
                         if(commentPicBean!=null&&!commentPicBean.getCommentPic().equals("")){
                             mView.addCommentPicSuccess(commentPicBean.getCommentPic());
                         }else{
+                            mView.hideLoading();
                             mView.loadFail("发布失败");
                         }
                     }

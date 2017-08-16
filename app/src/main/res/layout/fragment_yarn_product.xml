@@ -124,6 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:gravity="center_vertical"
                     android:text="织信通" />
                 <ImageView
                     android:layout_width="20dp"
@@ -267,19 +268,21 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/userhead_iv"
                         android:layout_marginLeft="10dp"
-                        android:text="13512345611"/>
+                        />
                     <TextView
                         android:id="@+id/comment_details_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/userhead_iv"
                         android:layout_marginTop="@dimen/dp_5"
-                        android:text="十分骄傲了会计师会计法律是经济来看撒娇法律数据反馈说两句"/>
+                        />
                     <TextView
                         android:id="@+id/look_allcomment_tv"
                         android:layout_width="140dp"
                         android:layout_height="30dp"
                         android:textColor="@color/red3"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
                         android:background="@drawable/red_shap"
                         android:textSize="16sp"
                         android:gravity="center"

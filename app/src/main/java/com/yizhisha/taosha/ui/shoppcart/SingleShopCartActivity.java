@@ -25,6 +25,8 @@ import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +101,26 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
                     case R.id.img_delete:
-                        mShopCartAddShopAdapter.remove(position);
+                        if(dataList.get(position).isAdd()){
+                            if(dataList.size()>7){
+                                ToastUtil.showShortToast("一个订单最多八组");
+                                return;
+                            }
+                            for(int i=0;i<dataList.size();i++){
+                                if(dataList.get(i).getDetail().equals("")){
+                                    ToastUtil.showShortToast("请先输入色号");
+                                    return;
+                                }
+                            }
+                            ShopCartBean.ShopcartList shopcartList=new ShopCartBean().new ShopcartList();
+                            shopcartList.setAmount(0);
+                            shopcartList.setDetail("");
+                            shopcartList.setAdd(false);
+                            dataList.add(0,shopcartList);
+                            mShopCartAddShopAdapter.setNewData(dataList);
+                        }else {
+                            mShopCartAddShopAdapter.remove(position);
+                        }
                         break;
                 }
             }
@@ -110,13 +131,23 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         if(data.getShopcart()!=null&&data.getShopcart().size()>0){
             dataList.clear();
             dataList.addAll(data.getShopcart());
+            dataList.get(dataList.size()-1).setAdd(true);
             mShopCartAddShopAdapter.setNewData(dataList);
+        }else{
+            ShopCartBean.ShopcartList shopcartList=new ShopCartBean().new ShopcartList();
+            shopcartList.setAmount(0);
+            shopcartList.setDetail("");
+            shopcartList.setAdd(true);
+            dataList.add(shopcartList);
+
+        }
+        if(data.getSeka()!=null&&data.getSeka().size()>0) {
+            imgList.clear();
+            imgList.addAll(data.getSeka());
+            mProductDetailImgAdapter.setNewData(imgList);
         }else{
             showEmpty();
         }
-        imgList.clear();
-        imgList.addAll(data.getSeka());
-        mProductDetailImgAdapter.setNewData(imgList);
 
     }
 
@@ -153,22 +184,11 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
             }
         });
     }
-    @OnClick({R.id.tv_continue_add,R.id.sure_btn})
+    @OnClick({R.id.sure_btn})
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()){
-            case R.id.tv_continue_add:
-                if(dataList.size()>7){
-                    ToastUtil.showShortToast("一个订单最多八组");
-                    return;
-                }
-                ShopCartBean.ShopcartList shopcartList=new ShopCartBean().new ShopcartList();
-                shopcartList.setAmount(0);
-                shopcartList.setDetail("");
-                dataList.add(shopcartList);
-                mShopCartAddShopAdapter.notifyItemChanged(dataList.size()-1);
-                break;
             case R.id.sure_btn:
                 StringBuilder str=new StringBuilder();
                 for(int i=0;i<dataList.size();i++){

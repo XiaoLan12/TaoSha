@@ -110,6 +110,10 @@ public class Api {
     public Observable<RequestStatusBean> deleteAddress(int id){
         return service.deleteAddress(id);
     }
+    //修改默认地址
+    public Observable<RequestStatusBean> changeNormalAddress(Map<String,String> map){
+        return service.changeNormalAddress(map);
+    }
     //免费拿样
     public Observable<FreeSampleBean> loadFreeSample(Map<String,String> map){
         return service.getFreeSample(map);
@@ -147,8 +151,8 @@ public class Api {
         return service.changeUserInfo(map);
     }
     //修改用户头像
-    public Observable<UserHeadBean> changeUserHead(MultipartBody.Part body){
-        return service.changeUserHead(body);
+    public Observable<UserHeadBean> changeUserHead(RequestBody uid,MultipartBody.Part body){
+        return service.changeUserHead(uid,body);
     }
     //绑定微信号
     public Observable<RequestStatusBean> bindPhone(Map<String, String> map){

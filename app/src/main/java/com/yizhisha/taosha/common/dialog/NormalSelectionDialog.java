@@ -68,7 +68,7 @@ public class NormalSelectionDialog {
             title.setTextColor(mBuilder.getTitleTextColor());
             title.setTextSize(mBuilder.getTitleTextSize());
             LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) title.getLayoutParams();
-            lp.height=mBuilder.getItemHeight();
+            lp.height=mBuilder.getTitleHeight();
 
             title.setLayoutParams(lp);
             if(datas.size()!=0){
@@ -194,7 +194,7 @@ public class NormalSelectionDialog {
             this.mContext = context;
             //默认标题属性
             boolTitle = false;
-            titleHeight = 65;
+            titleHeight = DensityUtil.dip2px(50); // 默认title高度
             titleText = "请选择";
             titleTextColor = ContextCompat.getColor(mContext, R.color.common_h2);
             titleTextSize = 13;
@@ -238,7 +238,7 @@ public class NormalSelectionDialog {
         }
 
         public Builder setTitleHeight(int titleHeight) {
-            this.titleHeight = titleHeight;
+            this.titleHeight = DensityUtil.dip2px(titleHeight);
             return this;
         }
 

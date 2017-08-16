@@ -71,15 +71,13 @@
             android:textSize="20sp"
             android:background="@drawable/shape_bg_selector"
             android:text="+"/>
-
-
     </LinearLayout>
     <ImageView
         android:id="@+id/img_delete"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/icon_delete"/>
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:src="@drawable/icon_addimage"/>
 </LinearLayout>
 </LinearLayout>

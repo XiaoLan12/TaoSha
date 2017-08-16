@@ -17,6 +17,7 @@ import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
+import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.me.contract.SetContract;
 import com.yizhisha.taosha.ui.me.presenter.SetPresenter;
@@ -64,8 +65,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     @Override
     protected void initView() {
         if(AppConstant.infoBean!=null){
-            String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
-            GlideUtil.getInstance().LoadContextCircleBitmap(this,url+AppConstant.infoBean.getAvatar(),headIv);
+            GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv);
             usernameTv.setText(AppConstant.infoBean.getUsername());
         }
         //AppConst.WEIXIN.APP_ID是指你应用在微信开放平台上的AppID，记得替换。
@@ -75,19 +75,25 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         event();
     }
     private void event(){
-        subscription= RxBus.$().toObservable(WeChatEvent.class)
+        subscription= RxBus.$().toObservable(Object.class)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<WeChatEvent>() {
+                .subscribe(new Action1<Object>() {
                     @Override
-                    public void call(WeChatEvent event) {
-                        String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid="
-                                + AppConstant.WEIXIN_APP_ID
-                                + "&secret="
-                                + APP_SECRET
-                                + "&code="
-                                + event.getCode()
-                                + "&grant_type=authorization_code";
-                        mPresenter.loadWeChatData(url);
+                    public void call(Object event) {
+                        if(event instanceof WeChatEvent) {
+                            WeChatEvent chatEvent= (WeChatEvent) event;
+                            String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="
+                                    + AppConstant.WEIXIN_APP_ID
+                                    + "&secret="
+                                    + APP_SECRET
+                                    + "&code="
+                                    + chatEvent.getCode()
+                                    + "&grant_type=authorization_code";
+                            mPresenter.loadWeChatData(url);
+                        }else if(event instanceof UserHeadEvent){
+                            UserHeadEvent userHeadEvent= (UserHeadEvent) event;
+                            GlideUtil.getInstance().LoadContextCircleBitmap(SettinActivity.this,userHeadEvent.getAvatar(),headIv);
+                        }
                     }
                 });
     }

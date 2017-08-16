@@ -16,6 +16,8 @@ public interface MyAddressContract {
     interface View extends BaseView {
         void loadAddressSuccess(List<AddressListBean.Address> data);
 
+        void changeAddressSuccess(String msg);
+
         void deleteAddress();
 
         void showLoading();
@@ -32,6 +34,7 @@ public interface MyAddressContract {
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void loadAddress(int uid,boolean isShowLoad);
+        public abstract void changeAddress(Map<String,String> map);
         public abstract void deleteAddress(int id);
 
         @Override

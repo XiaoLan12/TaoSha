@@ -26,7 +26,9 @@ import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -45,6 +47,8 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     private MyAddressAdapter mAdapter;
     private List<AddressListBean.Address> dataList=new ArrayList<>();
     private CityPickerView mCityPickerView;
+
+    private int index;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_address;
@@ -102,11 +106,13 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
                         dataList.remove(position);
                         break;
                     case R.id.seletaddress_myaddress_cb:
-                        for(int i=0;i<dataList.size();i++){
-                            dataList.get(i).setIndex("0");
-                        }
-                        dataList.get(position).setIndex("1");
-                        mAdapter.setNewData(dataList);
+                        Map<String,String> map=new HashMap<String, String>();
+                        map.put("uid",String.valueOf(AppConstant.UID));
+                        map.put("id",String.valueOf(dataList.get(position).getId()));
+                        map.put("index",String.valueOf(1));
+                        mPresenter.changeAddress(map);
+                        index=position;
+
                         break;
                 }
             }
@@ -125,6 +131,15 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         mAdapter.setNewData(dataList);
     }
 
+    @Override
+    public void changeAddressSuccess(String msg) {
+        for(int i=0;i<dataList.size();i++){
+            dataList.get(i).setIndex("0");
+        }
+        dataList.get(index).setIndex("1");
+        mAdapter.setNewData(dataList);
+        ToastUtil.showbottomShortToast(msg);
+    }
     @Override
     public void deleteAddress() {
         mAdapter.setNewData(dataList);

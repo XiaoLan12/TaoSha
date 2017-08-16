@@ -18,6 +18,7 @@ import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
+import com.yizhisha.taosha.ui.home.fragment.SekaFragment;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ import qiu.niorgai.StatusBarCompat;
 public class YarnActivity extends BaseActivity {
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-    private String[] mTitles = {"产品", "参数", "详情"};
+    private String[] mTitles = {"产品", "参数", "色卡","详情"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     @Bind(R.id.vp)
@@ -69,6 +70,7 @@ public class YarnActivity extends BaseActivity {
         }
         mFragments.add(ProductYarnFragnment.getInstance(id));
         mFragments.add(new ParameterYarnFragment());
+        mFragments.add(new SekaFragment());
         mFragments.add(new DetailsYarnFragment());
 
         for (int i = 0; i < mTitles.length; i++) {

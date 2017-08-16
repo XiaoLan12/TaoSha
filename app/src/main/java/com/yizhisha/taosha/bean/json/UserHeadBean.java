@@ -6,6 +6,9 @@ package com.yizhisha.taosha.bean.json;
 
 public class UserHeadBean {
     private String avatar;
+    private String status;
+
+    private String info;
 
     public String getAvatar() {
         return avatar;
@@ -13,5 +16,21 @@ public class UserHeadBean {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

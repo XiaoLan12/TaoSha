@@ -20,9 +20,11 @@ import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.ui.ClipHeaderActivity;
 import com.yizhisha.taosha.ui.me.activity.ChangeUserNameActivity;
 import com.yizhisha.taosha.ui.me.contract.ChangeOneInfoContract;
@@ -74,6 +76,8 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
     private static final int CROP_PHOTO = 102;
 
     private File tempFile;
+
+    private String headUrl="http://www.taoshamall.com/data/attached/avatar/150x150/";
 
 
     @Override
@@ -148,9 +152,14 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
     }
 
     @Override
-    public void changeHeadSuccess(String msg) {
-        GlideUtil.getInstance().LoadContextCircleBitmap(activity,AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+msg,mIvHead);
-        ToastUtil.showbottomShortToast("头像修改成功");
+    public void changeHeadSuccess(UserHeadBean msg) {
+        //mPresenter.loadPersonalData(AppConstant.UID);
+        if(AppConstant.infoBean!=null) {
+            AppConstant.infoBean.setAvatar(msg.getAvatar());
+        }
+        GlideUtil.getInstance().LoadContextCircleBitmap(activity,headUrl+msg.getAvatar(),mIvHead);
+        RxBus.$().postEvent(new UserHeadEvent(headUrl+msg.getAvatar()));
+        ToastUtil.showbottomShortToast(msg.getInfo());
     }
     @Override
     public void loadFail(String msg) {
@@ -233,7 +242,11 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part body =
                     MultipartBody.Part.createFormData("Filedata", file.getName(), requestFile);
-            mPresenter.changeHeadSuccess(body);
+            Map<String, RequestBody> map = new HashMap<>();
+            RequestBody uidBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(AppConstant.UID));
+         /*   RequestBody fileBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            map.put("Filedata", fileBody);*/
+            mPresenter.changeHeadSuccess(uidBody,body);
         }
     }
     @OnClick({R.id.changeusernamee_rl,R.id.realname_rl,R.id.e_mail_rl,R.id.sex_rl
@@ -304,6 +317,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                                             public void noPermission() {
                                             }
                                         }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                                        dialog.dismiss();
                                         break;
                                     case 1:
                                         performCodeWithPermission("软件更新需要您提供浏览存储的权限", new BaseActivity.PermissionCallback() {
@@ -315,7 +329,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                                             public void noPermission() {
                                             }
                                         }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
+                                        dialog.dismiss();
                                         break;
                                 }
 

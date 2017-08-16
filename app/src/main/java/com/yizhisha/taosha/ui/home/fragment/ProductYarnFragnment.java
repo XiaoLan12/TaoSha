@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +58,14 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     TextView commentDetailsTv;
     @Bind(R.id.look_allcomment_tv)
     TextView lookAllcommentTv;
-    @Bind(R.id.comment_rl)
-    RelativeLayout commentRl;
+    @Bind(R.id.tv_title)
+    TextView tvTitle;
+    @Bind(R.id.tv_privce)
+    TextView tvPrivce;
+    @Bind(R.id.tv_price_real)
+    TextView tvPriceReal;
+    @Bind(R.id.tv_company)
+    TextView tvCompany;
 
 
     private ProductDetailImgAdapter adapter;
@@ -72,6 +77,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         sf.id = id;
         return sf;
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_yarn_product;
@@ -122,6 +128,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     public void getProductDetailFail(String msg) {
 
     }
+
     @Override
     public void getProductDetailSuccess(ProductDetailBean model) {
         AppConstant.productDetailBean = model;
@@ -162,31 +169,47 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
             }
         });
         //加载评论
-        if(model.getComment()!=null&&model.getComment().getCount()>0){
-            ProductDetailBean.Comment comment=model.getComment();
-            commentAmountTv.setText("产品评价("+comment.getCount()+")");
-            GlideUtil.getInstance().LoadContextCircleBitmap(activity,AppConstant.AVATARURL+comment.getAvatar(),userheadIv);
+        if (model.getComment() != null && model.getComment().getCount() > 0) {
+            ProductDetailBean.Comment comment = model.getComment();
+            commentAmountTv.setText("全部评价(" + comment.getCount() + ")");
+            GlideUtil.getInstance().LoadContextCircleBitmap(activity, AppConstant.AVATARURL + comment.getAvatar(), userheadIv);
             userphoneTv.setText(comment.getMobile());
             commentDetailsTv.setText(comment.getComment_detail());
-        }else{
-            commentRl.setVisibility(View.GONE);
-            commentAmountTv.setText("暂无评价(0)");
+        } else {
+            commentAmountTv.setText("全部评价(0)");
+            userheadIv.setImageResource(R.drawable.icon_head_normal);
+            commentDetailsTv.setText("暂无评论");
         }
     }
-    @OnClick({R.id.look_allcomment_tv,R.id.comment_ll})
+
+    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll})
     @Override
     public void onClick(View v) {
-       switch (v.getId()){
-           case R.id.look_allcomment_tv:
-            Bundle bundle=new Bundle();
-               bundle.putInt("ID",id);
-               startActivity(CommentYarnActivity.class,bundle);
-               break;
-           case R.id.comment_ll:
-               Bundle bundle1=new Bundle();
-               bundle1.putInt("ID",id);
-               startActivity(CommentYarnActivity.class,bundle1);
-               break;
-       }
+        switch (v.getId()) {
+            case R.id.look_allcomment_tv:
+                Bundle bundle = new Bundle();
+                bundle.putInt("ID", id);
+                startActivity(CommentYarnActivity.class, bundle);
+                break;
+            case R.id.comment_ll:
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("ID", id);
+                startActivity(CommentYarnActivity.class, bundle1);
+                break;
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }
