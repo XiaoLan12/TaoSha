@@ -70,4 +70,5 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:+'
     testCompile 'junit:junit:4.12'
     compile project(':pickerview')
+    compile project(':libzxing')
 }
