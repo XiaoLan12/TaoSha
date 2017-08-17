@@ -55,7 +55,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 }
                 break;
             case BaseResp.ErrCode.ERR_OK:
-                Log.d("TTT","类型"+baseResp.getType());
                 switch (baseResp.getType()) {
                     case RETURN_MSG_TYPE_LOGIN:
                         //拿到了微信返回的code,立马再去请求access_token
