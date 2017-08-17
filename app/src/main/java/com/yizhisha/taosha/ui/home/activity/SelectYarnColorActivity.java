@@ -62,7 +62,9 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
 
     @Override
     protected void initView() {
-
+        ArrayList<String> sekaList=new ArrayList<>();
+        Bundle bundle=getIntent().getExtras();
+        sekaList.addAll(bundle.getStringArrayList("DATA"));
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
@@ -106,14 +108,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
-        if(AppConstant.productDetailBean!=null){
-            List<String> content=new ArrayList<>();
-            productDetailBean=AppConstant.productDetailBean;
-            content=productDetailBean.getGoods().getSeka();
-            adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,content);
-            recyclerView.setAdapter(adapter);
-
-        }
+         adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,sekaList);
+         recyclerView.setAdapter(adapter);
     }
     @OnClick({R.id.sure_btn})
     @Override

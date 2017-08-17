@@ -9,6 +9,8 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +27,15 @@ public class SekaFragment extends BaseFragment {
     private ProductDetailImgAdapter mAdapter;
     private List<String> dataList=new ArrayList<>();
     private boolean isLoad=false;
+
+    public static SekaFragment getInstance(List<String> list) {
+        SekaFragment sf = new SekaFragment();
+       sf.dataList.addAll(list);
+        return sf;
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_product_details_yarn;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            if (AppConstant.productDetailBean != null & isLoad == false) {
-                dataList.addAll(AppConstant.productDetailBean.getGoods().getSeka());
-                mAdapter.setNewData(dataList);
-            }
-        }
     }
 
     @Override

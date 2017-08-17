@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/9.
  */
 
-public class ProductDetailBean {
+public class ProductDetailBean{
     private int info_s;
     private String info_t;
 

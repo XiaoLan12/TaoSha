@@ -51,6 +51,7 @@ dependencies {
     compile files('libs/Sunflower.jar')
     compile project(':pictureselector')
     compile project(':pickerview')
+    compile project(':libzxing')
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
@@ -70,5 +71,4 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.chrisbanes.photoview:library:+'
     testCompile 'junit:junit:4.12'
-    compile project(':libzxing')
 }

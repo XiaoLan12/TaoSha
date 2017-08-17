@@ -1,9 +1,11 @@
 package com.yizhisha.taosha.ui.home.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,32 +18,29 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
+import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
+import com.yizhisha.taosha.ui.home.fragment.SeckillProductYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.SekaFragment;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
+import com.yizhisha.taosha.ui.home.precenter.SeckillProductPresenter;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
 
-/**
- * Created by Administrator on 2017/7/2.
- */
-
-public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
-        ProductYarnContract.View {
+public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
+        implements SeckillProductContract.View{
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-
     private String[] mTitles = {"产品", "参数", "色卡","详情"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -49,19 +48,15 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
     ViewPager viewPager;
     @Bind(R.id.img_back)
     ImageView img_back;
-    @Bind(R.id.tv_shopping_cart)
-    TextView tv_shopping_cart;
-    @Bind(R.id.tv_shopping)
-    TextView tv_shopping;
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
-
     private FragmentPagerAdapter mAdapter;
+    private SeckillProductBean seckillProductBean;
+
     private int id;
-    private ProductDetailBean productDetailBean;
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_yarn;
+        return R.layout.activity_seckillproduct;
     }
 
     @Override
@@ -71,7 +66,7 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
     @Override
     protected void initView() {
         //设置状态栏颜色
-        StatusBarCompat.setStatusBarColor(YarnActivity.this, this.getResources().getColor(R.color.gray1));
+        StatusBarCompat.setStatusBarColor(this, this.getResources().getColor(R.color.gray1));
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null){
             id=bundle.getInt("id");
@@ -81,8 +76,7 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
         if (AppConstant.UID != 0) {
             map.put("uid", String.valueOf(AppConstant.UID));
         }
-        mPresenter.getProductDetail(map);
-
+        mPresenter.loadSeckillProduct(map);
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));
         }
@@ -121,77 +115,20 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
                 viewPager.setCurrentItem(position);
 
             }
-
             @Override
             public void onTabReselect(int position) {
-
             }
         });
     }
 
-    @OnClick({R.id.img_back,R.id.tv_shopping_cart,R.id.tv_shopping})
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-            case R.id.img_back:
-                finish_Activity(YarnActivity.this);
-                break;
-            case R.id.tv_shopping_cart:
-                Bundle bundle=new Bundle();
-                bundle.putInt("TYPE",2);
-                bundle.putStringArrayList("DATA", (ArrayList<String>) productDetailBean.getGoods().getSeka());
-                startActivity(SelectYarnColorActivity.class,bundle);
-                break;
-            case R.id.tv_shopping:
-                Bundle bundle1=new Bundle();
-                bundle1.putInt("TYPE",1);
-                bundle1.putStringArrayList("DATA", (ArrayList<String>) productDetailBean.getGoods().getSeka());
-                startActivity(SelectYarnColorActivity.class,bundle1);
-                break;
-        }
-    }
-
-    @Override
-    public void showLoading() {
-        mLoadingView.load();
-    }
-
-    @Override
-    public void hideLoading() {
-        mLoadingView.loadSuccess();
-    }
-
-    @Override
-    public void showEmpty() {
-        productDetailBean=null;
-        mLoadingView.loadSuccess(true);
-    }
-
-    @Override
-    public void getProductDetailFail(String msg) {
-        productDetailBean=null;
-        mLoadingView.loadError();
-        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
-            @Override
-            public void doRequestData() {
-                Map map = new HashMap<>();
-                map.put("id", String.valueOf(id));
-                if (AppConstant.UID != 0) {
-                    map.put("uid", String.valueOf(AppConstant.UID));
-                }
-                mPresenter.getProductDetail(map);
-            }
-        });
-    }
-    @Override
-    public void getProductDetailSuccess(ProductDetailBean model) {
-        productDetailBean=model;
-        mFragments.add(ProductYarnFragnment.getInstance(id,productDetailBean));
-        mFragments.add(ParameterYarnFragment.getInstance(2,null,productDetailBean.getGoods()));
-        mFragments.add(SekaFragment.getInstance(productDetailBean.getGoods().getSeka()));
-        mFragments.add(DetailsYarnFragment.getInstance(productDetailBean.getGoods().getContent_()));
-        mAdapter = new FragmentPagerAdapter(YarnActivity.this.getSupportFragmentManager()) {
+    public void loadSuccess(SeckillProductBean model) {
+        seckillProductBean=model;
+        mFragments.add(SeckillProductYarnFragment.getInstance(seckillProductBean));
+        mFragments.add(ParameterYarnFragment.getInstance(1,seckillProductBean.getGoods(),null));
+        mFragments.add(SekaFragment.getInstance(seckillProductBean.getGoods().getSeka()));
+        mFragments.add(DetailsYarnFragment.getInstance(seckillProductBean.getGoods().getContent()));
+        mAdapter = new FragmentPagerAdapter(this.getSupportFragmentManager()) {
             @Override
             public int getCount() {
                 return mFragments.size();
@@ -207,5 +144,38 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
         };
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(5);
+    }
+
+    @Override
+    public void showLoading() {
+        mLoadingView.load();
+    }
+
+    @Override
+    public void hideLoading() {
+        mLoadingView.loadSuccess();
+    }
+
+    @Override
+    public void showEmpty() {
+        seckillProductBean=null;
+        mLoadingView.loadSuccess(true);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        seckillProductBean=null;
+        mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+            @Override
+            public void doRequestData() {
+                Map map = new HashMap<>();
+                map.put("id", String.valueOf(id));
+                if (AppConstant.UID != 0) {
+                    map.put("uid", String.valueOf(AppConstant.UID));
+                }
+                mPresenter.loadSeckillProduct(map);
+            }
+        });
     }
 }

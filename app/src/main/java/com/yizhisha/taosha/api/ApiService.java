@@ -5,6 +5,7 @@ import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
@@ -213,17 +214,19 @@ public interface ApiService {
     Observable<RequestStatusBean> deleteShoppCart(@QueryMap  Map<String, String> param);
 
     //秒杀订单
-
     @GET("ios/order/seckilling/")
     Observable<SeckillListBean> getSeckillOrder(@QueryMap Map<String, String> param);
-
     //秒杀订单详情
     @GET("ios/order/detail_seckilling/")
     Observable<SeckillListBean> getSeckillOrderDetails(@QueryMap Map<String, String> param);
 
-    //秒纱h活动
+    //秒纱活动
     @GET("ios/goods/seckilling/")
     Observable<SeckillActListBean> getSeckillActivity(@QueryMap Map<String, String> param);
+
+    //秒杀详情页
+    @GET("ios/goods/seckillingview/")
+    Observable<SeckillProductBean> getSeckillProduct(@QueryMap Map<String, String> param);
 
     //发布评论
     @FormUrlEncoded

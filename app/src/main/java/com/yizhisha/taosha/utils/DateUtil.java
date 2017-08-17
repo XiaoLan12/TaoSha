@@ -2,6 +2,8 @@ package com.yizhisha.taosha.utils;
 
 import android.util.Log;
 
+import com.yizhisha.taosha.bean.DateBean;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +56,25 @@ public class DateUtil {
                 str.append(seconds);
             return str.toString();
     }
+    public static DateBean subDateTime1(Long startdate, Long endDate) {
+
+        //前的时间
+        Date fd = new Date(startdate*1000l);
+        //后的时间
+        Date td = new Date(endDate*1000l);
+        //两时间差,精确到毫秒
+        long diff = td.getTime() - fd.getTime();
+        long day = diff / 86400000;                         //以天数为单位取整
+        long hour = diff % 86400000 / 3600000;               //以小时为单位取整
+        long min = diff % 86400000 % 3600000 / 60000;       //以分钟为单位取整
+        long seconds = diff % 86400000 % 3600000 % 60000 / 1000;   //以秒为单位取整
+        DateBean bean=new DateBean();
+        bean.setDay(day);
+        bean.setHour(hour);
+        bean.setMin(min);
+        bean.setSeconds(seconds);
+        return bean;
+    }
 
     /**
      * @param subdate 服务器时间
@@ -93,4 +114,5 @@ public class DateUtil {
         int days = (int)((date1.getTime() - date2.getTime())/(1000 * 60 * 60 * 24));
         return days;
     }
+
 }

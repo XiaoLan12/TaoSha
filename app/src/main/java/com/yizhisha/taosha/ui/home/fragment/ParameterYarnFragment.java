@@ -6,6 +6,8 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,31 +34,41 @@ public class ParameterYarnFragment extends BaseFragment{
     @Bind(R.id.tv_brand)
     TextView tv_brand;
 
-    private boolean isLoad=false;
+    private SeckillProductBean.Goods goods=null;
+    private ProductDeatilItemBean goods1=null;
+    private int Type;
+
+    public static ParameterYarnFragment getInstance(int type, SeckillProductBean.Goods goods, ProductDeatilItemBean goods1) {
+        ParameterYarnFragment sf = new ParameterYarnFragment();
+        sf.Type=type;
+        if(type==1){
+            sf.goods=goods;
+        }else{
+            sf.goods1=goods1;
+        }
+        return sf;
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_parameter_yarn;
     }
     @Override
-    public void setUserVisibleHint(boolean hidden) {
-        super.onHiddenChanged(hidden);
-
-        if (hidden) {
-            if (AppConstant.productDetailBean != null & isLoad == false) {
-                isLoad = true;
-                tv_product_code.setText(AppConstant.productDetailBean.getGoods().getCode());
-                tv_ingredient.setText(AppConstant.productDetailBean.getGoods().getId());
-                tv_session_name.setText(AppConstant.productDetailBean.getGoods().getSession_name());
-                tv_needle_name.setText(AppConstant.productDetailBean.getGoods().getNeedle_name());
-                tv_yam.setText(AppConstant.productDetailBean.getGoods().getYam());
-                tv_pname.setText(AppConstant.productDetailBean.getGoods().getPname());
-                tv_brand.setText(AppConstant.productDetailBean.getGoods().getBrand());
-
-            }
-        }
-    }
-    @Override
     protected void initView() {
-
+        if(Type==1){
+            tv_product_code.setText(goods.getCode());
+            tv_ingredient.setText(goods.getColor());
+            tv_needle_name.setText(goods.getNeedle_name());
+            tv_yam.setText(goods.getYam());
+            tv_pname.setText(goods.getPname());
+            tv_brand.setText(goods.getBrand());
+        }else{
+            tv_product_code.setText(goods1.getCode());
+            tv_ingredient.setText(goods1.getId());
+            tv_session_name.setText(goods1.getSession_name());
+            tv_needle_name.setText(goods1.getNeedle_name());
+            tv_yam.setText(goods1.getYam());
+            tv_pname.setText(goods1.getPname());
+            tv_brand.setText(goods1.getBrand());
+        }
     }
 }

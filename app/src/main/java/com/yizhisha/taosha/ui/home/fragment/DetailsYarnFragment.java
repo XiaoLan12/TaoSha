@@ -22,40 +22,24 @@ public class DetailsYarnFragment extends BaseFragment{
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
     private ProductDetailImgAdapter adapter;
-    private boolean isLoad=false;
-
+    private List<String> dataList=new ArrayList<>();
+    public static DetailsYarnFragment getInstance(List<String> list) {
+        DetailsYarnFragment sf = new DetailsYarnFragment();
+        sf.dataList.addAll(list);
+        return sf;
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_product_details_yarn;
     }
-    @Override
-    public void setUserVisibleHint(boolean hidden) {
-        super.onHiddenChanged(hidden);
-
-        if(hidden){
-            if(AppConstant.productDetailBean!=null&isLoad==false){
-
-                isLoad=true;
-                List<String> content=new ArrayList<>();
-                List<String> content1=new ArrayList<>();
-                content=AppConstant.productDetailBean.getGoods().getContent_();
-                for(int i=0;i<content.size();i++){
-                    content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+content.get(i));
-                }
-                adapter=new ProductDetailImgAdapter(getActivity(),content1);
-                recyclerView.setAdapter(adapter);
-            }
-
-        }
-    }
-
-
 
     @Override
     protected void initView() {
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(getActivity());
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
+        adapter=new ProductDetailImgAdapter(getActivity(),dataList);
+        recyclerView.setAdapter(adapter);
 
     }
 }

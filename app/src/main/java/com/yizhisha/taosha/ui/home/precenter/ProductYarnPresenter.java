@@ -16,20 +16,22 @@ import java.util.Map;
 public class ProductYarnPresenter extends ProductYarnContract.Presenter {
     @Override
     public void getProductDetail(Map<String, String> map) {
+        mView.showLoading();
         addSubscrebe(Api.getInstance().getProductDetail(map), new RxSubscriber<ProductDetailBean>(mContext,true) {
             @Override
             protected void onSuccess(ProductDetailBean productDetailBean) {
-                Log.e("TTT", productDetailBean.toString());
+                mView.hideLoading();
                 if(productDetailBean.getInfo_s()==0){
                     mView.getProductDetailSuccess(productDetailBean);
                 }else{
-                    mView.getProductDetailFail(productDetailBean.getInfo_t());
+                    mView.showEmpty();
                 }
 
             }
 
             @Override
             protected void onFailure(String message) {
+                mView.hideLoading();
                 mView.getProductDetailFail(message);
             }
         });

@@ -30,15 +30,15 @@ public class SeckillActivityAdapter extends BaseQuickAdapter<SeckillActBean,Base
     }
     @Override
     protected void convert(BaseViewHolder helper, SeckillActBean item) {
-      /*  item.setStarttime(System.currentTimeMillis()+100);
-        item.setEndtime(System.currentTimeMillis()+10000);*/
+        item.setStarttime(System.currentTimeMillis()+2*60*1000);
+        item.setEndtime(System.currentTimeMillis()+30*60*1000);
         helper.setText(R.id.seckillact_title_tv,item.getTitle());
         helper.setText(R.id.seckillact_market_price_tv1,String.valueOf(item.getMarket_price()));
         helper.setText(R.id.seckillact_seckill_price_tv,String.valueOf(item.getPrice()));
         TimeView mTvTimer=helper.getView(R.id.seckillact_activity_tv);
         try {
-            //mTvTimer.setData(item.getStarttime(),item.getEndtime(),item.getNowtime()*1000);
-            mTvTimer.setData(item.getStarttime()*1000,item.getEndtime()*1000,item.getNowtime()*1000);
+            mTvTimer.setData(item.getStarttime(),item.getEndtime(),item.getNowtime());
+            //mTvTimer.setData(item.getStarttime()*1000,item.getEndtime()*1000,item.getNowtime()*1000);
 
         } catch (ParseException e) {
             e.printStackTrace();

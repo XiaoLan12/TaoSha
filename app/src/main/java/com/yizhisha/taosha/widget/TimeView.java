@@ -38,7 +38,7 @@ public class TimeView extends View {
 
     long startTime;//开始时间
     long endTime;//结束时间
-    long subTime;//服务器时间
+    long subTime;//服务器时间差
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             invalidate();
@@ -154,6 +154,7 @@ public class TimeView extends View {
      * @return 计算活动开始时间与当前时间的差值
      */
     public String StartAndEndTimeDiff(long subTime) {
+        Log.d("TTTT","通天塔"+DateUtil.getDateToString(subTime));
         if (startTime - subTime > 0) {
             return "活动未开始";
         } else if (endTime - subTime > 0) {
@@ -174,7 +175,7 @@ public class TimeView extends View {
         endTime=endtime;
         Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
         long cur1 = curDate.getTime();// 获取当前时间
-        subTime = curtime -cur1;//获得时间差
+        subTime = curtime*1000 -cur1;//获得时间差
     }
 
 }

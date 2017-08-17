@@ -15,6 +15,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
@@ -35,7 +36,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/7/2.
  */
 
-public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> implements ProductYarnContract.View {
+public class ProductYarnFragnment extends BaseFragment{
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.tv_title)
@@ -47,7 +48,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     @Bind(R.id.tv_company)
     TextView tv_company;
     @Bind(R.id.recyclerview)
-    RecyclerView recyclerView;
+    RecyclerView mRecyclerView;
     @Bind(R.id.comment_amount_tv)
     TextView commentAmountTv;
     @Bind(R.id.userhead_iv)
@@ -69,23 +70,16 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     @Bind(R.id.tv_favorite_num)
     TextView tv_favorite_num;
 
-//    @Bind(R.id.tv_title)
-//    TextView tvTitle;
-//    @Bind(R.id.tv_privce)
-//    TextView tvPrivce;
-//    @Bind(R.id.tv_price_real)
-//    TextView tvPriceReal;
-//    @Bind(R.id.tv_company)
-//    TextView tvCompany;
-
-
-    private ProductDetailImgAdapter adapter;
+    private ProductDetailImgAdapter mAdapter;
+    private ProductDetailBean productDetailBean;
+    private List<String> contentList=new ArrayList<>();
     private int id;
 
 
-    public static ProductYarnFragnment getInstance(int id) {
+    public static ProductYarnFragnment getInstance(int id,ProductDetailBean bean) {
         ProductYarnFragnment sf = new ProductYarnFragnment();
-        sf.id = id;
+        sf.productDetailBean = bean;
+        sf.id=id;
         return sf;
     }
 
@@ -107,86 +101,18 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         //设置图片资源:可选图片网址/资源文件，默认用Glide加载,也可自定义图片的加载框架
         //所有设置参数方法都放在此方法之前执行
         //banner.setImages(images);
-
-        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getActivity());
-        linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager4);
-
-        Map map = new HashMap<>();
-        map.put("id", String.valueOf(id));
-        if (AppConstant.UID != 0) {
-            map.put("uid", String.valueOf(AppConstant.UID));
+        initAdapter();
+        if(productDetailBean==null){
+            return;
         }
-        mPresenter.getProductDetail(map);
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showEmpty() {
-
-    }
-
-    @Override
-    public void getProductDetailFail(String msg) {
-
-    }
-
-    @Override
-    public void getProductDetailSuccess(ProductDetailBean model) {
-        AppConstant.productDetailBean = model;
-        if(model.getGoods().getIs_fanxian().equals("1")){
-            tv_fanxian.setVisibility(View.VISIBLE);
-        }else{
-            tv_fanxian.setVisibility(View.GONE);
+        ProductDeatilItemBean goods=productDetailBean.getGoods();
+        //加载轮播
+        List<String> albumList = new ArrayList<>();
+        for (int i = 0; i <goods.getAlbum().size(); i++) {
+            albumList.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + goods.getAlbum().get(i));
         }
-        if(model.getGoods().getIs_nayang().equals("1")){
-            tv_free_sample.setVisibility(View.VISIBLE);
-        }else{
-            tv_free_sample.setVisibility(View.GONE);
-        }
-        if(model.getGoods().getIs_dunjian().equals("1")){
-            tv_lijian.setVisibility(View.VISIBLE);
-        }else{
-            tv_lijian.setVisibility(View.GONE);
-        }
-       /* if(model.getGoods().getIs_fanxian().equals("1")){
-            tv_fanxian.setVisibility(View.VISIBLE);
-        }else{
-            tv_fanxian.setVisibility(View.GONE);
-        }*/
-
-        tv_favorite_num.setText(model.getGoods().getFavorite());
-        tv_title.setText(model.getGoods().getTitle());
-        tv_price.setText("￥" + model.getGoods().getPrice());
-        tv_price_real.setText("板毛:￥" + model.getGoods().getPrice_real() + "/份");
-        tv_company.setText(model.getGoods().getCompany());
-
-        List<String> productDetailImg = new ArrayList<>();
-        for (int i = 0; i < model.getGoods().getAlbum().size(); i++) {
-            productDetailImg.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + model.getGoods().getAlbum().get(i));
-        }
-
-        List<String> content = new ArrayList<>();
-        List<String> content1 = new ArrayList<>();
-        content = model.getGoods().getContent_();
-        for (int i = 0; i < content.size(); i++) {
-            content1.add(AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + content.get(i));
-        }
-        adapter = new ProductDetailImgAdapter(getActivity(), content1);
-        recyclerView.setAdapter(adapter);
-
-
         //自定义图片加载框架
-        banner.setImages(productDetailImg, new Banner.OnLoadImageListener() {
+        banner.setImages(albumList, new Banner.OnLoadImageListener() {
             @Override
             public void OnLoadImage(ImageView view, Object url) {
                 view.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -201,9 +127,40 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
                 Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
             }
         });
+        //加载详情
+        contentList.clear();
+        contentList.addAll(goods.getContent_());
+        mAdapter.setNewData(contentList);
+        //加载商品信息
+        if(goods.getIs_fanxian().equals("1")){
+            tv_fanxian.setVisibility(View.VISIBLE);
+        }else{
+            tv_fanxian.setVisibility(View.GONE);
+        }
+        if(goods.getIs_nayang().equals("1")){
+            tv_free_sample.setVisibility(View.VISIBLE);
+        }else{
+            tv_free_sample.setVisibility(View.GONE);
+        }
+        if(goods.getIs_dunjian().equals("1")){
+            tv_lijian.setVisibility(View.VISIBLE);
+        }else{
+            tv_lijian.setVisibility(View.GONE);
+        }
+       /* if(model.getGoods().getIs_fanxian().equals("1")){
+            tv_fanxian.setVisibility(View.VISIBLE);
+        }else{
+            tv_fanxian.setVisibility(View.GONE);
+        }*/
+
+        tv_favorite_num.setText(goods.getFavorite());
+        tv_title.setText(goods.getTitle());
+        tv_price.setText("￥" + goods.getPrice());
+        tv_price_real.setText("板毛:￥" + goods.getPrice_real() + "/份");
+        tv_company.setText(goods.getCompany());
         //加载评论
-        if (model.getComment() != null && model.getComment().getCount() > 0) {
-            ProductDetailBean.Comment comment = model.getComment();
+        ProductDetailBean.Comment comment=productDetailBean.getComment();
+        if (comment != null && comment.getCount() > 0) {
             commentAmountTv.setText("全部评价(" + comment.getCount() + ")");
             GlideUtil.getInstance().LoadContextCircleBitmap(activity, AppConstant.AVATARURL + comment.getAvatar(), userheadIv);
             userphoneTv.setText(comment.getMobile());
@@ -213,8 +170,15 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
             userheadIv.setImageResource(R.drawable.icon_head_normal);
             commentDetailsTv.setText("暂无评论");
         }
-    }
 
+    }
+    private void initAdapter(){
+        mAdapter=new ProductDetailImgAdapter(activity,contentList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setAdapter(mAdapter);
+    }
     @OnClick({R.id.look_allcomment_tv, R.id.comment_ll})
     @Override
     public void onClick(View v) {
@@ -230,19 +194,5 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
                 startActivity(CommentYarnActivity.class, bundle1);
                 break;
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

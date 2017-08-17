@@ -19,6 +19,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
@@ -244,6 +245,10 @@ public class Api {
     //秒纱活动
     public Observable<SeckillActListBean> getSeckillActivity(Map<String,String> map){
         return service.getSeckillActivity(map);
+    }
+    //秒杀产品详情
+    public Observable<SeckillProductBean> getSeckillProduct(Map<String,String> map){
+        return service.getSeckillProduct(map);
     }
     //发布评论
     public Observable<RequestStatusBean> addComment(Map<String,String> map){

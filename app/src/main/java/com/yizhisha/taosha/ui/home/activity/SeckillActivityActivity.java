@@ -35,7 +35,7 @@ import java.util.Map;
 import butterknife.Bind;
 
 public class SeckillActivityActivity extends BaseActivity<SeckillActivityPresenter>
-implements SeckillActivityContract.View{
+implements SeckillActivityContract.View,SwipeRefreshLayout.OnRefreshListener{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
     @Bind(R.id.loadingView)
@@ -47,7 +47,6 @@ implements SeckillActivityContract.View{
 
     private SeckillActivityAdapter mAdapter;
     private List<SeckillActBean> dataLists=new ArrayList<>();
-    MyThread   timeThread;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_seckill_activity;
@@ -68,23 +67,30 @@ implements SeckillActivityContract.View{
     }
 
     private void initAdapter(){
-      /*  mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
+        mSwipeRefreshLayout.setColorSchemeColors(RescourseUtil.getColor(R.color.red),
                 RescourseUtil.getColor(R.color.red));
         //设置刷新出现的位置
         mSwipeRefreshLayout.setProgressViewEndTarget(false, 100);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-*/
         mAdapter=new SeckillActivityAdapter(dataLists);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("id",dataLists.get(position).getId());
+                startActivity(SeckillYarnActivity.class,bundle);
+            }
+        });
     }
     @Override
     public void loadSuccess(SeckillActListBean data) {
         dataLists.clear();
-        //mSwipeRefreshLayout.setRefreshing(false);
+        mSwipeRefreshLayout.setRefreshing(false);
         dataLists.addAll(data.getSeckilling());
         for(int i=0;i<dataLists.size();i++){
             dataLists.get(i).setNowtime(data.getNowtime());
@@ -117,38 +123,17 @@ implements SeckillActivityContract.View{
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataLists);
         mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+            @Override
+            public void doRequestData() {
+                load(true);
+            }
+        });
     }
 
-    Handler handler = new Handler(){
-        public void handleMessage(Message msg){
-            switch (msg.what){
-                case 1:
-                    //刷新适配器
-                    //    mRecommendActivitiesAdapter.notifyDataSetChanged();
-                    //优化刷新adapter的方法
-                    mAdapter.notifyDataSetChanged();
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
-    class MyThread implements Runnable{
-        //用来停止线程
-        boolean endThread;
-
-        @Override
-        public void run() {
-            while(!endThread){
-                try{
-                    Thread.sleep(1000);
-                    Message message = new Message();
-                    message.what = 1;
-                    //发送信息给handler
-                    handler.sendMessage(message);
-                }catch (Exception e){
-
-                }
-            }
-        }
+    @Override
+    public void onRefresh() {
+        load(false);
     }
+
 }

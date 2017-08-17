@@ -87,7 +87,8 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".ui.shoppcart.SingleShopCartActivity" />
         <activity android:name=".ui.home.activity.SureOrderActivity" />
-        <activity android:name=".ui.home.activity.CommentYarnActivity"></activity>
+        <activity android:name=".ui.home.activity.CommentYarnActivity" />
+        <activity android:name=".ui.home.activity.SeckillYarnActivity"></activity>
     </application>
 
 </manifest>
