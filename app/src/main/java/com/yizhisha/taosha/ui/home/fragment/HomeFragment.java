@@ -45,6 +45,8 @@ import com.yizhisha.taosha.bean.json.IndexDeatailYarnBean;
 import com.yizhisha.taosha.bean.json.IndexImgBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.ui.home.activity.HotCommendActivity;
+import com.yizhisha.taosha.ui.home.activity.ProductsCommendActivity;
 import com.yizhisha.taosha.ui.home.activity.SearchActivity;
 import com.yizhisha.taosha.ui.home.activity.SeckillActivityActivity;
 import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
@@ -201,13 +203,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                         startActivity(SelectYarnActivity.class, bundle4);
                         break;
                     case 5:
-                       /* Bundle bundle5=new Bundle();
-                        bundle5.putInt("YARNTYPE",541);*/
-                        startActivity(SelectYarnActivity.class);
+                        Bundle bundle5=new Bundle();
+                        bundle5.putInt("YARNTYPE",541);
+                        startActivity(SelectYarnActivity.class,bundle5);
                         break;
                     case 6:
+                        startActivity(HotCommendActivity.class);
                         break;
                     case 7:
+                        startActivity(ProductsCommendActivity.class);
                         break;
                     case 8:
                         startActivity(SeckillActivityActivity.class);
@@ -275,6 +279,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data1.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -283,6 +288,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data2.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -291,6 +297,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data3.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -299,6 +306,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data4.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -307,6 +315,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data5.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -315,6 +324,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data6.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
@@ -323,17 +333,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
                 bundle.putInt("id", data6.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
         });
 
 
-        Map<String, String> map = new HashMap<>();
         //首页轮播图
-        mPresenter.getPPT(map);
+        mPresenter.getPPT();
         //首页推荐纺纱6种
-        mPresenter.getRecmomendYarn(map);
+        mPresenter.getRecmomendYarn();
 
 
     }

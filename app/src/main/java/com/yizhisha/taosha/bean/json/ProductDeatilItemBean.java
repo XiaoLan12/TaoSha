@@ -1,13 +1,14 @@
 package com.yizhisha.taosha.bean.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/9.
  */
 
-public class ProductDeatilItemBean {
-    private String id;
+public class ProductDeatilItemBean implements Serializable{
+    private int id;
     private String uid;
     private String mzw_uid;
     private String title;
@@ -54,11 +55,11 @@ public class ProductDeatilItemBean {
     private List<String> content_;
     private List<String> album;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

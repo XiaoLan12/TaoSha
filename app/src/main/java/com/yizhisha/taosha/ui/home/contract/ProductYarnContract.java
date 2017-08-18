@@ -29,6 +29,7 @@ public interface ProductYarnContract {
 
 
         public abstract void getProductDetail(Map<String, String> map);
+        public abstract void loadProductCommend(String url);
 
         @Override
         public void onStart() {

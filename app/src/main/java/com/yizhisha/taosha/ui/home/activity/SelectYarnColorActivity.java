@@ -14,6 +14,7 @@ import com.yizhisha.taosha.adapter.SelectYarnColorAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.SelectYarnBean;
+import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
@@ -41,7 +42,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     private ProductDetailImgAdapter adapter;
     private SelectYarnColorAdapter adapter1;
     private List<SelectYarnBean> list=new ArrayList<>();
-    private ProductDetailBean productDetailBean=null;
+    private ProductDeatilItemBean productDeatilItemBean=null;
+    private  ArrayList<String> sekaList=new ArrayList<>();
 
     private int type;
     @Override
@@ -58,13 +60,12 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
         }else{
             toolbar.setTitle("加入购物车");
         }
+        productDeatilItemBean= (ProductDeatilItemBean) bundle.getSerializable("DATA");
     }
 
     @Override
     protected void initView() {
-        ArrayList<String> sekaList=new ArrayList<>();
-        Bundle bundle=getIntent().getExtras();
-        sekaList.addAll(bundle.getStringArrayList("DATA"));
+        sekaList.addAll(productDeatilItemBean.getSeka());
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
@@ -134,7 +135,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         detail = str.substring(0, str.length() - 1);
                     }
                     Bundle bundle = new Bundle();
-                    bundle.putInt("gid", Integer.valueOf(productDetailBean.getGoods().getId()));
+                    bundle.putInt("gid", Integer.valueOf(productDeatilItemBean.getId()));
                     bundle.putInt("ORDERTYPE", 1);
                     bundle.putString("detail", detail);
                     bundle.putString("type", "order");
@@ -152,7 +153,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         ToastUtil.showShortToast("请选择商品");
                     }
                     Map<String,String> map=new HashMap<>();
-                    map.put("gid",String.valueOf(productDetailBean.getGoods().getId()));
+                    map.put("gid",String.valueOf(productDeatilItemBean.getId()));
                     map.put("uid",String.valueOf(AppConstant.UID));
                     map.put("savetype","add");
                     map.put("amount",String.valueOf(amount));

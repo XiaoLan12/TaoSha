@@ -1,12 +1,12 @@
 package com.yizhisha.taosha.api;
 
-import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
@@ -37,7 +37,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -196,15 +195,19 @@ public class Api {
         return service.bindWeChat(map);
     }
     //首页轮播
-    public Observable<IndexPPTBean> getPPT(Map<String,String> map){
-        return service.getPPT(map);
+    public Observable<IndexPPTBean> getPPT(){
+        return service.getPPT();
     }
 
     //首页推荐纺纱6种
-    public Observable<IndexRecommendYarnBean> getRecommendYarn(Map<String,String> map){
-        return service.getRecommendYarn(map);
+    public Observable<IndexRecommendYarnBean> getRecommendYarn(){
+        return service.getRecommendYarn();
     }
-
+    //加载热门推荐
+    //我的评论
+    public Observable<HotCommendBean> loadHotCommend(String type){
+        return service.loadHotCommend(type);
+    }
     // 搜索页搜索
     public Observable<SearchBean> search(Map<String,String> map){
         return service.search(map);
@@ -217,6 +220,10 @@ public class Api {
     // 商品详情
     public Observable<ProductDetailBean> getProductDetail(Map<String,String> map){
         return service.getProductDetail(map);
+    }
+    // 精品商品详情
+    public Observable<ProductDetailBean> getProductCommendDetail(String url){
+        return service.getProductCommendDetail(url);
     }
     // 购物车
     public Observable<ShopcartListBean> getShoppCart(int uid){

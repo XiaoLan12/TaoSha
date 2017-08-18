@@ -7,6 +7,7 @@ package com.yizhisha.taosha.bean;
 public class PopupListBean {
     private int id;
     private String title;
+    private String type;
 
     public int getId() {
         return id;
@@ -22,5 +23,13 @@ public class PopupListBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

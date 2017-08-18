@@ -88,7 +88,9 @@
         <activity android:name=".ui.shoppcart.SingleShopCartActivity" />
         <activity android:name=".ui.home.activity.SureOrderActivity" />
         <activity android:name=".ui.home.activity.CommentYarnActivity" />
-        <activity android:name=".ui.home.activity.SeckillYarnActivity"></activity>
+        <activity android:name=".ui.home.activity.SeckillYarnActivity" />
+        <activity android:name=".ui.home.activity.HotCommendActivity" />
+        <activity android:name=".ui.home.activity.ProductsCommendActivity"></activity>
     </application>
 
 </manifest>

@@ -137,6 +137,26 @@ public class ListPopupwindow extends PopupWindow {
         showAsDropDown(view, DensityUtil.dip2px(-22), DensityUtil.dip2px(12));
         //showAtLocation(view,Gravity.BOTTOM,10,10);
     }
+    /**
+     * 显示弹窗列表界面
+     */
+    public void showringht(View view) {
+        // 获得点击屏幕的位置坐标
+        view.getLocationOnScreen(mLocation);
+
+        // 设置矩形的大小
+        mRect.set(mLocation[0], mLocation[1], mLocation[0] + view.getWidth(),
+                mLocation[1] + view.getHeight());
+
+        // 判断是否需要添加或更新列表子类项
+        if (mIsDirty) {
+            populateActions();
+        }
+
+        // 显示弹窗的位置
+        showAtLocation(view, popupGravity, mScreenWidth - LIST_PADDING
+                - (getWidth() / 2), mRect.bottom);
+    }
 
     /**
      * 设置弹窗列表子项

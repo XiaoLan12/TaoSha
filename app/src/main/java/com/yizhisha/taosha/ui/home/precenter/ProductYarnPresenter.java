@@ -17,7 +17,30 @@ public class ProductYarnPresenter extends ProductYarnContract.Presenter {
     @Override
     public void getProductDetail(Map<String, String> map) {
         mView.showLoading();
-        addSubscrebe(Api.getInstance().getProductDetail(map), new RxSubscriber<ProductDetailBean>(mContext,true) {
+        addSubscrebe(Api.getInstance().getProductDetail(map), new RxSubscriber<ProductDetailBean>(mContext,false) {
+            @Override
+            protected void onSuccess(ProductDetailBean productDetailBean) {
+                mView.hideLoading();
+                if(productDetailBean.getInfo_s()==0){
+                    mView.getProductDetailSuccess(productDetailBean);
+                }else{
+                    mView.showEmpty();
+                }
+
+            }
+
+            @Override
+            protected void onFailure(String message) {
+                mView.hideLoading();
+                mView.getProductDetailFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void loadProductCommend(String url) {
+        mView.showLoading();
+        addSubscrebe(Api.getInstance().getProductCommendDetail(url), new RxSubscriber<ProductDetailBean>(mContext,false) {
             @Override
             protected void onSuccess(ProductDetailBean productDetailBean) {
                 mView.hideLoading();

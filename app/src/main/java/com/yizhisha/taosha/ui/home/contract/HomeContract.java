@@ -31,8 +31,8 @@ public interface HomeContract {
 
     abstract class Presenter extends BasePresenter<HomeContract.View> {
 
-        public abstract void getPPT(Map<String,String> map);
-        public abstract void getRecmomendYarn(Map<String,String> map);
+        public abstract void getPPT();
+        public abstract void getRecmomendYarn();
 
 
         @Override

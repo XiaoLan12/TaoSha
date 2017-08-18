@@ -3,6 +3,7 @@ package com.yizhisha.taosha.api;
 import com.yizhisha.taosha.bean.json.AccountBean;
 import com.yizhisha.taosha.bean.json.CommentPicBean;
 import com.yizhisha.taosha.bean.json.FootpringBean;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
@@ -175,12 +176,15 @@ public interface ApiService {
     Observable<RequestStatusBean> bindWeChat(@QueryMap Map<String, String> param);
     //首页轮播
     @GET("ios/index/")
-    Observable<IndexPPTBean> getPPT(@QueryMap Map<String, String> param);
+    Observable<IndexPPTBean> getPPT();
 
     //首页推荐纺纱6种
     @GET("ios/goods/goodsNew/")
-    Observable<IndexRecommendYarnBean> getRecommendYarn(@QueryMap Map<String, String> param);
+    Observable<IndexRecommendYarnBean> getRecommendYarn();
 
+    //热门推荐
+    @GET("ios/goods/hot/")
+    Observable<HotCommendBean> loadHotCommend(@Query("type") String type);
 
     // 搜索页搜索
     @FormUrlEncoded
@@ -191,6 +195,10 @@ public interface ApiService {
     //商品详情
     @GET("ios/goods/view/")
     Observable<ProductDetailBean> getProductDetail(@QueryMap Map<String, String> param);
+
+    //精品商品详情
+    @GET()
+    Observable<ProductDetailBean> getProductCommendDetail(@Url String url);
 
     //商品评价列表
     @FormUrlEncoded

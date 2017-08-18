@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +59,7 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
 
     private FragmentPagerAdapter mAdapter;
     private int id;
+    private int type;
     private ProductDetailBean productDetailBean;
     @Override
     protected int getLayoutId() {
@@ -74,14 +76,22 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
         StatusBarCompat.setStatusBarColor(YarnActivity.this, this.getResources().getColor(R.color.gray1));
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null){
-            id=bundle.getInt("id");
+            type=bundle.getInt("TYPE",1);
+            if(type==1) {//普通商品
+                id = bundle.getInt("id");
+                Map map = new HashMap<>();
+                map.put("id", String.valueOf(id));
+                if (AppConstant.UID != 0) {
+                    map.put("uid", String.valueOf(AppConstant.UID));
+                }
+                mPresenter.getProductDetail(map);
+            }else if(type==2){//精品
+                String url=bundle.getString("URL");
+                String mUrl="http://www.taoshamall.com"+url;
+                mPresenter.loadProductCommend(mUrl);
+            }
         }
-        Map map = new HashMap<>();
-        map.put("id", String.valueOf(id));
-        if (AppConstant.UID != 0) {
-            map.put("uid", String.valueOf(AppConstant.UID));
-        }
-        mPresenter.getProductDetail(map);
+
 
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));
@@ -140,13 +150,13 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
             case R.id.tv_shopping_cart:
                 Bundle bundle=new Bundle();
                 bundle.putInt("TYPE",2);
-                bundle.putStringArrayList("DATA", (ArrayList<String>) productDetailBean.getGoods().getSeka());
+                bundle.putSerializable("DATA",productDetailBean.getGoods());
                 startActivity(SelectYarnColorActivity.class,bundle);
                 break;
             case R.id.tv_shopping:
                 Bundle bundle1=new Bundle();
                 bundle1.putInt("TYPE",1);
-                bundle1.putStringArrayList("DATA", (ArrayList<String>) productDetailBean.getGoods().getSeka());
+                bundle1.putSerializable("DATA",productDetailBean.getGoods());
                 startActivity(SelectYarnColorActivity.class,bundle1);
                 break;
         }
@@ -172,6 +182,7 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
     public void getProductDetailFail(String msg) {
         productDetailBean=null;
         mLoadingView.loadError();
+
         mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
             @Override
             public void doRequestData() {
@@ -187,6 +198,7 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
     @Override
     public void getProductDetailSuccess(ProductDetailBean model) {
         productDetailBean=model;
+        id=model.getGoods().getId();
         mFragments.add(ProductYarnFragnment.getInstance(id,productDetailBean));
         mFragments.add(ParameterYarnFragment.getInstance(2,null,productDetailBean.getGoods()));
         mFragments.add(SekaFragment.getInstance(productDetailBean.getGoods().getSeka()));

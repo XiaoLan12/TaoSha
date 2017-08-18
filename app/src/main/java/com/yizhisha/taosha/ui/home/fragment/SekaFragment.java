@@ -26,7 +26,6 @@ public class SekaFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     private ProductDetailImgAdapter mAdapter;
     private List<String> dataList=new ArrayList<>();
-    private boolean isLoad=false;
 
     public static SekaFragment getInstance(List<String> list) {
         SekaFragment sf = new SekaFragment();

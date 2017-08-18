@@ -63,7 +63,7 @@ public class ParameterYarnFragment extends BaseFragment{
             tv_brand.setText(goods.getBrand());
         }else{
             tv_product_code.setText(goods1.getCode());
-            tv_ingredient.setText(goods1.getId());
+            tv_ingredient.setText(goods1.getId()+"");
             tv_session_name.setText(goods1.getSession_name());
             tv_needle_name.setText(goods1.getNeedle_name());
             tv_yam.setText(goods1.getYam());

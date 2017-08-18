@@ -10,12 +10,23 @@ public class IndexPPTBean {
 
     private List<IndexImgBean> ppt;
 
+    private List<IndexADSBean> ads;
+
+
     public List<IndexImgBean> getPpt() {
         return ppt;
     }
 
     public void setPpt(List<IndexImgBean> ppt) {
         this.ppt = ppt;
+    }
+
+    public List<IndexADSBean> getAds() {
+        return ads;
+    }
+
+    public void setAds(List<IndexADSBean> ads) {
+        this.ads = ads;
     }
 
     @Override

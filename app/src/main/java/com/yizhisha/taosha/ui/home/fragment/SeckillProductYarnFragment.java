@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yizhisha.taosha.AppConstant;
@@ -19,6 +20,7 @@ import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.DateBean;
+import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.ui.home.activity.SeckillActivityActivity;
 import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
@@ -63,19 +65,45 @@ public class SeckillProductYarnFragment extends BaseFragment{
     TextView companyTv;
     @Bind(R.id.tv_favorite_num)
     TextView favoriteNumTv;
-    @Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
     @Bind(R.id.activit_state_tv)
     TextView activitStateTv;
 
-    private SeckillProductBean seckillProductBean;
-    private ProductDetailImgAdapter mAdapter;
+    //参数
+    @Bind(R.id.tv_product_code)
+    TextView tv_product_code;
+    @Bind(R.id.tv_ingredient)
+    TextView tv_ingredient;
+    @Bind(R.id.tv_session_name)
+    TextView tv_session_name;
+    @Bind(R.id.tv_needle_name)
+    TextView tv_needle_name;
+    @Bind(R.id.tv_yam)
+    TextView tv_yam;
+    @Bind(R.id.tv_pname)
+    TextView tv_pname;
+    @Bind(R.id.tv_brand)
+    TextView tv_brand;
+    //色卡
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    //详情
+    @Bind(R.id.recycleview1)
+    RecyclerView mRecyclerView1;
+
+    private ProductDetailBean productDetailBean;
+    //详情
     private List<String> contentList=new ArrayList<>();
+    //色卡
+    private List<String> sekaList=new ArrayList<>();
+    //商品信息
+    private SeckillProductBean seckillProductBean;
+    private SeckillProductBean.Goods goods;
+
     private long startTime;
     private long endTime;
     private long nowTime;
     private long subTime;
-    private MyThread timeThread;
+    boolean stopThread=false;
 
 
     public static SeckillProductYarnFragment getInstance(SeckillProductBean bean) {
@@ -95,12 +123,10 @@ public class SeckillProductYarnFragment extends BaseFragment{
         banner.setIndicatorGravity(Banner.CENTER);
         //设置是否自动轮播（不设置则默认自动）
         banner.isAutoPlay(false);
-        initAdapter();
         if(seckillProductBean==null){
             return;
         }
-
-        SeckillProductBean.Goods goods=seckillProductBean.getGoods();
+        goods=seckillProductBean.getGoods();
         if(goods==null){
             return;
         }
@@ -109,7 +135,6 @@ public class SeckillProductYarnFragment extends BaseFragment{
         for (int i = 0; i <goods.getAlbum().size(); i++) {
             albumList.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + goods.getAlbum().get(i));
         }
-        //自定义图片加载框架
         banner.setImages(albumList, new Banner.OnLoadImageListener() {
             @Override
             public void OnLoadImage(ImageView view, Object url) {
@@ -118,17 +143,19 @@ public class SeckillProductYarnFragment extends BaseFragment{
                 Glide.with(getActivity()).load(url).into(view);
             }
         });
-
+//设置点击事件，下标是从1开始
+        banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
+            @Override
+            public void OnBannerClick(View view, int position) {
+                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
+            }
+        });
         //加载商品详情
         SeckillProductBean.Seckilling seckilling=seckillProductBean.getSeckilling();
         if(seckilling==null){
             return;
         }
-        contentList.clear();
-        contentList.addAll(goods.getContent());
-        mAdapter.setNewData(contentList);
         //加载商品信息
-
         originalPriceTv.setText("原价:￥"+seckilling.getMarket_price());
         seckillPriceTv.setText(seckilling.getPrice());
         titleTv.setText(seckilling.getTitle());
@@ -142,15 +169,34 @@ public class SeckillProductYarnFragment extends BaseFragment{
         subTime = nowTime*1000 -cur1;//获得时间差
         endTime=cur1+30*60*1000;
         startTime=cur1+1*60*1000;
-        new Thread(new MyThread()).start();
+        new Thread(mRunnable).start();
+
+        initParameter();
+        initSeka();
+        initDetail();
     }
 
-    private void initAdapter(){
-        mAdapter=new ProductDetailImgAdapter(activity,contentList);
+    private void initParameter() {
+        tv_product_code.setText(goods.getCode());
+        tv_ingredient.setText(goods.getColor());
+        tv_needle_name.setText(goods.getNeedle_name());
+        tv_yam.setText(goods.getYam());
+        tv_pname.setText(goods.getPname());
+        tv_brand.setText(goods.getBrand());
+    }
+    private void initSeka() {
+        sekaList.addAll(goods.getSeka());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(new ProductDetailImgAdapter(activity,sekaList));
+    }
+    private void initDetail() {
+        contentList.addAll(goods.getContent());
+        mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView1.setHasFixedSize(true);
+        mRecyclerView1.setNestedScrollingEnabled(false);
+        mRecyclerView1.setAdapter(new ProductDetailImgAdapter(activity,contentList));
     }
     private void setDateInfo(Long startdate, Long endDate) {
         try {
@@ -174,6 +220,10 @@ public class SeckillProductYarnFragment extends BaseFragment{
     }
     Handler handler = new Handler(){
         public void handleMessage(Message msg){
+            if(getActivity()==null){
+                return;
+            }
+
             switch (msg.what){
                 case 1:
                     Date curDate = new Date();// 获取当前时间
@@ -197,16 +247,13 @@ public class SeckillProductYarnFragment extends BaseFragment{
             super.handleMessage(msg);
         }
     };
-    class MyThread implements Runnable{
-        //用来停止线程
-        boolean endThread;
-
+    private Runnable mRunnable = new Runnable(){
         @Override
         public void run() {
-            while(!endThread){
+            while(!stopThread){
                 try{
                     Thread.sleep(1000);
-                    Message message = new Message();
+                    Message message=handler.obtainMessage();
                     message.what = 1;
                     //发送信息给handler
                     handler.sendMessage(message);
@@ -215,11 +262,12 @@ public class SeckillProductYarnFragment extends BaseFragment{
                 }
             }
         }
-    }
+    };
 
     @Override
     public void onDestroyView() {
+        stopThread=true;
         super.onDestroyView();
-        timeThread.endThread=false;
+
     }
 }

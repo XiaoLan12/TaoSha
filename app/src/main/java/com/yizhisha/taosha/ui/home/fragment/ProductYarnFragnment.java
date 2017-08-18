@@ -47,8 +47,7 @@ public class ProductYarnFragnment extends BaseFragment{
     TextView tv_price_real;
     @Bind(R.id.tv_company)
     TextView tv_company;
-    @Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+
     @Bind(R.id.comment_amount_tv)
     TextView commentAmountTv;
     @Bind(R.id.userhead_iv)
@@ -69,10 +68,37 @@ public class ProductYarnFragnment extends BaseFragment{
     TextView tv_free_sample;
     @Bind(R.id.tv_favorite_num)
     TextView tv_favorite_num;
+    //参数
+    @Bind(R.id.tv_product_code)
+    TextView tv_product_code;
+    @Bind(R.id.tv_ingredient)
+    TextView tv_ingredient;
+    @Bind(R.id.tv_session_name)
+    TextView tv_session_name;
+    @Bind(R.id.tv_needle_name)
+    TextView tv_needle_name;
+    @Bind(R.id.tv_yam)
+    TextView tv_yam;
+    @Bind(R.id.tv_pname)
+    TextView tv_pname;
+    @Bind(R.id.tv_brand)
+    TextView tv_brand;
+    //色卡
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    //详情
+    @Bind(R.id.recycleview1)
+    RecyclerView mRecyclerView1;
 
-    private ProductDetailImgAdapter mAdapter;
-    private ProductDetailBean productDetailBean;
+
+    //详情
     private List<String> contentList=new ArrayList<>();
+    //色卡
+    private List<String> sekaList=new ArrayList<>();
+    //商品信息
+    private ProductDetailBean productDetailBean;
+    private ProductDeatilItemBean goods;
+
     private int id;
 
 
@@ -82,7 +108,6 @@ public class ProductYarnFragnment extends BaseFragment{
         sf.id=id;
         return sf;
     }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_yarn_product;
@@ -101,11 +126,11 @@ public class ProductYarnFragnment extends BaseFragment{
         //设置图片资源:可选图片网址/资源文件，默认用Glide加载,也可自定义图片的加载框架
         //所有设置参数方法都放在此方法之前执行
         //banner.setImages(images);
-        initAdapter();
+
         if(productDetailBean==null){
             return;
         }
-        ProductDeatilItemBean goods=productDetailBean.getGoods();
+        goods=productDetailBean.getGoods();
         //加载轮播
         List<String> albumList = new ArrayList<>();
         for (int i = 0; i <goods.getAlbum().size(); i++) {
@@ -127,10 +152,7 @@ public class ProductYarnFragnment extends BaseFragment{
                 Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
             }
         });
-        //加载详情
-        contentList.clear();
-        contentList.addAll(goods.getContent_());
-        mAdapter.setNewData(contentList);
+
         //加载商品信息
         if(goods.getIs_fanxian().equals("1")){
             tv_fanxian.setVisibility(View.VISIBLE);
@@ -158,7 +180,20 @@ public class ProductYarnFragnment extends BaseFragment{
         tv_price.setText("￥" + goods.getPrice());
         tv_price_real.setText("板毛:￥" + goods.getPrice_real() + "/份");
         tv_company.setText(goods.getCompany());
-        //加载评论
+        initComment();
+        initParameter();
+        initSeka();
+        initDetail();
+
+    }
+
+
+
+
+
+
+    //加载评论
+    private void initComment() {
         ProductDetailBean.Comment comment=productDetailBean.getComment();
         if (comment != null && comment.getCount() > 0) {
             commentAmountTv.setText("全部评价(" + comment.getCount() + ")");
@@ -170,14 +205,30 @@ public class ProductYarnFragnment extends BaseFragment{
             userheadIv.setImageResource(R.drawable.icon_head_normal);
             commentDetailsTv.setText("暂无评论");
         }
-
     }
-    private void initAdapter(){
-        mAdapter=new ProductDetailImgAdapter(activity,contentList);
+    private void initParameter() {
+
+        tv_product_code.setText(goods.getCode());
+        tv_ingredient.setText(goods.getId()+"");
+        tv_session_name.setText(goods.getSession_name());
+        tv_needle_name.setText(goods.getNeedle_name());
+        tv_yam.setText(goods.getYam());
+        tv_pname.setText(goods.getPname());
+        tv_brand.setText(goods.getBrand());
+    }
+    private void initSeka() {
+        sekaList.addAll(goods.getSeka());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(new ProductDetailImgAdapter(activity,sekaList));
+    }
+    private void initDetail() {
+        contentList.addAll(goods.getContent_());
+        mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView1.setHasFixedSize(true);
+        mRecyclerView1.setNestedScrollingEnabled(false);
+        mRecyclerView1.setAdapter(new ProductDetailImgAdapter(activity,contentList));
     }
     @OnClick({R.id.look_allcomment_tv, R.id.comment_ll})
     @Override

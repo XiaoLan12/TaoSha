@@ -16,11 +16,10 @@ import java.util.Map;
 
 public class HomePresenter extends HomeContract.Presenter {
     @Override
-    public void getPPT(Map<String, String> map) {
-        addSubscrebe(Api.getInstance().getPPT(map),new RxSubscriber<IndexPPTBean>(mContext,false){
+    public void getPPT() {
+        addSubscrebe(Api.getInstance().getPPT(),new RxSubscriber<IndexPPTBean>(mContext,false){
             @Override
             protected void onSuccess(IndexPPTBean indexPPTBean) {
-                Log.e("TTT", indexPPTBean.toString());
                 mView.getPPTSuccess(indexPPTBean);
             }
             @Override
@@ -32,11 +31,10 @@ public class HomePresenter extends HomeContract.Presenter {
     }
 
     @Override
-    public void getRecmomendYarn(Map<String, String> map) {
-        addSubscrebe(Api.getInstance().getRecommendYarn(map), new RxSubscriber<IndexRecommendYarnBean>(mContext,false) {
+    public void getRecmomendYarn() {
+        addSubscrebe(Api.getInstance().getRecommendYarn(), new RxSubscriber<IndexRecommendYarnBean>(mContext,false) {
             @Override
             protected void onSuccess(IndexRecommendYarnBean model) {
-                Log.e("TTT",model.toString());
                 mView.getRecommendSuccess(model);
             }
 
