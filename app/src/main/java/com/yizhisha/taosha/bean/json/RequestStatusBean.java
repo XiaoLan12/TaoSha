@@ -11,6 +11,12 @@ public class RequestStatusBean {
 
     private int uid;
 
+    private String orderno;
+
+    public String getOrderno() {
+        return orderno;
+    }
+
     public void setStatus(String status){
         this.status = status;
     }

@@ -46,10 +46,10 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
     private SelectYarnAdapter mAdapter;
     private List<SearchDetailBean> dataList=new ArrayList<>();
 
-    private int mYarnType=1;
-    private String mNeedleType="3g";
-    private int mPriceType=1;
-    private int mOrderByType=1;
+    private int mYarnType=0;
+    private String mNeedleType="0";
+    private int mPriceType=0;
+    private int mOrderByType=0;
 
     public static SelectYarnFragment getInstance(int yarnType) {
         SelectYarnFragment sf = new SelectYarnFragment();

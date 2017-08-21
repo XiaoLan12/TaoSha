@@ -23,6 +23,7 @@ import com.yizhisha.taosha.ui.me.activity.OrderDetailsActivity;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.MyOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
@@ -110,6 +111,15 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()){
+                    case R.id.cancel_the_order_tv:
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                            OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            Map<String, String> bodyMap = new HashMap<>();
+                            bodyMap.put("uid", String.valueOf(AppConstant.UID));
+                            bodyMap.put("orderno", String.valueOf(orderFootBean.getOrderno()));
+                            mPresenter.cancleOrder(bodyMap);
+                        }
+                        break;
                     case R.id.immediate_evaluation_tv:
                         if(dataList.get(position) instanceof OrderFootBean) {
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
@@ -130,6 +140,10 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                     case R.id.additional_comments_tv:
                         if(dataList.get(position) instanceof OrderFootBean) {
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            if(orderFootBean.getCommentstatus()==2){
+                                ToastUtil.showShortToast("已追加评论");
+                                return;
+                            }
                             Bundle bundle=new Bundle();
                             bundle.putString("ORDERNO",orderFootBean.getOrderno());
                             startActivity(OrderDetailsActivity.class,bundle);
@@ -164,6 +178,16 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                                     }).build().show();
                         }
                         break;
+                    case R.id.confirm_goods_tv:
+                        if(dataList.get(position) instanceof OrderFootBean) {
+                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            Map<String,String> body=new HashMap<String, String>();
+                            body.put("orderno",orderFootBean.getOrderno());
+                            body.put("uid",String.valueOf(AppConstant.UID));
+                            body.put("type","order");
+                            mPresenter.sureGoods(body);
+                        }
+                        break;
                 }
             }
         });
@@ -180,6 +204,19 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mAdapter.setNewData(dataList);
 
     }
+
+    @Override
+    public void sureGoodsSuuccess(String msg) {
+        onRefresh();
+        ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void cancleOrder(String msg) {
+        onRefresh();
+        ToastUtil.showShortToast(msg);
+    }
+
     @Override
     public void showLoading() {
         mLoadingView.load();
@@ -209,6 +246,11 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                 load(mType,true);
             }
         });
+    }
+
+    @Override
+    public void cancelFail(String msg) {
+        ToastUtil.showShortToast(msg);
     }
 
 }

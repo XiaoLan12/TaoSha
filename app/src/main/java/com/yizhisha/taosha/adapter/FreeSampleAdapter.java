@@ -30,6 +30,7 @@ public class FreeSampleAdapter extends BaseQuickAdapter<FreeSampleBean.Active,Ba
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),
                 (ImageView) helper.getView(R.id.tradehead_iv),GlideUtil.LOAD_BITMAP);
         helper.addOnClickListener(R.id.cancel_the_order_tv);
+        helper.addOnClickListener(R.id.contact_the_merchant_tv);
 
        if(item.getIs_ship()==0){
             switchState(0,helper);

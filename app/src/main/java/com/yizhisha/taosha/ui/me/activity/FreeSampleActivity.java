@@ -40,7 +40,7 @@ public class FreeSampleActivity extends BaseActivity {
     TextView cacelTv;
 
     private String[] mTitles = {"全部","待发货","已完成"};
-    private int[] mType= {-1, 0, 1};
+    private int[] mType= {0, 1, 2};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     @Override

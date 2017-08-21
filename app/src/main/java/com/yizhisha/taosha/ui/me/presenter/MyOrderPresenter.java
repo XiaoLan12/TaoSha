@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.me.presenter;
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 
 import java.util.Map;
@@ -34,5 +35,41 @@ public class MyOrderPresenter extends MyOrderContract.Presenter{
                             mView.loadFail(message);
                     }
                 });
+    }
+
+    @Override
+    public void cancleOrder(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().cancelOrder(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.cancleOrder(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void sureGoods(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().sureGoods(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.sureGoodsSuuccess(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
+            }
+        });
     }
 }

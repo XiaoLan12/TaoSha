@@ -57,10 +57,10 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 }else if(order.getStatus()==2){
                     helper.setText(R.id.paystate_myorder_tv,"待收货");
                 }else if(order.getStatus()==3){
-                    helper.setText(R.id.paystate_myorder_tv,"待评价");
+                    helper.setText(R.id.paystate_myorder_tv,"交易完成");
                 }
                 else if(order.getStatus()==4){
-                    helper.setText(R.id.paystate_myorder_tv,"已评价");
+                    helper.setText(R.id.paystate_myorder_tv,"交易完成");
                 }
 
                 break;
@@ -88,6 +88,8 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.addOnClickListener(R.id.immediate_payment_tv);
                 helper.addOnClickListener(R.id.additional_comments_tv);
                 helper.addOnClickListener(R.id.contact_the_merchant_tv);
+                helper.addOnClickListener(R.id.cancel_the_order_tv);
+                helper.addOnClickListener(R.id.confirm_goods_tv);
                 switchState(orderFootBean.getStatus(),helper);
                 break;
         }
@@ -125,7 +127,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,true);
                 helper.setVisible(R.id.additional_comments_tv,false);
-                helper.setVisible(R.id.againbuy_tv,true);
+                helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 4:
                 helper.setVisible(R.id.cancel_the_order_tv,false);
@@ -133,7 +135,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.additional_comments_tv,true);
-                helper.setVisible(R.id.againbuy_tv,true);
+                helper.setVisible(R.id.againbuy_tv,false);
                 break;
         }
     }

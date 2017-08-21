@@ -13,6 +13,15 @@ public class OrderFootBean implements Serializable{
     private int status;
     private int amount;
     private String mobile_company;
+    private int commentstatus;
+
+    public int getCommentstatus() {
+        return commentstatus;
+    }
+
+    public void setCommentstatus(int commentstatus) {
+        this.commentstatus = commentstatus;
+    }
 
     public String getMobile_company() {
         return mobile_company;

@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +15,8 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.SeckillBean;
 import com.yizhisha.taosha.bean.json.SeckillGoodsBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderDetailsContract;
 import com.yizhisha.taosha.ui.me.presenter.SecKillOrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
@@ -26,6 +30,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetailsPresenter>
         implements SecKillOrderDetailsContract.View {
@@ -65,6 +70,8 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     TextView mTvConfirmGoods;
     @Bind(R.id.immediate_evaluation_tv)
     TextView mTvImmediateEvaluation;
+    @Bind(R.id.additional_comments_tv)
+    TextView mTvAddItionalComment;
     @Bind(R.id.againbuy_tv)
     TextView mTvAgeinBuy;
     @Bind(R.id.cancel_the_order_tv)
@@ -164,6 +171,60 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
 
         mLoadingView.loadError();
     }
+    @OnClick({R.id.cancel_the_order_tv,R.id.contact_the_merchant_tv,R.id.confirm_goods_tv,
+            R.id.immediate_evaluation_tv,R.id.againbuy_tv,R.id.immediate_payment_tv,R.id.additional_comments_tv})
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cancel_the_order_tv:
+                break;
+            case R.id.contact_the_merchant_tv:
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText(seckillBean.getCompany_mobile())
+                        .setContentTextColor(R.color.blue)
+                        .setLeftText("取消")
+                        .setLeftTextColor(R.color.blue)
+                        .setRightText("确认")
+                        .setRightTextColor(R.color.blue)
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + seckillBean.getCompany_mobile()));
+                                startActivity(phoneIneten);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
+                break;
+            case R.id.confirm_goods_tv:
+                break;
+            case R.id.immediate_evaluation_tv:
+                Bundle commentbundle = new Bundle();
+                commentbundle.putInt("TYPE",1);
+                commentbundle.putInt("ORDERID",seckillBean.getId());
+                commentbundle.putInt("MZWUIID",seckillBean.getMzw_uid());
+                startActivity(AddCommentActivity.class,commentbundle);
+                break;
+            case R.id.againbuy_tv:
+                break;
+            case R.id.immediate_payment_tv:
+                break;
+            case R.id.additional_comments_tv:
+                Bundle addCommentbundle = new Bundle();
+                addCommentbundle.putInt("TYPE",2);
+                addCommentbundle.putInt("ORDERID",seckillBean.getId());
+                addCommentbundle.putInt("MZWUIID",seckillBean.getMzw_uid());
+                startActivity(AddCommentActivity.class,addCommentbundle);
+                break;
+        }
+    }
     /**根据交易状态，切换布局显示
      * @param paystate
      * 0 未付款
@@ -179,6 +240,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvImmediatePayment.setVisibility(View.VISIBLE);
                 mTvConfirmGoods.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 1:
@@ -187,6 +249,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 2:
@@ -195,6 +258,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.VISIBLE);
                 mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 3:
@@ -202,7 +266,17 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.GONE);
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvImmediateEvaluation.setVisibility(View.VISIBLE);
+                mTvAgeinBuy.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                mIvPayState.setImageResource(R.drawable.icon_jiaoyiwancheng);
+                mTvCancelTheOrder.setVisibility(View.GONE);
+                mTvImmediatePayment.setVisibility(View.GONE);
+                mTvConfirmGoods.setVisibility(View.GONE);
+                mTvImmediateEvaluation.setVisibility(View.GONE);
+                mTvAddItionalComment.setVisibility(View.VISIBLE);
                 mTvAgeinBuy.setVisibility(View.VISIBLE);
                 break;
         }

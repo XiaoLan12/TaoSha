@@ -16,6 +16,8 @@ public interface SecKillOrderContract {
     interface View extends BaseView {
         void loadSuccess(List<SeckillBean> data);
 
+        void cancleOrder(String msg);
+
         void showLoading();
 
         void hideLoading();
@@ -23,12 +25,13 @@ public interface SecKillOrderContract {
         void showEmpty();
 
         void loadFail(String msg);
+        void cancelFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void loadSeckillOrder(Map<String, String> param, boolean isShowLoad);
-
+        public abstract void cancleOrder(Map<String, String> param);
         @Override
         public void onStart() {
 

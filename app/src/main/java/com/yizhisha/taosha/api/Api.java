@@ -12,6 +12,7 @@ import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
+import com.yizhisha.taosha.bean.json.PayReqBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
@@ -25,6 +26,7 @@ import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
+import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 
 import java.util.Map;
@@ -138,6 +140,14 @@ public class Api {
     public Observable<MyOrderListBean> loadOrderList(Map<String,String> map){
         return service.getOrderList(map);
     }
+    //确认收货
+    public Observable<RequestStatusBean> sureGoods(Map<String,String> map){
+        return service.sureGoods(map);
+    }
+    //取消订单
+    public Observable<RequestStatusBean> cancelOrder(Map<String,String> map){
+        return service.cancelOrder(map);
+    }
     //获得订单详情
     public Observable<MyOrderListBean> loadOrderDetails(Map<String,String> map){
         return service.getOrderDetails(map);
@@ -245,6 +255,10 @@ public class Api {
     public Observable<SeckillListBean> getSeckillOrder(Map<String,String> map){
         return service.getSeckillOrder(map);
     }
+    //取消秒杀订单
+    public Observable<RequestStatusBean> cancelSkillOrder(Map<String,String> map){
+        return service.cancelSkillOrder(map);
+    }
     // 秒杀订单详情
     public Observable<SeckillListBean> getSeckillOrderDetail(Map<String,String> map){
         return service.getSeckillOrderDetails(map);
@@ -280,5 +294,20 @@ public class Api {
     //订单确认
     public Observable<ShopCartOrderSureBean> shopCartOrderSure(Map<String,String> map){
         return service.shopCartOrderSure(map);
+    }
+
+    //普通商品和板毛下单
+    public Observable<RequestStatusBean> regularOrder(Map<String,String> map){
+        return service.regularOrder(map);
+    }
+
+    //微信支付下单
+    public Observable<PayReqBean> weChatPay(Map<String,String> map){
+        return service.weChatPay(map);
+    }
+
+    //获得微信支付状态
+    public Observable<WeChatPayStateBean> weChatPayState(Map<String,String> map){
+        return service.weChatPayState(map);
     }
 }

@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,9 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.FreeSampleAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.OrderFootBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.FreeSampleContract;
 import com.yizhisha.taosha.ui.me.presenter.FreeSamplePresenter;
@@ -76,12 +81,6 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RecyclerViewDriverLine(mContext, LinearLayoutManager.VERTICAL));
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
-            }
-        });
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -91,6 +90,33 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                         bodyMap.put("uid",String.valueOf(AppConstant.UID));
                         bodyMap.put("id",String.valueOf(dataList.get(position).getId()));
                         mPresenter.cancleFreeSample(bodyMap);
+                        break;
+                    case R.id.contact_the_merchant_tv:
+                        final String phone=dataList.get(position).getMobile();
+                            new NormalAlertDialog.Builder(activity)
+                                    .setBoolTitle(false)
+                                    .setContentText(phone)
+                                    .setContentTextColor(R.color.blue)
+                                    .setLeftText("取消")
+                                    .setLeftTextColor(R.color.blue)
+                                    .setRightText("确认")
+                                    .setRightTextColor(R.color.blue)
+                                    .setWidth(0.75f)
+                                    .setHeight(0.33f)
+                                    .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                        @Override
+                                        public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                            dialog.dismiss();
+                                        }
+
+                                        @Override
+                                        public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                            Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phone));
+                                            startActivity(phoneIneten);
+                                            dialog.dismiss();
+
+                                        }
+                                    }).build().show();
                         break;
                 }
             }
@@ -163,7 +189,7 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
 
     @Override
     public void cancleFreeSampleFail(String msg) {
-
+        ToastUtil.showShortToast(msg);
     }
 
 }

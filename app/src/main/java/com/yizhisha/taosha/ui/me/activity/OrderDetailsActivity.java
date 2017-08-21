@@ -27,6 +27,7 @@ import com.yizhisha.taosha.ui.me.presenter.OrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
@@ -216,6 +217,10 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
             case R.id.immediate_payment_tv:
                 break;
             case R.id.additional_comments_tv:
+                if(order.getCommentstatus()==2){
+                    ToastUtil.showShortToast("已追加评论");
+                    return;
+                }
                 Bundle addCommentbundle = new Bundle();
                 addCommentbundle.putInt("TYPE",2);
                 addCommentbundle.putInt("ORDERID",order.getId());

@@ -6,6 +6,7 @@ import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
+import com.yizhisha.taosha.bean.json.PayReqBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
@@ -25,6 +26,7 @@ import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
+import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 
 import java.util.Map;
@@ -110,6 +112,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("ios/order/")
     Observable<MyOrderListBean> getOrderList(@FieldMap Map<String,String> map);
+
+    //确认收货
+    @FormUrlEncoded
+    @POST("ios/order/order_receive/")
+    Observable<RequestStatusBean> sureGoods(@FieldMap Map<String,String> map);
+
+    //取消订单
+    @FormUrlEncoded
+    @POST("ios/order/orderDelete/")
+    Observable<RequestStatusBean> cancelOrder(@FieldMap Map<String,String> map);
 
     //获得订单详情
     @GET("ios/order/detail")
@@ -232,6 +244,11 @@ public interface ApiService {
     @GET("ios/goods/seckilling/")
     Observable<SeckillActListBean> getSeckillActivity(@QueryMap Map<String, String> param);
 
+    //取消秒杀订单
+    @FormUrlEncoded
+    @POST("ios/order/seckillingDelete/")
+    Observable<RequestStatusBean> cancelSkillOrder(@FieldMap Map<String,String> map);
+
     //秒杀详情页
     @GET("ios/goods/seckillingview/")
     Observable<SeckillProductBean> getSeckillProduct(@QueryMap Map<String, String> param);
@@ -264,4 +281,19 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("ios/order/confirm_shopcart/")
     Observable<ShopCartOrderSureBean> shopCartOrderSure(@FieldMap Map<String, String> param);
+
+    //普通商品和板毛下单
+    @FormUrlEncoded
+    @POST("ios/order/create/")
+    Observable<RequestStatusBean> regularOrder(@FieldMap Map<String, String> param);
+
+    //微信支付
+    @FormUrlEncoded
+    @POST("disecms/plugins/iosPay/examples/wechat/Wepay.php")
+    Observable<PayReqBean> weChatPay(@FieldMap Map<String, String> param);
+
+    //获得微信支付状态
+    @FormUrlEncoded
+    @POST("disecms/plugins/iosPay/examples/wechat/Query.php")
+    Observable<WeChatPayStateBean> weChatPayState(@FieldMap Map<String, String> param);
 }

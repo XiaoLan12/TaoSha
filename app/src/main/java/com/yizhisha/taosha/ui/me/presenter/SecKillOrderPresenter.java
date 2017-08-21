@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.me.presenter;
 
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderContract;
 
@@ -32,6 +33,24 @@ public class SecKillOrderPresenter extends SecKillOrderContract.Presenter{
             protected void onFailure(String message) {
                 mView.hideLoading();
                 mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void cancleOrder(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().cancelSkillOrder(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.cancleOrder(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
             }
         });
     }

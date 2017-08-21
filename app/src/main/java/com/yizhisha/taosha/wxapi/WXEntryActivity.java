@@ -45,8 +45,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
-        switch (baseResp.errCode) {
 
+        switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
@@ -55,12 +55,16 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 }
                 break;
             case BaseResp.ErrCode.ERR_OK:
+
                 switch (baseResp.getType()) {
+
                     case RETURN_MSG_TYPE_LOGIN:
                         //拿到了微信返回的code,立马再去请求access_token
                         String code = ((SendAuth.Resp) baseResp).code;
                         RxBus.$().postEvent(new WeChatEvent(code));
                         finish();
+                        break;
+                    default:
                         break;
                 }
                 break;

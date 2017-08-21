@@ -47,9 +47,9 @@ public class ShopCartOrderSureBean {
     }
 
     public class Address {
-    private String id;
+    private int id;
 
-    private String uid;
+    private int uid;
 
     private String linkman;
 
@@ -71,16 +71,16 @@ public class ShopCartOrderSureBean {
 
     private String area_app;
 
-    public void setId(String id){
+    public void setId(int id){
         this.id = id;
     }
-    public String getId(){
+    public int getId(){
         return this.id;
     }
-    public void setUid(String uid){
+    public void setUid(int uid){
         this.uid = uid;
     }
-    public String getUid(){
+    public int getUid(){
         return this.uid;
     }
     public void setLinkman(String linkman){
@@ -156,7 +156,7 @@ public class ShopCartOrderSureBean {
 
         private String litpic;
 
-        private String amount;
+        private int amount;
 
         private String detail;
 
@@ -190,10 +190,10 @@ public class ShopCartOrderSureBean {
         public String getLitpic(){
             return this.litpic;
         }
-        public void setAmount(String amount){
+        public void setAmount(int amount){
             this.amount = amount;
         }
-        public String getAmount(){
+        public int getAmount(){
             return this.amount;
         }
         public void setDetail(String detail){

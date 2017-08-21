@@ -21,9 +21,9 @@ public class OrderSureBean {
 
     private String pname;
 
-    private String amount;
+    private int amount;
 
-    private int totalprice;
+    private float totalprice;
 
     private List<Address> address ;
     public void setGid(String gid){
@@ -68,16 +68,16 @@ public class OrderSureBean {
     public String getPname(){
         return this.pname;
     }
-    public void setAmount(String amount){
+    public void setAmount(int amount){
         this.amount = amount;
     }
-    public String getAmount(){
+    public int getAmount(){
         return this.amount;
     }
-    public void setTotalprice(int totalprice){
+    public void setTotalprice(float totalprice){
         this.totalprice = totalprice;
     }
-    public int getTotalprice(){
+    public float getTotalprice(){
         return this.totalprice;
     }
     public void setAddress(List<Address> address){
@@ -87,9 +87,9 @@ public class OrderSureBean {
         return this.address;
     }
     public class Address {
-        private String id;
+        private int id;
 
-        private String uid;
+        private int uid;
 
         private String linkman;
 
@@ -111,16 +111,16 @@ public class OrderSureBean {
 
         private String area_app;
 
-        public void setId(String id){
+        public void setId(int id){
             this.id = id;
         }
-        public String getId(){
+        public int getId(){
             return this.id;
         }
-        public void setUid(String uid){
+        public void setUid(int uid){
             this.uid = uid;
         }
-        public String getUid(){
+        public int getUid(){
             return this.uid;
         }
         public void setLinkman(String linkman){

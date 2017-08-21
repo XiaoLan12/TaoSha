@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +13,15 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.SecondKillOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.SeckillBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.activity.SecKillOrderDetailActivity;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderContract;
 import com.yizhisha.taosha.ui.me.presenter.SecKillOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
@@ -69,10 +75,49 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
                 Bundle bundle=new Bundle();
                 bundle.putString("ORDERNO",dataList.get(position).getOrderno());
                 startActivity(SecKillOrderDetailActivity.class,bundle);
+            }
+        });
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.cancel_the_order_tv:
+                            Map<String, String> bodyMap = new HashMap<>();
+                            bodyMap.put("uid", String.valueOf(AppConstant.UID));
+                            bodyMap.put("orderno", String.valueOf(dataList.get(position).getOrderno()));
+                            mPresenter.cancleOrder(bodyMap);
+                        break;
+                    case R.id.contact_the_merchant_tv:
+                        final String phone=dataList.get(position).getGoods().getMobile();
+                        new NormalAlertDialog.Builder(activity)
+                                .setBoolTitle(false)
+                                .setContentText(phone)
+                                .setContentTextColor(R.color.blue)
+                                .setLeftText("取消")
+                                .setLeftTextColor(R.color.blue)
+                                .setRightText("确认")
+                                .setRightTextColor(R.color.blue)
+                                .setWidth(0.75f)
+                                .setHeight(0.33f)
+                                .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                    @Override
+                                    public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                        dialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                        Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phone));
+                                        startActivity(phoneIneten);
+                                        dialog.dismiss();
+
+                                    }
+                                }).build().show();
+                        break;
+                }
             }
         });
 
@@ -103,6 +148,12 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     }
 
     @Override
+    public void cancleOrder(String msg) {
+        onRefresh();
+        ToastUtil.showCenterLongToast(msg);
+    }
+
+    @Override
     public void showLoading() {
         mLoadingView.load();
     }
@@ -125,6 +176,11 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
         mSwipeRefreshLayout.setRefreshing(false);
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
+    }
+
+    @Override
+    public void cancelFail(String msg) {
+        ToastUtil.showShortToast(msg);
     }
 
     @Override

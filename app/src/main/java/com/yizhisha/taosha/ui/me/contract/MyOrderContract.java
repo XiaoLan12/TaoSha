@@ -17,6 +17,10 @@ public interface MyOrderContract {
     interface View extends BaseView {
         void loadOrderSuccess(List<Order> data);
 
+        void sureGoodsSuuccess(String msg);
+
+        void cancleOrder(String msg);
+
         void showLoading();
 
         void hideLoading();
@@ -24,11 +28,15 @@ public interface MyOrderContract {
         void showEmpty();
 
         void loadFail(String msg);
+        void cancelFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void loadOrder(Map<String, String> param, boolean isShowLoad);
+        public abstract void cancleOrder(Map<String, String> param);
+        public abstract void sureGoods(Map<String, String> param);
+
 
         @Override
         public void onStart() {

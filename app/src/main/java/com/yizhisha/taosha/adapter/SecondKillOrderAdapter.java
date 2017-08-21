@@ -31,7 +31,10 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
         }else if(item.getStatus()==2){
             helper.setText(R.id.paystate_tv,"待收货");
         }else if(item.getStatus()==3){
-            helper.setText(R.id.paystate_tv,"已完成");
+            helper.setText(R.id.paystate_tv,"交易完成");
+        }
+        else if(item.getStatus()==4){
+            helper.setText(R.id.paystate_tv,"交易完成");
         }
 
         helper.setText(R.id.tradename_tv,item.getTitle());
@@ -43,6 +46,8 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goods.getLitpic(),
                 (ImageView) helper.getView(R.id.tradehead_iv),GlideUtil.LOAD_BITMAP);
         switchState(item.getStatus(),helper);
+        helper.addOnClickListener(R.id.cancel_the_order_tv);
+        helper.addOnClickListener(R.id.contact_the_merchant_tv);
 
     }
     private void switchState(int paystate,BaseViewHolder helper){
@@ -73,7 +78,15 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,true);
-                helper.setVisible(R.id.againbuy_tv,true);
+                helper.setVisible(R.id.againbuy_tv,false);
+                break;
+            case 4:
+                helper.setVisible(R.id.cancel_the_order_tv,false);
+                helper.setVisible(R.id.immediate_payment_tv,false);
+                helper.setVisible(R.id.confirm_goods_tv,false);
+                helper.setVisible(R.id.immediate_evaluation_tv,false);
+                helper.setVisible(R.id.additional_comments_tv,true);
+                helper.setVisible(R.id.againbuy_tv,false);
                 break;
         }
     }

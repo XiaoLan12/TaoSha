@@ -59,8 +59,17 @@ public class Order implements MultiItemEntity {
         private List<Goods> goods;
 
         private String mobile_company;
+        private int commentstatus;
 
-        public int getId() {
+    public int getCommentstatus() {
+        return commentstatus;
+    }
+
+    public void setCommentstatus(int commentstatus) {
+        this.commentstatus = commentstatus;
+    }
+
+    public int getId() {
             return id;
         }
 

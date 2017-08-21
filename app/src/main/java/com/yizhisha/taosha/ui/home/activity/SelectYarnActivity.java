@@ -93,10 +93,10 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     private ListPopupwindow mNeedlePopup;
     private ListPopupwindow mOrderbyPopup;
 
-    private int mYarnType=1;
-    private String mNeedleType="3g";
-    private int mPriceType=1;
-    private int mOrderByType=1;
+    private int mYarnType=0;
+    private String mNeedleType="0";
+    private int mPriceType=0;
+    private int mOrderByType=0;
     private static String TAG = SelectYarnActivity.class.getSimpleName();
 
     // 语音听写对象
@@ -432,6 +432,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mNeedleType=item.getTitle();
+                if(mNeedleType.equals("全部")){
+                    mNeedleType="";
+                }
                 viewPager.setCurrentItem(index);
                 commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
@@ -441,7 +444,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         mNeedlePopup.addAction(list);
     }
     private void initPopup4(final int index){
-        int[] id=new int[]{1,2,3,4,5};
+        int[] id=new int[]{0,1,2,3,4};
         String[] title=new String[]{"不限","销量最高","浏览最多","收藏最多","最新上传"};
         ArrayList<PopupListBean> list=new ArrayList<>();
         for(int i=0;i<id.length;i++){

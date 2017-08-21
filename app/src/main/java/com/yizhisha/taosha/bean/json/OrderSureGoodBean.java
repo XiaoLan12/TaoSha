@@ -15,7 +15,13 @@ public class OrderSureGoodBean {
 
     private String price;
 
-    private String amount;
+    private int amount;
+
+    private int addressId;
+
+    private float totalprice;
+
+    private int totalamount;
 
     public String getGid() {
         return gid;
@@ -57,11 +63,35 @@ public class OrderSureGoodBean {
         this.price = price;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    public float getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(float totalprice) {
+        this.totalprice = totalprice;
+    }
+
+    public int getTotalamount() {
+        return totalamount;
+    }
+
+    public void setTotalamount(int totalamount) {
+        this.totalamount = totalamount;
     }
 }
