@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,7 +60,12 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
 
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(SingleShopCartActivity.this);
+            }
+        });
     }
     @Override
     protected void initView() {
@@ -113,7 +119,7 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
                                 }
                             }
                             ShopCartBean.ShopcartList shopcartList=new ShopCartBean().new ShopcartList();
-                            shopcartList.setAmount(0);
+                            shopcartList.setAmount(1);
                             shopcartList.setDetail("");
                             shopcartList.setAdd(false);
                             dataList.add(0,shopcartList);
@@ -191,19 +197,30 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         switch (v.getId()){
             case R.id.sure_btn:
                 StringBuilder str=new StringBuilder();
+                int amount = 0;
+                String detail = "";
                 for(int i=0;i<dataList.size();i++){
+                    if (dataList.get(i).getDetail().equals("")){
+                        ToastUtil.showShortToast("请输入6位数内的色号");
+                        return;
+                    }
+                    if (dataList.get(i).getAmount()==0) {
+                        ToastUtil.showShortToast("请输入购买的数量数量");
+                        return;
+                    }
                     str.append(dataList.get(i).getDetail()).append("#");
                     str.append(dataList.get(i).getAmount()).append("，");
+                    amount += dataList.get(i).getAmount();
                 }
-                if(str.length()<=0){
-                    ToastUtil.showShortToast("请选择商品");
+                if (str.length() > 0) {
+                    detail = str.substring(0, str.length() - 1);
                 }
                 Map<String,String> map=new HashMap<>();
                 map.put("gid",String.valueOf(gid));
                 map.put("uid",String.valueOf(AppConstant.UID));
                 map.put("savetype","edit");
-                map.put("amount",String.valueOf(dataList.size()));
-                map.put("detail",str.substring(0,str.length()-1));
+                map.put("amount",String.valueOf(detail));
+                map.put("detail",detail);
                 mPresenter.changeShopCart(map);
                 break;
         }

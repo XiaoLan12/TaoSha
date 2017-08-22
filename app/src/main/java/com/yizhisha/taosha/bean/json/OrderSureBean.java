@@ -15,7 +15,7 @@ public class OrderSureBean {
 
     private String detail;
 
-    private String price;
+    private float price;
 
     private String price_real;
 
@@ -26,6 +26,7 @@ public class OrderSureBean {
     private float totalprice;
 
     private List<Address> address ;
+
     public void setGid(String gid){
         this.gid = gid;
     }
@@ -50,10 +51,10 @@ public class OrderSureBean {
     public String getDetail(){
         return this.detail;
     }
-    public void setPrice(String price){
+    public void setPrice(float price){
         this.price = price;
     }
-    public String getPrice(){
+    public float getPrice(){
         return this.price;
     }
     public void setPrice_real(String price_real){

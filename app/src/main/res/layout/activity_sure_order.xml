@@ -144,6 +144,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
                 android:background="@color/white">
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
@@ -173,6 +175,7 @@
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/icon_contact_us"
             android:textColor="@color/blue"
+            android:textSize="@dimen/font_small"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/dp_5"
             android:text="联系我们"/>
@@ -200,10 +203,10 @@
             android:id="@+id/sureorder_tv"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:paddingLeft="@dimen/dp_25"
-            android:paddingRight="@dimen/dp_25"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:gravity="center"
-            android:background="@color/yellow1"
+            android:background="@color/red1"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:textColor="@color/white"

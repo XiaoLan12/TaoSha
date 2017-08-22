@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
 
 public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
@@ -177,5 +178,25 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
                 mPresenter.loadSeckillProduct(map);
             }
         });
+    }
+    @OnClick({R.id.img_back,R.id.tv_shopping})
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.img_back:
+                finish_Activity(SeckillYarnActivity.this);
+                break;
+            case R.id.tv_shopping:
+                int id=0;
+                if(seckillProductBean!=null){
+                    id=seckillProductBean.getSeckilling().getId();
+                }
+                Bundle bundle=new Bundle();
+                bundle.putInt("ORDERTYPE",3);
+                bundle.putInt("id",id);
+                startActivity(SureOrderActivity.class,bundle);
+                break;
+        }
     }
 }

@@ -64,6 +64,7 @@
                 android:text="联系我们"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/nayang_ll"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -74,12 +75,14 @@
                 android:layout_height="30dp"
                 android:src="@drawable/icon_free"/>
             <TextView
+                android:id="@+id/nayang_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:text="免费拿样"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/banmao_ll"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"

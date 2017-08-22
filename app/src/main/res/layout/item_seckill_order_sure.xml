@@ -50,18 +50,4 @@
         android:textColor="@color/red1"
         tools:text="12"/>
 
-    <com.yizhisha.taosha.widget.TimeView
-        android:id="@+id/seckillact_activity_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_5"
-        app:titles="活动已结束"
-        app:titleColors="@color/yellow"
-        app:titleSizes="@dimen/font_normal2"
-        />
-
 </RelativeLayout>

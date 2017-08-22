@@ -7,6 +7,7 @@ import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.PayReqBean;
+import com.yizhisha.taosha.bean.json.SeckillOrderSureBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
@@ -282,10 +283,37 @@ public interface ApiService {
     @POST("ios/order/confirm_shopcart/")
     Observable<ShopCartOrderSureBean> shopCartOrderSure(@FieldMap Map<String, String> param);
 
+    //秒杀下单确认
+    @FormUrlEncoded
+    @POST("ios/order/confirm_seckilling/")
+    Observable<SeckillOrderSureBean> seckillOrderSure(@FieldMap Map<String, String> param);
+
+    //拿样下单确认
+    @FormUrlEncoded
+    @POST("ios/order/confirm_nayang/")
+    Observable<AddressListBean> nayangOrderSure(@FieldMap Map<String, String> param);
+
     //普通商品和板毛下单
     @FormUrlEncoded
     @POST("ios/order/create/")
     Observable<RequestStatusBean> regularOrder(@FieldMap Map<String, String> param);
+
+    //购物车创建订单
+    @FormUrlEncoded
+    @POST("ios/order/create_shopcart/")
+    Observable<RequestStatusBean> shopCartCreateOrder(@FieldMap Map<String, String> param);
+
+    //拿样创建订单
+    @FormUrlEncoded
+    @POST("ios/order/create_nayang/")
+    Observable<RequestStatusBean> naYangCreateOrder(@FieldMap Map<String, String> param);
+
+    //秒纱创建订单
+    @FormUrlEncoded
+    @POST("ios/order/create_seckilling/")
+    Observable<RequestStatusBean> seckillCreateOrder(@FieldMap Map<String, String> param);
+
+
 
     //微信支付
     @FormUrlEncoded

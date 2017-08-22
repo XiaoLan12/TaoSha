@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.shoppcart.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -24,6 +25,8 @@ import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
 import com.yizhisha.taosha.bean.json.Shopcart;
 import com.yizhisha.taosha.bean.json.ShopcartGoods;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
@@ -141,6 +144,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             @Override
             public void onClick(View v) {
                 StringBuilder str=new StringBuilder();
+                String sid = "";
                 for (int i = 0; i < parentMapList.size(); i++) {
                     StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
                     List<Map<String, Object>> childMapList = childMapList_list.get(i);
@@ -151,13 +155,12 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                         }
                     }
                 }
-                if(str.length()<=0){
-                    ToastUtil.showShortToast("请选择购买的商品");
-                    return;
+                if (str.length() > 0) {
+                    sid = str.substring(0, str.length() - 1);
                 }
                 Bundle bundle=new Bundle();
                 bundle.putInt("ORDERTYPE",2);
-                bundle.putString("gid",str.substring(0,str.length()-1));
+                bundle.putString("gid",sid);
                 startActivity(SureOrderActivity.class,bundle);
             }
         });
@@ -196,13 +199,35 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         //删除单项商品
         adapter.setOnDeleteShopListener(new ShoppCartAdapter.OnDeleteShopListener() {
             @Override
-            public void onDeleteShop(int groupPosition, int childPosition) {
-                final GoodsBean goodsBean = (GoodsBean) childMapList_list.get(groupPosition).get(childPosition).get("childName");
-                Map<String,String> map=new HashMap<>();
-                map.put("uid",String.valueOf(AppConstant.UID));
-                map.put("sid", String.valueOf(goodsBean.getSid()));
-                mPresenter.deleteOneShoppCart(map,groupPosition,childPosition);
-                adapter.removeOneGood(groupPosition,childPosition);
+            public void onDeleteShop(final int groupPosition, final int childPosition) {
+                new NormalAlertDialog.Builder(activity)
+                        .setBoolTitle(false)
+                        .setContentText("确定删除该商品吗?")
+                        .setContentTextColor(R.color.blue)
+                        .setLeftText("取消")
+                        .setLeftTextColor(R.color.blue)
+                        .setRightText("确认")
+                        .setRightTextColor(R.color.blue)
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                final GoodsBean goodsBean = (GoodsBean) childMapList_list.get(groupPosition).get(childPosition).get("childName");
+                                Map<String,String> map=new HashMap<>();
+                                map.put("uid",String.valueOf(AppConstant.UID));
+                                map.put("sid", String.valueOf(goodsBean.getSid()));
+                                mPresenter.deleteOneShoppCart(map,groupPosition,childPosition);
+                                adapter.removeOneGood(groupPosition,childPosition);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
+
             }
         });
         adapter.setOnGoodsEditChangeListenr(new ShoppCartAdapter.OnGoodsEditChangeListenr() {
@@ -350,6 +375,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
        switch (v.getId()){
            case R.id.deleteall_btn:
                StringBuilder str=new StringBuilder();
+               String sid = "";
                for (int i = 0; i < parentMapList.size(); i++) {
                    List<Map<String, Object>> childMapList = childMapList_list.get(i);
                    for (int j = 0; j < childMapList.size(); j++) {
@@ -360,10 +386,8 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                        }
                    }
                }
-
-               if(str.length()==0){
-                   ToastUtil.showbottomLongToast("请选择");
-                  return;
+               if (str.length() > 0) {
+                   sid = str.substring(0, str.length() - 1);
                }
                Map<String,String> map=new HashMap<>();
                map.put("uid",String.valueOf(AppConstant.UID));

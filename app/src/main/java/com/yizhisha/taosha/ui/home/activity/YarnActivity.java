@@ -139,7 +139,8 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
         });
     }
 
-    @OnClick({R.id.img_back,R.id.tv_shopping_cart,R.id.tv_shopping})
+    @OnClick({R.id.img_back,R.id.tv_shopping_cart,R.id.tv_shopping,R.id.nayang_ll,
+    R.id.banmao_ll})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -150,14 +151,30 @@ public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
             case R.id.tv_shopping_cart:
                 Bundle bundle=new Bundle();
                 bundle.putInt("TYPE",2);
+                bundle.putBoolean("ISBANMAO",false);
                 bundle.putSerializable("DATA",productDetailBean.getGoods());
                 startActivity(SelectYarnColorActivity.class,bundle);
                 break;
             case R.id.tv_shopping:
                 Bundle bundle1=new Bundle();
                 bundle1.putInt("TYPE",1);
+                bundle1.putBoolean("ISBANMAO",false);
                 bundle1.putSerializable("DATA",productDetailBean.getGoods());
                 startActivity(SelectYarnColorActivity.class,bundle1);
+                break;
+            case R.id.nayang_ll:
+                Bundle bundle2=new Bundle();
+                bundle2.putInt("ORDERTYPE",4);
+
+                bundle2.putInt("gid",productDetailBean.getGoods().getId());
+                startActivity(SureOrderActivity.class,bundle2);
+                break;
+            case R.id.banmao_ll:
+                Bundle bundle3=new Bundle();
+                bundle3.putInt("TYPE",1);
+                bundle3.putBoolean("ISBANMAO",true);
+                bundle3.putSerializable("DATA",productDetailBean.getGoods());
+                startActivity(SelectYarnColorActivity.class,bundle3);
                 break;
         }
     }

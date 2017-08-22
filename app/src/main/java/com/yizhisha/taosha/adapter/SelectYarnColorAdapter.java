@@ -59,7 +59,9 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<SelectYarnBean,Base
         et_color.addTextChangedListener(watcher);
         et_color.setTag(watcher);
         et_color.setText(goods.getColor());
-            helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener(){
+        helper.addOnClickListener(R.id.tv_add);
+        helper.addOnClickListener(R.id.tv_reduce);
+         /*   helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                         TextView tv_num=    (TextView)helper.getView(R.id.tv_num);
@@ -76,14 +78,14 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<SelectYarnBean,Base
                 TextView tv_num=    (TextView)helper.getView(R.id.tv_num);
                 int num1 = goods.getNum();
 
-                if(num1!=1){
+                if(num1>0){
                     num1--;
                     goods.setNum(num1);
                     ((TextView) helper.getView(R.id.tv_num)).setText(num1+"");
                 }
 
             }
-        });
+        });*/
 
     }
 }

@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.home.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     RecyclerView recyclerView;
     @Bind(R.id.recycleview1)
     RecyclerView recyclerView1;
+    @Bind(R.id.buynum_tv)
+    TextView buyNumTv;
     private ProductDetailImgAdapter adapter;
     private SelectYarnColorAdapter adapter1;
     private List<SelectYarnBean> list=new ArrayList<>();
@@ -46,6 +49,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     private  ArrayList<String> sekaList=new ArrayList<>();
 
     private int type;
+    private boolean isBanmao=false;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -61,6 +65,16 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
             toolbar.setTitle("加入购物车");
         }
         productDeatilItemBean= (ProductDeatilItemBean) bundle.getSerializable("DATA");
+        isBanmao=bundle.getBoolean("ISBANMAO",false);
+        if(isBanmao){
+            buyNumTv.setText("购买数量(份)");
+        }
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(SelectYarnColorActivity.this);
+            }
+        });
     }
 
     @Override
@@ -71,41 +85,57 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
         recyclerView.setLayoutManager(linearLayoutManager4);
         SelectYarnBean selectYarnBean=new SelectYarnBean();
         selectYarnBean.setColor("");
-        selectYarnBean.setNum(0);
+        selectYarnBean.setNum(1);
         selectYarnBean.setAdd(true);
         list.add(selectYarnBean);
         adapter1=new SelectYarnColorAdapter(SelectYarnColorActivity.this,list);
         recyclerView1.setAdapter(adapter1);
-        adapter1.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
-                    case R.id.img_delete:
-                        if(list.get(position).isAdd()) {
-                            if (list.size() > 7) {
-                                ToastUtil.showShortToast("一个订单最多八组");
-                                return;
-                            }
-                            for (int i = 0; i < list.size(); i++) {
-                                if (list.get(i).getColor().equals("")||list.get(i).getNum()==0) {
-                                    ToastUtil.showShortToast("请先输入色号和数量");
+        if(!isBanmao) {
+            adapter1.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    switch (view.getId()) {
+                        case R.id.img_delete:
+                            if (list.get(position).isAdd()) {
+                                if (list.size() > 7) {
+                                    ToastUtil.showShortToast("一个订单最多八组");
                                     return;
                                 }
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (list.get(i).getColor().equals("") || list.get(i).getNum() == 0) {
+                                        ToastUtil.showShortToast("请先输入色号和数量");
+                                        return;
+                                    }
+                                }
+                                SelectYarnBean selectYarnBean = new SelectYarnBean();
+                                selectYarnBean.setColor("");
+                                selectYarnBean.setNum(1);
+                                selectYarnBean.setAdd(false);
+                                list.add(0, selectYarnBean);
+                                adapter1.setNewData(list);
+                            } else {
+                                adapter1.remove(position);
                             }
-                            SelectYarnBean selectYarnBean = new SelectYarnBean();
-                            selectYarnBean.setColor("");
-                            selectYarnBean.setNum(0);
-                            selectYarnBean.setAdd(false);
-                            list.add(0, selectYarnBean);
-                            adapter1.setNewData(list);
-                        }else{
-                            adapter1.remove(position);
-                        }
-                        break;
-                }
-            }
-        });
+                            break;
+                        case R.id.tv_add:
+                            int num= list.get(position).getNum();
+                            num++;
+                            list.get(position).setNum(num);
+                            adapter1.notifyItemChanged(position);
+                            break;
+                        case R.id.tv_reduce:
+                            int num1= list.get(position).getNum();
 
+                            if(num1>1){
+                                num1--;
+                                list.get(position).setNum(num1);
+                                adapter1.notifyItemChanged(position);
+                            }
+                            break;
+                    }
+                }
+            });
+        }
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
@@ -123,8 +153,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                     int amount = 0;
                     String detail = "";
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getColor().equals("")||list.get(i).getNum()==0) {
-                            ToastUtil.showShortToast("请先输入色号和数量");
+                        if (list.get(i).getColor().equals("")){
+                            ToastUtil.showShortToast("请输入6位数内的色号");
                             return;
                         }
                         str.append(list.get(i).getColor()).append("#");
@@ -138,26 +168,39 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                     bundle.putInt("gid", Integer.valueOf(productDeatilItemBean.getId()));
                     bundle.putInt("ORDERTYPE", 1);
                     bundle.putString("detail", detail);
-                    bundle.putString("type", "order");
+                    if(isBanmao) {
+                        bundle.putString("type", "banmao");
+                    }else{
+                        bundle.putString("type", "order");
+                    }
                     bundle.putInt("amount", amount);
                     startActivity(SureOrderActivity.class, bundle);
                 }else{
                     StringBuilder str=new StringBuilder();
-                    int amount=0;
+                    int amount = 0;
+                    String detail = "";
                     for(int i=0;i<list.size();i++){
+                        if (list.get(i).getColor().equals("")){
+                            ToastUtil.showShortToast("请输入6位数内的色号");
+                            return;
+                        }
+                        if (list.get(i).getNum()==0) {
+                            ToastUtil.showShortToast("请输入购买的数量数量");
+                            return;
+                        }
                         str.append(list.get(i).getColor()).append("#");
                         str.append(list.get(i).getNum()).append("，");
                         amount+=list.get(i).getNum();
                     }
                     if(str.length()<=0){
-                        ToastUtil.showShortToast("请选择商品");
+                        detail = str.substring(0, str.length() - 1);
                     }
                     Map<String,String> map=new HashMap<>();
                     map.put("gid",String.valueOf(productDeatilItemBean.getId()));
                     map.put("uid",String.valueOf(AppConstant.UID));
                     map.put("savetype","add");
                     map.put("amount",String.valueOf(amount));
-                    map.put("detail",str.substring(0,str.length()-1));
+                    map.put("detail",detail);
                     mPresenter.changeShopCart(map);
                 }
                 break;

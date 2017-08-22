@@ -33,9 +33,6 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
         }else if(item.getStatus()==3){
             helper.setText(R.id.paystate_tv,"交易完成");
         }
-        else if(item.getStatus()==4){
-            helper.setText(R.id.paystate_tv,"交易完成");
-        }
 
         helper.setText(R.id.tradename_tv,item.getTitle());
         helper.setText(R.id.seckillprice_tv,String.valueOf(item.getSeckilling_price()));
@@ -78,14 +75,6 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,true);
-                helper.setVisible(R.id.againbuy_tv,false);
-                break;
-            case 4:
-                helper.setVisible(R.id.cancel_the_order_tv,false);
-                helper.setVisible(R.id.immediate_payment_tv,false);
-                helper.setVisible(R.id.confirm_goods_tv,false);
-                helper.setVisible(R.id.immediate_evaluation_tv,false);
-                helper.setVisible(R.id.additional_comments_tv,true);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
         }

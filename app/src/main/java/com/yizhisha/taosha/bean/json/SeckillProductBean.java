@@ -149,7 +149,7 @@ public class SeckillProductBean implements Serializable{
 
     }
     public class Seckilling {
-        private String id;
+        private int id;
 
         private String title;
 
@@ -171,10 +171,10 @@ public class SeckillProductBean implements Serializable{
 
         private String is_show;
 
-        public void setId(String id){
+        public void setId(int id){
             this.id = id;
         }
-        public String getId(){
+        public int getId(){
             return this.id;
         }
         public void setTitle(String title){

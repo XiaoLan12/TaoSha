@@ -13,7 +13,9 @@ public class OrderSureGoodBean {
 
     private String detail;
 
-    private String price;
+    private float price;
+
+    private float market_price;
 
     private int amount;
 
@@ -55,11 +57,11 @@ public class OrderSureGoodBean {
         this.detail = detail;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -93,5 +95,13 @@ public class OrderSureGoodBean {
 
     public void setTotalamount(int totalamount) {
         this.totalamount = totalamount;
+    }
+
+    public float getMarket_price() {
+        return market_price;
+    }
+
+    public void setMarket_price(float market_price) {
+        this.market_price = market_price;
     }
 }

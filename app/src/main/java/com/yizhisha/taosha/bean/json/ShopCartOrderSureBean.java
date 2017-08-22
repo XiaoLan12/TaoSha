@@ -152,7 +152,7 @@ public class ShopCartOrderSureBean {
 
         private String gid;
 
-        private String price;
+        private float price;
 
         private String litpic;
 
@@ -178,10 +178,10 @@ public class ShopCartOrderSureBean {
         public String getGid(){
             return this.gid;
         }
-        public void setPrice(String price){
+        public void setPrice(float price){
             this.price = price;
         }
-        public String getPrice(){
+        public float getPrice(){
             return this.price;
         }
         public void setLitpic(String litpic){

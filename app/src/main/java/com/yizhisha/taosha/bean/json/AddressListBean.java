@@ -33,6 +33,14 @@ public class AddressListBean implements  Serializable{
 
         private String index;
 
+        private String area_pid;
+
+        private String area_sid;
+
+        private String area_pname;
+
+        private String area_sname;
+
         public void setId(int id) {
             this.id = id;
         }
@@ -87,6 +95,30 @@ public class AddressListBean implements  Serializable{
 
         public void setArea_app(String area_app) {
             this.area_app = area_app;
+        }
+
+        public String getArea_sid() {
+            return area_sid;
+        }
+
+        public void setArea_sid(String area_sid) {
+            this.area_sid = area_sid;
+        }
+
+        public String getArea_pname() {
+            return area_pname;
+        }
+
+        public void setArea_pname(String area_pname) {
+            this.area_pname = area_pname;
+        }
+
+        public String getArea_sname() {
+            return area_sname;
+        }
+
+        public void setArea_sname(String area_sname) {
+            this.area_sname = area_sname;
         }
     }
     @Override

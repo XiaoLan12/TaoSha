@@ -2,10 +2,12 @@ package com.yizhisha.taosha.ui.home.contract;
 
 import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
+import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
 import com.yizhisha.taosha.bean.json.PayReqBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchDetailBean;
+import com.yizhisha.taosha.bean.json.SeckillOrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 
@@ -23,9 +25,13 @@ public interface SureOrderContract {
     interface View extends BaseView {
         void loadOrderSuccess(OrderSureBean data);
         void loadShopCartOrderSuccess(ShopCartOrderSureBean data);
+        void loadSeckillOrderSuccess(SeckillOrderSureBean bean);
+        void loadNayangOrderSuccess(List<AddressListBean.Address> bean);
         void weChatPay(PayReqBean bean);
-        void regularOrderSuccess(String msg);
+
+        void regularOrderSuccess(RequestStatusBean bean);
         void loadWeChatPayState(WeChatPayStateBean bean);
+
         void showLoading();
         void hideLoading();
         void loadFail(String msg);
@@ -36,9 +42,17 @@ public interface SureOrderContract {
 
         public abstract void loadOrderSure(Map<String, String> param);
         public abstract void loadShopCartOrderSure(Map<String, String> param);
+        public abstract void loadSeckillOrder(Map<String, String> param);
+        public abstract void loadNayangOrderOrder(Map<String, String> param);
         public abstract void weChatPay(Map<String, String> param);
+
         public abstract void regularOrder(Map<String, String> param);
+        public abstract void shopcartOrder(Map<String, String> param);
+        public abstract void nayangOrder(Map<String, String> param);
+        public abstract void seckillOrder(Map<String, String> param);
+
         public abstract void loadWeChatPayState(Map<String, String> param);
+
         @Override
         public void onStart() {
 

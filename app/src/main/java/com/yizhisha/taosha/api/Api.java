@@ -20,6 +20,7 @@ import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.bean.json.SeckillOrderSureBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.bean.json.ShopCartBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
@@ -287,19 +288,46 @@ public class Api {
     public Observable<AccountBean> loadAccount(int uid){
         return service.loadAccount(uid);
     }
+
     //订单确认
     public Observable<OrderSureBean> orderSure(Map<String,String> map){
         return service.orderSure(map);
     }
-    //订单确认
+    //购物车订单确认
     public Observable<ShopCartOrderSureBean> shopCartOrderSure(Map<String,String> map){
         return service.shopCartOrderSure(map);
     }
 
-    //普通商品和板毛下单
+    //秒杀下单确认
+    public Observable<SeckillOrderSureBean> seckillOrderSure(Map<String,String> map){
+        return service.seckillOrderSure(map);
+    }
+
+    //拿样下单确认
+    public Observable<AddressListBean> nayangOrderSure(Map<String,String> map){
+        return service.nayangOrderSure(map);
+    }
+
+    //普通商品和板毛创建订单
     public Observable<RequestStatusBean> regularOrder(Map<String,String> map){
         return service.regularOrder(map);
     }
+
+    //购物车创建订单
+    public Observable<RequestStatusBean> shopCartCreateOrder(Map<String,String> map){
+        return service.shopCartCreateOrder(map);
+    }
+
+    //拿样创建订单
+    public Observable<RequestStatusBean> naYangCreateOrder(Map<String,String> map){
+        return service.naYangCreateOrder(map);
+    }
+
+    //秒纱创建订单
+    public Observable<RequestStatusBean> seckillCreateOrder(Map<String,String> map){
+        return service.seckillCreateOrder(map);
+    }
+
 
     //微信支付下单
     public Observable<PayReqBean> weChatPay(Map<String,String> map){
