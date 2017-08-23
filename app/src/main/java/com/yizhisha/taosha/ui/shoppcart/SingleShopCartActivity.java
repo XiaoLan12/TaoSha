@@ -92,8 +92,7 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         mProductDetailImgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String url="http://www.taoshamall.com";
-                PicShowDialog dialog=new PicShowDialog(SingleShopCartActivity.this,url+imgList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(SingleShopCartActivity.this,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+imgList.get(position),position);
                 dialog.show();
             }
         });

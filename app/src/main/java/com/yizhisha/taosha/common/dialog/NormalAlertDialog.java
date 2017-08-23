@@ -161,7 +161,7 @@ public class NormalAlertDialog {
             isSingleModel=false;
             singleTextColor= ContextCompat.getColor(mContext, R.color.blue);
             leftText="取消";
-            leftTextColor= ContextCompat.getColor(mContext, R.color.common_h2);
+            leftTextColor= ContextCompat.getColor(mContext, R.color.common_h3);
             rightText="确认";
             rightTextColor= ContextCompat.getColor(mContext, R.color.blue);
             onclickListener = null;

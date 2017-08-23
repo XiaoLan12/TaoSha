@@ -25,14 +25,21 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
     @Override
     protected void convert(BaseViewHolder helper, SeckillBean item) {
         if(item.getStatus()==0){
-            helper.setText(R.id.paystate_tv,"未付款");
+            if(item.getPayment()==3){
+                helper.setText(R.id.paystate_tv,"货到付款");
+            }else{
+                helper.setText(R.id.paystate_tv,"未付款");
+            }
         }else if(item.getStatus()==1){
             helper.setText(R.id.paystate_tv,"待发货");
         }else if(item.getStatus()==2){
             helper.setText(R.id.paystate_tv,"待收货");
         }else if(item.getStatus()==3){
             helper.setText(R.id.paystate_tv,"交易完成");
+        }else if(item.getPayment()==3&&item.getStatus()==0){
+
         }
+
 
         helper.setText(R.id.tradename_tv,item.getTitle());
         helper.setText(R.id.seckillprice_tv,String.valueOf(item.getSeckilling_price()));
@@ -42,19 +49,23 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
         helper.setText(R.id.company_tv,goods.getCompany());
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goods.getLitpic(),
                 (ImageView) helper.getView(R.id.tradehead_iv),GlideUtil.LOAD_BITMAP);
-        switchState(item.getStatus(),helper);
+        switchState(item.getStatus(),helper,item.getPayment());
         helper.addOnClickListener(R.id.cancel_the_order_tv);
         helper.addOnClickListener(R.id.contact_the_merchant_tv);
 
     }
-    private void switchState(int paystate,BaseViewHolder helper){
+    private void switchState(int paystate,BaseViewHolder helper,int payment){
         switch (paystate){
             case 0:
                 helper.setVisible(R.id.cancel_the_order_tv,true);
-                helper.setVisible(R.id.immediate_payment_tv,true);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
+                if(payment==3){
+                    helper.setVisible(R.id.immediate_payment_tv,false);
+                }else{
+                    helper.setVisible(R.id.immediate_payment_tv,true);
+                }
                 break;
             case 1:
                 helper.setVisible(R.id.cancel_the_order_tv,true);

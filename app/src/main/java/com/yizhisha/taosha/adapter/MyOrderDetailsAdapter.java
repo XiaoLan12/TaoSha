@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.utils.GlideUtil;
@@ -30,7 +31,7 @@ public class MyOrderDetailsAdapter extends BaseQuickAdapter<Goods,BaseViewHolder
         helper.setText(R.id.tradecolor_myorder_tv,goods.getRemark());
         helper.setText(R.id.tradeprice_myorder_tv,"￥"+goods.getTotalprice());
         ImageView imageView=helper.getView(R.id.tradehead_myorder_iv);
-        GlideUtil.getInstance().LoadContextBitmap(mContext,goods.getLitpic(),imageView,GlideUtil.LOAD_BITMAP);
+        GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goods.getLitpic(),imageView,GlideUtil.LOAD_BITMAP);
         helper.setText(R.id.tradecolor_myorder_tv,goods.getDetail());
     }
 }

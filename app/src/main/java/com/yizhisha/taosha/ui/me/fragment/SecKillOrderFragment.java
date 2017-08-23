@@ -77,7 +77,7 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle=new Bundle();
                 bundle.putString("ORDERNO",dataList.get(position).getOrderno());
-                startActivity(SecKillOrderDetailActivity.class,bundle);
+                startActivityForResult(SecKillOrderDetailActivity.class,bundle,100);
             }
         });
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -125,7 +125,7 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     private void load(int type,boolean isShowLoad){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(AppConstant.UID));
-        if(type!=-1) {
+        if(type!=0) {
             map.put("status", String.valueOf(type));
         }
         mPresenter.loadSeckillOrder(map,isShowLoad);
@@ -133,7 +133,7 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     public void search(String key){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(AppConstant.UID));
-        if(mType!=-1) {
+        if(mType!=0) {
             map.put("status", String.valueOf(mType));
         }
         map.put("key",key);
@@ -186,5 +186,12 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     @Override
     public void onRefresh() {
         load(mType,false);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100&&resultCode==2){
+            onRefresh();
+        }
     }
 }

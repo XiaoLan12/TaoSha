@@ -43,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="林先生" />
+                        tools:text="林先生" />
 
                     <TextView
                         android:id="@+id/consignee_phone_tv"
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_10"
                         android:gravity="right"
-                        android:text="1412523452345" />
+                        tools:text="1412523452345" />
                 </LinearLayout>
 
             <LinearLayout

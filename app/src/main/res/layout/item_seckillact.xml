@@ -60,7 +60,7 @@
         android:layout_marginRight="@dimen/dp_5"
         android:layout_marginTop="@dimen/dp_5"
         app:titles="活动已结束"
-        app:titleColors="@color/yellow"
+        app:titleColors="@color/yellow3"
         app:titleSizes="@dimen/font_normal2"
         />
 

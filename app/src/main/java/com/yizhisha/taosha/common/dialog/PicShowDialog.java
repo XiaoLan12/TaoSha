@@ -49,6 +49,12 @@ public class PicShowDialog extends Dialog {
         this.imageUrl.add(url);
         this.position = position;
     }
+    public PicShowDialog(Context context, List<String> url, int position) {
+        this(context, R.style.Pic_Dialog);
+        imageUrl=new ArrayList<>();
+        this.imageUrl.addAll(url);
+        this.position = position;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

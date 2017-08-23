@@ -5,6 +5,9 @@ package com.yizhisha.taosha.bean.json;
  */
 
 public class PayReqBean {
+    private String status;
+
+    private String info;
     private String appid;
 
     private String partnerid;
@@ -17,6 +20,14 @@ public class PayReqBean {
 
 
     private String sign;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public String getAppid() {
         return appid;

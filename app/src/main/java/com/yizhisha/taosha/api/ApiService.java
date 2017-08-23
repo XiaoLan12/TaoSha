@@ -62,6 +62,10 @@ public interface ApiService {
     @GET("ios/ajax/goodsFavCancel/")
     Observable<RequestStatusBean> cacheCollect(@QueryMap Map<String, String> param);
 
+    //收藏商品
+    @GET("ios/ajax/goodsFav/")
+    Observable<RequestStatusBean> collectProduct(@QueryMap Map<String, String> param);
+
     //获得个人资料信息
     @GET("ios/ucenter/profile/")
     Observable<PersonalDataBean> getPersonalData(@Query("uid") int uid);
@@ -142,8 +146,6 @@ public interface ApiService {
     @GET("ios/ucenter/mobile_save/")
     Observable<RequestStatusBean> bindPhone(@QueryMap Map<String,String> map);
 
-
-
     //登录
     @FormUrlEncoded
     @POST("ios/user/dologin/")
@@ -187,6 +189,11 @@ public interface ApiService {
     //绑定微信号
     @GET("ios/user/wxreg/")
     Observable<RequestStatusBean> bindWeChat(@QueryMap Map<String, String> param);
+
+    //微信解除绑定
+    @GET("ios/user/wxunbind/")
+    Observable<RequestStatusBean> unBindWeChat(@Query("uid") int uid);
+
     //首页轮播
     @GET("ios/index/")
     Observable<IndexPPTBean> getPPT();
@@ -230,6 +237,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("ios/ucenter/shopcart_update/")
     Observable<RequestStatusBean> changeShopCart(@FieldMap Map<String, String> param);
+
     //删除购物车商品
     @GET("ios/ucenter/shopcart_delete/")
     Observable<RequestStatusBean> deleteShoppCart(@QueryMap  Map<String, String> param);

@@ -7,12 +7,23 @@ import java.util.List;
  */
 
 public class ShopCartOrderSureBean {
+    private String status;
+
+    private String info;
     private List<Address> address ;
 
     private List<Shopcart> shopcart ;
     private int price;
 
     private int amount;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public int getPrice() {
         return price;

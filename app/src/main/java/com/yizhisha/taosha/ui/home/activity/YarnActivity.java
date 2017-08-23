@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,15 +16,14 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
-import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
+import com.yizhisha.taosha.ui.home.contract.YarnContract;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
 import com.yizhisha.taosha.ui.home.fragment.SekaFragment;
-import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
+import com.yizhisha.taosha.ui.home.precenter.YarnPresenter;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +36,8 @@ import qiu.niorgai.StatusBarCompat;
  * Created by Administrator on 2017/7/2.
  */
 
-public class YarnActivity extends BaseActivity<ProductYarnPresenter> implements
-        ProductYarnContract.View {
+public class YarnActivity extends BaseActivity<YarnPresenter> implements
+        YarnContract.View {
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
 

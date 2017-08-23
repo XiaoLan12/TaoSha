@@ -7,7 +7,18 @@ import java.util.List;
  */
 
 public class ShopcartListBean {
+    private String status;
+
+    private String info;
     private List<Shopcart> shopcart ;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public void setShopcart(List<Shopcart> shopcart){
         this.shopcart = shopcart;

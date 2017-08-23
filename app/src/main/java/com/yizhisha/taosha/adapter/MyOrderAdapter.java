@@ -51,7 +51,11 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 final OrderHeadBean order= (OrderHeadBean) item;
                 helper.setText(R.id.company_myorder_tv,order.getCompany());
                 if(order.getStatus()==0){
-                    helper.setText(R.id.paystate_myorder_tv,"未付款");
+                    if(order.getPayment()==3) {
+                        helper.setText(R.id.paystate_myorder_tv,"货到付款");
+                    }else{
+                        helper.setText(R.id.paystate_myorder_tv, "未付款");
+                    }
                 }else if(order.getStatus()==1){
                     helper.setText(R.id.paystate_myorder_tv,"待发货");
                 }else if(order.getStatus()==2){
@@ -62,7 +66,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 else if(order.getStatus()==4){
                     helper.setText(R.id.paystate_myorder_tv,"交易完成");
                 }
-
                 break;
             case ITEM_CONTENT:
                 Goods goods= (Goods) item;
@@ -83,27 +86,30 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 final OrderFootBean orderFootBean= (OrderFootBean) item;
                 helper.setText(R.id.tradeltotal_myorder_tv,orderFootBean.getTotalprice()+"");
                 helper.setText(R.id.tradelnumber_total_tv,"共"+orderFootBean.getAmount()+"件商品");
-                switchState(orderFootBean.getStatus(),helper);
                 helper.addOnClickListener(R.id.immediate_evaluation_tv);
                 helper.addOnClickListener(R.id.immediate_payment_tv);
                 helper.addOnClickListener(R.id.additional_comments_tv);
                 helper.addOnClickListener(R.id.contact_the_merchant_tv);
                 helper.addOnClickListener(R.id.cancel_the_order_tv);
                 helper.addOnClickListener(R.id.confirm_goods_tv);
-                switchState(orderFootBean.getStatus(),helper);
+                switchState(orderFootBean.getStatus(),helper,orderFootBean.getPayment());
                 break;
         }
 
     }
-    private void switchState(int paystate,BaseViewHolder helper){
+    private void switchState(int paystate,BaseViewHolder helper,int payment){
         switch (paystate){
             case 0:
                 helper.setVisible(R.id.cancel_the_order_tv,true);
-                helper.setVisible(R.id.immediate_payment_tv,true);
                 helper.setVisible(R.id.confirm_goods_tv,false);
                 helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.additional_comments_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
+                if(payment==3){
+                    helper.setVisible(R.id.immediate_payment_tv,false);
+                }else{
+                    helper.setVisible(R.id.immediate_payment_tv,true);
+                }
                 break;
             case 1:
                 helper.setVisible(R.id.cancel_the_order_tv,true);

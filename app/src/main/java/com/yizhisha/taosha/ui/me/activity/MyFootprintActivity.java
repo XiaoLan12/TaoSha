@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.me.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,8 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.DataHelper;
 import com.yizhisha.taosha.bean.json.FootprintListBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.contract.MyFootprintContract;
 import com.yizhisha.taosha.ui.me.fragment.MyOrderFragment;
 import com.yizhisha.taosha.ui.me.presenter.MyFootprintPresenter;
@@ -78,10 +82,30 @@ public class MyFootprintActivity extends BaseActivity<MyFootprintPresenter>
                 if(dataLists.size()==0){
                    return;
                 }
-                Map<String,String> map=new HashMap<String, String>();
-                map.put("uid",String.valueOf(AppConstant.UID));
-                map.put("type",dataLists.get(0).getType());
-                mPresenter.clearFootPrint(map);
+                new NormalAlertDialog.Builder(MyFootprintActivity.this)
+                        .setBoolTitle(false)
+                        .setContentText("删除全部数据?")
+                        .setLeftText("取消")
+                        .setRightText("确认")
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Map<String,String> map=new HashMap<String, String>();
+                                map.put("uid",String.valueOf(AppConstant.UID));
+                                map.put("type",dataLists.get(0).getType());
+                                mPresenter.clearFootPrint(map);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
+
             }
         });
     }
@@ -117,12 +141,32 @@ public class MyFootprintActivity extends BaseActivity<MyFootprintPresenter>
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 switch (view.getId()){
                     case R.id.delete_tv:
-                        Map<String,String> map=new HashMap<String, String>();
-                        map.put("id",dataLists.get(position).getId());
-                        mPresenter.clearFootPrint(map);
+                        new NormalAlertDialog.Builder(MyFootprintActivity.this)
+                                .setBoolTitle(false)
+                                .setContentText("确定删除该条数据吗?")
+                                .setLeftText("取消")
+                                .setRightText("确认")
+                                .setWidth(0.75f)
+                                .setHeight(0.33f)
+                                .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                    @Override
+                                    public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                        dialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                        Map<String,String> map=new HashMap<String, String>();
+                                        map.put("id",dataLists.get(position).getId());
+                                        mPresenter.clearFootPrint(map);
+                                        dialog.dismiss();
+
+                                    }
+                                }).build().show();
+
                         break;
                 }
             }

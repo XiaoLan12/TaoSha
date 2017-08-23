@@ -7,9 +7,20 @@ import java.util.List;
  */
 
 public class SeckillOrderSureBean {
+    private String status;
+
+    private String info;
     private List<Address> address ;
 
     private Goods goods;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public List<Address> getAddress() {
         return address;

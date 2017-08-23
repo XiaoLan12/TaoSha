@@ -102,7 +102,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                         orderno=goods.getOrderno();
                         Bundle bundle=new Bundle();
                         bundle.putString("ORDERNO",orderno);
-                        startActivity(OrderDetailsActivity.class,bundle);
+                        startActivityForResult(OrderDetailsActivity.class,bundle,100);
                     }
                 }
             }
@@ -125,28 +125,32 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
                             Bundle bundle=new Bundle();
                             bundle.putString("ORDERNO",orderFootBean.getOrderno());
-                            startActivity(OrderDetailsActivity.class,bundle);
+                            startActivityForResult(OrderDetailsActivity.class,bundle,100);
                         }
 
                         break;
                     case R.id.immediate_payment_tv:
                         if(dataList.get(position) instanceof OrderFootBean) {
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            if(orderFootBean.getCommentstatus()==1){
+                                ToastUtil.showShortToast("已评论,可追加评论");
+                                return;
+                            }
                             Bundle bundle=new Bundle();
                             bundle.putString("ORDERNO",orderFootBean.getOrderno());
-                            startActivity(OrderDetailsActivity.class,bundle);
+                            startActivityForResult(OrderDetailsActivity.class,bundle,100);
                         }
                         break;
                     case R.id.additional_comments_tv:
                         if(dataList.get(position) instanceof OrderFootBean) {
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
                             if(orderFootBean.getCommentstatus()==2){
-                                ToastUtil.showShortToast("已追加评论");
+                                ToastUtil.showShortToast("已追加评论,不可重复追加");
                                 return;
                             }
                             Bundle bundle=new Bundle();
                             bundle.putString("ORDERNO",orderFootBean.getOrderno());
-                            startActivity(OrderDetailsActivity.class,bundle);
+                            startActivityForResult(OrderDetailsActivity.class,bundle,100);
                         }
                         break;
                     case R.id.contact_the_merchant_tv:
@@ -155,11 +159,8 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                             new NormalAlertDialog.Builder(activity)
                                     .setBoolTitle(false)
                                     .setContentText(orderFootBean.getMobile_company())
-                                     .setContentTextColor(R.color.blue)
                                     .setLeftText("取消")
-                                    .setLeftTextColor(R.color.blue)
                                     .setRightText("确认")
-                                    .setRightTextColor(R.color.blue)
                                     .setWidth(0.75f)
                                     .setHeight(0.33f)
                                     .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
@@ -253,4 +254,11 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         ToastUtil.showShortToast(msg);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100&&resultCode==2){
+            onRefresh();
+        }
+    }
 }

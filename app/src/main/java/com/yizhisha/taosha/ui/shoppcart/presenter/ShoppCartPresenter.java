@@ -24,12 +24,11 @@ public class ShoppCartPresenter extends ShoppCartContract.Presenter{
         addSubscrebe(Api.getInstance().getShoppCart(uid),
                 new RxSubscriber<ShopcartListBean>(mContext, false) {
                     @Override
-                    protected void onSuccess(ShopcartListBean shopcartListBean) {
+                    protected void onSuccess(ShopcartListBean bean) {
                         mView.hideLoading();
-
-                        if(null!=shopcartListBean&&shopcartListBean.getShopcart().size()>0){
-                            mView.loadSuccess(shopcartListBean.getShopcart());
-                        }else{
+                        if(bean.getStatus()==null&&bean.getShopcart().size()>0){
+                            mView.loadSuccess(bean.getShopcart());
+                        }else if(bean.getStatus()!=null&&bean.getStatus().equals("n")){
                             mView.showEmpty();
                         }
                     }

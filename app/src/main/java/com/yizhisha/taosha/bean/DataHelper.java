@@ -36,6 +36,7 @@ public class DataHelper {
             OrderHeadBean orderHeadBean = new OrderHeadBean();
             orderHeadBean.setStatus(order.getStatus());
             orderHeadBean.setCompany(order.getCompany());
+            orderHeadBean.setPayment(order.getPayment());
             dataList.add(orderHeadBean);
 
 
@@ -50,6 +51,7 @@ public class DataHelper {
             orderFootBean.setStatus(order.getStatus());
             orderFootBean.setAmount(goodses.size());
             orderFootBean.setOrderno(order.getOrderno());
+            orderFootBean.setPayment(order.getPayment());
             orderFootBean.setMobile_company(order.getMobile_company());
             dataList.add(orderFootBean);
         }

@@ -145,9 +145,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                                         api.sendReq(req);
                                         break;
                                     case 1:
-                                        Bundle bundle3 = new Bundle();
-                                        bundle3.putInt("TARGET", 3);
-                                        startActivity(SetInfoActivity.class, bundle3);
+                                        mPresenter.unBindWeChat(AppConstant.UID);
                                         break;
                                 }
                                 dialog.dismiss();
@@ -176,6 +174,18 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     @Override
     public void bindWeChat(String info) {
         ToastUtil.showShortToast(info);
+    }
+
+    @Override
+    public void unBindWeChat(String msg) {
+        if (!api.isWXAppInstalled()) {
+            ToastUtil.showbottomShortToast("您还未安装微信客户端");
+            return;
+        }
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "taosha_wx_login";
+        api.sendReq(req);
     }
 
     @Override

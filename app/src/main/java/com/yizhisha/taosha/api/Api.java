@@ -89,6 +89,10 @@ public class Api {
     public Observable<RequestStatusBean> cacheCollect(Map<String, String> param){
         return service.cacheCollect(param);
     }
+    //收藏商品
+    public Observable<RequestStatusBean> collectProduct(Map<String, String> param){
+        return service.collectProduct(param);
+    }
     //获得个人资料
     public Observable<PersonalDataBean> loadPersonalData(int uid){
         return service.getPersonalData(uid);
@@ -204,7 +208,11 @@ public class Api {
     //绑定微信号
     public Observable<RequestStatusBean> bindWeChat(Map<String,String> map){
         return service.bindWeChat(map);
+    } //微信解除绑定
+    public Observable<RequestStatusBean> unBindWeChat(int uid){
+        return service.unBindWeChat(uid);
     }
+
     //首页轮播
     public Observable<IndexPPTBean> getPPT(){
         return service.getPPT();

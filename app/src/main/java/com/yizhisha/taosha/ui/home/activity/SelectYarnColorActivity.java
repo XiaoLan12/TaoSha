@@ -14,9 +14,11 @@ import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.adapter.SelectYarnColorAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.event.UpdateShopCartEvent;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
 import com.yizhisha.taosha.utils.ToastUtil;
@@ -209,6 +211,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     @Override
     public void changeShopCartSuccess(String msg) {
         ToastUtil.showShortToast("商品已添加到购物车");
+        RxBus.$().postEvent(new UpdateShopCartEvent());
         finish_Activity(this);
     }
 

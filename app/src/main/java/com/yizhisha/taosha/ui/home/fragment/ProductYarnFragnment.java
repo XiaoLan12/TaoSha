@@ -3,24 +3,26 @@ package com.yizhisha.taosha.ui.home.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
+import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -29,14 +31,14 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/7/2.
  */
 
-public class ProductYarnFragnment extends BaseFragment{
+public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> implements
+ProductYarnContract.View{
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.tv_title)
@@ -100,8 +102,6 @@ public class ProductYarnFragnment extends BaseFragment{
     private ProductDeatilItemBean goods;
 
     private int id;
-
-
     public static ProductYarnFragnment getInstance(int id,ProductDetailBean bean) {
         ProductYarnFragnment sf = new ProductYarnFragnment();
         sf.productDetailBean = bean;
@@ -186,12 +186,6 @@ public class ProductYarnFragnment extends BaseFragment{
         initDetail();
 
     }
-
-
-
-
-
-
     //加载评论
     private void initComment() {
         ProductDetailBean.Comment comment=productDetailBean.getComment();
@@ -221,16 +215,32 @@ public class ProductYarnFragnment extends BaseFragment{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setAdapter(new ProductDetailImgAdapter(activity,sekaList));
+        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,sekaList);
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(position),position);
+                dialog.show();
+            }
+        });
     }
     private void initDetail() {
         contentList.addAll(goods.getContent_());
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView1.setNestedScrollingEnabled(false);
-        mRecyclerView1.setAdapter(new ProductDetailImgAdapter(activity,contentList));
+        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,contentList);
+        mRecyclerView1.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(position),position);
+                dialog.show();
+            }
+        });
     }
-    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll})
+    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll,R.id.collect_iv})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -244,6 +254,22 @@ public class ProductYarnFragnment extends BaseFragment{
                 bundle1.putInt("ID", id);
                 startActivity(CommentYarnActivity.class, bundle1);
                 break;
+            case R.id.collect_iv:
+                Map<String,String> map=new HashMap<>();
+                map.put("gid",String.valueOf(goods.getId()));
+                map.put("uid",String.valueOf(AppConstant.UID));
+                mPresenter.collectProduct(map);
+                break;
         }
+    }
+
+    @Override
+    public void collectProductSuccess(String msg) {
+        ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        ToastUtil.showShortToast(msg);
     }
 }

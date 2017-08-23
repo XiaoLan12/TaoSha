@@ -48,4 +48,23 @@ public class SetPresenter extends SetContract.Presenter{
                     }
                 });
     }
+
+    @Override
+    public void unBindWeChat(int uid) {
+        addSubscrebe(Api.getInstance().unBindWeChat(uid),
+                new RxSubscriber<RequestStatusBean>(mContext, true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean info) {
+                        if(info.getStatus().equals("y")){
+                            mView.unBindWeChat(info.getInfo());
+                        }else{
+                            mView.unBindWeChat(info.getInfo());
+                        }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
 }

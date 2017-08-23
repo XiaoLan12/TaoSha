@@ -41,7 +41,7 @@ public class SecKillOrderActivity extends BaseActivity{
     TextView cacelTv;
 
     private String[] mTitles = {"全部", "待付款", "待发货", "待收货","已完成"};
-    private int[] mType= {-1,0,1,2,3};
+    private int[] mType= {0,1,2,3,4};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     @Override
     protected int getLayoutId() {

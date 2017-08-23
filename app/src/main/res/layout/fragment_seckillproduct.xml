@@ -165,6 +165,7 @@
                     android:textColor="@color/common_h1"
                     tools:text="高品质，段染四经一维"/>
                 <ImageView
+                    android:id="@+id/collect_iv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/icon_favorite"/>

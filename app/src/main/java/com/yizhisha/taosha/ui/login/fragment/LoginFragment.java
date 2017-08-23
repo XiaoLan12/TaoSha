@@ -208,7 +208,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                 api.sendReq(req);
                 break;
         }
-    } @Override
+    }
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (subscription != null&&!subscription.isUnsubscribed()) {

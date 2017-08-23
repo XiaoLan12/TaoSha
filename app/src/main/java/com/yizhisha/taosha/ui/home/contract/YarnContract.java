@@ -10,14 +10,26 @@ import java.util.Map;
  * Created by Administrator on 2017/7/16.
  */
 
-public interface ProductYarnContract {
+public interface YarnContract {
     interface View extends BaseView {
-        void collectProductSuccess(String msg);
-        void loadFail(String msg);
+
+        void showLoading();
+
+        void hideLoading();
+
+        void showEmpty();
+
+        void getProductDetailFail(String msg);
+
+        void getProductDetailSuccess(ProductDetailBean model);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void collectProduct(Map<String, String> map);
+
+
+        public abstract void getProductDetail(Map<String, String> map);
+        public abstract void loadProductCommend(String url);
 
         @Override
         public void onStart() {

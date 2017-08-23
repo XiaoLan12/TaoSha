@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.ui.me.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.contract.MyAddressContract;
 import com.yizhisha.taosha.ui.me.presenter.MyAddressPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
@@ -93,7 +96,7 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         });
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
-            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 switch (view.getId()){
                     case R.id.edit_myaddress_tv:
                         Bundle bundle=new Bundle();
@@ -102,8 +105,28 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
                         startActivityForResult(AddAddressActivity.class,bundle,2);
                         break;
                     case R.id.delete_myaddress_tv:
-                        mPresenter.deleteAddress(dataList.get(position).getId());
-                        dataList.remove(position);
+                        new NormalAlertDialog.Builder(MyAddressActivity.this)
+                                .setBoolTitle(false)
+                                .setContentText("确定要删除该地址吗?")
+                                .setLeftText("取消")
+                                .setRightText("确认")
+                                .setWidth(0.75f)
+                                .setHeight(0.33f)
+                                .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                    @Override
+                                    public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                        dialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                        mPresenter.deleteAddress(dataList.get(position).getId());
+                                        dataList.remove(position);
+                                        dialog.dismiss();
+
+                                    }
+                                }).build().show();
+
                         break;
                     case R.id.seletaddress_myaddress_cb:
                         Map<String,String> map=new HashMap<String, String>();

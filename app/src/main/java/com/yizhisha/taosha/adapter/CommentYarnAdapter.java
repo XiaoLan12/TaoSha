@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,6 +16,7 @@ import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.MultiImageView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,11 +44,11 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                     helper.setVisible(R.id.addcomment_ll,true);
                     helper.setText(R.id.detail_addcomment_tv,item.getComment_detail_add());
 
-                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add(),item.getComment_addtime());
+                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add()*1000,item.getComment_addtime()*1000);
                     if(time>0){
-                        helper.setText(R.id.time_addcomment_img_tv,"用户"+time+"后追加评论");
+                        helper.setText(R.id.time_addcomment_tv,"用户"+time+"天后追加评论");
                     }else{
-                        helper.setText(R.id.time_addcomment_img_tv,"用户当天追加评论");
+                        helper.setText(R.id.time_addcomment_tv,"用户当天追加评论");
                     }
                 }else{
                     helper.setVisible(R.id.addcomment_ll,false);
@@ -74,9 +76,9 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_img_ll,true);
                     helper.setText(R.id.detail_addcomment_img_tv,item.getComment_detail_add());
-                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add(),item.getComment_addtime());
+                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add()*1000,item.getComment_addtime()*1000);
                     if(time>0){
-                        helper.setText(R.id.time_addcomment_img_tv,"用户"+time+"后追加评论");
+                        helper.setText(R.id.time_addcomment_img_tv,"用户"+time+"天后追加评论");
                     }else{
                         helper.setText(R.id.time_addcomment_img_tv,"用户当天追加评论");
                     }
@@ -92,8 +94,13 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                     helper.setVisible(R.id.business_reply_img_ll,false);
                 }
                 MultiImageView multiImageView = helper.getView(R.id.cilrcleimgMv_img);
-                final List<String> photos = item.getcommentPhotos();
-                if (photos != null && photos.size() > 0) {
+                final List<String> photos =new ArrayList<>(9);
+                if (item.getcommentPhotos() != null && item.getcommentPhotos().size() > 0) {
+                   for(int i=0;i<item.getcommentPhotos().size();i++){
+                       if(i<=8){
+                           photos.add(item.getcommentPhotos().get(i));
+                       }
+                   }
                     multiImageView.setList(photos);
                     multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
                         @Override

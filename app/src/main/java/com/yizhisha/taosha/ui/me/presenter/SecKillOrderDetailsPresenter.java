@@ -3,7 +3,10 @@ package com.yizhisha.taosha.ui.me.presenter;
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.PayReqBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.ui.me.contract.OrderDetailsContract;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderDetailsContract;
 
@@ -33,6 +36,80 @@ public class SecKillOrderDetailsPresenter extends SecKillOrderDetailsContract.Pr
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
+                mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void sureGoods(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().sureGoods(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.sureGoodsSuuccess(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void cancleOrder(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().cancelSkillOrder(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.cancleOrder(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void weChatPay(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().weChatPay(param), new RxSubscriber<PayReqBean>(mContext, true) {
+            @Override
+            protected void onSuccess(PayReqBean bean) {
+                mView.hideLoading();
+                if(bean!=null){
+                    mView.weChatPay(bean);
+                }else{
+                    mView.loadFail("数据加载失败");
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.hideLoading();
+                mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void loadWeChatPayState(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().weChatPayState(param), new RxSubscriber<WeChatPayStateBean>(mContext, true) {
+            @Override
+            protected void onSuccess(WeChatPayStateBean bean) {
+                if(bean.getResult_code().equals("SUCCESS")){
+                    mView.loadWeChatPayState(bean);
+                }else{
+                    mView.loadWeChatPayStateFail(bean.getReturn_msg());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
                 mView.loadFail(message);
             }
         });

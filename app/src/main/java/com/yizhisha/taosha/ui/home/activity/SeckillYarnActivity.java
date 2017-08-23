@@ -3,9 +3,7 @@ package com.yizhisha.taosha.ui.home.activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,17 +14,15 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
-import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
-import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
+import com.yizhisha.taosha.event.SecKillEvent;
 import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
-import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
 import com.yizhisha.taosha.ui.home.fragment.SeckillProductYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.SekaFragment;
-import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
 import com.yizhisha.taosha.ui.home.precenter.SeckillProductPresenter;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
@@ -37,6 +33,9 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
         implements SeckillProductContract.View{
@@ -51,8 +50,12 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
     ImageView img_back;
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
+    @Bind(R.id.tv_shopping)
+    TextView shoppTv;
     private FragmentPagerAdapter mAdapter;
     private SeckillProductBean seckillProductBean;
+
+    private Subscription subscription;
 
     private int id;
     @Override
@@ -120,8 +123,31 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
             public void onTabReselect(int position) {
             }
         });
+        event();
     }
-
+    private void event(){
+        subscription= RxBus.$().toObservable(SecKillEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<SecKillEvent>() {
+                    @Override
+                    public void call(SecKillEvent event) {
+                     switch (event.getState()){
+                         case 1:
+                             shoppTv.setText("活动未开始");
+                             shoppTv.setEnabled(false);
+                             break;
+                         case 2:
+                             shoppTv.setText("立即抢购");
+                             shoppTv.setEnabled(true);
+                             break;
+                         case 3:
+                             shoppTv.setText("活动已结束");
+                             shoppTv.setEnabled(false);
+                             break;
+                     }
+                    }
+                });
+    }
     @Override
     public void loadSuccess(SeckillProductBean model) {
         seckillProductBean=model;
@@ -198,5 +224,12 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
                 startActivity(SureOrderActivity.class,bundle);
                 break;
         }
+    } @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null&&!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
     }
+
 }

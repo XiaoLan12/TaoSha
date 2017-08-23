@@ -21,12 +21,15 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
 import com.yizhisha.taosha.bean.json.Shopcart;
 import com.yizhisha.taosha.bean.json.ShopcartGoods;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.event.UpdateShopCartEvent;
+import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.ui.shoppcart.contract.ShoppCartContract;
@@ -43,6 +46,9 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by lan on 2017/6/22.
@@ -79,6 +85,8 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     List<Map<String, Object>> parentMapList = new ArrayList<Map<String, Object>>();
     //定义子列表项List数据集合
     List<List<Map<String, Object>>> childMapList_list = new ArrayList<List<Map<String, Object>>>();
+
+    private Subscription subscription;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shoppcart;
@@ -108,6 +116,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         });
         initAdapter();
         mPresenter.loadShoppCart(AppConstant.UID,true);
+        event();
     }
 
     private void initAdapter(){
@@ -258,6 +267,17 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         });
 
     }
+    //回调事件，成功调起微信支付后响应该事件
+    private void event(){
+        subscription= RxBus.$().toObservable(UpdateShopCartEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<UpdateShopCartEvent>() {
+                    @Override
+                    public void call(UpdateShopCartEvent event) {
+                        onRefresh();
+                    }
+                });
+    }
     @Override
     public void loadSuccess(List<Shopcart> data) {
         mSwipeRefreshLayout.setRefreshing(false);
@@ -335,7 +355,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         mToobar.hideRightButton();
         mRlBottomBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
-        mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
+        mLoadingView.loadSuccess(true, R.drawable.icon_shopcart_normal,"您的购物车中还没有商品，请您先逛逛！");
     }
     @Override
     public void loadFail(String msg) {
@@ -406,7 +426,13 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         ivSelectAll.setChecked(false);
         mPresenter.loadShoppCart(AppConstant.UID,false);
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (subscription != null&&!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

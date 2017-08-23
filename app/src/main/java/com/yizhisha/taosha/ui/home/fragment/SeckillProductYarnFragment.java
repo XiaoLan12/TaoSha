@@ -14,16 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.DateBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
+import com.yizhisha.taosha.common.dialog.PicShowDialog;
+import com.yizhisha.taosha.event.SecKillEvent;
+import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
 import com.yizhisha.taosha.ui.home.activity.SeckillActivityActivity;
+import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
+import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
 import com.yizhisha.taosha.ui.home.precenter.SeckillProductPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
@@ -37,13 +44,15 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import uk.co.senab.photoview.log.LoggerDefault;
 
 /**
  * Created by lan on 2017/8/17.
  */
 
-public class SeckillProductYarnFragment extends BaseFragment{
+public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresenter> implements
+        ProductYarnContract.View{
 
     @Bind(R.id.banner)
     Banner banner;
@@ -105,6 +114,8 @@ public class SeckillProductYarnFragment extends BaseFragment{
     private long subTime;
     boolean stopThread=false;
 
+    private boolean isActivityOver=false;
+
 
     public static SeckillProductYarnFragment getInstance(SeckillProductBean bean) {
         SeckillProductYarnFragment sf = new SeckillProductYarnFragment();
@@ -161,14 +172,13 @@ public class SeckillProductYarnFragment extends BaseFragment{
         titleTv.setText(seckilling.getTitle());
         companyTv.setText(goods.getCompany());
 
-        //startTime=seckilling.getStarttime();
-        //endTime=seckilling.getEndtime();
+        startTime=seckilling.getStarttime()*1000;
+        endTime=seckilling.getEndtime()*1000;
+
         nowTime=seckillProductBean.getNowtime();
         Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
         long cur1 = curDate.getTime();// 获取当前时间
         subTime = nowTime*1000 -cur1;//获得时间差
-        endTime=cur1+30*60*1000;
-        startTime=cur1+1*60*1000;
         new Thread(mRunnable).start();
 
         initParameter();
@@ -189,14 +199,33 @@ public class SeckillProductYarnFragment extends BaseFragment{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setAdapter(new ProductDetailImgAdapter(activity,sekaList));
+        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,sekaList);
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                for(int i=0;i<sekaList.size();i++){
+                    sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(position));
+                }
+                PicShowDialog dialog=new PicShowDialog(activity,sekaList,position);
+                dialog.show();
+            }
+        });
     }
     private void initDetail() {
         contentList.addAll(goods.getContent());
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView1.setNestedScrollingEnabled(false);
-        mRecyclerView1.setAdapter(new ProductDetailImgAdapter(activity,contentList));
+        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,contentList);
+        mRecyclerView1.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(position),position);
+                dialog.show();
+            }
+        });
     }
     private void setDateInfo(Long startdate, Long endDate) {
         try {
@@ -223,23 +252,22 @@ public class SeckillProductYarnFragment extends BaseFragment{
             if(getActivity()==null){
                 return;
             }
-
             switch (msg.what){
                 case 1:
                     Date curDate = new Date();// 获取当前时间
                     long cur = curDate.getTime();// 获取当前时间
 
-                   /* if(startTime*1000-(cur+subTime)<0){
-                        activitStateTv.setText("活动未开始");
-                    }*/
                     if (startTime - (cur+subTime) > 0) {
                         activitStateTv.setText("活动未开始");
+                        RxBus.$().postEvent(new SecKillEvent(1));
                     } else if (endTime - (cur+subTime) > 0) {
                         activitStateTv.setText("距离结束还剩");
                         setDateInfo((cur+subTime),endTime);
+                        RxBus.$().postEvent(new SecKillEvent(2));
                         //setDateInfo((cur+subTime),endTime*1000);
                     } else {
                         activitStateTv.setText("活动已结束");
+                        RxBus.$().postEvent(new SecKillEvent(3));
                     }
 
                     break;
@@ -263,11 +291,32 @@ public class SeckillProductYarnFragment extends BaseFragment{
             }
         }
     };
-
+    @OnClick({R.id.collect_iv})
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.collect_iv:
+                Map<String,String> map=new HashMap<>();
+                map.put("gid",String.valueOf(seckillProductBean.getSeckilling().getGoods_id()));
+                map.put("uid",String.valueOf(AppConstant.UID));
+                mPresenter.collectProduct(map);
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         stopThread=true;
         super.onDestroyView();
 
+    }
+
+    @Override
+    public void collectProductSuccess(String msg) {
+        ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        ToastUtil.showShortToast(msg);
     }
 }

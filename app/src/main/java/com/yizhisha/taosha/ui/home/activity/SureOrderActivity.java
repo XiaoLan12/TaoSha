@@ -105,6 +105,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     private Subscription subscription;
 
     private int seckillId;//秒纱的id
+    private int nayangGid;//拿样的gid
+    private String orderType;//是普通订单还是板毛
     private int mType=0;//当前订单类型,1:普通订单  2:购物车订单 3:秒纱订单 4:拿样订单
     private int mPayType=5;//支付方式  5:微信  2:支付宝 3:到付
     private int mExpressType=2;//配送方式 1:物流发货 2：快递发货  3:朗通快递
@@ -146,11 +148,12 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //普通商品和板毛确认订单
     private void loadOrder(Bundle bundle){
+        orderType=bundle.getString("type");
         Map<String,String> map=new HashMap();
         map.put("uid",String.valueOf(AppConstant.UID));
         map.put("gid",String.valueOf(bundle.getInt("gid",0)));
 
-        map.put("type",bundle.getString("type"));
+        map.put("type",orderType);
         map.put("detail",bundle.getString("detail"));
         map.put("amount",String.valueOf(bundle.getInt("amount")));
         mPresenter.loadOrderSure(map);
@@ -172,9 +175,10 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //拿样确认订单
     private void loadnayangOrder(Bundle bundle){
+        nayangGid=bundle.getInt("gid");
         Map<String,String> map=new HashMap();
         map.put("uid",String.valueOf(AppConstant.UID));
-        map.put("gid",String.valueOf(bundle.getInt("gid")));
+        map.put("gid",String.valueOf(nayangGid));
         mPresenter.loadNayangOrderOrder(map);
     }
     //初始化一般商品适配器
@@ -207,7 +211,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
 
     //生成普通订单
-    private void createOrder(String type){
+    private void createOrder(){
         StringBuilder str=new StringBuilder();
         for(int i=0;i<dataList.size();i++){
             str.append(dataList.get(i).getDetail()).append("#");
@@ -218,7 +222,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         //暂时写死
         //body.put("gid",orderSureBean.getGid());
         body.put("gid",String.valueOf(orderSureBean.getGid()));
-        body.put("type",type);
+        body.put("type",orderType);
         body.put("goodsprice",String.valueOf(Double.valueOf(orderSureBean.getTotalprice())));
         body.put("totalamount",String.valueOf(orderSureBean.getTotalamount()));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
@@ -246,7 +250,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         body.put("uid",String.valueOf(AppConstant.UID));
         //暂时写死
         //body.put("gid",orderSureBean.getGid());
-        body.put("gid",String.valueOf(orderSureBean.getGid()));
+        body.put("gid",String.valueOf(nayangGid));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("express_type",String.valueOf(mExpressType));
         body.put("detail",remarkEt.getText().toString());
@@ -280,19 +284,38 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
             }
 
         }
-        costTv.setText("合计:￥"+data.getTotalprice());
-        OrderSureGoodBean goodBean=new OrderSureGoodBean();
-        goodBean.setGid(data.getGid());
-        goodBean.setTitle(data.getTitle());
-        goodBean.setLitpic(data.getLitpic());
-        goodBean.setAmount(data.getAmount());
-        goodBean.setDetail(data.getDetail());
-        goodBean.setPrice(data.getPrice());
-        goodBean.setAddressId(addressId);
-        goodBean.setTotalprice(data.getTotalprice());
-        goodBean.setTotalamount(data.getAmount());
-        orderSureBean=goodBean;
-        dataList.add(goodBean);
+        if(orderType.equals("banmao")){
+            costTv.setText("合计:￥"+data.getPrice_real());
+            OrderSureGoodBean goodBean=new OrderSureGoodBean();
+            goodBean.setGid(data.getGid());
+            goodBean.setTitle(data.getTitle());
+            goodBean.setLitpic(data.getLitpic());
+            goodBean.setAmount(data.getAmount());
+            goodBean.setDetail(data.getDetail());
+            goodBean.setPrice(data.getPrice_real());
+            goodBean.setAddressId(addressId);
+            goodBean.setTotalprice(data.getTotalprice());
+            goodBean.setTotalamount(data.getAmount());
+            orderSureBean=goodBean;
+            dataList.add(goodBean);
+        }else{
+            costTv.setText("合计:￥"+data.getTotalprice());
+            OrderSureGoodBean goodBean=new OrderSureGoodBean();
+            goodBean.setGid(data.getGid());
+            goodBean.setTitle(data.getTitle());
+            goodBean.setLitpic(data.getLitpic());
+            goodBean.setAmount(data.getAmount());
+            goodBean.setDetail(data.getDetail());
+            goodBean.setPrice(data.getPrice());
+            goodBean.setAddressId(addressId);
+            goodBean.setTotalprice(data.getTotalprice());
+            goodBean.setTotalamount(data.getAmount());
+            orderSureBean=goodBean;
+            dataList.add(goodBean);
+
+        }
+
+
         mAdapter.setNewData(dataList);
     }
     //加载购物车确认订单成功后的回调
@@ -379,6 +402,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                     addressId=address.getId();
                 }
             }
+        OrderSureGoodBean goodBean=new OrderSureGoodBean();
+        goodBean.setAddressId(addressId);
+        orderSureBean=goodBean;
         costTv.setText("合计:样品免费");
     }
 
@@ -432,6 +458,25 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         }
 
     }
+
+    @Override
+    public void nayangOrderSuccess(String msg) {
+        new NormalAlertDialog.Builder(this)
+                .setTitleText("支付结果")
+                .setContentText(msg)
+                .setSingleModel(true)
+                .setSingleText("确认")
+                .setWidth(0.75f)
+                .setHeight(0.33f)
+                .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
+                    @Override
+                    public void clickSingleButton(NormalAlertDialog dialog, View view) {
+                        dialog.dismiss();
+                        finish_Activity(SureOrderActivity.this);
+                    }
+                }).build().show();
+    }
+
     //获得微信支付的状态
     @Override
     public void loadWeChatPayState(WeChatPayStateBean bean) {
@@ -541,6 +586,26 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     @Override
     public void loadFail(String msg) {
+        new NormalAlertDialog.Builder(this)
+                .setBoolTitle(false)
+                .setContentText(msg)
+                .setSingleModel(true)
+                .setSingleText("确认")
+                .setHeight(0.23f)
+                .setWidth(0.65f)
+                .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
+                    @Override
+                    public void clickSingleButton(NormalAlertDialog dialog, View view) {
+                        finish_Activity(SureOrderActivity.this);
+                        dialog.dismiss();
+                    }
+                }).setTouchOutside(false)
+                .setCancelable(false)
+                .build().show();
+    }
+
+    @Override
+    public void createFail(String msg) {
         ToastUtil.showShortToast(msg);
     }
 
@@ -673,9 +738,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         }).build().show();
                 break;
             case R.id.sureorder_tv:
-                String payType=payWayTv.getText().toString();
                 if(mType==1){
-                    createOrder("order");
+                    createOrder();
                 }else if(mType==2){
                     createShopCartOrder();
                 }else if(mType==3){

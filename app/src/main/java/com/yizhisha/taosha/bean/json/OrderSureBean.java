@@ -7,6 +7,10 @@ import java.util.List;
  */
 
 public class OrderSureBean {
+    private String status;
+
+    private String info;
+
     private String gid;
 
     private String title;
@@ -17,7 +21,7 @@ public class OrderSureBean {
 
     private float price;
 
-    private String price_real;
+    private float price_real;
 
     private String pname;
 
@@ -26,6 +30,22 @@ public class OrderSureBean {
     private float totalprice;
 
     private List<Address> address ;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
     public void setGid(String gid){
         this.gid = gid;
@@ -57,10 +77,10 @@ public class OrderSureBean {
     public float getPrice(){
         return this.price;
     }
-    public void setPrice_real(String price_real){
+    public void setPrice_real(float price_real){
         this.price_real = price_real;
     }
-    public String getPrice_real(){
+    public float getPrice_real(){
         return this.price_real;
     }
     public void setPname(String pname){
@@ -185,5 +205,23 @@ public class OrderSureBean {
             return this.area_app;
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "OrderSureBean{" +
+                "status='" + status + '\'' +
+                ", info='" + info + '\'' +
+                ", gid='" + gid + '\'' +
+                ", title='" + title + '\'' +
+                ", litpic='" + litpic + '\'' +
+                ", detail='" + detail + '\'' +
+                ", price=" + price +
+                ", price_real='" + price_real + '\'' +
+                ", pname='" + pname + '\'' +
+                ", amount=" + amount +
+                ", totalprice=" + totalprice +
+                ", address=" + address +
+                '}';
     }
 }

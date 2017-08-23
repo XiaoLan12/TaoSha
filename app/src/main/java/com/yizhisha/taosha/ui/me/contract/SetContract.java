@@ -16,12 +16,15 @@ public interface SetContract {
     interface View extends BaseView {
         void loadWeChatData(WechatBean wechatBean);
         void bindWeChat(String info);
+        void unBindWeChat(String msg);
         void loadFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void loadWeChatData(String url);
         public abstract void bindWeChat(Map<String,String> map);
+        public abstract void unBindWeChat(int uid);
+
         @Override
         public void onStart() {
 

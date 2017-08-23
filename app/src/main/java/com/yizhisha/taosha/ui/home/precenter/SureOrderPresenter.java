@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.home.precenter;
 
+import android.util.Log;
+
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.AddressListBean;
@@ -27,10 +29,10 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().orderSure(param), new RxSubscriber<OrderSureBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(OrderSureBean bean) {
-                if(bean!=null){
+              if(bean.getStatus().equals("y")){
                     mView.loadOrderSuccess(bean);
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.loadFail(bean.getInfo());
                 }
             }
             @Override
@@ -45,10 +47,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().shopCartOrderSure(param), new RxSubscriber<ShopCartOrderSureBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(ShopCartOrderSureBean bean) {
-                if(bean!=null){
+                if(bean.getStatus()==null){
+                    mView.loadShopCartOrderSuccess(bean);
+                }
+                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
                     mView.loadShopCartOrderSuccess(bean);
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.loadFail(bean.getInfo());
                 }
             }
             @Override
@@ -63,10 +68,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().seckillOrderSure(param), new RxSubscriber<SeckillOrderSureBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(SeckillOrderSureBean bean) {
-                if(bean!=null){
+                if(bean.getStatus()==null){
+                    mView.loadSeckillOrderSuccess(bean);
+                }
+                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
                     mView.loadSeckillOrderSuccess(bean);
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.loadFail(bean.getInfo());
                 }
             }
             @Override
@@ -81,10 +89,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().nayangOrderSure(param), new RxSubscriber<AddressListBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(AddressListBean bean) {
-                if(bean!=null&&bean.getAddress().size()>0){
+                if(bean.getStatus()==null){
+                    mView.loadNayangOrderSuccess(bean.getAddress());
+                }
+                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
                     mView.loadNayangOrderSuccess(bean.getAddress());
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.loadFail(bean.getInfo());
                 }
             }
             @Override
@@ -100,16 +111,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             @Override
             protected void onSuccess(PayReqBean bean) {
                 mView.hideLoading();
-                if(bean!=null){
+                if(bean.getStatus().equals("y")){
                     mView.weChatPay(bean);
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.createFail(bean.getInfo());
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -124,13 +135,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
                     mView.regularOrderSuccess(bean);
                 }else{
                     mView.hideLoading();
-                    mView.loadFail(bean.getInfo());
+                    mView.createFail(bean.getInfo());
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -145,13 +156,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
                     mView.regularOrderSuccess(bean);
                 }else{
                     mView.hideLoading();
-                    mView.loadFail(bean.getInfo());
+                    mView.createFail(bean.getInfo());
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -163,16 +174,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             @Override
             protected void onSuccess(RequestStatusBean bean) {
                 if(bean.getStatus().equals("y")){
-                    mView.regularOrderSuccess(bean);
+                    mView.nayangOrderSuccess(bean.getInfo());
                 }else{
                     mView.hideLoading();
-                    mView.loadFail(bean.getInfo());
+                    mView.createFail(bean.getInfo());
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -187,13 +198,13 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
                     mView.regularOrderSuccess(bean);
                 }else{
                     mView.hideLoading();
-                    mView.loadFail(bean.getInfo());
+                    mView.createFail(bean.getInfo());
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -211,7 +222,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
