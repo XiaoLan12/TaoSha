@@ -16,9 +16,12 @@ import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
@@ -85,9 +88,11 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     }
 
     @Override
-    public void loginSuccess(String info) {
+    public void loginSuccess(RequestStatusBean bean) {
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
         AppConstant.isLogin=true;
+        //AppConstant.UID=bean.getUid();
+        RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }
     @Override
@@ -108,13 +113,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         Map<String,String> map=new HashMap<>();
         map.put("openid",wechatBean.getOpenid());
         mPresenter.weChatLogin(map);
-    }
-
-    @Override
-    public void weChatLogin(String info) {
-        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
-        AppConstant.isLogin=true;
-        activity.finish();
     }
 
     @Override
@@ -172,10 +170,10 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                 switchFragmentListener.switchFragment(1);
                 break;
             case R.id.register_tv:
-                switchFragmentListener.switchFragment(2);
+                startActivity(RegisterActivity.class);
                 break;
             case R.id.phone_login_tv:
-                switchFragmentListener.switchFragment(3);
+                switchFragmentListener.switchFragment(2);
                 break;
             case R.id.login_btn:
                 if(!checkInput(mEtAccount.getText().toString(),mEtPwd.getText().toString())){

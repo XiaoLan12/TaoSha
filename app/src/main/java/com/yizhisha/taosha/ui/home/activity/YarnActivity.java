@@ -1,5 +1,7 @@
 package com.yizhisha.taosha.ui.home.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,16 +18,22 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.ui.home.contract.YarnContract;
 import com.yizhisha.taosha.ui.home.fragment.DetailsYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ParameterYarnFragment;
 import com.yizhisha.taosha.ui.home.fragment.ProductYarnFragnment;
 import com.yizhisha.taosha.ui.home.fragment.SekaFragment;
 import com.yizhisha.taosha.ui.home.precenter.YarnPresenter;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -138,7 +146,7 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
     }
 
     @OnClick({R.id.img_back,R.id.tv_shopping_cart,R.id.tv_shopping,R.id.nayang_ll,
-    R.id.banmao_ll})
+    R.id.banmao_ll,R.id.call_us_ll})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -161,6 +169,38 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
                 startActivity(SelectYarnColorActivity.class,bundle1);
                 break;
             case R.id.nayang_ll:
+                if(AppConstant.isLogin==false){
+                    final List<String> mDatas1=new ArrayList<>();
+                    mDatas1.add("登录");
+                    mDatas1.add("注册");
+                    NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
+                            .setBoolTitle(true)
+                            .setTitleText("温馨提示\n尊敬的用户,您尚未登录,请选择登录或注册")
+                            .setTitleHeight(55)
+                            .setItemHeight(45)
+                            .setItemTextColor(R.color.blue)
+                            .setItemTextSize(14)
+                            .setItemWidth(0.95f)
+                            .setCancleButtonText("取消")
+                            .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                @Override
+                                public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                    switch (position){
+                                        case 0:
+                                            startActivity(LoginFragmentActivity.class);
+                                            break;
+                                        case 1:
+                                            startActivity(RegisterActivity.class);
+                                            break;
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }).setTouchOutside(true)
+                            .build();
+                    dialog.setData(mDatas1);
+                    dialog.show();
+                    return;
+                }
                 Bundle bundle2=new Bundle();
                 bundle2.putInt("ORDERTYPE",4);
 
@@ -173,6 +213,30 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
                 bundle3.putBoolean("ISBANMAO",true);
                 bundle3.putSerializable("DATA",productDetailBean.getGoods());
                 startActivity(SelectYarnColorActivity.class,bundle3);
+                break;
+            case R.id.call_us_ll:
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText("0769-83115811")
+                        .setContentTextSize(18)
+                        .setLeftText("取消")
+                        .setRightText("确认")
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + "0769-83115811"));
+                                startActivity(phoneIneten);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
                 break;
         }
     }

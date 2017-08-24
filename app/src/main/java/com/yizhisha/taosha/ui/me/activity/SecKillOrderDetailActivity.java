@@ -355,11 +355,9 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 new NormalAlertDialog.Builder(this)
                         .setBoolTitle(false)
                         .setContentText(seckillBean.getCompany_mobile())
-                        .setContentTextColor(R.color.blue)
+                        .setContentTextSize(18)
                         .setLeftText("取消")
-                        .setLeftTextColor(R.color.blue)
                         .setRightText("确认")
-                        .setRightTextColor(R.color.blue)
                         .setWidth(0.75f)
                         .setHeight(0.33f)
                         .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {

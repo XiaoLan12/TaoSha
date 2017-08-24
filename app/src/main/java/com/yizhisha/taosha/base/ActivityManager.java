@@ -115,7 +115,7 @@ public class ActivityManager {
         if (isExit == false) {
             isExit = true;
             //信息提示
-            ToastUtil.showbottomShortToast("是否退出应用?");
+            ToastUtil.showbottomShortToast("再按一次后退键退出应用程序");
             //创建定时器
             tExit = new Timer();
             //如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务

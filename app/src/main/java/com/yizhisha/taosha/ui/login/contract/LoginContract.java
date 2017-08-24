@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.login.contract;
 import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.ui.me.contract.MyOrderContract;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public interface LoginContract {
     interface View extends BaseView {
-        void loginSuccess(String info);
+        void loginSuccess(RequestStatusBean info);
 
         void registerSuccess(String info);
 
@@ -24,7 +25,6 @@ public interface LoginContract {
         void getCodeSuccess(String info);
 
         void loadWeChatData(WechatBean wechatBean);
-        void weChatLogin(String info);
 
         void loadFail(String msg);
     }

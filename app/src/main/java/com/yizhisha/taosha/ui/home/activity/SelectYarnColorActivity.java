@@ -18,9 +18,13 @@ import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.UpdateShopCartEvent;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -52,6 +56,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
 
     private int type;
     private boolean isBanmao=false;
+
+    private NormalSelectionDialog dialog;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -82,6 +88,9 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     @Override
     protected void initView() {
         sekaList.addAll(productDeatilItemBean.getSeka());
+        for(int i=0;i<sekaList.size();i++){
+            sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(i));
+        }
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
@@ -141,8 +150,38 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectYarnColorActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(linearLayoutManager);
-         adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,sekaList);
+        adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,sekaList);
          recyclerView.setAdapter(adapter);
+    }
+    private void showLoginDialog(){
+        final List<String> mDatas1=new ArrayList<>();
+        mDatas1.add("登录");
+        mDatas1.add("注册");
+        dialog=new NormalSelectionDialog.Builder(this)
+                .setBoolTitle(true)
+                .setTitleText("温馨提示\n尊敬的用户,您尚未登录,请选择登录或注册")
+                .setTitleHeight(55)
+                .setItemHeight(45)
+                .setItemTextColor(R.color.blue)
+                .setItemTextSize(14)
+                .setItemWidth(0.95f)
+                .setCancleButtonText("取消")
+                .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                    @Override
+                    public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                        switch (position){
+                            case 0:
+                                startActivity(LoginFragmentActivity.class);
+                                break;
+                            case 1:
+                                startActivity(RegisterActivity.class);
+                                break;
+                        }
+                        dialog.dismiss();
+                    }
+                }).setTouchOutside(true)
+                .build();
+        dialog.setData(mDatas1);
     }
     @OnClick({R.id.sure_btn})
     @Override
@@ -162,6 +201,13 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         str.append(list.get(i).getColor()).append("#");
                         str.append(list.get(i).getNum()).append("，");
                         amount += list.get(i).getNum();
+                    }
+                    if(AppConstant.isLogin==false){
+                        if(dialog==null){
+                            showLoginDialog();
+                        }
+                        dialog.show();
+                        return;
                     }
                     if (str.length() > 0) {
                         detail = str.substring(0, str.length() - 1);
@@ -193,6 +239,13 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         str.append(list.get(i).getColor()).append("#");
                         str.append(list.get(i).getNum()).append("，");
                         amount+=list.get(i).getNum();
+                    }
+                    if(AppConstant.isLogin==false){
+                        if(dialog==null){
+                            showLoginDialog();
+                        }
+                        dialog.show();
+                        return;
                     }
                     if(str.length()<=0){
                         detail = str.substring(0, str.length() - 1);

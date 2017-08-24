@@ -48,6 +48,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/call_us_ll"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -58,6 +59,7 @@
                 android:layout_height="30dp"
                 android:src="@drawable/icon_contact"/>
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"

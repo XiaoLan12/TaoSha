@@ -3,21 +3,31 @@ package com.yizhisha.taosha.ui;
 import android.support.annotation.BoolRes;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.yizhisha.taosha.App;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.bean.MainTabEntity;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.ui.home.fragment.HomeFragment;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.ui.me.fragment.MeFragment;
 import com.yizhisha.taosha.ui.shoppcart.fragment.ShoppCartFragment;
 import com.yizhisha.taosha.utils.SharedPreferencesUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -35,6 +45,8 @@ public class MainActivity extends BaseActivity {
     private HomeFragment homeFragment;
     private ShoppCartFragment shoppCartFragment;
     private MeFragment meFragment;
+
+    private int currentPosition;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -54,10 +66,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         //初始化选项卡
-        if(SharedPreferencesUtil.getValue(this,"ISLOGIN", Boolean.class)!=null) {
-            AppConstant.isLogin = (boolean) SharedPreferencesUtil.getValue(this, "ISLOGIN", Boolean.class);
-        }
-
+        AppConstant.isLogin = (boolean) SharedPreferencesUtil.getValue(this, "ISLOGIN",new Boolean(false));
         initTab();
     }
     /**
@@ -72,13 +81,41 @@ public class MainActivity extends BaseActivity {
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                /*if(position==1||position==2){
+                if(position==1){
                     if(AppConstant.isLogin==false){
-                        startActivity(LoginFragmentActivity.class);
-                        tabLayout.setCurrentTab(0);
+                        final List<String> mDatas1=new ArrayList<>();
+                        mDatas1.add("登录");
+                        mDatas1.add("注册");
+                        NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(MainActivity.this)
+                                .setBoolTitle(true)
+                                .setTitleText("温馨提示\n尊敬的用户,您尚未登录,请选择登录或注册")
+                                .setTitleHeight(55)
+                                .setItemHeight(45)
+                                .setItemTextColor(R.color.blue)
+                                .setItemTextSize(14)
+                                .setItemWidth(0.95f)
+                                .setCancleButtonText("取消")
+                                .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                    @Override
+                                    public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                        switch (position){
+                                            case 0:
+                                                startActivity(LoginFragmentActivity.class);
+                                                break;
+                                            case 1:
+                                                startActivity(RegisterActivity.class);
+                                                break;
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                }).setTouchOutside(true)
+                                .build();
+                        dialog.setData(mDatas1);
+                        dialog.show();
+                        tabLayout.setCurrentTab(currentPosition);
                         return;
                     }
-                }*/
+                }
                 SwitchTo(position);
             }
             @Override
@@ -114,6 +151,7 @@ public class MainActivity extends BaseActivity {
      * 切换
      */
     private void SwitchTo(int position) {
+        currentPosition=position;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (position) {
             //首页
@@ -140,5 +178,18 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+    /**
+     * 双击返回键退出应用
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                ActivityManager.getActivityMar().exitApp(MainActivity.this);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -18,7 +18,6 @@ import java.util.List;
  */
 
 public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
-    private String url="http://www.taoshamall.com";
     private Context mContext;
     public ProductDetailImgAdapter(Context context,@Nullable List<String> data) {
         super(R.layout.item_fragment_product_img,data);
@@ -26,7 +25,7 @@ public class ProductDetailImgAdapter extends BaseQuickAdapter<String,BaseViewHol
     }
     @Override
     protected void convert(BaseViewHolder helper, String goods) {
-        GlideUtil.getInstance().LoadContextBitmap(mContext, url+goods,
+        GlideUtil.getInstance().LoadContextBitmap(mContext,goods,
                 (ImageView) helper.getView(R.id.img), GlideUtil.LOAD_BITMAP);
     }
 }

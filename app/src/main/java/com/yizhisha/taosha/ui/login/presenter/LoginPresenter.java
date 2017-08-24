@@ -20,7 +20,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                     @Override
                     protected void onSuccess(RequestStatusBean requestStatusBean) {
                         if(requestStatusBean.getStatus().equals("y")){
-                            mView.loginSuccess(requestStatusBean.getInfo());
+                            mView.loginSuccess(requestStatusBean);
                         }else{
                             mView.loadFail(requestStatusBean.getInfo());
                         }
@@ -110,7 +110,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                     @Override
                     protected void onSuccess(RequestStatusBean info) {
                         if(info.getStatus().equals("y")){
-                            mView.weChatLogin(info.getInfo());
+                            mView.loginSuccess(info);
                         }else{
                             mView.loadFail(info.getInfo());
                         }

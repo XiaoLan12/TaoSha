@@ -21,6 +21,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.StoreBean;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.LogUtil;
@@ -136,13 +137,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         } else {
             groupViewHolder.mTvEdit.setText(EDITING);
         }
-        //覆盖原有收起展开事件
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "店铺：" + parentName, Toast.LENGTH_SHORT).show();
-            }
-        });
         groupViewHolder.id_cb_select_parent.setChecked(storeBean.isChecked());
         final boolean nowBeanChecked = storeBean.isChecked();
         groupViewHolder.id_cb_select_parent.setOnClickListener(new View.OnClickListener() {
@@ -205,14 +199,21 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         if (goodsBean.isEditing()) {
             childViewHolder.mRlNormal.setVisibility(View.GONE);
             childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
+
         } else {
             childViewHolder.mRlNormal.setVisibility(View.VISIBLE);
             childViewHolder.mRlEdit.setVisibility(View.GONE);
         }
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "商品：" + goodsBean.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context,YarnActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id",goodsBean.getGid());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
 
@@ -238,6 +239,12 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
                 //控制总checkedbox 接口
                 onAllCheckedBoxNeedChangeListener.onCheckedBoxNeedChange(dealAllParentIsChecked());
                 dealPrice();
+            }
+        });
+        childViewHolder.mIvPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         childViewHolder.mBtnDelete.setOnClickListener(new View.OnClickListener() {

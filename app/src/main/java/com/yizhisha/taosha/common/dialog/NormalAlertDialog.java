@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.utils.DensityUtil;
+import com.yizhisha.taosha.utils.RescourseUtil;
 
 /**
  * Created by lan on 2016/12/19.
@@ -172,7 +173,7 @@ public class NormalAlertDialog {
             height = 0.23f;
             width = 0.65f;
             titleTextSize = 16;
-            contentTextSize = 14;
+            contentTextSize = 16;
             buttonTextSize = 14;
         }
         public boolean isBoolTitle() {

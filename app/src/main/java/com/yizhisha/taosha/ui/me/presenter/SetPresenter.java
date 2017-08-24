@@ -58,7 +58,7 @@ public class SetPresenter extends SetContract.Presenter{
                         if(info.getStatus().equals("y")){
                             mView.unBindWeChat(info.getInfo());
                         }else{
-                            mView.unBindWeChat(info.getInfo());
+                            mView.unBindWeChatFail(info.getInfo());
                         }
                     }
                     @Override

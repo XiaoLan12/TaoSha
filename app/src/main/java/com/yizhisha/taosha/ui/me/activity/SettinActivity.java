@@ -10,12 +10,15 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
@@ -65,7 +68,8 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     @Override
     protected void initView() {
         if(AppConstant.infoBean!=null){
-            GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv);
+            GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv,
+                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
             usernameTv.setText(AppConstant.infoBean.getUsername());
         }
         //AppConst.WEIXIN.APP_ID是指你应用在微信开放平台上的AppID，记得替换。
@@ -92,7 +96,8 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                             mPresenter.loadWeChatData(url);
                         }else if(event instanceof UserHeadEvent){
                             UserHeadEvent userHeadEvent= (UserHeadEvent) event;
-                            GlideUtil.getInstance().LoadContextCircleBitmap(SettinActivity.this,userHeadEvent.getAvatar(),headIv);
+                            GlideUtil.getInstance().LoadContextCircleBitmap(SettinActivity.this,userHeadEvent.getAvatar(),headIv,
+                                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
                         }
                     }
                 });
@@ -191,6 +196,41 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     @Override
     public void loadFail(String msg) {
         ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void unBindWeChatFail(String msg) {
+
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText(msg+"是否绑定一个微信账号")
+                        .setContentTextColor(R.color.blue)
+                        .setLeftText("取消")
+                        .setLeftTextColor(R.color.blue)
+                        .setRightText("确认")
+                        .setRightTextColor(R.color.blue)
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                if (!api.isWXAppInstalled()) {
+                                    ToastUtil.showbottomShortToast("您还未安装微信客户端");
+                                    dialog.dismiss();
+                                    return;
+                                }
+                                final SendAuth.Req req = new SendAuth.Req();
+                                req.scope = "snsapi_userinfo";
+                                req.state = "taosha_wx_login";
+                                api.sendReq(req);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
     }
 
     @Override

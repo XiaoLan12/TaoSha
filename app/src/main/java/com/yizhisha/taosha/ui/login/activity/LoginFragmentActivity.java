@@ -13,11 +13,9 @@ import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.ui.login.fragment.FindPwdFragment;
 import com.yizhisha.taosha.ui.login.fragment.LoginFragment;
 import com.yizhisha.taosha.ui.login.fragment.PhoneLoginFragment;
-import com.yizhisha.taosha.ui.login.fragment.RegisterFragment;
 
 public class LoginFragmentActivity extends BaseActivity implements LoginFragment.switchFragmentListener {
     private FindPwdFragment findPwdFragment;
-    private RegisterFragment registerFragment;
     private LoginFragment loginFragment;
     private PhoneLoginFragment phoneLoginFragment;
     private Fragment currentFragment;
@@ -68,11 +66,6 @@ public class LoginFragmentActivity extends BaseActivity implements LoginFragment
             }
             switchFragment(findPwdFragment,"findPwdFragment");
         }else if(index==2){
-            if(registerFragment==null){
-                registerFragment=new RegisterFragment();
-            }
-            switchFragment(registerFragment,"registerFragment");
-        }else if(index==3){
             if(phoneLoginFragment==null){
                 phoneLoginFragment=new PhoneLoginFragment();
             }

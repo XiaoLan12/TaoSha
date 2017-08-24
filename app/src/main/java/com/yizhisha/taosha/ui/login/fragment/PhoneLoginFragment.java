@@ -7,14 +7,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.ui.login.contract.PhoneLoginContract;
 import com.yizhisha.taosha.ui.login.presenter.PhoneLoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
+import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -92,7 +96,11 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
     }
     @Override
     public void loginSuccess(RequestStatusBean info) {
-        ToastUtil.showbottomShortToast(info.getInfo());
+        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        AppConstant.isLogin=true;
+        //AppConstant.UID=bean.getUid();
+        RxBus.$().postEvent(new LoginEvent());
+        activity.finish();
     }
     @Override
     public void getCodeSuccess(String info) {

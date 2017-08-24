@@ -18,6 +18,7 @@ public interface SetContract {
         void bindWeChat(String info);
         void unBindWeChat(String msg);
         void loadFail(String msg);
+        void unBindWeChatFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<View> {

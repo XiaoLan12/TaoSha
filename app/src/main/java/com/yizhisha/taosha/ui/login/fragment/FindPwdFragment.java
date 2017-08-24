@@ -12,6 +12,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
@@ -66,7 +67,7 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
         });
     }
     @Override
-    public void loginSuccess(String info) {
+    public void loginSuccess(RequestStatusBean info) {
 
     }
     @Override
@@ -84,11 +85,6 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
 
     @Override
     public void loadWeChatData(WechatBean wechatBean) {
-
-    }
-
-    @Override
-    public void weChatLogin(String info) {
 
     }
 

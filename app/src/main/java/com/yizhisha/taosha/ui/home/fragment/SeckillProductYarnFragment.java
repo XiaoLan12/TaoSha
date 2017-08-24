@@ -196,6 +196,9 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     }
     private void initSeka() {
         sekaList.addAll(goods.getSeka());
+        for(int i=0;i<sekaList.size();i++){
+            sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(i));
+        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -204,9 +207,6 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                for(int i=0;i<sekaList.size();i++){
-                    sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(position));
-                }
                 PicShowDialog dialog=new PicShowDialog(activity,sekaList,position);
                 dialog.show();
             }
@@ -214,6 +214,9 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     }
     private void initDetail() {
         contentList.addAll(goods.getContent());
+        for(int i=0;i<contentList.size();i++){
+            contentList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(i));
+        }
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView1.setNestedScrollingEnabled(false);
@@ -222,7 +225,7 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(activity,contentList,position);
                 dialog.show();
             }
         });

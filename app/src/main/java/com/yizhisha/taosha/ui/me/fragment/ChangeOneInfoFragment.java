@@ -138,7 +138,8 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         }
         if(AppConstant.infoBean!=null){
             String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
-            GlideUtil.getInstance().LoadContextCircleBitmap(activity,url+AppConstant.infoBean.getAvatar(),mIvHead);
+            GlideUtil.getInstance().LoadContextCircleBitmap(activity,url+AppConstant.infoBean.getAvatar(),mIvHead,
+                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
         }
         mTvUserName.setText(personalDataBean.getUsername());
         mTvRealName.setText(personalDataBean.getLinkman());
@@ -157,7 +158,8 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
         if(AppConstant.infoBean!=null) {
             AppConstant.infoBean.setAvatar(msg.getAvatar());
         }
-        GlideUtil.getInstance().LoadContextCircleBitmap(activity,headUrl+msg.getAvatar(),mIvHead);
+        GlideUtil.getInstance().LoadContextCircleBitmap(activity,headUrl+msg.getAvatar(),mIvHead,
+                R.drawable.icon_head_normal,R.drawable.icon_head_normal);
         RxBus.$().postEvent(new UserHeadEvent(headUrl+msg.getAvatar()));
         ToastUtil.showbottomShortToast(msg.getInfo());
     }

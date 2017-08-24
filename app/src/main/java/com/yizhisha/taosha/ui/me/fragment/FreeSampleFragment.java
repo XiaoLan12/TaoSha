@@ -96,11 +96,9 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                             new NormalAlertDialog.Builder(activity)
                                     .setBoolTitle(false)
                                     .setContentText(phone)
-                                    .setContentTextColor(R.color.blue)
+                                    .setContentTextSize(18)
                                     .setLeftText("取消")
-                                    .setLeftTextColor(R.color.blue)
                                     .setRightText("确认")
-                                    .setRightTextColor(R.color.blue)
                                     .setWidth(0.75f)
                                     .setHeight(0.33f)
                                     .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {

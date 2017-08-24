@@ -191,8 +191,11 @@ ProductYarnContract.View{
         ProductDetailBean.Comment comment=productDetailBean.getComment();
         if (comment != null && comment.getCount() > 0) {
             commentAmountTv.setText("全部评价(" + comment.getCount() + ")");
-            GlideUtil.getInstance().LoadContextCircleBitmap(activity, AppConstant.AVATARURL + comment.getAvatar(), userheadIv);
-            userphoneTv.setText(comment.getMobile());
+            GlideUtil.getInstance().LoadContextCircleBitmap(activity, AppConstant.AVATARURL + comment.getAvatar(), userheadIv,
+                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
+            if(comment.getMobile()!=null&&!comment.getMobile().equals("")){
+                userphoneTv.setText(comment.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+            }
             commentDetailsTv.setText(comment.getComment_detail());
         } else {
             commentAmountTv.setText("全部评价(0)");
@@ -212,6 +215,9 @@ ProductYarnContract.View{
     }
     private void initSeka() {
         sekaList.addAll(goods.getSeka());
+        for(int i=0;i<sekaList.size();i++){
+            sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(i));
+        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -220,13 +226,16 @@ ProductYarnContract.View{
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(activity,sekaList,position);
                 dialog.show();
             }
         });
     }
     private void initDetail() {
         contentList.addAll(goods.getContent_());
+        for(int i=0;i<contentList.size();i++){
+            contentList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(i));
+        }
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView1.setNestedScrollingEnabled(false);
@@ -235,7 +244,7 @@ ProductYarnContract.View{
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(activity,contentList,position);
                 dialog.show();
             }
         });

@@ -68,7 +68,8 @@ public class AccountCenterActivity extends BaseActivity<AccountCenterPresenter>
     protected void initView() {
         if(AppConstant.infoBean!=null){
             String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
-            GlideUtil.getInstance().LoadContextCircleBitmap(this,url+AppConstant.infoBean.getAvatar(),headIv);
+            GlideUtil.getInstance().LoadContextCircleBitmap(this,url+AppConstant.infoBean.getAvatar(),headIv,
+                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
             usernameTv.setText(AppConstant.infoBean.getUsername());
         }
         initAdapter();

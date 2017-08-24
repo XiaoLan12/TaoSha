@@ -38,6 +38,9 @@ public class DetailsYarnFragment extends BaseFragment{
 
     @Override
     protected void initView() {
+        for(int i=0;i<dataList.size();i++){
+            dataList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+dataList.get(i));
+        }
         LinearLayoutManager linearLayoutManager4=new LinearLayoutManager(getActivity());
         linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager4);
@@ -46,7 +49,7 @@ public class DetailsYarnFragment extends BaseFragment{
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+dataList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(activity,dataList,position);
                 dialog.show();
             }
         });

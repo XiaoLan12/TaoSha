@@ -159,6 +159,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                             new NormalAlertDialog.Builder(activity)
                                     .setBoolTitle(false)
                                     .setContentText(orderFootBean.getMobile_company())
+                                    .setContentTextSize(18)
                                     .setLeftText("取消")
                                     .setRightText("确认")
                                     .setWidth(0.75f)

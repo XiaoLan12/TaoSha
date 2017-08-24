@@ -92,7 +92,7 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         mProductDetailImgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(SingleShopCartActivity.this,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+imgList.get(position),position);
+                PicShowDialog dialog=new PicShowDialog(SingleShopCartActivity.this,imgList,position);
                 dialog.show();
             }
         });
@@ -149,6 +149,9 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
         if(data.getSeka()!=null&&data.getSeka().size()>0) {
             imgList.clear();
             imgList.addAll(data.getSeka());
+            for(int i=0;i<imgList.size();i++){
+                imgList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+imgList.get(i));
+            }
             mProductDetailImgAdapter.setNewData(imgList);
         }else{
             showEmpty();

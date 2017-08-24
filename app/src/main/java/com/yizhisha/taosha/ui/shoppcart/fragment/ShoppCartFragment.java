@@ -199,7 +199,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 }else{
                     mToobar.hideRightButton();
                     changeFootShowDeleteView(true);
-                    mLoadingView.loadSuccess(true, R.drawable.icon_delete,"购物车空空的");
+                    mLoadingView.loadSuccess(true, R.drawable.icon_shopcart_normal,"您的购物车中还没有商品，请您先逛逛!");
                     mRlBottomBar.setVisibility(View.GONE);
                 }
                 //setupViewsShow(isHasGoods);
@@ -355,7 +355,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
         mToobar.hideRightButton();
         mRlBottomBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
-        mLoadingView.loadSuccess(true, R.drawable.icon_shopcart_normal,"您的购物车中还没有商品，请您先逛逛！");
+        mLoadingView.loadSuccess(true, R.drawable.icon_shopcart_normal,"您的购物车中还没有商品，请您先逛逛!");
     }
     @Override
     public void loadFail(String msg) {

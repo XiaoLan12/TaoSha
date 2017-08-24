@@ -36,8 +36,12 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
         switch (helper.getItemViewType()){
             case CommentBean.TEXT_TYPE:
                 ImageView imageView=helper.getView(R.id.head_comment_iv);
-                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView);
-                helper.setText(R.id.name_comment_tv,item.getMobile());
+                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView,
+                        R.drawable.icon_head_normal,R.drawable.icon_head_normal);
+                if(item.getMobile()!=null&&!item.getMobile().equals("")){
+                    helper.setText(R.id.name_comment_tv,item.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+                }
+
                 helper.setText(R.id.time_comment_tv, DateUtil.getDateToString1(item.getComment_addtime_add()*1000));
                 helper.setText(R.id.detail_comment_tv,item.getComment_detail());
                 if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
@@ -63,8 +67,10 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 break;
             case CommentBean.IMGS_TYPE:
                 ImageView imageView1=helper.getView(R.id.head_comment_img_iv);
-                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView1);
-                helper.setText(R.id.name_comment_img_tv,item.getMobile());
+                GlideUtil.getInstance().LoadContextCircleBitmap(mContext,AVATARURL+item.getAvatar(),imageView1,R.drawable.icon_head_normal,R.drawable.icon_head_normal);
+                if(item.getMobile()!=null&&!item.getMobile().equals("")){
+                    helper.setText(R.id.name_comment_img_tv,item.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+                }
                 helper.setText(R.id.time_comment_img_tv,DateUtil.getDateToString1(item.getComment_addtime_add()*1000));
                 helper.setText(R.id.detail_comment_img_tv,item.getComment_detail());
                 if(item.getComment_detail()==null||item.getComment_detail().length()==0){
