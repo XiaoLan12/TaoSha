@@ -372,7 +372,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         super.onClick(v);
         switch (v.getId()){
             case R.id.ll_search:
-                startActivity(SearchActivity.class);
+//                startActivity(SearchActivity.class);
+                Bundle bundle4 = new Bundle();
+                bundle4.putInt("YARNTYPE", 0);
+                startActivity(SelectYarnActivity.class, bundle4);
                 break;
         }
     }
