@@ -45,6 +45,7 @@ import com.yizhisha.taosha.bean.json.IndexDeatailYarnBean;
 import com.yizhisha.taosha.bean.json.IndexImgBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.ui.home.activity.CreditLoanActivity;
 import com.yizhisha.taosha.ui.home.activity.HotCommendActivity;
 import com.yizhisha.taosha.ui.home.activity.ProductsCommendActivity;
 import com.yizhisha.taosha.ui.home.activity.SearchActivity;
@@ -217,6 +218,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                         startActivity(SeckillActivityActivity.class);
                         break;
                     case 9:
+                        startActivity(CreditLoanActivity.class);
                         break;
                 }
             }

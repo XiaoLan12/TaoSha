@@ -17,9 +17,9 @@
             tools:src="@drawable/icon_delete"/>
         <TextView
             android:id="@+id/name_comment_tv"
-            style="@style/TS.Theme.Widget.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/head_comment_iv"
-            android:layout_toLeftOf="@+id/time_comment_tv"
             android:layout_marginLeft="@dimen/dp_8"
             tools:text="aaaa"
             />

@@ -62,6 +62,8 @@ public class ListPopupwindow extends PopupWindow {
     // 定义列表对象
     private RecyclerView mRecyclerView;
 
+    //item的字体颜色
+    private int itemTextColor=0;
     private MyAdapter mAdapter;
 
     // 定义弹窗子类项列表
@@ -159,6 +161,13 @@ public class ListPopupwindow extends PopupWindow {
     }
 
     /**
+     * 设置item字体颜色
+     * @param color
+     */
+    public void setItemTextColor(int color){
+        this.itemTextColor=RescourseUtil.getColor(color);
+    }
+    /**
      * 设置弹窗列表子项
      */
     private void populateActions() {
@@ -225,12 +234,16 @@ public class ListPopupwindow extends PopupWindow {
         @Override
         protected void convert(BaseViewHolder helper, PopupListBean item) {
             helper.setText(R.id.txt_title,item.getTitle());
+
             if(position==helper.getAdapterPosition()){
                 helper.setBackgroundRes(R.id.txt_title,R.color.common_bg);
                 helper.setTextColor(R.id.txt_title, RescourseUtil.getColor(R.color.blue));
             }else{
                 helper.setBackgroundRes(R.id.txt_title,R.color.white);
                 helper.setTextColor(R.id.txt_title,RescourseUtil.getColor(R.color.common_h1));
+            }
+            if(itemTextColor!=0){
+                helper.setTextColor(R.id.txt_title,itemTextColor);
             }
         }
         public void setPosition(int position){

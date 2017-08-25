@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        style="@style/TS.Theme.Widget.Text"
+        android:text="一般经营性贷款"
+        android:textColor="@color/yellow2"
+        android:textSize="@dimen/font_normal3"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_16"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/icon_bg"
+        android:scaleType="fitXY"/>
+    <TextView
+        style="@style/TS.Theme.Widget.Text"
+        android:text="是根据客户的不同资质和条件，匹配不同的授信业务解决客户不同需求的融资授信业务"
+        android:textColor="@color/common_h1"
+        android:textSize="@dimen/font_normal"
+        android:padding="@dimen/dp_10"/>
+</LinearLayout>

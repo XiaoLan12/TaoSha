@@ -11,7 +11,7 @@
         style="@style/basetoolbarStyle"
         app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
-        app:rightButtonIcon="@drawable/icon_delete"
+        app:rightButtonIcon="@drawable/icon_menu"
         app:title="热门推荐"/>
     <RelativeLayout
         android:layout_width="match_parent"

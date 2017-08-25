@@ -191,3 +191,8 @@
   -dontwarn com.tencent.wxop.stat.**
   -keep class com.tencent.mm.** {*;}
   -keep class com.tencent.wxop.stat.**{*;}
+#讯飞语音
+  -keepattributes *Annotation*,InnerClasses
+  -keepattributes Signature
+  -dontwarn com.iflytek.**
+  -keep class com.iflytek.** {*;}

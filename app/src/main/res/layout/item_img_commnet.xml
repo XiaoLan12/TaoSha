@@ -15,14 +15,12 @@
             android:id="@+id/head_comment_img_iv"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
-            tools:src="@drawable/icon_delete"/>
+            tools:src="@drawable/icon_head_normal"/>
         <TextView
             android:id="@+id/name_comment_img_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_toRightOf="@+id/head_comment_img_iv"
-            android:layout_toLeftOf="@+id/time_comment_img_tv"
             android:layout_marginLeft="@dimen/dp_8"
-            android:layout_centerVertical="true"
             tools:text="张三"/>
         <TextView
             android:id="@+id/time_comment_img_tv"
