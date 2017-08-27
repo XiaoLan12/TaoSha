@@ -5,6 +5,8 @@ package com.yizhisha.taosha.bean.json;
  */
 
 public class UserInfoBean {
+
+
     private String uid;
 
     private String username;
@@ -14,6 +16,16 @@ public class UserInfoBean {
     private String linkman;
 
     private String company;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public String getUid() {
         return uid;

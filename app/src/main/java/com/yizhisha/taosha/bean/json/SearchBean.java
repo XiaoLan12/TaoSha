@@ -7,7 +7,18 @@ import java.util.List;
  */
 
 public class SearchBean {
+    private String status;
+
+    private String info;
     private List<SearchDetailBean> goods;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public List<SearchDetailBean> getGoods() {
         return goods;
@@ -20,7 +31,9 @@ public class SearchBean {
     @Override
     public String toString() {
         return "SearchBean{" +
-                "goods=" + goods +
+                "status='" + status + '\'' +
+                ", info='" + info + '\'' +
+                ", goods=" + goods +
                 '}';
     }
 }

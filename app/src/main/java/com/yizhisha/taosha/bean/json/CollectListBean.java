@@ -17,7 +17,16 @@ public class CollectListBean {
     public void setData(List<Favorite> favorite) {
         this.favorite = favorite;
     }
+    private String status;
 
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public class Favorite {
 

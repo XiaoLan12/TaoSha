@@ -18,6 +18,16 @@ public class PersonalDataBean {
     private String email;
 
     private String company;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public void setUid(String uid){
         this.uid = uid;

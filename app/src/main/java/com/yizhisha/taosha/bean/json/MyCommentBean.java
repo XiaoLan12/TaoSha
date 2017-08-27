@@ -8,6 +8,16 @@ import java.util.List;
 
 public class MyCommentBean{
     private List<MyCommentListBean> commentList;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public List<MyCommentListBean> getCommentList() {
         return commentList;

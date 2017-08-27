@@ -16,6 +16,7 @@ import com.yizhisha.taosha.ui.me.contract.BindContract;
 import com.yizhisha.taosha.ui.me.presenter.BindPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
+import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -103,6 +104,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                 mPresenter.getCode(map);
             }
         });
+        bindPhoneTv.setText((String)SharedPreferencesUtil.getValue(getActivity(), "MOBILE",""));
     }
                 /**
                  * 检查输入
@@ -128,6 +130,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
 
     @Override
     public void bindSuccess(String msg) {
+        SharedPreferencesUtil.putValue(getActivity(),"MOBILE",bindPhoneTv.getText().toString());
         ToastUtil.showCenterShortToast(msg);
     }
     @Override

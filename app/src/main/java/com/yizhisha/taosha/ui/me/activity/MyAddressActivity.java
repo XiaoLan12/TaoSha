@@ -65,6 +65,15 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
                 ActivityManager.getActivityMar().finishActivity(MyAddressActivity.this);
             }
         });
+        toolbar.showRightButton();
+        toolbar.setRightButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("TYPE",0);
+                startActivityForResult(AddAddressActivity.class,bundle,2);
+            }
+        });
     }
 
     @Override
@@ -202,19 +211,6 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     @Override
     public void deleteFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
-    }
-
-    @OnClick({R.id.add_address_ll})
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()){
-            case R.id.add_address_ll:
-                Bundle bundle=new Bundle();
-                bundle.putInt("TYPE",0);
-                startActivityForResult(AddAddressActivity.class,bundle,2);
-                break;
-        }
     }
 
     @Override

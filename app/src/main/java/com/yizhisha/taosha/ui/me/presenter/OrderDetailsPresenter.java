@@ -26,7 +26,7 @@ public class OrderDetailsPresenter extends OrderDetailsContract.Presenter{
               @Override
               protected void onSuccess(MyOrderListBean myOrderListBean) {
                   mView.hideLoading();
-                  if(myOrderListBean!=null&&myOrderListBean.getOrder().size()>0){
+                  if(myOrderListBean.getStatus().equals("y")&&myOrderListBean.getOrder().size()>0){
                       mView.loadoSuccess(myOrderListBean.getOrder());
                   }else{
                       mView.showEmpty();

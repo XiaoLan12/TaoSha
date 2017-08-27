@@ -23,7 +23,11 @@ public class ChangeOneInfoPresenter extends ChangeOneInfoContract.Presenter{
         addSubscrebe(Api.getInstance().loadPersonalData(uid), new RxSubscriber<PersonalDataBean>(mContext,true) {
             @Override
             protected void onSuccess(PersonalDataBean personalDataBean) {
-                mView.loadPersonalDataSuccess(personalDataBean);
+                if(personalDataBean.getStatus().equals("y")) {
+                    mView.loadPersonalDataSuccess(personalDataBean);
+                }else{
+                    mView.loadFail(personalDataBean.getInfo());
+                }
             }
             @Override
             protected void onFailure(String message) {

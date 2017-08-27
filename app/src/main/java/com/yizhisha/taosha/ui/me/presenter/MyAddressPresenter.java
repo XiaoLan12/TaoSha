@@ -22,7 +22,7 @@ public class MyAddressPresenter extends MyAddressContract.Presenter{
             @Override
             protected void onSuccess(AddressListBean data) {
                 mView.hideLoading();
-                if(data!=null&&data.getAddress().size()>0){
+                if(data.getStatus().equals("y")&&data.getAddress().size()>0){
                     mView.loadAddressSuccess(data.getAddress());
                 }else{
                     mView.showEmpty();

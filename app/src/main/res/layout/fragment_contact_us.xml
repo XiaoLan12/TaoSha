@@ -42,7 +42,7 @@
                 <TextView
                     android:id="@+id/customer_service_hotline_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:text="0779-32525243"/>
+                    android:text="0769-83115822"/>
 
             </LinearLayout>
             <LinearLayout
@@ -57,7 +57,7 @@
                 <TextView
                     android:id="@+id/email_address_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:text="562562562@qq.com"/>
+                    android:text="5874511214@qq.com"/>
 
             </LinearLayout>
             <LinearLayout
@@ -76,9 +76,8 @@
                 <TextView
                     android:id="@+id/business_address_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:gravity="right"
                     android:layout_gravity="bottom"
-                    android:text="广东省东莞市东莞市福利卡世纪东方看来是打开"/>
+                    android:text="广东省东莞市大朗镇松朗新园-路6号创意信息服务产业园区"/>
 
             </LinearLayout>
             <TextView

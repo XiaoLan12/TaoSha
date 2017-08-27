@@ -27,7 +27,7 @@ public class SecKillOrderDetailsPresenter extends SecKillOrderDetailsContract.Pr
             @Override
             protected void onSuccess(SeckillListBean seckillListBean) {
                 mView.hideLoading();
-                if(seckillListBean!=null&&seckillListBean.getSeckilling().size()>0){
+                if(seckillListBean.getStatus().equals("y")&&seckillListBean.getSeckilling().size()>0){
                     mView.loadoSecKillOrderSuccess(seckillListBean.getSeckilling());
                 }else{
                     mView.showEmpty();

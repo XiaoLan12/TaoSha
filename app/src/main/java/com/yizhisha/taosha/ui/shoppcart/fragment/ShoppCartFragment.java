@@ -106,10 +106,10 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             @Override
             public void onClick(View v) {
                 if(mToobar.getRightButtonText().equals("编辑")){
-                    adapter.setupEditingAll(true);
+                    adapter.setupEditingAll(2);
                    changeFootShowDeleteView(true);
                 }else{
-                    adapter.setupEditingAll(false);
+                    adapter.setupEditingAll(0);
                     changeFootShowDeleteView(false);
                 }
             }
@@ -290,7 +290,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             store.setMzw_uid(data.get(i).getMzw_uid());
             store.setCompany(data.get(i).getCompany());
             store.setChecked(false);
-            store.setEditing(false);
+            store.setEditing(0);
             parentMap.put("parentName",store);
             parentMapList.add(parentMap);
             //提供当前父列的子列数据
@@ -310,7 +310,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 goodsBean.setDetail(goods.get(j).getDetail());
                 goodsBean.setAddtime(goods.get(j).getAddtime());
                 goodsBean.setChecked(false);
-                goodsBean.setEditing(false);
+                goodsBean.setEditing(0);
                 childMap.put("childName", goodsBean);
                 childMapList.add(childMap);
             }

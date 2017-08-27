@@ -21,6 +21,17 @@ public class ShopCartBean {
 
     private String sid;
 
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -7,11 +7,12 @@ import java.util.List;
  */
 
 public class ShopcartListBean {
+
+    private List<Shopcart> shopcart ;
+
     private String status;
 
     private String info;
-    private List<Shopcart> shopcart ;
-
     public String getStatus() {
         return status;
     }
@@ -30,7 +31,9 @@ public class ShopcartListBean {
     @Override
     public String toString() {
         return "ShopcartListBean{" +
-                "shopcart=" + shopcart +
+                "status='" + status + '\'' +
+                ", info='" + info + '\'' +
+                ", shopcart=" + shopcart +
                 '}';
     }
 }

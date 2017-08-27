@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,8 +87,7 @@ public class CreditLoanActivity extends BaseActivity {
             if(currentFragment != null) {
                 transaction.hide(currentFragment);
             }
-            transaction
-                    .add(R.id.fragment, targetFragment,tag).
+            transaction.add(R.id.fragment, targetFragment,tag).
                     addToBackStack(tag);
 
             transaction.commit();
@@ -153,14 +153,8 @@ public class CreditLoanActivity extends BaseActivity {
             // 获取当前回退栈中的Fragment个数
             int backStackEntryCount = fragmentManager.getBackStackEntryCount();
             // 判断当前回退栈中的fragment个数,
-            if (backStackEntryCount > 0) {
-                // 获取当前退到了哪一个Fragment上,重新获取当前的Fragment回退栈中的个数
-                FragmentManager.BackStackEntry backStack = fragmentManager
-                        .getBackStackEntryAt(fragmentManager
-                                .getBackStackEntryCount() - 1);
-                // 获取当前栈顶的Fragment的标记值
-                String tag = backStack.getName();
-                if("creditLoanFragment".equals(tag)){
+            if (backStackEntryCount > 1) {
+                if(currentFragment==creditLoanFragment){
                     finish_Activity(this);
                 }else {
                     // 立即回退一步

@@ -90,6 +90,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     @Override
     public void loginSuccess(RequestStatusBean bean) {
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        SharedPreferencesUtil.putValue(getActivity(),"MOBILE",mEtAccount.getText().toString());
         AppConstant.isLogin=true;
         //AppConstant.UID=bean.getUid();
         RxBus.$().postEvent(new LoginEvent());

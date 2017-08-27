@@ -13,7 +13,7 @@ public class StoreBean {
 
     private boolean isChecked;
 
-    private boolean isEditing;
+    private int isEditing;
 
     public int getMzw_uid() {
         return mzw_uid;
@@ -47,11 +47,11 @@ public class StoreBean {
         isChecked = checked;
     }
 
-    public boolean isEditing() {
+    public int isEditing() {
         return isEditing;
     }
 
-    public void setEditing(boolean editing) {
+    public void setEditing(int editing) {
         isEditing = editing;
     }
 

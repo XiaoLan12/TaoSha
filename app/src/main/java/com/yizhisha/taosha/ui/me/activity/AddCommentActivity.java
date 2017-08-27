@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.me.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -99,6 +100,12 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
 
     @Override
     protected void initToolBar() {
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(AddCommentActivity.this);
+            }
+        });
         Bundle bundle=getIntent().getExtras();
         orderId=bundle.getInt("ORDERID",0);
         mzwuId=bundle.getInt("MZWUIID",0);
@@ -198,12 +205,7 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
                     if (path.contains("selectpic")) {
                         path.remove("selectpic");
                     }
-                    PhotoPickerIntent intent = new PhotoPickerIntent(AddCommentActivity.this);
-                    intent.setSelectModel(SelectModel.MULTI);
-                    intent.setShowCarema(true); // 是否显示拍照
-                    intent.setMaxTotal(5); // 最多选择照片数量，默认为6
-                    intent.setSelectedPaths(path); // 已选中的照片地址， 用于回显选中状态
-                    startActivityForResult(intent, REQUEST_CAMERA_CODE);
+                  showPhotoPicker();
                 } else {
                     if (path.contains("selectpic")) {
                         path.remove("selectpic");
@@ -267,6 +269,23 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
                 e.printStackTrace();
             }
         }
+    }
+    private void showPhotoPicker(){
+        performCodeWithPermission("软件更新需要您提供浏览存储的权限", new PermissionCallback() {
+            @Override
+            public void hasPermission() {
+                PhotoPickerIntent intent = new PhotoPickerIntent(AddCommentActivity.this);
+                intent.setSelectModel(SelectModel.MULTI);
+                intent.setShowCarema(true); // 是否显示拍照
+                intent.setMaxTotal(5); // 最多选择照片数量，默认为6
+                intent.setSelectedPaths(path); // 已选中的照片地址， 用于回显选中状态
+                startActivityForResult(intent, REQUEST_CAMERA_CODE);
+            }
+            @Override
+            public void noPermission() {
+
+            }
+        }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

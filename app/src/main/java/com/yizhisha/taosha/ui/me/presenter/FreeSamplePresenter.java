@@ -23,7 +23,7 @@ public class FreeSamplePresenter extends FreeSampleContract.Presenter{
                     @Override
                     protected void onSuccess(FreeSampleBean freeSampleBean) {
                         mView.hideLoading();
-                        if(freeSampleBean!=null&&freeSampleBean.getActive().size()>0){
+                        if(freeSampleBean.getStatus().equals("y")&&freeSampleBean.getActive().size()>0){
                             mView.loadFreeSampleSuccess(freeSampleBean.getActive());
                         }else{
                             mView.showEmpty();

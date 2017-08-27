@@ -8,7 +8,16 @@ import java.util.List;
 
 public class MyOrderListBean {
     private List<Order> order ;
+    private String status;
 
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
     public void setOrder(List<Order> order){
         this.order = order;
     }

@@ -11,11 +11,10 @@
         app:leftButtonIcon="@drawable/icon_back"
         app:title="如何在大浪淘沙上购买纱线"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_commonquestion1"
-        android:scaleType="fitXY"/>
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 
 import com.yizhisha.taosha.R;
@@ -42,7 +44,7 @@ public class AboutTaoShaFragment extends BaseFragment{
             }
         });
     }
-    @OnClick({R.id.about_rl1,R.id.about_rl3})
+    @OnClick({R.id.about_rl1,R.id.about_rl3,R.id.call_tv})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -52,6 +54,10 @@ public class AboutTaoShaFragment extends BaseFragment{
                 break;
             case R.id.about_rl3:
                 switchFragmentListener.switchFragment(3);
+                break;
+            case R.id.call_tv:
+                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + "0769-83115811"));
+                startActivity(phoneIneten);
                 break;
         }
     }

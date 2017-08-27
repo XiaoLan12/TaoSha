@@ -2,6 +2,7 @@ package com.yizhisha.taosha;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -19,6 +20,7 @@ public class App extends Application{
         context=this;
         //讯飞语音初始化工作
         SpeechUtility.createUtility(this, SpeechConstant.APPID + "=5966e19d");
+
     }
     public static Context getAppContext() {
         return context;

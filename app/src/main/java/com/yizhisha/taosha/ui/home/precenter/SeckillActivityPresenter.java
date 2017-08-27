@@ -23,7 +23,7 @@ public class SeckillActivityPresenter extends SeckillActivityContract.Presenter{
                     @Override
                     protected void onSuccess(SeckillActListBean seckillActListBean) {
                         mView.hideLoading();
-                        if(seckillActListBean!=null&&seckillActListBean.getSeckilling().size()>0){
+                        if(seckillActListBean.getStatus().equals("y")&&seckillActListBean.getSeckilling().size()>0){
                             mView.loadSuccess(seckillActListBean);
                         }else{
                             mView.showEmpty();

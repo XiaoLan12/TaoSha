@@ -19,7 +19,7 @@ public class YarnPresenter extends YarnContract.Presenter {
             @Override
             protected void onSuccess(ProductDetailBean productDetailBean) {
                 mView.hideLoading();
-                if(productDetailBean.getInfo_s()==0){
+                if(productDetailBean.getStatus().equals("y")){
                     mView.getProductDetailSuccess(productDetailBean);
                 }else{
                     mView.showEmpty();
@@ -42,7 +42,7 @@ public class YarnPresenter extends YarnContract.Presenter {
             @Override
             protected void onSuccess(ProductDetailBean productDetailBean) {
                 mView.hideLoading();
-                if(productDetailBean.getInfo_s()==0){
+                if(productDetailBean.getStatus().equals("y")){
                     mView.getProductDetailSuccess(productDetailBean);
                 }else{
                     mView.showEmpty();

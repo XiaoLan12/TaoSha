@@ -10,9 +10,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="320dp">
                 <com.youth.banner.Banner
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     app:indicator_drawable_selected="@drawable/selected_radius_red"
@@ -23,7 +23,18 @@
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="320dp" />
-            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:visibility="gone"
+                    android:orientation="horizontal"></LinearLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

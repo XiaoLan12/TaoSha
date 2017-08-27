@@ -318,7 +318,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                                             @Override
                                             public void noPermission() {
                                             }
-                                        }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                                        }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA);
                                         dialog.dismiss();
                                         break;
                                     case 1:

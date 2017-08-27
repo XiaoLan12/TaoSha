@@ -132,10 +132,11 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         final String parentName = storeBean.getCompany();
         groupViewHolder.tv_title_parent.setText(parentName);
-        if (storeBean.isEditing()) {
-            groupViewHolder.mTvEdit.setText(FINISH_EDITING);
-        } else {
+        Log.d("TTT","tonggn"+storeBean.isEditing());
+        if (storeBean.isEditing()==0) {
             groupViewHolder.mTvEdit.setText(EDITING);
+        } else {
+            groupViewHolder.mTvEdit.setText(FINISH_EDITING);
         }
         groupViewHolder.id_cb_select_parent.setChecked(storeBean.isChecked());
         final boolean nowBeanChecked = storeBean.isChecked();
@@ -196,11 +197,15 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         final GoodsBean goodsBean = (GoodsBean) childMapList_list.get(groupPosition).get(childPosition).get("childName");
 
-        if (goodsBean.isEditing()) {
+        if (goodsBean.isEditing()==1) {
             childViewHolder.mRlNormal.setVisibility(View.GONE);
             childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
 
-        } else {
+        } else if (goodsBean.isEditing()==2){
+            childViewHolder.mRlNormal.setVisibility(View.GONE);
+            childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
+            childViewHolder.mBtnDelete.setVisibility(View.GONE);
+        }else{
             childViewHolder.mRlNormal.setVisibility(View.VISIBLE);
             childViewHolder.mRlEdit.setVisibility(View.GONE);
         }
@@ -281,7 +286,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         for (int i = 0; i < parentMapList.size(); i++) {
             StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
             storeBean.setChecked(isChecked);
-
             List<Map<String, Object>> childMapList = childMapList_list.get(i);
             for (int j = 0; j < childMapList.size(); j++) {
                 GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
@@ -399,17 +403,17 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
     public void setupEditing(int groupPosition) {
         StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-        boolean isEditing = !storeBean.isEditing();
-        storeBean.setEditing(isEditing);
+        int isEdting=storeBean.isEditing()==0?1:0;
+        storeBean.setEditing(isEdting);
         List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
         for (int j = 0; j < childMapList.size(); j++) {
             GoodsBean goodsBean = (GoodsBean) childMapList.get(j).get("childName");
-            goodsBean.setEditing(isEditing);
+            goodsBean.setEditing(isEdting);
         }
         notifyDataSetChanged();
     }
     //供总编辑按钮调用
-    public void setupEditingAll(boolean isEditingAll) {
+    public void setupEditingAll(int isEditingAll) {
         for (int i = 0; i < parentMapList.size(); i++) {
             StoreBean storeBean = (StoreBean) parentMapList.get(i).get("parentName");
             storeBean.setEditing(isEditingAll);

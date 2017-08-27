@@ -103,6 +103,7 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));
         }
         commonTabLayout.setTabData(mTabEntities);
+
         // 对ViewPager设置滑动监听
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

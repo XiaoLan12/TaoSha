@@ -25,7 +25,7 @@ public class MyFootprintPresenter extends MyFootprintContract.Presenter{
                     @Override
                     protected void onSuccess(FootpringBean bean) {
                         mView.hideLoading();
-                        if(bean!=null&&bean.getHistory().size()>0){
+                        if(bean.getStatus().equals("y")&&bean.getHistory().size()>0){
                             mView.loadSuccess(bean.getHistory());
                         }else{
                             mView.showEmpty();

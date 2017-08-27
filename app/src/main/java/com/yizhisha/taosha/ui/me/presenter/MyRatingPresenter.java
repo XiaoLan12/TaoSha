@@ -21,7 +21,7 @@ public class MyRatingPresenter extends MyRatingContract.Presenter{
                     @Override
                     protected void onSuccess(MyCommentBean info) {
                         mView.hideLoading();
-                        if(info!=null&&info.getCommentList().size()>0){
+                        if(info.getStatus().equals("y")&&info.getCommentList().size()>0){
                             mView.loadCommentSuccess(info.getCommentList());
                         }else{
                             mView.showEmpty();

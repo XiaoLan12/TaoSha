@@ -10,7 +10,10 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyCollectConstract;
 import com.yizhisha.taosha.ui.me.presenter.MyCollectPresenter;
@@ -82,17 +85,43 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
                 startActivity(YarnActivity.class);
             }
         });
-        mAdapter.setOnDelListener(new MyCollectAdapter.onSwipeListener() {
-            @Override
-            public void onDel(int pos) {
-                position=pos;
-                Map<String,String> map=new HashMap<String, String>();
-                map.put("gid",dataList.get(pos).getGid());
-                map.put("uid",String.valueOf(AppConstant.UID));
-                mPresenter.cacheCollect(map);
-                position=pos;
-            }
-        });
+       mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+           @Override
+           public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int pos) {
+               switch (view.getId()){
+                   case R.id.btnDelete:
+                       new NormalAlertDialog.Builder(activity)
+                               .setBoolTitle(false)
+                               .setContentText("确定取消收藏该商品吗?")
+                               .setContentTextColor(R.color.blue)
+                               .setLeftText("取消")
+                               .setLeftTextColor(R.color.blue)
+                               .setRightText("确认")
+                               .setRightTextColor(R.color.blue)
+                               .setWidth(0.75f)
+                               .setHeight(0.33f)
+                               .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                                   @Override
+                                   public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                       dialog.dismiss();
+                                   }
+                                   @Override
+                                   public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                       position=pos;
+                                       Map<String,String> map=new HashMap<String, String>();
+                                       map.put("gid",dataList.get(pos).getGid());
+                                       map.put("uid",String.valueOf(AppConstant.UID));
+                                       mPresenter.cacheCollect(map);
+                                       position=pos;
+                                       dialog.dismiss();
+
+                                   }
+                               }).build().show();
+
+                       break;
+               }
+           }
+       });
     }
     private void load(int type,boolean isShowLoad){
         Map<String, String> bodyMap = new HashMap<>();
@@ -101,6 +130,15 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
         bodyMap.put("pid",String.valueOf(type));
         }
         mPresenter.loadCollect(bodyMap,isShowLoad);
+    }
+    public void search(String key){
+        Map<String, String> bodyMap = new HashMap<>();
+        bodyMap.put("uid",String.valueOf(AppConstant.UID));
+        if(mType!=0){
+            bodyMap.put("pid",String.valueOf(mType));
+        }
+        bodyMap.put("key",key);
+        mPresenter.loadCollect(bodyMap,false);
     }
     @Override
     public void onRefresh() {

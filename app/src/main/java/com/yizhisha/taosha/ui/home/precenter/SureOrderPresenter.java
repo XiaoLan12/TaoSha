@@ -47,10 +47,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().shopCartOrderSure(param), new RxSubscriber<ShopCartOrderSureBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(ShopCartOrderSureBean bean) {
-                if(bean.getStatus()==null){
-                    mView.loadShopCartOrderSuccess(bean);
-                }
-                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
+              if(bean.getStatus().equals("y")){
                     mView.loadShopCartOrderSuccess(bean);
                 }else{
                     mView.loadFail(bean.getInfo());
@@ -68,10 +65,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().seckillOrderSure(param), new RxSubscriber<SeckillOrderSureBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(SeckillOrderSureBean bean) {
-                if(bean.getStatus()==null){
-                    mView.loadSeckillOrderSuccess(bean);
-                }
-                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
+             if(bean.getStatus().equals("y")){
                     mView.loadSeckillOrderSuccess(bean);
                 }else{
                     mView.loadFail(bean.getInfo());
@@ -89,10 +83,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().nayangOrderSure(param), new RxSubscriber<AddressListBean>(mContext,"载入中...",true) {
             @Override
             protected void onSuccess(AddressListBean bean) {
-                if(bean.getStatus()==null){
-                    mView.loadNayangOrderSuccess(bean.getAddress());
-                }
-                else if(bean.getStatus()!=null&&bean.getStatus().equals("y")){
+             if(bean.getStatus().equals("y")){
                     mView.loadNayangOrderSuccess(bean.getAddress());
                 }else{
                     mView.loadFail(bean.getInfo());

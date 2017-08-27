@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +92,8 @@ ProductYarnContract.View{
     //详情
     @Bind(R.id.recycleview1)
     RecyclerView mRecyclerView1;
+    @Bind(R.id.ll_banner)
+    LinearLayout ll_banner;
 
 
     //详情
@@ -116,7 +119,8 @@ ProductYarnContract.View{
     @Override
     protected void initView() {
         //设置样式,默认为:Banner.NOT_INDICATOR(不显示指示器和标题)
-        banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
+//        banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
+
         //设置轮播样式（没有标题默认为右边,有标题时默认左边）
         banner.setIndicatorGravity(Banner.CENTER);
         //设置是否自动轮播（不设置则默认自动）
@@ -132,10 +136,26 @@ ProductYarnContract.View{
         }
         goods=productDetailBean.getGoods();
         //加载轮播
-        List<String> albumList = new ArrayList<>();
+      final  List<String> albumList = new ArrayList<>();
         for (int i = 0; i <goods.getAlbum().size(); i++) {
             albumList.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + goods.getAlbum().get(i));
         }
+        if(albumList.size()>1){
+            //是否显示
+            banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
+            ll_banner.setVisibility(View.GONE);
+
+        }else{
+            ll_banner.setVisibility(View.VISIBLE);
+            ll_banner.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    PicShowDialog dialog=new PicShowDialog(activity,albumList,0);
+                    dialog.show();
+                }
+            });
+        }
+
         //自定义图片加载框架
         banner.setImages(albumList, new Banner.OnLoadImageListener() {
             @Override
@@ -145,13 +165,18 @@ ProductYarnContract.View{
                 Glide.with(getActivity()).load(url).into(view);
             }
         });
+
+
         //设置点击事件，下标是从1开始
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
             @Override
             public void OnBannerClick(View view, int position) {
-                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
+                PicShowDialog dialog=new PicShowDialog(activity,albumList,position);
+                dialog.show();
             }
         });
+
+
 
         //加载商品信息
         if(goods.getIs_fanxian().equals("1")){
@@ -271,7 +296,6 @@ ProductYarnContract.View{
                 break;
         }
     }
-
     @Override
     public void collectProductSuccess(String msg) {
         ToastUtil.showShortToast(msg);

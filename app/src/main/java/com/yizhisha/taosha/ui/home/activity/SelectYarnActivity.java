@@ -17,11 +17,14 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -70,8 +73,6 @@ import qiu.niorgai.StatusBarCompat;
 public class SelectYarnActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.commontablayout)
     CommonTabLayout commonTabLayout;
-    @Bind(R.id.vp)
-    ViewPager viewPager;
     @Bind(R.id.img_back)
     ImageView img_back;
     @Bind(R.id.img_yuyin)
@@ -138,42 +139,10 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         for (int i = 0; i < mTitles.length; i++) {
             mFragments.add(SelectYarnFragment.getInstance(mYarnType));
         }
-        commonTabLayout.setTabData(mTabEntities);
+        commonTabLayout.setTabData(mTabEntities, this, R.id.fl_change, mFragments);
 
         mFragment = (SelectYarnFragment) mFragments.get(0);
-        mAdapter = new FragmentPagerAdapter(SelectYarnActivity.this.getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return mFragments.size();
-            }
 
-            @Override
-            public Fragment getItem(int position) {
-                return mFragments.get(position);
-            }
-        };
-        viewPager.setAdapter(mAdapter);
-        viewPager.setOffscreenPageLimit(0);
-
-        // 对ViewPager设置滑动监听
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                commonTabLayout.setCurrentTab(position);
-                mFragment = (SelectYarnFragment) mFragments.get(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         //导航栏设置监听
         commonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -283,21 +252,15 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
             }
         });
-        searchYarnEt.addTextChangedListener(new TextWatcher() {
+        searchYarnEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
-                selectYarnFragment.search(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                    selectYarnFragment.search(v.getText().toString());
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -379,7 +342,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                     mYarnType=item.getId();
-                    viewPager.setCurrentItem(index);
                     commonTabLayout.getTitleView(index).setText(item.getTitle());
                     mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
@@ -407,7 +369,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mPriceType=item.getId();
-                viewPager.setCurrentItem(index);
                 commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
@@ -435,7 +396,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                 if(mNeedleType.equals("全部")){
                     mNeedleType="";
                 }
-                viewPager.setCurrentItem(index);
                 commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
@@ -460,7 +420,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mOrderByType=item.getId();
-                viewPager.setCurrentItem(index);
                 commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }

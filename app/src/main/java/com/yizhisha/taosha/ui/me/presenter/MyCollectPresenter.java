@@ -26,7 +26,7 @@ public class MyCollectPresenter extends MyCollectConstract.Presenter{
             @Override
             protected void onSuccess(CollectListBean data) {
                 mView.hideLoading();
-                if(data!=null&&data.getData().size()>0){
+                if(data.getStatus().equals("y")&&data.getData()!=null){
                     mView.loadCollectSuccess(data.getData());
                 }else{
                     mView.showEmpty();

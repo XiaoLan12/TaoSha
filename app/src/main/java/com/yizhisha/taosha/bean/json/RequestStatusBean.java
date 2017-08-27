@@ -13,6 +13,12 @@ public class RequestStatusBean {
 
     private String orderno;
 
+    private String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
+
     public String getOrderno() {
         return orderno;
     }

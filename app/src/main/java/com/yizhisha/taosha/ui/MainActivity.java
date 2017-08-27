@@ -23,6 +23,7 @@ import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.ui.me.fragment.MeFragment;
 import com.yizhisha.taosha.ui.shoppcart.fragment.ShoppCartFragment;
+import com.yizhisha.taosha.ui.welcome.WeclomeActivity;
 import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 
@@ -65,6 +66,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        String welcome= (String) SharedPreferencesUtil.getValue(MainActivity.this,"WELCOME","");
+        if(welcome.equals("")){
+            startActivity(WeclomeActivity.class);
+            finish();
+        }
+
+
         //初始化选项卡
         AppConstant.isLogin = (boolean) SharedPreferencesUtil.getValue(this, "ISLOGIN",new Boolean(false));
         initTab();

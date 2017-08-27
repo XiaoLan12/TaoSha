@@ -8,6 +8,16 @@ import java.util.List;
 
 public class SeckillListBean {
     private List<SeckillBean> seckilling ;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public List<SeckillBean> getSeckilling() {
         return seckilling;

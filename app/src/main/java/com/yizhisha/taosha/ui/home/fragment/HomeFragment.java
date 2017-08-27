@@ -153,7 +153,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         //设置样式,默认为:Banner.NOT_INDICATOR(不显示指示器和标题)
         banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
         //设置轮播样式（没有标题默认为右边,有标题时默认左边）
-        banner.setIndicatorGravity(Banner.RIGHT);
+        banner.setIndicatorGravity(Banner.CENTER);
         //设置是否自动轮播（不设置则默认自动）
         banner.isAutoPlay(true);
         //设置轮播图片间隔时间（不设置默认为2000）

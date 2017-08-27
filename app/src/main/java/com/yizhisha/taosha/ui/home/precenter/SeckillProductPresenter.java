@@ -20,7 +20,7 @@ public class SeckillProductPresenter extends SeckillProductContract.Presenter{
             @Override
             protected void onSuccess(SeckillProductBean bean) {
                 mView.hideLoading();
-                if(bean.getInfo_s()==0){
+                if(bean.getStatus().equals("y")){
                     mView.loadSuccess(bean);
                 }else{
                     mView.showEmpty();

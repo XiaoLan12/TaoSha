@@ -31,7 +31,7 @@ public class GoodsBean {
     /** 是否被选中 */
     private boolean isChecked;
     /** 是否是编辑状态 */
-    private boolean isEditing;
+    private int isEditing;
 
     public int getSid() {
         return sid;
@@ -111,11 +111,11 @@ public class GoodsBean {
         isChecked = checked;
     }
 
-    public boolean isEditing() {
+    public int isEditing() {
         return isEditing;
     }
 
-    public void setEditing(boolean editing) {
+    public void setEditing(int editing) {
         isEditing = editing;
     }
 

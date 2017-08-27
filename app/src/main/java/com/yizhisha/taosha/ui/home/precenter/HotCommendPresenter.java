@@ -20,7 +20,7 @@ public class HotCommendPresenter extends HotCommendContract.Presenter{
             @Override
             protected void onSuccess(HotCommendBean bean) {
                 mView.hideLoading();
-                if(bean.getInfo_s()==1||bean.getInfo_s()==0){
+                if(bean.getStatus().equals("y")){
                     mView.loadSuccess(bean);
                 }else{
                     mView.showEmpty();

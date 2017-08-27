@@ -36,6 +36,8 @@
                 android:layout_weight="1"
                 android:textSize="10sp"
                 android:background="@null"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
                 android:hint="请输入关键字"
                 />
             <ImageView
@@ -81,8 +83,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/red3"></LinearLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp"
+    <FrameLayout
+        android:id="@+id/fl_change"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </FrameLayout>
 </LinearLayout>

@@ -1,122 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yizhisha.taosha.widget.SwipeMenuLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:paddingBottom="1dp"
-    app:ios="false"
-    app:leftSwipe="true"
-    app:swipeEnable="true">
+   >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10">
+
         <ImageView
             android:id="@+id/shophead_mycollect_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_delete" />
+
         <TextView
             android:id="@+id/shopname_mycollect_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_alignTop="@+id/shophead_mycollect_iv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:textColor="@color/common_h1"
-            />
+            android:layout_toRightOf="@+id/shophead_mycollect_iv"
+            android:layout_toLeftOf="@+id/btnDelete"
+            android:layout_marginRight="@dimen/dp_5"
+            android:textColor="@color/common_h1" />
 
         <TextView
             android:id="@+id/composition_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:textSize="@dimen/font_small"
-            android:text="成分比例:"/>
+            android:layout_toRightOf="@+id/shophead_mycollect_iv"
+            android:text="成分比例:"
+            android:textSize="@dimen/font_small" />
+
         <TextView
             android:id="@+id/composition_mycollect_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/composition_tv"
-            android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_alignTop="@+id/composition_tv"
-            android:textSize="@dimen/font_small"
+            android:layout_below="@+id/shopname_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            />
+            android:layout_toRightOf="@+id/composition_tv"
+            android:textSize="@dimen/font_small" />
+
         <TextView
             android:id="@+id/fit_pittype_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/composition_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            android:textSize="@dimen/font_small"
-            android:text="适合针型:"/>
+            android:layout_toRightOf="@+id/shophead_mycollect_iv"
+            android:text="适合针型:"
+            android:textSize="@dimen/font_small" />
 
         <TextView
             android:id="@+id/fit_pittype_mycollect_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:layout_toRightOf="@+id/fit_pittype_tv"
-            android:layout_below="@+id/composition_mycollect_tv"
             android:layout_alignTop="@+id/fit_pittype_tv"
-            android:textSize="@dimen/font_small"
+            android:layout_below="@+id/composition_mycollect_tv"
             android:layout_marginLeft="@dimen/dp_5"
-            />
+            android:layout_toRightOf="@+id/fit_pittype_tv"
+            android:textSize="@dimen/font_small" />
+        <TextView
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/shophead_mycollect_iv"
+            android:layout_marginRight="@dimen/dp_5"
+            android:text="取消收藏"
+            android:textColor="@color/red" />
+
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/shophead_mycollect_iv"
             android:layout_below="@+id/fit_pittype_mycollect_tv"
+            android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_5">
+            android:layout_toRightOf="@+id/shophead_mycollect_iv">
 
-                <TextView
-                    android:id="@+id/totalprice_mycollect_tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:textSize="@dimen/font_normal3"
-                    android:textColor="@color/red1"
-                    android:layout_gravity="top"
-                    />
-                <TextView
-                    android:id="@+id/tv"
-                    style="@style/TS.Theme.Widget.Text"
-                    android:layout_gravity="top"
-                    android:layout_toRightOf="@+id/totalprice_mycollect_tv"
-                    android:layout_alignBottom="@+id/totalprice_mycollect_tv"
-                    android:text="/公斤"/>
+            <TextView
+                android:id="@+id/totalprice_mycollect_tv"
+                style="@style/TS.Theme.Widget.Text"
+                android:layout_gravity="top"
+                android:textColor="@color/red1"
+                android:textSize="@dimen/font_normal3" />
+
+            <TextView
+                android:id="@+id/tv"
+                style="@style/TS.Theme.Widget.Text"
+                android:layout_alignBottom="@+id/totalprice_mycollect_tv"
+                android:layout_gravity="top"
+                android:layout_toRightOf="@+id/totalprice_mycollect_tv"
+                android:text="/公斤" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:gravity="right"
                 android:layout_alignTop="@+id/tv"
+                android:layout_marginLeft="@dimen/dp_5"
                 android:layout_toRightOf="@+id/tv"
-                >
+                android:gravity="right">
+
                 <TextView
                     android:id="@+id/tv1"
                     style="@style/TS.Theme.Widget.Text"
-                    android:textColor="@color/orange"
                     android:layout_marginLeft="@dimen/dp_5"
-                    android:text="板毛:"/>
+                    android:text="板毛:"
+                    android:textColor="@color/orange" />
+
                 <TextView
                     android:id="@+id/unitprice_mycollect_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:textColor="@color/orange"
-                    android:gravity="right"
                     android:layout_toRightOf="@+id/tv1"
-                    />
-                </RelativeLayout>
+                    android:gravity="right"
+                    android:textColor="@color/orange" />
             </RelativeLayout>
+
+
+        </RelativeLayout>
     </RelativeLayout>
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="match_parent"
-        android:background="@color/red1"
-        android:text="取消收藏"
-        android:textColor="@android:color/white"/>
-</com.yizhisha.taosha.widget.SwipeMenuLayout>
+
+</LinearLayout>

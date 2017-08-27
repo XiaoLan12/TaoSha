@@ -7,28 +7,20 @@ import java.util.List;
  */
 
 public class HotCommendBean {
-    private int info_s;
-
-    private String info_t;
 
     private String pname;
 
     private List<Goods> goods ;
 
-    public int getInfo_s() {
-        return info_s;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
     }
 
-    public void setInfo_s(int info_s) {
-        this.info_s = info_s;
-    }
-
-    public String getInfo_t() {
-        return info_t;
-    }
-
-    public void setInfo_t(String info_t) {
-        this.info_t = info_t;
+    public String getInfo() {
+        return info;
     }
 
     public String getPname() {

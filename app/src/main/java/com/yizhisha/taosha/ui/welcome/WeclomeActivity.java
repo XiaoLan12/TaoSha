@@ -48,13 +48,6 @@ public class WeclomeActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        String welcome= (String) SharedPreferencesUtil.getValue(WeclomeActivity.this,"WELCOME","");
-        if(!welcome.equals("")){
-            startActivity(MainActivity.class);
-            finish();
-        }else{
-            SharedPreferencesUtil.putValue(WeclomeActivity.this,"WELCOME","yes");
-        }
 
         mFragments.add(WelcomeFragment.getInstance(1));
         mFragments.add(WelcomeFragment.getInstance(2));
@@ -104,5 +97,8 @@ public class WeclomeActivity extends BaseActivity {
 
             }
         });
+
+            SharedPreferencesUtil.putValue(WeclomeActivity.this,"WELCOME","yes");
+
     }
 }

@@ -35,13 +35,19 @@ public class PicShowDialog extends Dialog {
     private LinearLayout ll_point;
     private ViewPagerAdapter pageAdapter;
     private int position;
+    private int mUrl;
     private LinearLayout.LayoutParams paramsL = new LinearLayout.LayoutParams(10, 10);
 
     public PicShowDialog(Context context, int themeResId) {
         super(context, themeResId);
         this.context = context;
     }
-
+    public PicShowDialog(Context context, int url, int position) {
+        this(context, R.style.Pic_Dialog);
+        imageUrl=new ArrayList<>();
+        this.mUrl=url;
+        this.position = position;
+    }
 
     public PicShowDialog(Context context, String url, int position) {
         this(context, R.style.Pic_Dialog);
@@ -102,7 +108,11 @@ public class PicShowDialog extends Dialog {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = View.inflate(context, R.layout.item_pic_show, null);
             PhotoView photoView = (PhotoView) view.findViewById(R.id.pic_pv);
-            GlideUtil.getInstance().LoadContextBitmap(context,imageUrl.get(position),photoView,GlideUtil.LOAD_BITMAP);
+            if(mUrl!=0) {
+                photoView.setImageResource(mUrl);
+            }else {
+                GlideUtil.getInstance().LoadContextBitmap(context, imageUrl.get(position), photoView, GlideUtil.LOAD_BITMAP);
+            }
             photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(View view, float x, float y) {

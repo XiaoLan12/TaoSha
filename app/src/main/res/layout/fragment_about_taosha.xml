@@ -112,7 +112,9 @@
             />
         <TextView
             style="@style/TS.Theme.Widget.Text"
-            android:text="0988-565363637"
+            android:id="@+id/call_tv"
+            android:text="0769-83115822"
+            android:textColor="@color/blue"
             android:layout_toRightOf="@+id/customer_service_hotline"
             android:layout_centerVertical="true"
             />

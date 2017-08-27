@@ -9,6 +9,16 @@ import java.util.List;
 public class FreeSampleBean {
 
     private List<Active> active ;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public void setActive(List<Active> active){
         this.active = active;

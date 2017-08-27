@@ -52,6 +52,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 if (RETURN_MSG_TYPE_LOGIN == baseResp.getType()){
                     ToastUtil.showShortToast("登录失败");
+
                 }
                 break;
             case BaseResp.ErrCode.ERR_OK:
@@ -62,13 +63,15 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                         //拿到了微信返回的code,立马再去请求access_token
                         String code = ((SendAuth.Resp) baseResp).code;
                         RxBus.$().postEvent(new WeChatEvent(code));
-                        finish();
+
                         break;
                     default:
                         break;
                 }
                 break;
+
         }
+        finish();
 
     }
 }

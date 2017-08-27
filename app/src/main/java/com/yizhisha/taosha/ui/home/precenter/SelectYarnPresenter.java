@@ -22,7 +22,7 @@ public class SelectYarnPresenter extends SelectYarnConstract.Presenter{
             @Override
             protected void onSuccess(SearchBean searchBean) {
                 mView.hideLoading();
-                if(searchBean!=null&&searchBean.getGoods().size()>0){
+                if(searchBean.getStatus().equals("y")&&searchBean.getGoods().size()>0){
                     mView.loadSuccess(searchBean.getGoods());
                 }else{
                     mView.showEmpty();

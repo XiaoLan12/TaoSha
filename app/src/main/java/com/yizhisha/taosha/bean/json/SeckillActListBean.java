@@ -10,6 +10,16 @@ public class SeckillActListBean {
     private List<SeckillActBean> seckilling ;
 
     private int nowtime;
+    private String status;
+
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public int getNowtime() {
         return nowtime;

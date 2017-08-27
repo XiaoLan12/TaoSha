@@ -31,27 +31,8 @@ public class MyCollectAdapter extends BaseQuickAdapter<CollectListBean.Favorite,
         helper.setText(R.id.totalprice_mycollect_tv,"￥"+item.getPrice());
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),
                 (ImageView) helper.getView(R.id.shophead_mycollect_iv),GlideUtil.LOAD_BITMAP);
-        helper.getView(R.id.btnDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mOnSwipeListener) {
-                    mOnSwipeListener.onDel(helper.getAdapterPosition());
-                }
-            }
-        });
+        helper.addOnClickListener(R.id.btnDelete);
 
-    }
-    /**
-     * 和Activity通信的接口
-     */
-    public interface onSwipeListener {
-        void onDel(int pos);
-    }
-
-    private onSwipeListener mOnSwipeListener;
-
-    public void setOnDelListener(onSwipeListener mOnDelListener) {
-        this.mOnSwipeListener = mOnDelListener;
     }
 
 }

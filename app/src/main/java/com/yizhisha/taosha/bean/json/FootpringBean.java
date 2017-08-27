@@ -8,7 +8,16 @@ import java.util.List;
 
 public class FootpringBean {
     private List<FootprintListBean> history ;
+    private String status;
 
+    private String info;
+    public String getStatus() {
+        return status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
     public List<FootprintListBean> getHistory() {
         return history;
     }

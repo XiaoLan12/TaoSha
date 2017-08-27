@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/bind_phone_tv"
             style="@style/TS.Theme.Widget.Text"
-            android:text="18819283470"/>
+            android:text=""/>
 
     </LinearLayout>
     <com.yizhisha.taosha.widget.ClearEditText

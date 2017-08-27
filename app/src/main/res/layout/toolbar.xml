@@ -31,7 +31,7 @@
         android:textColor="@color/common_h1"
         android:textSize="@dimen/font_normal3"
         android:singleLine="true"
-        android:maxEms="6"
+        android:maxEms="20"
         android:ellipsize="end"
         android:text="title"/>
     <TextView

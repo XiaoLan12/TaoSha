@@ -23,7 +23,7 @@ public class SingleShopCartPresenter extends SingleShopCartContract.Presenter{
                     @Override
                     protected void onSuccess(ShopCartBean shopCartBean) {
                         mView.hideLoading();
-                        if(shopCartBean!=null){
+                        if(shopCartBean.getStatus().equals("y")){
                             mView.loadSuccess(shopCartBean);
                         }else{
                             mView.showEmpty();

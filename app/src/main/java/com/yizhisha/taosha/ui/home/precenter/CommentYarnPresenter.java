@@ -21,7 +21,7 @@ public class CommentYarnPresenter extends CommentYarnContract.Presenter{
             @Override
             protected void onSuccess(CommentListBean data) {
                 mView.hideLoading();
-                if(data!=null&&data.getComment().size()>0){
+                if(data.getStatus().equals("y")&data.getComment().size()>0){
                     mView.loadCommentListSuccess(data.getComment());
                 }else{
                     mView.showEmpty();
