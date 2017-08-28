@@ -16,7 +16,7 @@ public class SeckillProductPresenter extends SeckillProductContract.Presenter{
     @Override
     public void loadSeckillProduct(Map<String, String> map) {
         mView.showLoading();
-        addSubscrebe(Api.getInstance().getSeckillProduct(map), new RxSubscriber<SeckillProductBean>(mContext,true) {
+        addSubscrebe(Api.getInstance().getSeckillProduct(map), new RxSubscriber<SeckillProductBean>(mContext,false) {
             @Override
             protected void onSuccess(SeckillProductBean bean) {
                 mView.hideLoading();

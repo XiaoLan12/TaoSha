@@ -9,6 +9,7 @@ import android.view.View;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.CommentYarnAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.CommentBean;
 import com.yizhisha.taosha.ui.home.contract.CommentYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.CommentYarnPresenter;
@@ -25,6 +26,8 @@ import butterknife.OnClick;
 
 public class CommentYarnActivity extends BaseActivity<CommentYarnPresenter> implements
         CommentYarnContract.View  {
+    @Bind(R.id.toolbar)
+    BaseToolbar toolbar;
     @Bind(R.id.comment_rv)
     RecyclerView mRecyclerView;
     @Bind(R.id.loadingView)
@@ -40,7 +43,12 @@ public class CommentYarnActivity extends BaseActivity<CommentYarnPresenter> impl
     }
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(CommentYarnActivity.this);
+            }
+        });
     }
     @Override
     protected void initView() {

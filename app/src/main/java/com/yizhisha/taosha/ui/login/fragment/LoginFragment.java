@@ -96,6 +96,17 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }
+
+    @Override
+    public void weChatLoginSuccess(RequestStatusBean bean) {
+        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        SharedPreferencesUtil.putValue(activity,"MOBILE",bean.getMobile());
+        AppConstant.isLogin=true;
+        //AppConstant.UID=bean.getUid();
+        RxBus.$().postEvent(new LoginEvent());
+        activity.finish();
+    }
+
     @Override
     public void registerSuccess(String info) {
 

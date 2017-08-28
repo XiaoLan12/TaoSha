@@ -3,11 +3,12 @@ package com.yizhisha.taosha.ui.home.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,11 +18,14 @@ import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
-import com.yizhisha.taosha.ui.shoppcart.SingleShopCartActivity;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.youth.banner.Banner;
@@ -32,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -39,7 +44,7 @@ import butterknife.OnClick;
  */
 
 public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> implements
-ProductYarnContract.View{
+        ProductYarnContract.View {
     @Bind(R.id.banner)
     Banner banner;
     @Bind(R.id.tv_title)
@@ -50,6 +55,7 @@ ProductYarnContract.View{
     TextView tv_price_real;
     @Bind(R.id.tv_company)
     TextView tv_company;
+
 
     @Bind(R.id.comment_amount_tv)
     TextView commentAmountTv;
@@ -69,8 +75,7 @@ ProductYarnContract.View{
     TextView tv_banjiabanmao;
     @Bind(R.id.tv_free_sample)
     TextView tv_free_sample;
-    @Bind(R.id.tv_favorite_num)
-    TextView tv_favorite_num;
+
     //参数
     @Bind(R.id.tv_product_code)
     TextView tv_product_code;
@@ -86,6 +91,7 @@ ProductYarnContract.View{
     TextView tv_pname;
     @Bind(R.id.tv_brand)
     TextView tv_brand;
+
     //色卡
     @Bind(R.id.recyclerview)
     RecyclerView mRecyclerView;
@@ -94,23 +100,29 @@ ProductYarnContract.View{
     RecyclerView mRecyclerView1;
     @Bind(R.id.ll_banner)
     LinearLayout ll_banner;
+    @Bind(R.id.merchant_addrss_tv)
+    TextView merchantAddrssTv;
+    @Bind(R.id.main_product_tv)
+    TextView mainProductTv;
 
 
     //详情
-    private List<String> contentList=new ArrayList<>();
+    private List<String> contentList = new ArrayList<>();
     //色卡
-    private List<String> sekaList=new ArrayList<>();
+    private List<String> sekaList = new ArrayList<>();
     //商品信息
     private ProductDetailBean productDetailBean;
     private ProductDeatilItemBean goods;
 
     private int id;
-    public static ProductYarnFragnment getInstance(int id,ProductDetailBean bean) {
+
+    public static ProductYarnFragnment getInstance(int id, ProductDetailBean bean) {
         ProductYarnFragnment sf = new ProductYarnFragnment();
         sf.productDetailBean = bean;
-        sf.id=id;
+        sf.id = id;
         return sf;
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_yarn_product;
@@ -131,26 +143,29 @@ ProductYarnContract.View{
         //所有设置参数方法都放在此方法之前执行
         //banner.setImages(images);
 
-        if(productDetailBean==null){
+        if (productDetailBean == null) {
             return;
         }
-        goods=productDetailBean.getGoods();
+        goods = productDetailBean.getGoods();
+        if (goods == null) {
+            return;
+        }
         //加载轮播
-      final  List<String> albumList = new ArrayList<>();
-        for (int i = 0; i <goods.getAlbum().size(); i++) {
+        final List<String> albumList = new ArrayList<>();
+        for (int i = 0; i < goods.getAlbum().size(); i++) {
             albumList.add(AppConstant.PRODUCT_DETAIL_ALBUM_IMG_URL + goods.getAlbum().get(i));
         }
-        if(albumList.size()>1){
+        if (albumList.size() > 1) {
             //是否显示
             banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
             ll_banner.setVisibility(View.GONE);
 
-        }else{
+        } else {
             ll_banner.setVisibility(View.VISIBLE);
-            ll_banner.setOnClickListener(new View.OnClickListener(){
+            ll_banner.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PicShowDialog dialog=new PicShowDialog(activity,albumList,0);
+                    PicShowDialog dialog = new PicShowDialog(activity, albumList, 0);
                     dialog.show();
                 }
             });
@@ -171,27 +186,26 @@ ProductYarnContract.View{
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
             @Override
             public void OnBannerClick(View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,albumList,position);
+                PicShowDialog dialog = new PicShowDialog(activity, albumList, position);
                 dialog.show();
             }
         });
 
 
-
         //加载商品信息
-        if(goods.getIs_fanxian().equals("1")){
+        if (goods.getIs_fanxian().equals("1")) {
             tv_fanxian.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tv_fanxian.setVisibility(View.GONE);
         }
-        if(goods.getIs_nayang().equals("1")){
+        if (goods.getIs_nayang().equals("1")) {
             tv_free_sample.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tv_free_sample.setVisibility(View.GONE);
         }
-        if(goods.getIs_dunjian().equals("1")){
+        if (goods.getIs_dunjian().equals("1")) {
             tv_lijian.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tv_lijian.setVisibility(View.GONE);
         }
        /* if(model.getGoods().getIs_fanxian().equals("1")){
@@ -199,103 +213,144 @@ ProductYarnContract.View{
         }else{
             tv_fanxian.setVisibility(View.GONE);
         }*/
-
-        tv_favorite_num.setText(goods.getFavorite());
         tv_title.setText(goods.getTitle());
         tv_price.setText("￥" + goods.getPrice());
         tv_price_real.setText("板毛:￥" + goods.getPrice_real() + "/份");
         tv_company.setText(goods.getCompany());
+        mainProductTv.setText(goods.getMajor());
+        merchantAddrssTv.setText(goods.getAddress());
         initComment();
         initParameter();
         initSeka();
         initDetail();
 
     }
+
     //加载评论
     private void initComment() {
-        ProductDetailBean.Comment comment=productDetailBean.getComment();
+        ProductDetailBean.Comment comment = productDetailBean.getComment();
         if (comment != null && comment.getCount() > 0) {
             commentAmountTv.setText("全部评价(" + comment.getCount() + ")");
             GlideUtil.getInstance().LoadContextCircleBitmap(activity, AppConstant.AVATARURL + comment.getAvatar(), userheadIv,
-                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
-            if(comment.getMobile()!=null&&!comment.getMobile().equals("")){
+                    R.drawable.icon_head_normal, R.drawable.icon_head_normal);
+            if (comment.getMobile() != null && !comment.getMobile().equals("")) {
                 userphoneTv.setText(comment.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
             }
             commentDetailsTv.setText(comment.getComment_detail());
+            lookAllcommentTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("ID", id);
+                    startActivity(CommentYarnActivity.class, bundle);
+                }
+            });
+
         } else {
             commentAmountTv.setText("全部评价(0)");
             userheadIv.setImageResource(R.drawable.icon_head_normal);
             commentDetailsTv.setText("暂无评论");
         }
     }
+
     private void initParameter() {
 
         tv_product_code.setText(goods.getCode());
-        tv_ingredient.setText(goods.getId()+"");
+        tv_ingredient.setText(goods.getId() + "");
         tv_session_name.setText(goods.getSession_name());
         tv_needle_name.setText(goods.getNeedle_name());
         tv_yam.setText(goods.getYam());
         tv_pname.setText(goods.getPname());
         tv_brand.setText(goods.getBrand());
     }
+
     private void initSeka() {
         sekaList.addAll(goods.getSeka());
-        for(int i=0;i<sekaList.size();i++){
-            sekaList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+sekaList.get(i));
+        for (int i = 0; i < sekaList.size(); i++) {
+            sekaList.set(i, AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + sekaList.get(i));
         }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,sekaList);
+        ProductDetailImgAdapter adapter = new ProductDetailImgAdapter(activity, sekaList);
         mRecyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,sekaList,position);
+                PicShowDialog dialog = new PicShowDialog(activity, sekaList, position);
                 dialog.show();
             }
         });
     }
+
     private void initDetail() {
         contentList.addAll(goods.getContent_());
-        for(int i=0;i<contentList.size();i++){
-            contentList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(i));
+        for (int i = 0; i < contentList.size(); i++) {
+            contentList.set(i, AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + contentList.get(i));
         }
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView1.setNestedScrollingEnabled(false);
-        ProductDetailImgAdapter adapter=new ProductDetailImgAdapter(activity,contentList);
+        ProductDetailImgAdapter adapter = new ProductDetailImgAdapter(activity, contentList);
         mRecyclerView1.setAdapter(adapter);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                PicShowDialog dialog=new PicShowDialog(activity,contentList,position);
+                PicShowDialog dialog = new PicShowDialog(activity, contentList, position);
                 dialog.show();
             }
         });
     }
-    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll,R.id.collect_iv})
+
+    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll, R.id.collect_iv})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.look_allcomment_tv:
-                Bundle bundle = new Bundle();
-                bundle.putInt("ID", id);
-                startActivity(CommentYarnActivity.class, bundle);
+
                 break;
-            case R.id.comment_ll:
-                Bundle bundle1 = new Bundle();
-                bundle1.putInt("ID", id);
-                startActivity(CommentYarnActivity.class, bundle1);
-                break;
+
             case R.id.collect_iv:
-                Map<String,String> map=new HashMap<>();
-                map.put("gid",String.valueOf(goods.getId()));
-                map.put("uid",String.valueOf(AppConstant.UID));
+                if(AppConstant.isLogin==false){
+                    final List<String> mDatas1=new ArrayList<>();
+                    mDatas1.add("登录");
+                    mDatas1.add("注册");
+                    NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(activity)
+                            .setBoolTitle(true)
+                            .setTitleText("温馨提示\n尊敬的用户,您尚未登录,请选择登录或注册")
+                            .setTitleHeight(55)
+                            .setItemHeight(45)
+                            .setItemTextColor(R.color.blue)
+                            .setItemTextSize(14)
+                            .setItemWidth(0.95f)
+                            .setCancleButtonText("取消")
+                            .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                @Override
+                                public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                    switch (position){
+                                        case 0:
+                                            startActivity(LoginFragmentActivity.class);
+                                            break;
+                                        case 1:
+                                            startActivity(RegisterActivity.class);
+                                            break;
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }).setTouchOutside(true)
+                            .build();
+                    dialog.setData(mDatas1);
+                    dialog.show();
+                    return;
+                }
+                Map<String, String> map = new HashMap<>();
+                map.put("gid", String.valueOf(goods.getId()));
+                map.put("uid", String.valueOf(AppConstant.UID));
                 mPresenter.collectProduct(map);
                 break;
         }
     }
+
     @Override
     public void collectProductSuccess(String msg) {
         ToastUtil.showShortToast(msg);
@@ -304,5 +359,19 @@ ProductYarnContract.View{
     @Override
     public void loadFail(String msg) {
         ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

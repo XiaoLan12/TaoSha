@@ -170,6 +170,13 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     }
 
     @Override
+    public void changePayWaySuccess(String info) {
+        ToastUtil.showShortToast(info);
+        setResult(2);
+        finish_Activity(this);
+    }
+
+    @Override
     public void sureGoodsSuuccess(String msg) {
         ToastUtil.showShortToast(msg);
         setResult(2);
@@ -424,7 +431,11 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
 
                                         break;
                                     case 2:
-
+                                        Map<String,String> body1=new HashMap<String, String>();
+                                        body1.put("uid",String.valueOf(AppConstant.UID));
+                                        body1.put("orderno",orderNo);
+                                        body1.put("payment",String.valueOf(seckillBean.getPayment()));
+                                        mPresenter.changePayWay(body1);
                                         break;
                                 }
                                 dialog.dismiss();

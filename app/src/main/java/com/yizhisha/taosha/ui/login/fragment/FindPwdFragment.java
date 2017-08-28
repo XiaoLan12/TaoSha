@@ -70,6 +70,12 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
     public void loginSuccess(RequestStatusBean info) {
 
     }
+
+    @Override
+    public void weChatLoginSuccess(RequestStatusBean bean) {
+
+    }
+
     @Override
     public void registerSuccess(String info) {
 

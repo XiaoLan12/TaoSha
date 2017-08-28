@@ -49,7 +49,6 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     private MyOrderAdapter mAdapter;
     private int mType=0;
     private ArrayList<Object> dataList=new ArrayList<>();
-
     public static MyOrderFragment getInstance(int type) {
         MyOrderFragment sf = new MyOrderFragment();
         sf.mType = type;
@@ -67,6 +66,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         if(mAdapter.getData().size()<=0){
             load(mType,true);
         }
+
     }
 
     private void load(int type,boolean isShowLoad){
@@ -194,6 +194,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
             }
         });
     }
+
     @Override
     public void onRefresh() {
         load(mType,false);

@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.AddressListBean;
+import com.yizhisha.taosha.utils.RescourseUtil;
 
 import java.util.List;
 
@@ -24,8 +25,12 @@ public class MyAddressAdapter extends BaseQuickAdapter<AddressListBean.Address,B
         helper.setText(R.id.address_myaddress_tv,item.getAddress());
         if(item.getIndex().equals("1")){
             helper.setChecked(R.id.seletaddress_myaddress_cb,true);
+            helper.setText(R.id.isnormal_address_tv,"默认地址");
+            helper.setTextColor(R.id.isnormal_address_tv, RescourseUtil.getColor(R.color.red2));
         }else{
             helper.setChecked(R.id.seletaddress_myaddress_cb,false);
+            helper.setText(R.id.isnormal_address_tv,"设为默认地址");
+            helper.setTextColor(R.id.isnormal_address_tv,RescourseUtil.getColor(R.color.common_h3));
         }
         helper.addOnClickListener(R.id.edit_myaddress_tv);
         helper.addOnClickListener(R.id.delete_myaddress_tv);

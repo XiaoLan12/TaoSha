@@ -24,15 +24,15 @@ public class CommentBean implements MultiItemEntity {
     private List<String> commentPhotos;
     private String comment_photos;
 
-    private int comment_addtime;
+    private long comment_addtime;
 
     private String comment_redetail;
 
-    private int comment_retime;
+    private long comment_retime;
 
     private String comment_detail_add;
 
-    private int comment_addtime_add;
+    private long comment_addtime_add;
 
     private String detail;
 
@@ -91,11 +91,11 @@ public class CommentBean implements MultiItemEntity {
         return comment_photos;
     }
 
-    public int getComment_addtime() {
+    public long getComment_addtime() {
         return comment_addtime;
     }
 
-    public void setComment_addtime(int comment_addtime) {
+    public void setComment_addtime(long comment_addtime) {
         this.comment_addtime = comment_addtime;
     }
 
@@ -107,11 +107,11 @@ public class CommentBean implements MultiItemEntity {
         this.comment_redetail = comment_redetail;
     }
 
-    public int getComment_retime() {
+    public long getComment_retime() {
         return comment_retime;
     }
 
-    public void setComment_retime(int comment_retime) {
+    public void setComment_retime(long comment_retime) {
         this.comment_retime = comment_retime;
     }
 
@@ -123,11 +123,11 @@ public class CommentBean implements MultiItemEntity {
         this.comment_detail_add = comment_detail_add;
     }
 
-    public int getComment_addtime_add() {
+    public long getComment_addtime_add() {
         return comment_addtime_add;
     }
 
-    public void setComment_addtime_add(int comment_addtime_add) {
+    public void setComment_addtime_add(long comment_addtime_add) {
         this.comment_addtime_add = comment_addtime_add;
     }
 

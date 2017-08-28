@@ -47,13 +47,6 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_ll,true);
                     helper.setText(R.id.detail_addcomment_tv,item.getComment_detail_add());
-
-                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add()*1000,item.getComment_addtime()*1000);
-                    if(time>0){
-                        helper.setText(R.id.time_addcomment_tv,"用户"+time+"天后追加评论");
-                    }else{
-                        helper.setText(R.id.time_addcomment_tv,"用户当天追加评论");
-                    }
                 }else{
                     helper.setVisible(R.id.addcomment_ll,false);
                 }
@@ -82,13 +75,6 @@ public class CommentYarnAdapter extends BaseMultiItemQuickAdapter<CommentBean,Ba
                 if(item.getComment_detail_add()!=null&&!item.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_img_ll,true);
                     helper.setText(R.id.detail_addcomment_img_tv,item.getComment_detail_add());
-                    int time=DateUtil.getTimeintervalDay(item.getComment_addtime_add()*1000,item.getComment_addtime()*1000);
-                    if(time>0){
-                        helper.setText(R.id.time_addcomment_img_tv,"用户"+time+"天后追加评论");
-                    }else{
-                        helper.setText(R.id.time_addcomment_img_tv,"用户当天追加评论");
-                    }
-
                 }else{
                     helper.setVisible(R.id.addcomment_img_ll,false);
                 }

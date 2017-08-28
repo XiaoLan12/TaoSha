@@ -157,6 +157,11 @@ public class Api {
     public Observable<MyOrderListBean> loadOrderDetails(Map<String,String> map){
         return service.getOrderDetails(map);
     }
+    //修改支付状态
+    public Observable<RequestStatusBean> changePayWay(Map<String,String> map){
+        return service.changePayWay(map);
+    }
+
     //修改密码
     public Observable<RequestStatusBean> changePwd(Map<String,String> map){
         return service.changePwd(map);

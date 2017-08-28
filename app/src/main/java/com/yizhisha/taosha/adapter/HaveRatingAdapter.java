@@ -1,6 +1,7 @@
 package com.yizhisha.taosha.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -61,13 +62,13 @@ public class HaveRatingAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
             case ITEM_HEADER:
                 MyCommentHeadBean headBean= (MyCommentHeadBean) item;
                 helper.setText(R.id.orderno_mycomment_tv,headBean.getOrderno());
-                helper.setText(R.id.time_mycomment_tv,DateUtil.getDateToString1(headBean.getComment_addtime()));
+                helper.setText(R.id.time_mycomment_tv,DateUtil.getDateToString1(headBean.getComment_addtime()*1000));
                 break;
             case ITEM_CONTENT:
                 MyCommentListBean.Goods goods= (MyCommentListBean.Goods) item;
                 helper.setText(R.id.tradename_myorder_tv,goods.getTitle());
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getRemark());
-                helper.setText(R.id.tradeprice_myorder_tv,"￥"+goods.getTotalprice());
+                helper.setText(R.id.tradeprice_myorder_tv,"￥"+goods.getTotalprice()+"元");
                 helper.setText(R.id.tradecolor_myorder_tv,goods.getDetail());
                 GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goods.getLitpic(),
                         (ImageView) helper.getView(R.id.tradehead_myorder_iv),GlideUtil.LOAD_BITMAP);
@@ -84,12 +85,12 @@ public class HaveRatingAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 if(myComment.getComment_detail_add()!=null&&!myComment.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_mycomment_ll,true);
                     helper.setText(R.id.detail_addcomment_mycomment_tv,myComment.getComment_detail_add());
-                    int time=DateUtil.getTimeintervalDay(myComment.getComment_addtime_add(),myComment.getComment_addtime());
+                   /* int time=DateUtil.getTimeintervalDay(myComment.getComment_addtime_add(),myComment.getComment_addtime());
                     if(time>0){
                         helper.setText(R.id.time_addcomment_mycomment_tv,"用户"+time+"后追加评论");
                     }else{
                         helper.setText(R.id.time_addcomment_mycomment_tv,"用户当天追加评论");
-                    }
+                    }*/
 
                 }else{
                     helper.setVisible(R.id.addcomment_mycomment_ll,false);

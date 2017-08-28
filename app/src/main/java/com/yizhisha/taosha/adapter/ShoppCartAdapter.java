@@ -132,7 +132,6 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
 
         final String parentName = storeBean.getCompany();
         groupViewHolder.tv_title_parent.setText(parentName);
-        Log.d("TTT","tonggn"+storeBean.isEditing());
         if (storeBean.isEditing()==0) {
             groupViewHolder.mTvEdit.setText(EDITING);
         } else {

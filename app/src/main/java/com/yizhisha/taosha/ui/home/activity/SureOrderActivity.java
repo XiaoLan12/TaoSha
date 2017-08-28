@@ -117,7 +117,12 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(SureOrderActivity.this);
+            }
+        });
     }
     @Override
     protected void initView() {

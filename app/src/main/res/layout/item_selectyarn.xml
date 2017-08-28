@@ -16,7 +16,7 @@
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete"/>
+            />
         <TextView
             android:id="@+id/shopname_selectyarn_tv"
             style="@style/TS.Theme.Widget.Text"

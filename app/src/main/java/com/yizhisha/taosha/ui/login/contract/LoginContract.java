@@ -18,6 +18,8 @@ public interface LoginContract {
     interface View extends BaseView {
         void loginSuccess(RequestStatusBean info);
 
+        void weChatLoginSuccess(RequestStatusBean bean);
+
         void registerSuccess(String info);
 
         void findPwdSuccess(String info);

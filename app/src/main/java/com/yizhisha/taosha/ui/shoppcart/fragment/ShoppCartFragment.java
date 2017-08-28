@@ -75,11 +75,6 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     LinearLayout mLlDeleteAllBottom;
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
-
-    RelativeLayout mRlNormal;
-    RelativeLayout mRlEdit;
-    TextView id_tv_edit_all;
-
     private ShoppCartAdapter adapter;
     //定义父列表项List数据集合
     List<Map<String, Object>> parentMapList = new ArrayList<Map<String, Object>>();

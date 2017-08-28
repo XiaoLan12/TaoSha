@@ -108,21 +108,24 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                     switch (view.getId()) {
                         case R.id.img_delete:
                             if (list.get(position).isAdd()) {
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (list.get(i).getColor().equals("")) {
+                                        ToastUtil.showShortToast("请先输入色号");
+                                        return;
+                                    }
+                                }
                                 if (list.size() > 7) {
                                     ToastUtil.showShortToast("一个订单最多八组");
                                     return;
                                 }
                                 for (int i = 0; i < list.size(); i++) {
-                                    if (list.get(i).getColor().equals("") || list.get(i).getNum() == 0) {
-                                        ToastUtil.showShortToast("请先输入色号和数量");
-                                        return;
-                                    }
+                                   list.get(i).setAdd(false);
                                 }
                                 SelectYarnBean selectYarnBean = new SelectYarnBean();
                                 selectYarnBean.setColor("");
                                 selectYarnBean.setNum(1);
-                                selectYarnBean.setAdd(false);
-                                list.add(0, selectYarnBean);
+                                selectYarnBean.setAdd(true);
+                                list.add(selectYarnBean);
                                 adapter1.setNewData(list);
                             } else {
                                 adapter1.remove(position);

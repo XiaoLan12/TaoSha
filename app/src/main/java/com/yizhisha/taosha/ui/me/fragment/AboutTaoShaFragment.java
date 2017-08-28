@@ -8,6 +8,8 @@ import android.view.View;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -56,8 +58,27 @@ public class AboutTaoShaFragment extends BaseFragment{
                 switchFragmentListener.switchFragment(3);
                 break;
             case R.id.call_tv:
-                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + "0769-83115811"));
-                startActivity(phoneIneten);
+                new NormalAlertDialog.Builder(activity)
+                        .setBoolTitle(false)
+                        .setContentText("0769-83115811")
+                        .setContentTextSize(18)
+                        .setLeftText("取消")
+                        .setRightText("确认")
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:0769-83115811"));
+                                startActivity(phoneIneten);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
                 break;
         }
     }

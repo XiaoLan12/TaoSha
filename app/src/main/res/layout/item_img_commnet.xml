@@ -63,6 +63,29 @@
             android:layout_marginTop="@dimen/dp_5"
             tools:text="2017.06.19"/>
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/addcomment_img_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="买家追评:"/>
+        <TextView
+            android:id="@+id/detail_addcomment_img_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="买家追评"
+            />
+        <!-- <TextView
+             android:id="@+id/time_addcomment_img_tv"
+             style="@style/TS.Theme.Widget.Text"
+             android:layout_marginTop="@dimen/dp_5"
+             tools:text="2017.06.19"/>-->
+    </LinearLayout>
     <!-- 不同的地方 -->
 
     <com.yizhisha.taosha.widget.MultiImageView
@@ -70,36 +93,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         >
     </com.yizhisha.taosha.widget.MultiImageView>
-    <LinearLayout
-        android:id="@+id/addcomment_img_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
-        android:visibility="gone"
-        android:orientation="vertical">
-        <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>
-        <TextView
-            android:id="@+id/time_addcomment_img_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:textColor="@color/red1"
-            android:layout_gravity="left"
-            android:layout_marginTop="@dimen/dp_10"
-            android:textSize="@dimen/font_normal2"
-            tools:text="用户当天追评"/>
-        <TextView
-            android:id="@+id/detail_addcomment_img_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            tools:text="aaaaaaaaaaaaaaaaaaa"
-            />
-       <!-- <TextView
-            android:id="@+id/time_addcomment_img_tv"
-            style="@style/TS.Theme.Widget.Text"
-            android:layout_marginTop="@dimen/dp_5"
-            tools:text="2017.06.19"/>-->
-    </LinearLayout>
+
 
 </LinearLayout>

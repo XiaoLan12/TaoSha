@@ -49,7 +49,7 @@ public class MyCommentListBean implements MultiItemEntity {
         private String amount;
         private String litpic;
         private String detail;
-        private String totalprice;
+        private float totalprice;
         private String remark;
         private String mobile;
         private String is_ship;
@@ -119,11 +119,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.detail = detail;
         }
 
-        public String getTotalprice() {
+        public float getTotalprice() {
             return totalprice;
         }
 
-        public void setTotalprice(String totalprice) {
+        public void setTotalprice(float totalprice) {
             this.totalprice = totalprice;
         }
 
@@ -166,9 +166,9 @@ public class MyCommentListBean implements MultiItemEntity {
             private List<String> commentPhotos;
             private long comment_addtime;
             private String comment_redetail;
-            private int comment_retime;
+            private long comment_retime;
             private String comment_detail_add;
-            private int comment_addtime_add;
+            private long comment_addtime_add;
 
         public String getComment_id() {
             return comment_id;
@@ -282,11 +282,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.comment_redetail = comment_redetail;
         }
 
-        public int getComment_retime() {
+        public long getComment_retime() {
             return comment_retime;
         }
 
-        public void setComment_retime(int comment_retime) {
+        public void setComment_retime(long comment_retime) {
             this.comment_retime = comment_retime;
         }
 
@@ -298,11 +298,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.comment_detail_add = comment_detail_add;
         }
 
-        public int getComment_addtime_add() {
+        public long getComment_addtime_add() {
             return comment_addtime_add;
         }
 
-        public void setComment_addtime_add(int comment_addtime_add) {
+        public void setComment_addtime_add(long comment_addtime_add) {
             this.comment_addtime_add = comment_addtime_add;
         }
     }

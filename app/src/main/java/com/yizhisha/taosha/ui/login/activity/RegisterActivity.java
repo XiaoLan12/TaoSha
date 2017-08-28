@@ -83,6 +83,12 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
         RxBus.$().postEvent(new LoginEvent());
         finish_Activity(this);
     }
+
+    @Override
+    public void weChatLoginSuccess(RequestStatusBean bean) {
+
+    }
+
     @Override
     public void registerSuccess(String info) {
         Map<String,String> map=new HashMap<>();

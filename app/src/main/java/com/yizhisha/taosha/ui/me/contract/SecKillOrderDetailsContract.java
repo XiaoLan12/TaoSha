@@ -17,6 +17,7 @@ import java.util.Map;
 public interface SecKillOrderDetailsContract {
     interface View extends BaseView {
         void loadoSecKillOrderSuccess(List<SeckillBean> data);
+        void changePayWaySuccess(String info);
         void sureGoodsSuuccess(String msg);
         void cancleOrder(String msg);
 
@@ -37,6 +38,7 @@ public interface SecKillOrderDetailsContract {
     abstract class Presenter extends BasePresenter<View> {
 
         public abstract void loadSecKillOrderDetails(Map<String, String> param, boolean isShowLoad);
+        public abstract void changePayWay(Map<String, String> param);
         public abstract void sureGoods(Map<String, String> param);
         public abstract void cancleOrder(Map<String, String> param);
         public abstract void weChatPay(Map<String, String> param);

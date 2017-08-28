@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
@@ -26,6 +27,7 @@ import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
+import com.yizhisha.taosha.widget.TimeView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +55,12 @@ implements SeckillActivityContract.View,SwipeRefreshLayout.OnRefreshListener{
     }
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(SeckillActivityActivity.this);
+            }
+        });
     }
     @Override
     protected void initView() {
@@ -81,9 +88,13 @@ implements SeckillActivityContract.View,SwipeRefreshLayout.OnRefreshListener{
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",dataLists.get(position).getId());
-                startActivity(SeckillYarnActivity.class,bundle);
+                TimeView mTvTimer= (TimeView) view.findViewById(R.id.seckillact_activity_tv);
+                boolean isOver=mTvTimer.isOverActivity();
+                if(isOver) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", dataLists.get(position).getId());
+                    startActivity(SeckillYarnActivity.class, bundle);
+                }
             }
         });
     }

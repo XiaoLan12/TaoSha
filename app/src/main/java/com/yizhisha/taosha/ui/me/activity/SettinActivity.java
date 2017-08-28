@@ -25,6 +25,7 @@ import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.me.contract.SetContract;
 import com.yizhisha.taosha.ui.me.presenter.SetPresenter;
 import com.yizhisha.taosha.utils.GlideUtil;
+import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 });
     }
     @OnClick({R.id.changepwd_rl, R.id.changephone_rl, R.id.changeoneinfo_rl,
-            R.id.managedeladdress_rl, R.id.changeweixin_rl})
+            R.id.managedeladdress_rl, R.id.changeweixin_rl,R.id.exit_btn})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -163,6 +164,14 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 break;
             case R.id.managedeladdress_rl:
                 startActivity(MyAddressActivity.class);
+                break;
+            case R.id.exit_btn:
+                SharedPreferencesUtil.removeValue(this,"ISLOGIN");
+                SharedPreferencesUtil.removeValue(this,"MOBILE");
+                AppConstant.isLogin=false;
+                AppConstant.infoBean=null;
+                setResult(103);
+                finish_Activity(this);
                 break;
 
         }

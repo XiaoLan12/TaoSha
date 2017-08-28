@@ -55,6 +55,9 @@ public class SeckillProductBean implements Serializable{
         private List<String> content_;
 
         private List<String> album ;
+        private String address;
+
+        private String major;
 
         public void setMzw_uid(String mzw_uid){
             this.mzw_uid = mzw_uid;
@@ -153,6 +156,17 @@ public class SeckillProductBean implements Serializable{
             return this.album;
         }
 
+        public List<String> getContent_() {
+            return content_;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public String getMajor() {
+            return major;
+        }
     }
     public class Seckilling {
         private int id;

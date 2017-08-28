@@ -54,6 +54,9 @@ public class ProductDeatilItemBean implements Serializable{
     private String description;
     private List<String> content_;
     private List<String> album;
+    private String address;
+
+    private String major;
 
     public int getId() {
         return id;
@@ -423,10 +426,18 @@ public class ProductDeatilItemBean implements Serializable{
         this.album = album;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
     @Override
     public String toString() {
         return "ProductDeatilItemBean{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", uid='" + uid + '\'' +
                 ", mzw_uid='" + mzw_uid + '\'' +
                 ", title='" + title + '\'' +
@@ -472,6 +483,8 @@ public class ProductDeatilItemBean implements Serializable{
                 ", description='" + description + '\'' +
                 ", content_=" + content_ +
                 ", album=" + album +
+                ", address='" + address + '\'' +
+                ", major='" + major + '\'' +
                 '}';
     }
 }

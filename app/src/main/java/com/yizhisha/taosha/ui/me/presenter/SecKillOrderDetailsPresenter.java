@@ -40,6 +40,23 @@ public class SecKillOrderDetailsPresenter extends SecKillOrderDetailsContract.Pr
             }
         });
     }
+    @Override
+    public void changePayWay(Map<String, String> param) {
+        addSubscrebe(Api.getInstance().changePayWay(param), new RxSubscriber<RequestStatusBean>(mContext, true) {
+            @Override
+            protected void onSuccess(RequestStatusBean requestStatusBean) {
+                if(requestStatusBean.getStatus().equals("y")){
+                    mView.changePayWaySuccess(requestStatusBean.getInfo());
+                }else{
+                    mView.cancelFail(requestStatusBean.getInfo());
+                }
+            }
+            @Override
+            protected void onFailure(String message) {
+                mView.cancelFail(message);
+            }
+        });
+    }
 
     @Override
     public void sureGoods(Map<String, String> param) {

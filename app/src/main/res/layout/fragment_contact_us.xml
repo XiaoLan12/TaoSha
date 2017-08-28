@@ -24,10 +24,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:gravity="center"
-                android:background="@drawable/icon_bg">
+                android:background="@drawable/icon_contact_us_bg">
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
                     />
             </LinearLayout>
             <LinearLayout

@@ -295,7 +295,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                     dialog.show();
                     return;
                 }
-                startActivity(SettinActivity.class);
+                startActivityForResult(SettinActivity.class,103);
                 break;
             case R.id.myorder_set_tv:
                 if(AppConstant.isLogin==false){
@@ -375,6 +375,13 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                 startActivity(SecKillOrderActivity.class);
                 break;
             case R.id.head_me_iv:
+                if(AppConstant.isLogin==false){
+                    if(dialog==null){
+                        showLoginDialog();
+                    }
+                    dialog.show();
+                    return;
+                }
                 List<String> headData=new ArrayList<>();
                 headData.add("相机");
                 headData.add("相册");
@@ -445,6 +452,12 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                     if (intent != null) {
                         setPicToView(intent);
                     }
+                }
+                break;
+            case 103:
+                if(AppConstant.infoBean==null){
+                    mIvHead.setImageResource(R.drawable.icon_head_normal);
+                    mTVUserName.setText("毛织网感谢您的支持,请登录");
                 }
                 break;
 

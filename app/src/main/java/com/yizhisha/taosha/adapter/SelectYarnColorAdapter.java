@@ -37,28 +37,27 @@ public class SelectYarnColorAdapter extends BaseQuickAdapter<SelectYarnBean,Base
             helper.setImageResource(R.id.img_delete,R.drawable.icon_shanchushuxing);
         }
         helper.setText(R.id.tv_num,goods.getNum()+"");
-
         final EditText et_color=(EditText) helper.getView(R.id.et_color);
         if(et_color.getTag() instanceof TextWatcher) {
             et_color.removeTextChangedListener((TextWatcher)et_color.getTag());
         }
+        et_color.setText(goods.getColor());
         TextWatcher watcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2){
-
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
             @Override
             public void afterTextChanged(Editable editable) {
+
                 goods.setColor(et_color.getText().toString());
             }
         };
         et_color.addTextChangedListener(watcher);
         et_color.setTag(watcher);
-        et_color.setText(goods.getColor());
+
         helper.addOnClickListener(R.id.tv_add);
         helper.addOnClickListener(R.id.tv_reduce);
          /*   helper.getView(R.id.tv_add).setOnClickListener(new View.OnClickListener(){

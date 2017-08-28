@@ -49,7 +49,6 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
 
     private MyAddressAdapter mAdapter;
     private List<AddressListBean.Address> dataList=new ArrayList<>();
-    private CityPickerView mCityPickerView;
 
     private int index;
     @Override

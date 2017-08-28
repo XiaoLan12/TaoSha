@@ -39,6 +39,8 @@ public class TimeView extends View {
     long startTime;//开始时间
     long endTime;//结束时间
     long subTime;//服务器时间差
+
+    private boolean isSecKill=false;
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             invalidate();
@@ -152,10 +154,13 @@ public class TimeView extends View {
      */
     public String StartAndEndTimeDiff(long subTime) {
         if (startTime - subTime > 0) {
+            isSecKill=false;
             return "活动未开始";
         } else if (endTime - subTime > 0) {
+            isSecKill=true;
             return "活动进行中";
         } else {
+            isSecKill=false;
             return "活动已结束";
         }
     }
@@ -174,4 +179,7 @@ public class TimeView extends View {
         subTime = curtime*1000 -cur1;//获得时间差
     }
 
+    public boolean isOverActivity(){
+        return isSecKill;
+    }
 }

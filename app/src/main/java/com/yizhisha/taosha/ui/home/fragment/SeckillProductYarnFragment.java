@@ -24,6 +24,8 @@ import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.DateBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.event.SecKillEvent;
 import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
@@ -32,6 +34,8 @@ import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
 import com.yizhisha.taosha.ui.home.precenter.SeckillProductPresenter;
+import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
+import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.youth.banner.Banner;
@@ -72,8 +76,6 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     TextView titleTv;
     @Bind(R.id.tv_company)
     TextView companyTv;
-    @Bind(R.id.tv_favorite_num)
-    TextView favoriteNumTv;
     @Bind(R.id.activit_state_tv)
     TextView activitStateTv;
 
@@ -92,14 +94,16 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     TextView tv_pname;
     @Bind(R.id.tv_brand)
     TextView tv_brand;
+    @Bind(R.id.merchant_addrss_tv)
+    TextView merchantAddrssTv;
+    @Bind(R.id.main_product_tv)
+    TextView mainProductTv;
     //色卡
     @Bind(R.id.recyclerview)
     RecyclerView mRecyclerView;
     //详情
     @Bind(R.id.recycleview1)
     RecyclerView mRecyclerView1;
-
-    private ProductDetailBean productDetailBean;
     //详情
     private List<String> contentList=new ArrayList<>();
     //色卡
@@ -113,9 +117,6 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     private long nowTime;
     private long subTime;
     boolean stopThread=false;
-
-    private boolean isActivityOver=false;
-
 
     public static SeckillProductYarnFragment getInstance(SeckillProductBean bean) {
         SeckillProductYarnFragment sf = new SeckillProductYarnFragment();
@@ -171,6 +172,8 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         seckillPriceTv.setText(seckilling.getPrice());
         titleTv.setText(seckilling.getTitle());
         companyTv.setText(goods.getCompany());
+        mainProductTv.setText(goods.getMajor());
+        merchantAddrssTv.setText(goods.getAddress());
 
         startTime=seckilling.getStarttime()*1000;
         endTime=seckilling.getEndtime()*1000;
@@ -299,6 +302,38 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.collect_iv:
+                if(AppConstant.isLogin==false){
+                    final List<String> mDatas1=new ArrayList<>();
+                    mDatas1.add("登录");
+                    mDatas1.add("注册");
+                    NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(activity)
+                            .setBoolTitle(true)
+                            .setTitleText("温馨提示\n尊敬的用户,您尚未登录,请选择登录或注册")
+                            .setTitleHeight(55)
+                            .setItemHeight(45)
+                            .setItemTextColor(R.color.blue)
+                            .setItemTextSize(14)
+                            .setItemWidth(0.95f)
+                            .setCancleButtonText("取消")
+                            .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                @Override
+                                public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                    switch (position){
+                                        case 0:
+                                            startActivity(LoginFragmentActivity.class);
+                                            break;
+                                        case 1:
+                                            startActivity(RegisterActivity.class);
+                                            break;
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }).setTouchOutside(true)
+                            .build();
+                    dialog.setData(mDatas1);
+                    dialog.show();
+                    return;
+                }
                 Map<String,String> map=new HashMap<>();
                 map.put("gid",String.valueOf(seckillProductBean.getSeckilling().getGoods_id()));
                 map.put("uid",String.valueOf(AppConstant.UID));
@@ -312,7 +347,6 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         super.onDestroyView();
 
     }
-
     @Override
     public void collectProductSuccess(String msg) {
         ToastUtil.showShortToast(msg);

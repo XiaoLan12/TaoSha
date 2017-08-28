@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.utils.GlideUtil;
@@ -18,6 +19,7 @@ import com.yizhisha.taosha.utils.MyViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -34,6 +36,7 @@ public class PicShowDialog extends Dialog {
     private LayoutAnimationController lac;
     private LinearLayout ll_point;
     private ViewPagerAdapter pageAdapter;
+    TextView tvPage;
     private int position;
     private int mUrl;
     private LinearLayout.LayoutParams paramsL = new LinearLayout.LayoutParams(10, 10);
@@ -42,13 +45,6 @@ public class PicShowDialog extends Dialog {
         super(context, themeResId);
         this.context = context;
     }
-    public PicShowDialog(Context context, int url, int position) {
-        this(context, R.style.Pic_Dialog);
-        imageUrl=new ArrayList<>();
-        this.mUrl=url;
-        this.position = position;
-    }
-
     public PicShowDialog(Context context, String url, int position) {
         this(context, R.style.Pic_Dialog);
         imageUrl=new ArrayList<>();
@@ -69,9 +65,28 @@ public class PicShowDialog extends Dialog {
         getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 //        getWindow().setLayout(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         vp = (MyViewPager) findViewById(R.id.vp);
+        tvPage= (TextView) findViewById(R.id.show_img_page_tv);
+
 //        init();
         initMyPageAdapter();
+        tvPage.setText(1 + "/" + imageUrl.size());
 //        vp.setAdapter(new ViewPagerAdapter());
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                tvPage.setText(position + 1 + "/" + imageUrl.size());
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         vp.setCurrentItem(position);
 
     }

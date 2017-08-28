@@ -16,6 +16,7 @@ import com.yizhisha.taosha.ui.me.contract.BindContract;
 import com.yizhisha.taosha.ui.me.presenter.BindPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
+import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
@@ -50,6 +51,8 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
 
     private int type;
 
+    private String bindPhone;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_changebind;
@@ -57,14 +60,13 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
 
     @Override
     protected void initView() {
-        Bundle bundle = getArguments();
-        type = bundle.getInt("TYPE");
-        if (type == 1) {
-            toolbar.setTitle(R.string.change_phone);
-            bindTv.setText("已绑定手机号:");
+        bindPhone=(String)SharedPreferencesUtil.getValue(getActivity(), "MOBILE",new String());
+        if (bindPhone!= null) {
+            bindTv.setText("未绑定手机号");
+            bindTv.setTextColor(RescourseUtil.getColor(R.color.red1));
         } else {
-            toolbar.setTitle(R.string.change_weixin);
-            bindTv.setText("已绑定微信号:");
+            bindTv.setText("已绑定手机号:");
+            bindPhoneTv.setText(bindPhone);
         }
         mBtnSava.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +106,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                 mPresenter.getCode(map);
             }
         });
-        bindPhoneTv.setText((String)SharedPreferencesUtil.getValue(getActivity(), "MOBILE",""));
+
     }
                 /**
                  * 检查输入
@@ -130,7 +132,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
 
     @Override
     public void bindSuccess(String msg) {
-        SharedPreferencesUtil.putValue(getActivity(),"MOBILE",bindPhoneTv.getText().toString());
+        SharedPreferencesUtil.putValue(getActivity(),"MOBILE",phoneChagephoneEt.getText().toString());
         ToastUtil.showCenterShortToast(msg);
     }
     @Override

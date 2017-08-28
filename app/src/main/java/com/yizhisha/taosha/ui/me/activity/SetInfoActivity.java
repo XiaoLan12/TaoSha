@@ -53,15 +53,7 @@ public class SetInfoActivity extends BaseActivity {
             case 2:
                 changeBindFragment =new ChangeBindFragment();
                 Bundle bundle1=new Bundle();
-                bundle1.putInt("TYPE",1);
                 changeBindFragment.setArguments(bundle1);
-                switchFragment(changeBindFragment);
-                break;
-            case 3:
-                changeBindFragment =new ChangeBindFragment();
-                Bundle bundle2=new Bundle();
-                bundle2.putInt("TYPE",2);
-                changeBindFragment.setArguments(bundle2);
                 switchFragment(changeBindFragment);
                 break;
 

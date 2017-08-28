@@ -132,6 +132,11 @@ public interface ApiService {
     @GET("ios/order/detail")
     Observable<MyOrderListBean> getOrderDetails(@QueryMap Map<String,String> map);
 
+    //修改支付状态
+    @FormUrlEncoded
+    @POST("ios/order/daofuPay/")
+    Observable<RequestStatusBean> changePayWay(@FieldMap Map<String, String> map);
+
     //修改用户信息
     @FormUrlEncoded
     @POST("ios/ucenter/profile_save/")

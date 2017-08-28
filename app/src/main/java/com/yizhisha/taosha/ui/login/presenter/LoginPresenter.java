@@ -110,7 +110,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                     @Override
                     protected void onSuccess(RequestStatusBean info) {
                         if(info.getStatus().equals("y")){
-                            mView.loginSuccess(info);
+                            mView.weChatLoginSuccess(info);
                         }else{
                             mView.loadFail(info.getInfo());
                         }
