@@ -44,11 +44,11 @@ public class Order implements MultiItemEntity {
 
         private float uid;
 
-        private String addtime;
+        private long addtime;
 
-        private int paytime;
+        private long paytime;
 
-        private String shiptime;
+        private long shiptime;
 
         private int loanstatus;
 
@@ -189,27 +189,27 @@ public class Order implements MultiItemEntity {
             this.uid = uid;
         }
 
-        public String getAddtime() {
+        public long getAddtime() {
             return addtime;
         }
 
-        public void setAddtime(String addtime) {
+        public void setAddtime(long addtime) {
             this.addtime = addtime;
         }
 
-        public int getPaytime() {
+        public long getPaytime() {
             return paytime;
         }
 
-        public void setPaytime(int paytime) {
+        public void setPaytime(long paytime) {
             this.paytime = paytime;
         }
 
-        public String getShiptime() {
+        public long getShiptime() {
             return shiptime;
         }
 
-        public void setShiptime(String shiptime) {
+        public void setShiptime(long shiptime) {
             this.shiptime = shiptime;
         }
 

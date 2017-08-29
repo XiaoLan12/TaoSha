@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -61,14 +62,11 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
 
     @Override
     protected void initView() {
-
         initAdapter();
         if(mAdapter.getData().size()<=0){
             load(mType,true);
         }
-
     }
-
     private void load(int type,boolean isShowLoad){
         Map<String,String> map=new HashMap<>();
         map.put("uid",String.valueOf(AppConstant.UID));

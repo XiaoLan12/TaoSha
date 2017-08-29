@@ -25,11 +25,11 @@ public class SeckillBean {
 
     private String addday;
 
-    private String addtime;
+    private long addtime;
 
     private int paystatus;
 
-    private int paytime;
+    private long paytime;
 
     private int payment;
 
@@ -143,11 +143,11 @@ public class SeckillBean {
         this.addday = addday;
     }
 
-    public String getAddtime() {
+    public long getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
+    public void setAddtime(long addtime) {
         this.addtime = addtime;
     }
 
@@ -159,11 +159,11 @@ public class SeckillBean {
         this.paystatus = paystatus;
     }
 
-    public int getPaytime() {
+    public long getPaytime() {
         return paytime;
     }
 
-    public void setPaytime(int paytime) {
+    public void setPaytime(long paytime) {
         this.paytime = paytime;
     }
 

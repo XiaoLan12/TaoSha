@@ -147,9 +147,16 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
         mTvShipAddress.setText(seckillBean.getAddress());
 
         mTvOrderNo.setText(seckillBean.getOrderno());
-        mTvOrderTime.setText(seckillBean.getAddtime());
-        mTvPayWay.setText(seckillBean.getPayment()+"");
-        mTvPayTime.setText(DateUtil.getDateToString(seckillBean.getPaytime()*1000));
+        mTvOrderTime.setText(DateUtil.getDateToString1(seckillBean.getAddtime()*1000));
+        int payment=seckillBean.getPayment();
+        if(payment==2){
+            mTvPayWay.setText("支付宝");
+        }else if(payment==3){
+            mTvPayWay.setText("到付");
+        }else if(payment==5){
+            mTvPayWay.setText("微信支付");
+        }
+        mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
         mTvDistributionway.setText("三四十");
         mTvTradelTotal.setText(seckillBean.getMarket_price()+"");
         if(seckillBean.getGoods()!=null){

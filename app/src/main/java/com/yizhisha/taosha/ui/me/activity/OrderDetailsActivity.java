@@ -82,6 +82,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
     TextView mTvPayTime;
     @Bind(R.id.distributionway_orderdetail_tv)
     TextView mTvDistributionway;
+    @Bind(R.id.distributiontime_orderdetail)
+    TextView mTvDistributionTime;
     @Bind(R.id.tradeltotal_myorder_tv)
     TextView mTvTradelTotal;
     @Bind(R.id.tradelpaymentpay_myorder_tv)
@@ -146,10 +148,19 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         mTvShipAddress.setText(order.getAddress());
         mTvCompay.setText(order.getCompany());
         mTvOrderNo.setText(order.getOrderno());
-        mTvOrderTime.setText(order.getAddtime());
-        mTvPayWay.setText(order.getPayment()+"");
-        mTvPayTime.setText(DateUtil.getDateToString(order.getPaytime()*1000));
-        mTvDistributionway.setText("三四十");
+
+        mTvOrderTime.setText(DateUtil.getDateToString1(order.getAddtime()*1000));
+        int payment=order.getPayment();
+        if(payment==2){
+            mTvPayWay.setText("支付宝");
+        }else if(payment==3){
+            mTvPayWay.setText("到付");
+        }else if(payment==5){
+            mTvPayWay.setText("微信支付");
+        }
+        mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()));
+        mTvDistributionway.setText("快递配送");
+        mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
         mTvTradelTotal.setText(order.getGoods_price()+"");
         switchState(order.getStatus(),order.getPayment());
     }
