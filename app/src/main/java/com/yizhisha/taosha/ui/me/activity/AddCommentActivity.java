@@ -7,10 +7,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,20 +25,14 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ChoosePhotoListAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.bean.json.Goods;
-import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.LoadingDialog;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.ui.me.contract.AddCommentContract;
 import com.yizhisha.taosha.ui.me.presenter.AddCommentPresenter;
-import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.ImageUtils;
-import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.StarView;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +41,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

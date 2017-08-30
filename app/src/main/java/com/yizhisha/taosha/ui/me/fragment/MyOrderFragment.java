@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -50,10 +49,25 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     private MyOrderAdapter mAdapter;
     private int mType=0;
     private ArrayList<Object> dataList=new ArrayList<>();
+
+    private int currStatus;//当前点击的位置
+
+    // 标志位，标志已经初始化完成。
+    private boolean isPrepared;
     public static MyOrderFragment getInstance(int type) {
         MyOrderFragment sf = new MyOrderFragment();
         sf.mType = type;
         return sf;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+           if(isPrepared){
+              onRefresh();
+           }
+
+        }
     }
     @Override
     protected int getLayoutId() {
@@ -62,6 +76,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
 
     @Override
     protected void initView() {
+        isPrepared=true;
         initAdapter();
         if(mAdapter.getData().size()<=0){
             load(mType,true);
@@ -108,10 +123,12 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                currStatus=position;
                 switch (view.getId()){
                     case R.id.cancel_the_order_tv:
                         if(dataList.get(position) instanceof OrderFootBean) {
                             OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
+                            currStatus=orderFootBean.getStatus();
                             Map<String, String> bodyMap = new HashMap<>();
                             bodyMap.put("uid", String.valueOf(AppConstant.UID));
                             bodyMap.put("orderno", String.valueOf(orderFootBean.getOrderno()));
@@ -192,7 +209,6 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
             }
         });
     }
-
     @Override
     public void onRefresh() {
         load(mType,false);
@@ -209,6 +225,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     @Override
     public void sureGoodsSuuccess(String msg) {
         onRefresh();
+
         ToastUtil.showShortToast(msg);
     }
 
@@ -257,8 +274,6 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==100&&resultCode==2){
             onRefresh();
-        }
     }
 }

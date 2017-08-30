@@ -2,45 +2,36 @@ package com.yizhisha.taosha.ui.me.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.adapter.MyOrderDetailsAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
+import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.Goods;
 import com.yizhisha.taosha.bean.json.Order;
-import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.PayReqBean;
-import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.WeChatPayEvent;
-import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.OrderDetailsContract;
 import com.yizhisha.taosha.ui.me.presenter.OrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
-import com.yizhisha.taosha.utils.LogUtil;
-import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.CommonLoadingView;
-import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -58,6 +49,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> implements OrderDetailsContract.View{
+    @Bind(R.id.toolbar)
+    BaseToolbar toolbar;
     @Bind(R.id.paystate_orderdetails_tv)
     TextView mTvPayState;
     @Bind(R.id.paystate_orderdetails_iv)
@@ -118,7 +111,12 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
     }
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish_Activity(OrderDetailsActivity.this);
+            }
+        });
     }
     @Override
     protected void initView() {
@@ -183,7 +181,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
     @Override
     public void changePayWaySuccess(String info) {
         ToastUtil.showShortToast(info);
-        setResult(2);
         finish_Activity(this);
     }
 

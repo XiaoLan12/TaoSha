@@ -47,10 +47,23 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     private SecondKillOrderAdapter mAdapter;
     private int mType=0;
     private ArrayList<SeckillBean> dataList=new ArrayList<>();
+
+    // 标志位，标志已经初始化完成。
+    private boolean isPrepared;
     public static SecKillOrderFragment getInstance(int type) {
         SecKillOrderFragment sf = new SecKillOrderFragment();
         sf.mType = type;
         return sf;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            if(isPrepared){
+                onRefresh();
+            }
+
+        }
     }
     @Override
     protected int getLayoutId() {
@@ -188,8 +201,6 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==100&&resultCode==2){
             onRefresh();
-        }
     }
 }

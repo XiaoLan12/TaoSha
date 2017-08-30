@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="image">图片</string>
     <string name="all_image">所有图片</string>
     <string name="preview">预览</string>
