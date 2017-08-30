@@ -20,6 +20,7 @@ import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
+import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.event.UpdateShopCartEvent;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
@@ -155,6 +156,14 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
         recyclerView1.setLayoutManager(linearLayoutManager);
         adapter=new ProductDetailImgAdapter(SelectYarnColorActivity.this,sekaList);
          recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                PicShowDialog dialog=new PicShowDialog(SelectYarnColorActivity.this,sekaList,position);
+                dialog.show();
+            }
+        });
     }
     private void showLoginDialog(){
         final List<String> mDatas1=new ArrayList<>();
