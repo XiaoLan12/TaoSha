@@ -49,7 +49,8 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
     private FreeSampleAdapter mAdapter;
     private int mType=0;
     private List<FreeSampleBean.Active> dataList=new ArrayList<>();
-
+    // 标志位，标志已经初始化完成。
+    private boolean isPrepared;
     public static FreeSampleFragment getInstance(int type) {
         FreeSampleFragment sf = new FreeSampleFragment();
         sf.mType = type;
@@ -59,9 +60,19 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
     protected int getLayoutId() {
         return R.layout.fragment_freesample;
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            if(isPrepared){
+                onRefresh();
+            }
 
+        }
+    }
     @Override
     protected void initView() {
+        isPrepared=true;
         initAdapter();
         dataList.clear();
         if(mAdapter.getData().size()<=0){

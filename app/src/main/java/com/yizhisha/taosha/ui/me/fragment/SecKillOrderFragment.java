@@ -71,6 +71,7 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
     }
     @Override
     protected void initView() {
+        isPrepared=true;
         initAdapter();
         if(mAdapter.getData().size()<=0){
             load(mType,true);
