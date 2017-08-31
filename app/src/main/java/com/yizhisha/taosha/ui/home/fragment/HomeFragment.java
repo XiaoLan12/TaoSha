@@ -373,9 +373,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         switch (v.getId()){
             case R.id.ll_search:
 //                startActivity(SearchActivity.class);
-                Bundle bundle4 = new Bundle();
-                bundle4.putInt("YARNTYPE", 0);
-                startActivity(SelectYarnActivity.class, bundle4);
+             /*   Bundle bundle4 = new Bundle();
+                bundle4.putInt("YARNTYPE", 0);*/
+                startActivity(SearchActivity.class);
                 break;
         }
     }

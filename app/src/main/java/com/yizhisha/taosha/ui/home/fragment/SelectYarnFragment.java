@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +16,11 @@ import com.yizhisha.taosha.adapter.SelectYarnAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.SearchDetailBean;
+import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnConstract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnPresenter;
+import com.yizhisha.taosha.ui.me.fragment.AboutTaoShaFragment;
 import com.yizhisha.taosha.ui.me.fragment.MyCollectFragment;
 import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
@@ -46,7 +49,9 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
     private SelectYarnAdapter mAdapter;
     private List<SearchDetailBean> dataList=new ArrayList<>();
 
+    private SelectYarnActivity activity;
     private int mYarnType=0;
+    private String mKey;
     private String mNeedleType="0";
     private int mPriceType=0;
     private int mOrderByType=0;
@@ -56,6 +61,15 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
         sf.mYarnType=yarnType;
         return sf;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(getActivity() instanceof SelectYarnActivity){
+            activity = (SelectYarnActivity) getActivity();
+        }
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_mycollect;
@@ -91,20 +105,30 @@ public class SelectYarnFragment extends BaseFragment<SelectYarnPresenter> implem
         });
     }
     private void load(boolean isShowLoad){
+        if(activity!=null){
+            mKey=activity.key;
+        }
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("pid",String.valueOf(mYarnType));
         bodyMap.put("price",String.valueOf(mPriceType));
         bodyMap.put("needle",mNeedleType);
         bodyMap.put("orderby",String.valueOf(mOrderByType));
+
+        if(!mKey.equals("")) {
+            bodyMap.put("key", mKey);
+        }
         mPresenter.loadSearch(bodyMap,isShowLoad);
     }
     public void search(String key){
+        mKey=key;
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("pid",String.valueOf(mYarnType));
         bodyMap.put("price",String.valueOf(mPriceType));
         bodyMap.put("needle",mNeedleType);
         bodyMap.put("orderby",String.valueOf(mOrderByType));
-        bodyMap.put("key",key);
+        if(!mKey.equals("")) {
+            bodyMap.put("key", mKey);
+        }
         mPresenter.loadSearch(bodyMap,false);
     }
 

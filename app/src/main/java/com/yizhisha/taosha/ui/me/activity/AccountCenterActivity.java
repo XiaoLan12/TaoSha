@@ -59,7 +59,7 @@ public class AccountCenterActivity extends BaseActivity<AccountCenterPresenter>
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ActivityManager.getActivityMar().finishActivity(AccountCenterActivity.this);
+                finish_Activity(AccountCenterActivity.this);
             }
         });
     }

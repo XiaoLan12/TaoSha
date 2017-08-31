@@ -95,6 +95,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     private ListPopupwindow mOrderbyPopup;
 
     private int mYarnType=0;
+    public String key;
     private String mNeedleType="0";
     private int mPriceType=0;
     private int mOrderByType=0;
@@ -129,6 +130,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mYarnType = bundle.getInt("YARNTYPE");
+            key=bundle.getString("KEY","");
+        }
+        if(!key.equals("")){
+            searchYarnEt.setText(key);
+            searchYarnEt.setSelection(searchYarnEt.getText().length());
         }
         //设置状态栏颜色
         StatusBarCompat.setStatusBarColor(SelectYarnActivity.this, this.getResources().getColor(R.color.red3));
@@ -239,8 +245,6 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         img_yuyin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SelectYarnActivity.this, "sfsfs", Toast.LENGTH_SHORT).show();
-
                 //⑧申请录制音频的动态权限
                 if (ContextCompat.checkSelfPermission(SelectYarnActivity.this, android.Manifest.permission.RECORD_AUDIO)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -261,6 +265,20 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                     return true;
                 }
                 return false;
+            }
+        });
+        searchYarnEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                    key=s.toString();
             }
         });
     }
@@ -342,7 +360,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                     mYarnType=item.getId();
-                    commonTabLayout.getTitleView(index).setText(item.getTitle());
+                    if(position==0){
+                        commonTabLayout.getTitleView(index).setText("棉纱");
+                    }else{
+                        commonTabLayout.getTitleView(index).setText(item.getTitle());
+                    }
                     mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -350,7 +372,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
 
         mYarnPopup.addAction(list);
         mYarnPopup.setItemSelected(position);
-        commonTabLayout.getTitleView(index).setText(title[position]);
+        if(position==0){
+            commonTabLayout.getTitleView(index).setText("棉纱");
+        }else{
+            commonTabLayout.getTitleView(index).setText(title[position]);
+        }
     }
     private void initPopup2(final int index) {
         int[] id = new int[]{0,1, 2, 3, 4, 5, 6};
@@ -369,7 +395,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mPriceType=item.getId();
-                commonTabLayout.getTitleView(index).setText(item.getTitle());
+                if(position==0){
+                    commonTabLayout.getTitleView(index).setText("价格");
+                }else{
+                    commonTabLayout.getTitleView(index).setText(item.getTitle());
+                }
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -393,10 +423,12 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mNeedleType=item.getTitle();
-                if(mNeedleType.equals("全部")){
+                if(position==0){
+                    commonTabLayout.getTitleView(index).setText("针型");
                     mNeedleType="";
+                }else{
+                    commonTabLayout.getTitleView(index).setText(item.getTitle());
                 }
-                commonTabLayout.getTitleView(index).setText(item.getTitle());
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });
@@ -420,7 +452,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(PopupListBean item, int position) {
                 mOrderByType=item.getId();
-                commonTabLayout.getTitleView(index).setText(item.getTitle());
+                if(position==0){
+                    commonTabLayout.getTitleView(index).setText("排序");
+                }else{
+                    commonTabLayout.getTitleView(index).setText(item.getTitle());
+                }
                 mFragment.loadSearch(mYarnType,mPriceType,mNeedleType,mOrderByType);
             }
         });

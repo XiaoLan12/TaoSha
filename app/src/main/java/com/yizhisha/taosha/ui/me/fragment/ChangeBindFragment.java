@@ -60,6 +60,12 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
 
     @Override
     protected void initView() {
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
         bindPhone=(String)SharedPreferencesUtil.getValue(getActivity(), "MOBILE",new String());
         if (bindPhone!= null) {
             bindTv.setText("未绑定手机号");
