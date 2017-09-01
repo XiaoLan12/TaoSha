@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity {
 
         //初始化选项卡
         AppConstant.isLogin = (boolean) SharedPreferencesUtil.getValue(this, "ISLOGIN",new Boolean(false));
+        AppConstant.UID= (int) SharedPreferencesUtil.getValue(this,"UID",new Integer(0));
         initTab();
     }
     /**

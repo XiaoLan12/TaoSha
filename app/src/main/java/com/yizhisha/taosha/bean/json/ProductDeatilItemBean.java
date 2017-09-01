@@ -32,22 +32,22 @@ public class ProductDeatilItemBean implements Serializable{
     private String company;
     private String skey;
     private String likekey;
-    private String is_show;
-    private String is_c;
-    private String is_banmao;
-    private String is_dunjian;
-    private String is_top;
-    private String is_new;
-    private String is_jian;
-    private String hits;
-    private String addtime;
-    private String retime;
-    private String  favorite;
-    private String diggbest;
-    private String sales;
-    private String is_xianhuo;
-    private String is_nayang;
-    private String is_fanxian;
+    private int is_show;
+    private int is_c;
+    private int is_banmao;
+    private int is_dunjian;
+    private int is_top;
+    private int is_new;
+    private int is_jian;
+    private int hits;
+    private long addtime;
+    private long retime;
+    private int  favorite;
+    private int diggbest;
+    private int sales;
+    private int is_xianhuo;
+    private int is_nayang;
+    private int is_fanxian;
     private String session_name;
     private List<String> seka;
     private String color;
@@ -250,131 +250,131 @@ public class ProductDeatilItemBean implements Serializable{
         this.likekey = likekey;
     }
 
-    public String getIs_show() {
+    public int getIs_show() {
         return is_show;
     }
 
-    public void setIs_show(String is_show) {
+    public void setIs_show(int is_show) {
         this.is_show = is_show;
     }
 
-    public String getIs_c() {
+    public int getIs_c() {
         return is_c;
     }
 
-    public void setIs_c(String is_c) {
+    public void setIs_c(int is_c) {
         this.is_c = is_c;
     }
 
-    public String getIs_banmao() {
+    public int getIs_banmao() {
         return is_banmao;
     }
 
-    public void setIs_banmao(String is_banmao) {
+    public void setIs_banmao(int is_banmao) {
         this.is_banmao = is_banmao;
     }
 
-    public String getIs_dunjian() {
+    public int getIs_dunjian() {
         return is_dunjian;
     }
 
-    public void setIs_dunjian(String is_dunjian) {
+    public void setIs_dunjian(int is_dunjian) {
         this.is_dunjian = is_dunjian;
     }
 
-    public String getIs_top() {
+    public int getIs_top() {
         return is_top;
     }
 
-    public void setIs_top(String is_top) {
+    public void setIs_top(int is_top) {
         this.is_top = is_top;
     }
 
-    public String getIs_new() {
+    public int getIs_new() {
         return is_new;
     }
 
-    public void setIs_new(String is_new) {
+    public void setIs_new(int is_new) {
         this.is_new = is_new;
     }
 
-    public String getIs_jian() {
+    public int getIs_jian() {
         return is_jian;
     }
 
-    public void setIs_jian(String is_jian) {
+    public void setIs_jian(int is_jian) {
         this.is_jian = is_jian;
     }
 
-    public String getHits() {
+    public int getHits() {
         return hits;
     }
 
-    public void setHits(String hits) {
+    public void setHits(int hits) {
         this.hits = hits;
     }
 
-    public String getAddtime() {
+    public long getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
+    public void setAddtime(long addtime) {
         this.addtime = addtime;
     }
 
-    public String getRetime() {
+    public long getRetime() {
         return retime;
     }
 
-    public void setRetime(String retime) {
+    public void setRetime(long retime) {
         this.retime = retime;
     }
 
-    public String getFavorite() {
+    public int getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(String favorite) {
+    public void setFavorite(int favorite) {
         this.favorite = favorite;
     }
 
-    public String getDiggbest() {
+    public int getDiggbest() {
         return diggbest;
     }
 
-    public void setDiggbest(String diggbest) {
+    public void setDiggbest(int diggbest) {
         this.diggbest = diggbest;
     }
 
-    public String getSales() {
+    public int getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
+    public void setSales(int sales) {
         this.sales = sales;
     }
 
-    public String getIs_xianhuo() {
+    public int getIs_xianhuo() {
         return is_xianhuo;
     }
 
-    public void setIs_xianhuo(String is_xianhuo) {
+    public void setIs_xianhuo(int is_xianhuo) {
         this.is_xianhuo = is_xianhuo;
     }
 
-    public String getIs_nayang() {
+    public int getIs_nayang() {
         return is_nayang;
     }
 
-    public void setIs_nayang(String is_nayang) {
+    public void setIs_nayang(int is_nayang) {
         this.is_nayang = is_nayang;
     }
 
-    public String getIs_fanxian() {
+    public int getIs_fanxian() {
         return is_fanxian;
     }
 
-    public void setIs_fanxian(String is_fanxian) {
+    public void setIs_fanxian(int is_fanxian) {
         this.is_fanxian = is_fanxian;
     }
 

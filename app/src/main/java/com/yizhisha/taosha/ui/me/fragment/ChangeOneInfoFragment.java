@@ -24,6 +24,7 @@ import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.ui.ClipHeaderActivity;
 import com.yizhisha.taosha.ui.me.activity.ChangeUserNameActivity;
@@ -149,6 +150,8 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
     }
     @Override
     public void changeSuccess(String msg) {
+        AppConstant.infoBean.setUsername(mTvUserName.getText().toString());
+        RxBus.$().postEvent(new LoginEvent());
         ToastUtil.showbottomShortToast(msg);
     }
 
@@ -286,6 +289,7 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
                             @Override
                             public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
                                     mTvSex.setText(sexDatas.get(position));
+                                dialog.dismiss();
                             }
                         }).setTouchOutside(true)
                         .build();

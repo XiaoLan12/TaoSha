@@ -10,6 +10,7 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -74,6 +75,10 @@ public class ChangeUserNameActivity extends BaseActivity{
                     case 3:
                         if(value == null || value.equals("")){
                             ToastUtil.showbottomShortToast("请输入您的邮箱");
+                            return;
+                        }
+                        if(!CheckUtils.isEmail(value)){
+                            ToastUtil.showbottomShortToast("请输入正确的邮箱");
                             return;
                         }
                         RxBus.$().postEvent(new ChangeUserInfoEvent(type,value));

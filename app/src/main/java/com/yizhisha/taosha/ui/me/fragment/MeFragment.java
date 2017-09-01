@@ -273,10 +273,8 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part body =
                     MultipartBody.Part.createFormData("Filedata", file.getName(), requestFile);
-            Map<String, RequestBody> map = new HashMap<>();
             RequestBody uidBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(AppConstant.UID));
-         /*   RequestBody fileBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            map.put("Filedata", fileBody);*/
+
             mPresenter.changeHeadSuccess(uidBody,body);
         }
     }

@@ -7,15 +7,11 @@ import java.util.List;
  */
 
 public class AccountBean {
-    private float money;
+    private User  user;
     private List<AccountList> detail ;
 
-    public float getMoney() {
-        return money;
-    }
-
-    public void setMoney(float money) {
-        this.money = money;
+    public User getUser() {
+        return user;
     }
 
     public List<AccountList> getDetail() {
@@ -25,7 +21,41 @@ public class AccountBean {
     public void setDetail(List<AccountList> detail) {
         this.detail = detail;
     }
+    public class User {
+        private String money;
 
+        private String username;
+
+        private String mobile;
+
+        private String avatar;
+
+        public void setMoney(String money){
+            this.money = money;
+        }
+        public String getMoney(){
+            return this.money;
+        }
+        public void setUsername(String username){
+            this.username = username;
+        }
+        public String getUsername(){
+            return this.username;
+        }
+        public void setMobile(String mobile){
+            this.mobile = mobile;
+        }
+        public String getMobile(){
+            return this.mobile;
+        }
+        public void setAvatar(String avatar){
+            this.avatar = avatar;
+        }
+        public String getAvatar(){
+            return this.avatar;
+        }
+
+    }
     public class AccountList{
         private int id;
 

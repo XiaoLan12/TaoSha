@@ -18,7 +18,7 @@ public class AppConstant {
     //用户头像链接
     public static final String USERHEAD="http://www.taoshamall.com/data/attached/avatar/100x100/";
 
-    public static  int UID=882;
+    public static  int UID;
     public static UserInfoBean infoBean=null;
     public static final String WEIXIN_APP_ID="wxc09f8708837c1651";
     public static boolean isLogin=false;

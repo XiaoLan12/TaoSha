@@ -60,6 +60,15 @@ public class CheckUtils {
             return true;
         }
     }
+    /**
+     * 验证邮箱是否正确
+     * @param email  邮箱地址
+     * @return boolean
+     */
+    public static boolean isEmail(String email) {
+        Pattern email_pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        return email_pattern.matcher(email).matches();
+    }
     /*
      * 获取应用版本
      */

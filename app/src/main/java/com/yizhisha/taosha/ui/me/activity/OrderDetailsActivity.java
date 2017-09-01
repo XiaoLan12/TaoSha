@@ -156,8 +156,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         }else if(payment==5){
             mTvPayWay.setText("微信支付");
         }
+        int express_type=order.getExpress_type();
+        if(express_type==1){
+            mTvDistributionway.setText("物流发货");
+        }else if(express_type==2){
+            mTvDistributionway.setText("快递发货");
+        }else if(express_type==3){
+            mTvDistributionway.setText(" 朗通快递");
+        }
         mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()));
-        mTvDistributionway.setText("快递配送");
+
         mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
         mTvTradelTotal.setText(order.getGoods_price()+"");
         switchState(order.getStatus(),order.getPayment());

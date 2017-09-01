@@ -79,7 +79,8 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
     public void loginSuccess(RequestStatusBean bean) {
         SharedPreferencesUtil.putValue(this,"ISLOGIN",true);
         AppConstant.isLogin=true;
-        //AppConstant.UID=bean.getUid();
+        AppConstant.UID=bean.getUid();
+        SharedPreferencesUtil.putValue(this,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         finish_Activity(this);
     }

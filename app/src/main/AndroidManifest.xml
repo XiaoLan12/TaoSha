@@ -171,8 +171,10 @@
         <activity
             android:name=".ui.home.activity.ProductsCommendActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.login.activity.RegisterActivity" />
-        <activity android:name=".ui.home.activity.CreditLoanActivity"></activity>
+        <activity android:name=".ui.login.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.activity.CreditLoanActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

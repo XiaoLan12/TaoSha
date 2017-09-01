@@ -98,7 +98,8 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
     public void loginSuccess(RequestStatusBean info) {
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
         AppConstant.isLogin=true;
-        //AppConstant.UID=bean.getUid();
+        AppConstant.UID=info.getUid();
+        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }

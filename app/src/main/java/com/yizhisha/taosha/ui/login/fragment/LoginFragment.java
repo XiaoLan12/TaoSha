@@ -92,7 +92,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
         SharedPreferencesUtil.putValue(getActivity(),"MOBILE",mEtAccount.getText().toString());
         AppConstant.isLogin=true;
-        //AppConstant.UID=bean.getUid();
+        AppConstant.UID=bean.getUid();
+        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }
@@ -102,7 +103,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
         SharedPreferencesUtil.putValue(activity,"MOBILE",bean.getMobile());
         AppConstant.isLogin=true;
-        //AppConstant.UID=bean.getUid();
+        AppConstant.UID=bean.getUid();
+        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }

@@ -20,6 +20,7 @@ import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.me.contract.SetContract;
@@ -99,6 +100,8 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                             UserHeadEvent userHeadEvent= (UserHeadEvent) event;
                             GlideUtil.getInstance().LoadContextCircleBitmap(SettinActivity.this,userHeadEvent.getAvatar(),headIv,
                                     R.drawable.icon_head_normal,R.drawable.icon_head_normal);
+                        }else if(event instanceof LoginEvent){
+                            usernameTv.setText(AppConstant.infoBean.getUsername());
                         }
                     }
                 });
@@ -170,6 +173,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 SharedPreferencesUtil.removeValue(this,"MOBILE");
                 AppConstant.isLogin=false;
                 AppConstant.infoBean=null;
+                AppConstant.UID=0;
                 setResult(103);
                 finish_Activity(this);
                 break;

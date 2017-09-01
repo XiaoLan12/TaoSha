@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -62,6 +63,10 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
     TextView tv_shopping;
     @Bind(R.id.loadingView)
     CommonLoadingView mLoadingView;
+    @Bind(R.id.nayang_ll)
+    LinearLayout nayangLl;
+    @Bind(R.id.banmao_ll)
+    LinearLayout banmaoLl;
 
     private FragmentPagerAdapter mAdapter;
     private int id;
@@ -279,6 +284,16 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
     public void getProductDetailSuccess(ProductDetailBean model) {
         productDetailBean=model;
         id=model.getGoods().getId();
+        if(productDetailBean.getGoods().getIs_banmao()==1){
+            banmaoLl.setVisibility(View.VISIBLE);
+        }else{
+            nayangLl.setVisibility(View.GONE);
+        }
+        if(productDetailBean.getGoods().getIs_nayang()==1){
+            nayangLl.setVisibility(View.VISIBLE);
+        }else{
+            nayangLl.setVisibility(View.GONE);
+        }
         mFragments.add(ProductYarnFragnment.getInstance(id,productDetailBean));
         mFragments.add(ParameterYarnFragment.getInstance(2,null,productDetailBean.getGoods()));
         mFragments.add(SekaFragment.getInstance(productDetailBean.getGoods().getSeka()));

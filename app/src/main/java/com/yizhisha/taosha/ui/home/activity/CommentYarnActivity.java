@@ -71,7 +71,7 @@ public class CommentYarnActivity extends BaseActivity<CommentYarnPresenter> impl
     private void load(int id, int type,boolean isShowLoad) {
         Map<String, String> bodyMap = new HashMap<>();
         //暂时写死，发布时替换
-        bodyMap.put("id", String.valueOf(982));
+        bodyMap.put("id", String.valueOf(id));
         if(type!=0) {
             bodyMap.put("type", String.valueOf(type));
         }

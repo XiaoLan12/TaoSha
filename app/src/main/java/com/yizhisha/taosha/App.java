@@ -19,14 +19,11 @@ public class App extends Application{
         super.onCreate();
         context=this;
         //讯飞语音初始化工作
-        SpeechUtility.createUtility(this, SpeechConstant.APPID + "=5966e19d");
+        SpeechUtility.createUtility(this, SpeechConstant.APPID + "=59a8c40b");
 
     }
     public static Context getAppContext() {
         return context;
     }
 
-    private void registToWX() {
-
-    }
 }

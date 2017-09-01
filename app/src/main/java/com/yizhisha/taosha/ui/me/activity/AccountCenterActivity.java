@@ -66,18 +66,13 @@ public class AccountCenterActivity extends BaseActivity<AccountCenterPresenter>
 
     @Override
     protected void initView() {
-        if(AppConstant.infoBean!=null){
-            String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
-            GlideUtil.getInstance().LoadContextCircleBitmap(this,url+AppConstant.infoBean.getAvatar(),headIv,
-                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
-            usernameTv.setText(AppConstant.infoBean.getUsername());
-        }
+
         initAdapter();
         load(true);
     }
 
     private void load(boolean isShow) {
-        mPresenter.loadAccount(240, isShow);
+        mPresenter.loadAccount(AppConstant.UID, isShow);
     }
 
     private void initAdapter() {
@@ -103,8 +98,13 @@ public class AccountCenterActivity extends BaseActivity<AccountCenterPresenter>
     @Override
     public void loadAccountSuccess(AccountBean data) {
         mSwipeRefreshLayout.setRefreshing(false);
-        balanceTv.setText(data.getMoney()+"元");
-        integralTv.setText(data.getMoney()+"分");
+        AccountBean.User user=data.getUser();
+            String url="http://www.taoshamall.com/data/attached/avatar/100x100/";
+            GlideUtil.getInstance().LoadContextCircleBitmap(this,url+user.getAvatar(),headIv,
+                    R.drawable.icon_head_normal,R.drawable.icon_head_normal);
+            usernameTv.setText(user.getUsername());
+        balanceTv.setText(user.getMoney()+"元");
+        integralTv.setText(user.getMoney()+"分");
         dataList.clear();
         dataList.addAll(data.getDetail());
         mAdapter.setNewData(dataList);

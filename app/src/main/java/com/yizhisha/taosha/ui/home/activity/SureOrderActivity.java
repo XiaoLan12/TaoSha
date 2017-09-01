@@ -225,7 +225,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
         //暂时写死
-        //body.put("gid",orderSureBean.getGid());
         body.put("gid",String.valueOf(orderSureBean.getGid()));
         body.put("type",orderType);
         body.put("goodsprice",String.valueOf(Double.valueOf(orderSureBean.getTotalprice())));
@@ -283,7 +282,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 if(address.getIndex().equals("1")){
                     consigneeNameTv.setText(address.getLinkman());
                     consigneePhoneTv.setText(address.getMobile());
-                    shippingaddressTv.setText(address.getArea_app());
+                    shippingaddressTv.setText(address.getAddress());
                     addressId=address.getId();
                 }
             }
@@ -335,7 +334,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 if(address.getIndex().equals("1")){
                     consigneeNameTv.setText(address.getLinkman());
                     consigneePhoneTv.setText(address.getMobile());
-                    shippingaddressTv.setText(address.getArea_app());
+                    shippingaddressTv.setText(address.getAddress());
                     addressId=address.getId();
                 }
             }
@@ -371,7 +370,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 if(address.getIndex().equals("1")){
                     consigneeNameTv.setText(address.getLinkman());
                     consigneePhoneTv.setText(address.getMobile());
-                    shippingaddressTv.setText(address.getArea_app());
+                    shippingaddressTv.setText(address.getAddress());
                     addressId=address.getId();
                 }
             }
@@ -403,7 +402,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 if(address.getIndex().equals("1")){
                     consigneeNameTv.setText(address.getLinkman());
                     consigneePhoneTv.setText(address.getMobile());
-                    shippingaddressTv.setText(address.getArea_app());
+                    shippingaddressTv.setText(address.getAddress());
                     addressId=address.getId();
                 }
             }
@@ -455,7 +454,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 body.put("body",orderSureBean.getTitle());
                 body.put("out_trade_no",orderNo);
                 body.put("total_fee",String.valueOf((int)orderSureBean.getTotalprice()));
-                //body.put("total_fee",String.valueOf(Double.valueOf(1)));
                 body.put("spbill_create_ip",getPsdnIp());
                 body.put("attach","order");
                 mPresenter.weChatPay(body);

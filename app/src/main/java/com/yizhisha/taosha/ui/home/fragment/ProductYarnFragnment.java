@@ -193,17 +193,17 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
 
 
         //加载商品信息
-        if (goods.getIs_fanxian().equals("1")) {
+        if (goods.getIs_fanxian()==1) {
             tv_fanxian.setVisibility(View.VISIBLE);
         } else {
             tv_fanxian.setVisibility(View.GONE);
         }
-        if (goods.getIs_nayang().equals("1")) {
+        if (goods.getIs_nayang()==1) {
             tv_free_sample.setVisibility(View.VISIBLE);
         } else {
             tv_free_sample.setVisibility(View.GONE);
         }
-        if (goods.getIs_dunjian().equals("1")) {
+        if (goods.getIs_dunjian()==1) {
             tv_lijian.setVisibility(View.VISIBLE);
         } else {
             tv_lijian.setVisibility(View.GONE);
@@ -359,14 +359,6 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     @Override
     public void loadFail(String msg) {
         ToastUtil.showShortToast(msg);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
     }
 
     @Override

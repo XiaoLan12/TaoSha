@@ -157,7 +157,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             mTvPayWay.setText("微信支付");
         }
         mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
-        mTvDistributionway.setText("三四十");
+        mTvDistributionway.setText("朗通快递");
         mTvTradelTotal.setText(seckillBean.getMarket_price()+"");
         if(seckillBean.getGoods()!=null){
             SeckillGoodsBean goodsBean=seckillBean.getGoods();
