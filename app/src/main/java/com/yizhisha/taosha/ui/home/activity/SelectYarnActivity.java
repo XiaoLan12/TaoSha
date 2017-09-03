@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
-import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.iflytek.cloud.ErrorCode;
@@ -44,12 +42,10 @@ import com.iflytek.sunflower.FlowerCollector;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.bean.MyOrderTabEntity;
 import com.yizhisha.taosha.bean.PopupListBean;
 import com.yizhisha.taosha.common.popupwindow.ListPopupwindow;
 import com.yizhisha.taosha.ui.home.fragment.SelectYarnFragment;
-import com.yizhisha.taosha.ui.me.fragment.FreeSampleFragment;
 import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.xunfei.IatSettings;
 import com.yizhisha.taosha.utils.xunfei.JsonParser;
@@ -57,7 +53,6 @@ import com.yizhisha.taosha.utils.xunfei.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -730,7 +725,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         if(requestCode==1&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
             startRecord();
         }else {
-            Toast.makeText(SelectYarnActivity.this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+            if (1 == requestCode) {
+                Toast.makeText(SelectYarnActivity.this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (3 == requestCode) {

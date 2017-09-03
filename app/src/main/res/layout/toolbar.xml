@@ -9,33 +9,37 @@
         android:layout_width="@dimen/dp_45"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:visibility="gone"
+    android:visibility="gone"
         android:src="@drawable/icon_back"
         android:scaleType="fitStart"
         android:layout_margin="@dimen/dp_5"
         />
+
     <com.yizhisha.taosha.widget.ClearEditText
         android:id="@+id/toolbar_searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/dp_2"
-        android:visibility="gone"
+    android:visibility="gone"
         />
+
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/toolbar_leftbutton"
-        android:layout_toLeftOf="@+id/toolbar_rightbutton"
         android:textColor="@color/common_h1"
         android:textSize="@dimen/font_normal3"
         android:singleLine="true"
         android:maxEms="20"
         android:ellipsize="end"
-        android:text="title"/>
+        android:text="title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/toolbar_leftbutton"
+        android:layout_alignStart="@+id/toolbar_leftbutton" />
     <TextView
         android:id="@+id/toolbar_rightbutton"
         android:layout_width="@dimen/dp_40"
@@ -44,7 +48,7 @@
         android:layout_centerVertical="true"
         android:padding="@dimen/dp_5"
         android:textColor="@color/common_h2"
-        android:visibility="gone"
+    android:visibility="gone"
         />
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package com.yizhisha.taosha.ui.login.fragment;
 
-import android.os.CountDownTimer;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
@@ -18,7 +16,6 @@ import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
-import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -98,6 +95,12 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
     }
+
+    @Override
+    public void weChatLogin(String info) {
+        ToastUtil.showbottomShortToast(info);
+    }
+
     /**
      * 检查输入
      *

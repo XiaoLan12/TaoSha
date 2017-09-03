@@ -1,7 +1,5 @@
 package com.yizhisha.taosha.ui.login.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -114,6 +112,12 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
     }
+
+    @Override
+    public void weChatLogin(String info) {
+        ToastUtil.showbottomShortToast(info);
+    }
+
     /**
      * 检查输入
      *

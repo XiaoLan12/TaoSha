@@ -11,16 +11,12 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,14 +35,11 @@ import com.iflytek.sunflower.FlowerCollector;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.bean.HomeYarnTypeEntity;
 import com.yizhisha.taosha.common.flowlayout.FlowLayout;
 import com.yizhisha.taosha.common.flowlayout.TagAdapter;
 import com.yizhisha.taosha.common.flowlayout.TagFlowLayout;
-import com.yizhisha.taosha.ui.home.fragment.SelectYarnFragment;
 import com.yizhisha.taosha.utils.xunfei.IatSettings;
 import com.yizhisha.taosha.utils.xunfei.JsonParser;
-import com.yizhisha.taosha.widget.GridDivider;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +48,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -477,7 +469,10 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
         if(requestCode==1&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
             startRecord();
         }else {
-            Toast.makeText(SearchActivity.this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+            if (1 == requestCode) {
+                Toast.makeText(SearchActivity.this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         if (3 == requestCode) {

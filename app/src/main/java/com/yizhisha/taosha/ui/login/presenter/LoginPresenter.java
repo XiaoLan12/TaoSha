@@ -112,7 +112,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                         if(info.getStatus().equals("y")){
                             mView.weChatLoginSuccess(info);
                         }else{
-                            mView.loadFail(info.getInfo());
+                            mView.weChatLogin(info.getInfo());
                         }
                     }
                     @Override

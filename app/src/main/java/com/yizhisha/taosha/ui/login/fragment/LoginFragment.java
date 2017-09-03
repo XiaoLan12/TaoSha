@@ -1,6 +1,5 @@
 package com.yizhisha.taosha.ui.login.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -18,7 +17,8 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
-import com.yizhisha.taosha.event.ChangeUserInfoEvent;
+import com.yizhisha.taosha.common.dialog.DialogInterface;
+import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
@@ -133,6 +133,31 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
     }
+
+    @Override
+    public void weChatLogin(String info) {
+        new NormalAlertDialog.Builder(activity)
+                .setBoolTitle(false)
+                .setContentText("通过手机注册以后才能绑定微信哟，马上注册！")
+                .setContentTextSize(18)
+                .setLeftText("取消")
+                .setRightText("前往")
+                .setWidth(0.75f)
+                .setHeight(0.33f)
+                .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                    @Override
+                    public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                        dialog.dismiss();
+                    }
+                    @Override
+                    public void clickRightButton(NormalAlertDialog dialog, View view) {
+                        startActivity(RegisterActivity.class);
+                        dialog.dismiss();
+
+                    }
+                }).build().show();
+    }
+
     public interface switchFragmentListener{
         void switchFragment(int index);
     }

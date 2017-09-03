@@ -3,9 +3,7 @@ package com.yizhisha.taosha.ui.home.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -245,10 +243,12 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
                     startActivity(CommentYarnActivity.class, bundle);
                 }
             });
+            userheadIv.setVisibility(View.VISIBLE);
 
         } else {
             commentAmountTv.setText("全部评价(0)");
             userheadIv.setImageResource(R.drawable.icon_head_normal);
+            userheadIv.setVisibility(View.GONE);
             commentDetailsTv.setText("暂无评论");
         }
     }
