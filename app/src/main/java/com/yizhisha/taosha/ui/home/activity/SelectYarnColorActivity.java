@@ -3,7 +3,6 @@ package com.yizhisha.taosha.ui.home.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.SelectYarnBean;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
-import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
@@ -119,14 +117,14 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                                     ToastUtil.showShortToast("一个订单最多八组");
                                     return;
                                 }
-                                for (int i = 0; i < list.size(); i++) {
-                                   list.get(i).setAdd(false);
-                                }
+//                                for (int i = 0; i < list.size(); i++) {
+//                                   list.get(i).setAdd(false);
+//                                }
                                 SelectYarnBean selectYarnBean = new SelectYarnBean();
                                 selectYarnBean.setColor("");
                                 selectYarnBean.setNum(1);
-                                selectYarnBean.setAdd(true);
-                                list.add(selectYarnBean);
+                                selectYarnBean.setAdd(false);
+                                list.add(0,selectYarnBean);
                                 adapter1.setNewData(list);
                             } else {
                                 adapter1.remove(position);

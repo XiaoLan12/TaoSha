@@ -367,10 +367,31 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cancel_the_order_tv:
-                Map<String, String> bodyMap = new HashMap<>();
-                bodyMap.put("uid", String.valueOf(AppConstant.UID));
-                bodyMap.put("orderno",order.getOrderno());
-                mPresenter.cancleOrder(bodyMap);
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText("确认取消订单")
+                        .setContentTextSize(18)
+                        .setLeftText("取消")
+                        .setRightText("确认")
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Map<String, String> bodyMap = new HashMap<>();
+                                bodyMap.put("uid", String.valueOf(AppConstant.UID));
+                                bodyMap.put("orderno",order.getOrderno());
+                                mPresenter.cancleOrder(bodyMap);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
+
+
                 break;
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
