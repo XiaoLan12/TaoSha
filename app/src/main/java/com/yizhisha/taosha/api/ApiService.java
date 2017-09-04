@@ -29,6 +29,7 @@ import com.yizhisha.taosha.bean.json.ShopcartListBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 
 import java.util.Map;
 
@@ -198,6 +199,14 @@ public interface ApiService {
     //微信解除绑定
     @GET("ios/user/wxunbind/")
     Observable<RequestStatusBean> unBindWeChat(@Query("uid") int uid);
+
+    //微信绑定显示
+    @GET("ios/user/wxshow/")
+    Observable<RequestStatusBean> showBindWeChart(@Query("uid") int uid);
+
+    //加载微信用户信息
+    @GET()
+    Observable<WechatInfoBean> getWeChatInfo(@Url String url);
 
     //首页轮播
     @GET("ios/index/")

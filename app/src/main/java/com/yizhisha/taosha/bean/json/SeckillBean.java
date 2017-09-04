@@ -47,7 +47,7 @@ public class SeckillBean {
 
     private int device;
 
-    private String shiptime;
+    private long shiptime;
 
     private int status;
 
@@ -231,11 +231,11 @@ public class SeckillBean {
         this.device = device;
     }
 
-    public String getShiptime() {
+    public long getShiptime() {
         return shiptime;
     }
 
-    public void setShiptime(String shiptime) {
+    public void setShiptime(long shiptime) {
         this.shiptime = shiptime;
     }
 

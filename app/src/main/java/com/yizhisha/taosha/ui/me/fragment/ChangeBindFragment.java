@@ -12,6 +12,7 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.ui.me.contract.BindContract;
 import com.yizhisha.taosha.ui.me.presenter.BindPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
@@ -131,9 +132,15 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     }
 
     @Override
-    public void bindSuccess(String msg) {
-        SharedPreferencesUtil.putValue(getActivity(),"MOBILE",phoneChagephoneEt.getText().toString());
-        ToastUtil.showCenterShortToast(msg);
+    public void bindSuccess(RequestStatusBean msg) {
+        if(msg.getStatus().equals("y")) {
+            SharedPreferencesUtil.putValue(getActivity(), "MOBILE", phoneChagephoneEt.getText().toString());
+        }else{
+            getcodeChagephoneTv.setBackgroundResource(R.drawable.shape_edittext_gray_selector);
+            getcodeChagephoneTv.setTextColor(RescourseUtil.getColor(R.color.gray));
+            getcodeChagephoneTv.setEnabled(false);
+        }
+        ToastUtil.showCenterShortToast(msg.getInfo());
     }
     @Override
     public void getCodeSuccess(String info) {

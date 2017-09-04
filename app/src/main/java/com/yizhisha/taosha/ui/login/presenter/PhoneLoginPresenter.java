@@ -17,11 +17,8 @@ public class PhoneLoginPresenter extends PhoneLoginContract.Presenter{
         addSubscrebe(Api.getInstance().phoneLogin(map),new RxSubscriber<RequestStatusBean>(mContext, "正在登录....", true){
             @Override
             protected void onSuccess(RequestStatusBean requestStatusBean) {
-                if(requestStatusBean.getStatus().equals("y")){
                     mView.loginSuccess(requestStatusBean);
-                }else{
-                    mView.loadFail(requestStatusBean.getInfo());
-                }
+
             }
             @Override
             protected void onFailure(String message) {

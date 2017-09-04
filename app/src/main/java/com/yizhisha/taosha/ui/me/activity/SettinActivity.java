@@ -16,7 +16,9 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.GoodsBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
@@ -69,6 +71,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
 
     @Override
     protected void initView() {
+        AppConstant.weChartName= (String) SharedPreferencesUtil.getValue(this,"WECHARTNAME",new String(""));
         if(AppConstant.infoBean!=null){
             GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv,
                     R.drawable.icon_head_normal,R.drawable.icon_head_normal);
@@ -128,41 +131,66 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 startActivity(SetInfoActivity.class, bundle2);
                 break;
             case R.id.changeweixin_rl:
-                final List<String> mDatas=new ArrayList<>();
-                mDatas.add("绑定微信");
-                mDatas.add("修改绑定的微信");
-                NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
-                        .setBoolTitle(true)
-                        .setTitleText("微信登录绑定(修改)")
-                        .setItemHeight(45)
-                        .setItemTextColor(R.color.blue)
-                        .setItemTextSize(14)
-                        .setItemWidth(0.7f)
-                        .setCancleButtonText("取消")
-                        .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
-                            @Override
-                            public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
-                                switch (position){
-                                    case 0:
-                                        if (!api.isWXAppInstalled()) {
-                                            ToastUtil.showbottomShortToast("您还未安装微信客户端");
-                                            return;
-                                        }
-                                        final SendAuth.Req req = new SendAuth.Req();
-                                        req.scope = "snsapi_userinfo";
-                                        req.state = "taosha_wx_login";
-                                        api.sendReq(req);
-                                        break;
-                                    case 1:
-                                        mPresenter.unBindWeChat(AppConstant.UID);
-                                        break;
+                String weChartName=AppConstant.weChartName;
+                if(weChartName.equals("")){
+                    final List<String> mDatas=new ArrayList<>();
+                    mDatas.add("绑定微信");
+                    NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
+                            .setBoolTitle(true)
+                            .setTitleText("微信登录绑定")
+                            .setItemHeight(45)
+                            .setItemTextColor(R.color.blue)
+                            .setItemTextSize(14)
+                            .setItemWidth(0.7f)
+                            .setCancleButtonText("取消")
+                            .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                @Override
+                                public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                    switch (position){
+                                        case 0:
+                                            if (!api.isWXAppInstalled()) {
+                                                ToastUtil.showbottomShortToast("您还未安装微信客户端");
+                                                dialog.dismiss();
+                                                return;
+                                            }
+                                            final SendAuth.Req req = new SendAuth.Req();
+                                            req.scope = "snsapi_userinfo";
+                                            req.state = "taosha_wx_login";
+                                            api.sendReq(req);
+                                            break;
+                                    }
+                                    dialog.dismiss();
                                 }
-                                dialog.dismiss();
-                            }
-                        }).setTouchOutside(true)
-                        .build();
-                dialog.setData(mDatas);
-                dialog.show();
+                            }).setTouchOutside(true)
+                            .build();
+                    dialog.setData(mDatas);
+                    dialog.show();
+                }else{
+                    final List<String> mDatas=new ArrayList<>();
+                    mDatas.add("修改绑定的微信");
+                    NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
+                            .setBoolTitle(true)
+                            .setTitleText("微信绑定修改\n" + "(" + AppConstant.weChartName + ")")
+                            .setItemHeight(45)
+                            .setItemTextColor(R.color.blue)
+                            .setItemTextSize(14)
+                            .setItemWidth(0.7f)
+                            .setCancleButtonText("取消")
+                            .setOnItemListener(new DialogInterface.OnItemClickListener<NormalSelectionDialog>() {
+                                @Override
+                                public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
+                                    switch (position){
+                                        case 0:
+                                            mPresenter.unBindWeChat(AppConstant.UID);
+                                            break;
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }).setTouchOutside(true)
+                            .build();
+                    dialog.setData(mDatas);
+                    dialog.show();
+                }
 
                 break;
             case R.id.managedeladdress_rl:
@@ -187,6 +215,11 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         map.put("uid",String.valueOf(AppConstant.UID));
         map.put("openid",wechatBean.getOpenid());
         mPresenter.bindWeChat(map);
+        String url="https://api.weixin.qq.com/sns/userinfo?access_token="
+                + wechatBean.getAccess_token()
+                + "&openid="
+                + wechatBean.getOpenid();
+        mPresenter.loadWeChatInfo(url);
     }
 
     @Override
@@ -204,6 +237,21 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         req.scope = "snsapi_userinfo";
         req.state = "taosha_wx_login";
         api.sendReq(req);
+    }
+
+    @Override
+    public void loadWeChatInfo(WechatInfoBean bean) {
+        SharedPreferencesUtil.putValue(this,"WECHARTNAME",bean.getNickname());
+        AppConstant.weChartName=bean.getNickname();
+    }
+
+    @Override
+    public void showBindWeChart(RequestStatusBean bean) {
+        if(bean.getStatus().equals("y")){
+
+        }else if(bean.getStatus().equals("n")){
+
+        }
     }
 
     @Override

@@ -225,6 +225,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         childViewHolder.id_cb_select_child.setChecked(goodsBean.isChecked());
         childViewHolder.tv_items_child_desc.setText(goodsBean.getTitle());
         childViewHolder.id_tv_color.setText(goodsBean.getDetail());
+        childViewHolder.mTvEditShop.setText("色号:"+goodsBean.getDetail());
         GlideUtil.getInstance().LoadContextBitmap(context, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
                 (ImageView) childViewHolder.mIvPic,GlideUtil.LOAD_BITMAP);
         childViewHolder.id_cb_select_child.setOnClickListener(new View.OnClickListener() {

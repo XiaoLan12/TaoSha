@@ -9,7 +9,7 @@ public class FootprintListBean {
 
     private String type;
 
-    private String typeid;
+    private int typeid;
 
     private String addtime;
 
@@ -27,10 +27,10 @@ public class FootprintListBean {
     public String getType(){
         return this.type;
     }
-    public void setTypeid(String typeid){
+    public void setTypeid(int typeid){
         this.typeid = typeid;
     }
-    public String getTypeid(){
+    public int getTypeid(){
         return this.typeid;
     }
     public void setAddtime(String addtime){

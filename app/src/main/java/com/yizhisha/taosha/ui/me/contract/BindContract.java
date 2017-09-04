@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.me.contract;
 import com.yizhisha.taosha.base.BasePresenter;
 import com.yizhisha.taosha.base.BaseView;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
+import com.yizhisha.taosha.bean.json.RequestStatusBean;
 
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public interface BindContract {
     interface View extends BaseView {
-        void bindSuccess(String msg);
+        void bindSuccess(RequestStatusBean msg);
         void getCodeSuccess(String info);
         void loadFail(String msg);
     }

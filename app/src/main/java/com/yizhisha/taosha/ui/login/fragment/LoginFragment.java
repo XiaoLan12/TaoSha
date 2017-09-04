@@ -121,14 +121,12 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     public void getCodeSuccess(String info) {
 
     }
-
     @Override
     public void loadWeChatData(WechatBean wechatBean) {
         Map<String,String> map=new HashMap<>();
         map.put("openid",wechatBean.getOpenid());
         mPresenter.weChatLogin(map);
     }
-
     @Override
     public void loadFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
@@ -148,6 +146,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
                     @Override
                     public void clickLeftButton(NormalAlertDialog dialog, View view) {
                         dialog.dismiss();
+
                     }
                     @Override
                     public void clickRightButton(NormalAlertDialog dialog, View view) {

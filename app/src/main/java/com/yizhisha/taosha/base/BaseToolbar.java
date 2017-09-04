@@ -23,14 +23,12 @@ public class BaseToolbar extends Toolbar {
     //添加布局必不可少的工具
     private LayoutInflater mInflater;
 
-    //搜索框
-    private ClearEditText mEditSearchView;
     //标题
     private TextView mTextTitle;
     //右边按钮
     private TextView mRightButton;
     //左边按钮
-    private ImageView mLeftButton;
+    private TextView mLeftButton;
 
     private View mView;
 
@@ -69,20 +67,12 @@ public class BaseToolbar extends Toolbar {
             if (rightText != null) {
                 setRightButtonText(rightText);
             }
-            boolean isShowSearchView = a.getBoolean(R.styleable.LetToolBar_isShowSearchView, false);
 
-            //如果要显示searchView的时候
-            if (isShowSearchView) {
-                showSearchView();
-                hideTitleView();
-            }
             //资源的回收
             a.recycle();
         }
 
     }
-
-
 
     private void initView() {
 
@@ -92,9 +82,8 @@ public class BaseToolbar extends Toolbar {
             //添加布局文件
             mView = mInflater.inflate(R.layout.toolbar, null);
             //绑定控件
-            mEditSearchView = (ClearEditText) mView.findViewById(R.id.toolbar_searchview);
             mTextTitle = (TextView) mView.findViewById(R.id.toolbar_title);
-            mLeftButton = (ImageView) mView.findViewById(R.id.toolbar_leftbutton);
+            mLeftButton = (TextView) mView.findViewById(R.id.toolbar_leftbutton);
             mRightButton = (TextView) mView.findViewById(R.id.toolbar_rightbutton);
 
             //然后使用LayoutParams把控件添加到子view中
@@ -141,18 +130,6 @@ public class BaseToolbar extends Toolbar {
             mRightButton.setVisibility(View.GONE);
         }
     }
-    //显示搜索框
-    public void showSearchView() {
-        if (mEditSearchView != null)
-            mEditSearchView.setVisibility(VISIBLE);
-    }
-
-    //隐藏搜索框
-    public void hideSearchView() {
-        if (mEditSearchView != null) {
-            mEditSearchView.setVisibility(GONE);
-        }
-    }
 
     //给右侧按钮设置图片，也可以在布局文件中直接引入
     // 如：app:leftButtonIcon="@drawable/icon_back_32px"
@@ -181,11 +158,11 @@ public class BaseToolbar extends Toolbar {
 
     //给左侧按钮设置图片，也可以在布局文件中直接引入
     private void setLeftButtonIcon(Drawable icon) {
-        if (mLeftButton != null){
-            //icon.setBounds(0, 0, icon.getMinimumWidth(), icon.getMinimumHeight());
-            mLeftButton.setImageDrawable(icon);
-            mLeftButton.setVisibility(VISIBLE);
+        if (mLeftButton != null) {
+            icon.setBounds(0, 0, icon.getMinimumWidth(), icon.getMinimumHeight());
+            mLeftButton.setCompoundDrawables(null,null,icon,null);
         }
+        mLeftButton.setVisibility(View.VISIBLE);
     }
     //设置右侧按钮监听事件
     public void setRightButtonOnClickLinster(OnClickListener linster) {

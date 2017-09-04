@@ -85,9 +85,9 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
         }
         Map map = new HashMap<>();
         map.put("id", String.valueOf(id));
-        if (AppConstant.UID != 0) {
+       /* if (AppConstant.UID != 0) {
             map.put("uid", String.valueOf(AppConstant.UID));
-        }
+        }*/
         mPresenter.loadSeckillProduct(map);
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new MyOrderTabEntity(mTitles[i]));

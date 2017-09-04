@@ -100,10 +100,11 @@ public class OrderDetailsPresenter extends OrderDetailsContract.Presenter{
             @Override
             protected void onSuccess(PayReqBean bean) {
                 mView.hideLoading();
-                if(bean!=null){
-                    mView.weChatPay(bean);
+                if(bean.getStatus()!=null&&!bean.getStatus().equals("y")){
+                    mView.cancelFail("获取数据失败");
+
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.weChatPay(bean);
                 }
             }
             @Override

@@ -84,16 +84,13 @@ public class HaveRatingAdapter extends BaseQuickAdapter<Object,BaseViewHolder> {
                 }
                 if(myComment.getComment_detail_add()!=null&&!myComment.getComment_detail_add().equals("")){
                     helper.setVisible(R.id.addcomment_mycomment_ll,true);
+                    helper.setVisible(R.id.time_addcomment_img_ll,true);
                     helper.setText(R.id.detail_addcomment_mycomment_tv,myComment.getComment_detail_add());
-                   /* int time=DateUtil.getTimeintervalDay(myComment.getComment_addtime_add(),myComment.getComment_addtime());
-                    if(time>0){
-                        helper.setText(R.id.time_addcomment_mycomment_tv,"用户"+time+"后追加评论");
-                    }else{
-                        helper.setText(R.id.time_addcomment_mycomment_tv,"用户当天追加评论");
-                    }*/
+                    helper.setText(R.id.time_addcomment_img_tv,DateUtil.getDateToString1(myComment.getComment_addtime_add()*1000));
 
                 }else{
                     helper.setVisible(R.id.addcomment_mycomment_ll,false);
+                    helper.setVisible(R.id.time_addcomment_img_ll,false);
                 }
                 if(myComment.getComment_redetail()!=null&&!myComment.getComment_redetail().equals("")){
                     helper.setVisible(R.id.business_reply_mycomment_ll,true);

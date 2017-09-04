@@ -102,10 +102,11 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             @Override
             protected void onSuccess(PayReqBean bean) {
                 mView.hideLoading();
-                if(bean.getStatus().equals("y")){
-                    mView.weChatPay(bean);
-                }else{
+                if(bean.getStatus()!=null&&bean.getStatus().equals("n")){
                     mView.createFail(bean.getInfo());
+
+                }else{
+                    mView.weChatPay(bean);
                 }
             }
             @Override

@@ -27,6 +27,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_below="@+id/head_comment_img_iv"
             android:layout_marginTop="@dimen/dp_5"
+            android:textColor="@color/common_h2"
             tools:text="2017.06.19"/>
     </RelativeLayout>
     <TextView
@@ -34,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="aaaaaaaaaaaaaaaaaaa"
+        android:textColor="@color/common_h1"
         android:layout_marginLeft="@dimen/dp_10"
         />
     <RelativeLayout
@@ -49,12 +51,14 @@
             android:id="@+id/business_reply_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="掌柜回复:"/>
+            android:textColor="@color/yellow2"
+            android:text="商家回复:"/>
         <TextView
             android:id="@+id/business_reply_content_img_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/business_reply_img"
+            android:textColor="@color/yellow2"
             tools:text="啥工会管理的时间"/>
         <TextView
             android:id="@+id/business_reply_time_img_tv"
@@ -73,11 +77,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/common_h1"
             android:text="买家追评:"/>
         <TextView
             android:id="@+id/detail_addcomment_img_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/common_h1"
             tools:text="买家追评"
             />
         <!-- <TextView
@@ -86,6 +92,30 @@
              android:layout_marginTop="@dimen/dp_5"
              tools:text="2017.06.19"/>-->
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/time_addcomment_img_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_2"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:text="追评时间:"/>
+        <TextView
+            android:id="@+id/time_addcomment_img_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:text="aa"
+            />
+    </LinearLayout>
+
     <!-- 不同的地方 -->
 
     <com.yizhisha.taosha.widget.MultiImageView

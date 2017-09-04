@@ -22,4 +22,5 @@ public class AppConstant {
     public static UserInfoBean infoBean=null;
     public static final String WEIXIN_APP_ID="wxc09f8708837c1651";
     public static boolean isLogin=false;
+    public static String weChartName="";
 }

@@ -9,7 +9,6 @@
     <com.yizhisha.taosha.base.BaseToolbar
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
-        app:isShowSearchView="false"
         android:layout_alignParentTop="true"
         app:title="@string/shoppcart"/>
     <View

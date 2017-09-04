@@ -8,7 +8,6 @@
     <com.yizhisha.taosha.base.BaseToolbar
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
-        app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
         app:title="@string/oreder_details"/>
     <com.yizhisha.taosha.widget.CommonLoadingView
@@ -372,7 +371,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_redbtn_selector1"
+                    android:background="@color/red1"
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:text="立即支付"

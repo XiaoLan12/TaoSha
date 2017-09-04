@@ -9,7 +9,6 @@
     <com.yizhisha.taosha.base.BaseToolbar
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
-        app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
         app:rightButtonIcon="@drawable/icon_menu"
         app:title="热门推荐"/>

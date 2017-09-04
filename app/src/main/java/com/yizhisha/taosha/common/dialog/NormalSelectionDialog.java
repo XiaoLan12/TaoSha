@@ -3,6 +3,7 @@ package com.yizhisha.taosha.common.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -86,12 +87,14 @@ public class NormalSelectionDialog {
         btnLp.topMargin=10;
         bottomBtn.setLayoutParams(btnLp);
         if(datas.size()==1){
+            Log.d("TTT","到佛爱豆");
             Button button=getButton(datas.get(0),0);
             if(mBuilder.isBoolTitle()){
                 button.setBackgroundResource(R.drawable.selector_widget_actiondialog_bottom);
             }else{
                 button.setBackgroundResource(R.drawable.selector_widget_actiondialog_single);
             }
+            linearLayout.addView(button);
         }else if(datas.size()>1){
             for(int i=0;i<datas.size();i++){
                 Button button=getButton(datas.get(i),i);

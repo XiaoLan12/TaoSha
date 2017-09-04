@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.home.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -209,7 +210,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                             return;
                         }
                         str.append(list.get(i).getColor()).append("#");
-                        str.append(list.get(i).getNum()).append("，");
+                        str.append(list.get(i).getNum()).append("， ");
                         amount += list.get(i).getNum();
                     }
                     if(AppConstant.isLogin==false){
@@ -220,7 +221,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         return;
                     }
                     if (str.length() > 0) {
-                        detail = str.substring(0, str.length() - 1);
+                        detail = str.substring(0, str.length() - 2);
                     }
                     Bundle bundle = new Bundle();
                     bundle.putInt("gid", Integer.valueOf(productDeatilItemBean.getId()));
@@ -247,7 +248,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                             return;
                         }
                         str.append(list.get(i).getColor()).append("#");
-                        str.append(list.get(i).getNum()).append("，");
+                        str.append(list.get(i).getNum()).append("， ");
                         amount+=list.get(i).getNum();
                     }
                     if(AppConstant.isLogin==false){
@@ -257,8 +258,8 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                         dialog.show();
                         return;
                     }
-                    if(str.length()<=0){
-                        detail = str.substring(0, str.length() - 1);
+                    if(str.length()>0){
+                        detail = str.substring(0, str.length() - 2);
                     }
                     Map<String,String> map=new HashMap<>();
                     map.put("gid",String.valueOf(productDeatilItemBean.getId()));

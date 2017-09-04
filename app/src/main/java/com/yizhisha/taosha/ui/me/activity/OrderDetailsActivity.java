@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -137,7 +138,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         if(order==null){
             return;
         }
-        String state[]=new String[]{"您还未支付该订单","买家已付款,代发货","商家已发货","交易成功","已评价"};
+        String state[]=new String[]{"您还未支付该订单","买家已付款,待发货","商家已发货","交易成功","已评价"};
         String tip[]=new String[]{"请尽快支付","请耐心等待,我们会尽快给您发货","请耐心等待,我们会尽快给您送货","欢迎再次光临","已评价"};
         mTvPayState.setText(state[order.getStatus()]);
         mTvShopTip.setText(tip[order.getStatus()]);
@@ -165,8 +166,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
             mTvDistributionway.setText(" 朗通快递");
         }
         mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()));
+        if(order.getShiptime()==0){
+            if(order.getStatus()==0){
+                mTvDistributionTime.setText("未支付");
+            }else if(order.getStatus()==1){
+                mTvDistributionTime.setText("未发货");
+            }
+        }else {
+            mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
+        }
 
-        mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
         mTvTradelTotal.setText(order.getGoods_price()+"");
         switchState(order.getStatus(),order.getPayment());
     }
@@ -175,6 +184,15 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         mRecyclerView.setNestedScrollingEnabled(false);
         mAdapter=new MyOrderDetailsAdapter(this,dataList);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id", dataList.get(position).getGid());
+                startActivity(YarnActivity.class, bundle);
+            }
+        });
     }
 
     @Override
@@ -231,8 +249,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
                     @Override
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
-                        dialog.dismiss();
+                        setResult(2);
                         finish_Activity(OrderDetailsActivity.this);
+                        dialog.dismiss();
                     }
                 }).build().show();
     }
@@ -455,8 +474,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                             public void onItemClick(NormalSelectionDialog dialog, View button, int position) {
                                 switch (position){
                                     case 0:
+                                        String title="";
+                                        StringBuilder str=new StringBuilder();
+                                        for(int i=0;i<order.getGoods().size();i++){
+                                            str.append(order.getGoods().get(i).getTitle()).append(",");
+                                        }
+                                        if(str.length()>0){
+                                            title = str.substring(0, str.length() - 1);
+                                        }
                                         Map<String,String> body=new HashMap<String, String>();
-                                        body.put("body",order.getGoods().get(0).getTitle());
+                                        body.put("body",title);
                                         body.put("out_trade_no",orderNo);
                                         body.put("total_fee",String.valueOf((int)order.getTotalprice()));
                                         body.put("spbill_create_ip",getPsdnIp());

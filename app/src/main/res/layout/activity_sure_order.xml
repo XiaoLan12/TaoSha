@@ -9,7 +9,6 @@
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
         android:layout_alignParentTop="true"
-        app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
         app:title="确认下单"/>
     <ScrollView

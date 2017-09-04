@@ -18,6 +18,7 @@ import com.yizhisha.taosha.ui.login.contract.PhoneLoginContract;
 import com.yizhisha.taosha.ui.login.presenter.PhoneLoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
 import com.yizhisha.taosha.utils.CountDownTimerUtil;
+import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
@@ -96,12 +97,19 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
     }
     @Override
     public void loginSuccess(RequestStatusBean info) {
-        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
-        AppConstant.isLogin=true;
-        AppConstant.UID=info.getUid();
-        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
-        RxBus.$().postEvent(new LoginEvent());
-        activity.finish();
+        if(info.getStatus().equals("y")) {
+            SharedPreferencesUtil.putValue(activity, "ISLOGIN", true);
+            AppConstant.isLogin = true;
+            AppConstant.UID = info.getUid();
+            SharedPreferencesUtil.putValue(activity, "UID", AppConstant.UID);
+            RxBus.$().postEvent(new LoginEvent());
+            activity.finish();
+        }else{
+            mTvGetCode.setBackgroundResource(R.drawable.shape_edittext_gray_selector);
+            mTvGetCode.setTextColor(RescourseUtil.getColor(R.color.gray));
+            mTvGetCode.setEnabled(false);
+        }
+
     }
     @Override
     public void getCodeSuccess(String info) {

@@ -4,6 +4,7 @@ import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.ui.me.contract.SetContract;
 
 import java.util.Map;
@@ -50,6 +51,21 @@ public class SetPresenter extends SetContract.Presenter{
     }
 
     @Override
+    public void loadWeChatInfo(String url) {
+        addSubscrebe(Api.getInstance().getWeChatInfo(url),
+                new RxSubscriber<WechatInfoBean>(mContext, true) {
+                    @Override
+                    protected void onSuccess(WechatInfoBean bean) {
+                            mView.loadWeChatInfo(bean);
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
+
+    @Override
     public void unBindWeChat(int uid) {
         addSubscrebe(Api.getInstance().unBindWeChat(uid),
                 new RxSubscriber<RequestStatusBean>(mContext, true) {
@@ -60,6 +76,22 @@ public class SetPresenter extends SetContract.Presenter{
                         }else{
                             mView.unBindWeChatFail(info.getInfo());
                         }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
+
+    @Override
+    public void showBindWeChart(int uid) {
+        addSubscrebe(Api.getInstance().showBindWeChart(uid),
+                new RxSubscriber<RequestStatusBean>(mContext, true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean info) {
+                            mView.showBindWeChart(info);
+
                     }
                     @Override
                     protected void onFailure(String message) {

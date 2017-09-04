@@ -329,10 +329,12 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     @Override
     public void deleteShoppCart(String msg) {
       adapter.removeGoods();
+        mToobar.setRightButtonText("编辑");
     }
     @Override
     public void deleteOneShoppCart(String msg, int groupPosition, int childPosition) {
         adapter.removeOneGood(groupPosition,childPosition);
+
     }
     @Override
     public void showLoading() {
@@ -406,7 +408,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                }
                Map<String,String> map=new HashMap<>();
                map.put("uid",String.valueOf(AppConstant.UID));
-               map.put("sid", str.substring(0,str.length()-1).toString());
+               map.put("sid", sid);
                mPresenter.deleteShoppCart(map);
                break;
            case R.id.btnSettle:

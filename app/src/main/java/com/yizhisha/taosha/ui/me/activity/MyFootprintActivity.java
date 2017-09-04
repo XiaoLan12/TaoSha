@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.me.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.yizhisha.taosha.bean.DataHelper;
 import com.yizhisha.taosha.bean.json.FootprintListBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyFootprintContract;
 import com.yizhisha.taosha.ui.me.fragment.MyOrderFragment;
 import com.yizhisha.taosha.ui.me.presenter.MyFootprintPresenter;
@@ -169,6 +171,15 @@ public class MyFootprintActivity extends BaseActivity<MyFootprintPresenter>
 
                         break;
                 }
+            }
+        });
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id", dataLists.get(position).getTypeid());
+                startActivity(YarnActivity.class, bundle);
             }
         });
 

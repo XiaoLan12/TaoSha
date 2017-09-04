@@ -29,6 +29,7 @@ import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -213,9 +214,18 @@ public class Api {
     //绑定微信号
     public Observable<RequestStatusBean> bindWeChat(Map<String,String> map){
         return service.bindWeChat(map);
-    } //微信解除绑定
+    }
+    //微信解除绑定
     public Observable<RequestStatusBean> unBindWeChat(int uid){
         return service.unBindWeChat(uid);
+    }
+    //获得微信登录的数据
+    public Observable<WechatInfoBean> getWeChatInfo(String url){
+        return service.getWeChatInfo(url);
+    }
+    //微信解除绑定
+    public Observable<RequestStatusBean> showBindWeChart(int uid){
+        return service.showBindWeChart(uid);
     }
 
     //首页轮播

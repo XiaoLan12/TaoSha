@@ -36,8 +36,6 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
             helper.setText(R.id.paystate_tv,"待收货");
         }else if(item.getStatus()==3){
             helper.setText(R.id.paystate_tv,"交易完成");
-        }else if(item.getPayment()==3&&item.getStatus()==0){
-
         }
 
 
@@ -59,7 +57,6 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
             case 0:
                 helper.setVisible(R.id.cancel_the_order_tv,true);
                 helper.setVisible(R.id.confirm_goods_tv,false);
-                helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 if(payment==3){
                     helper.setVisible(R.id.immediate_payment_tv,false);
@@ -71,21 +68,18 @@ public class SecondKillOrderAdapter extends BaseQuickAdapter<SeckillBean,BaseVie
                 helper.setVisible(R.id.cancel_the_order_tv,true);
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
-                helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 2:
                 helper.setVisible(R.id.cancel_the_order_tv,false);
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,true);
-                helper.setVisible(R.id.immediate_evaluation_tv,false);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
             case 3:
                 helper.setVisible(R.id.cancel_the_order_tv,false);
                 helper.setVisible(R.id.immediate_payment_tv,false);
                 helper.setVisible(R.id.confirm_goods_tv,false);
-                helper.setVisible(R.id.immediate_evaluation_tv,true);
                 helper.setVisible(R.id.againbuy_tv,false);
                 break;
         }

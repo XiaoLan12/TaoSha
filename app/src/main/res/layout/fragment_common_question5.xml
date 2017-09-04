@@ -6,7 +6,6 @@
     <com.yizhisha.taosha.base.BaseToolbar
         android:id="@+id/toolbar"
         style="@style/basetoolbarStyle"
-        app:isShowSearchView="false"
         app:leftButtonIcon="@drawable/icon_back"
         app:title="索取小样,快递费怎么收取"/>
     <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>

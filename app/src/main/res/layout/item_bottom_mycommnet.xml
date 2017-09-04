@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="aaaaaaaaaaaaaaaaaaa"
+        android:textColor="@color/common_h1"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         />
@@ -57,14 +58,39 @@
             android:id="@+id/time_addcomment_mycomment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/common_h1"
             android:text="买家追评:"/>
         <TextView
             android:id="@+id/detail_addcomment_mycomment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/common_h1"
             tools:text="买家追评"
             />
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/time_addcomment_img_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_2"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:text="追评时间:"/>
+        <TextView
+            android:id="@+id/time_addcomment_img_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red1"
+            android:text="aa"
+            />
     </LinearLayout>
     <!-- 不同的地方 -->
 

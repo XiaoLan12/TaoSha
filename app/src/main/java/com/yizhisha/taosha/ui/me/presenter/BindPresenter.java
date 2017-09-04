@@ -18,11 +18,8 @@ public class BindPresenter extends BindContract.Presenter{
                 new RxSubscriber<RequestStatusBean>(mContext,true) {
                     @Override
                     protected void onSuccess(RequestStatusBean o) {
-                        if(o.getStatus().equals("y")){
-                            mView.bindSuccess(o.getInfo());
-                        }else {
-                            mView.loadFail(o.getInfo());
-                        }
+                            mView.bindSuccess(o);
+
                     }
                     @Override
                     protected void onFailure(String message) {

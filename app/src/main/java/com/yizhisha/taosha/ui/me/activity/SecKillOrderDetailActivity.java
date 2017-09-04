@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -77,6 +78,8 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     TextView mTvPayTime;
     @Bind(R.id.distributionway_orderdetail_tv)
     TextView mTvDistributionway;
+    @Bind(R.id.distributiontime_orderdetail)
+    TextView mTvDistributionTime;
     @Bind(R.id.tradeltotal_myorder_tv)
     TextView mTvTradelTotal;
     @Bind(R.id.tradelpaymentpay_myorder_tv)
@@ -85,10 +88,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     TextView mTvContactTheMerchant;
     @Bind(R.id.confirm_goods_tv)
     TextView mTvConfirmGoods;
-    @Bind(R.id.immediate_evaluation_tv)
-    TextView mTvImmediateEvaluation;
-    @Bind(R.id.additional_comments_tv)
-    TextView mTvAddItionalComment;
     @Bind(R.id.againbuy_tv)
     TextView mTvAgeinBuy;
     @Bind(R.id.cancel_the_order_tv)
@@ -106,6 +105,9 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     TextView mTvShopColor;
     @Bind(R.id.tradeprice_myorder_tv)
     TextView mTvShopPrice;
+
+    @Bind(R.id.ordergoods_rl)
+    RelativeLayout orderGoodsRl;
 
 
     private SeckillBean seckillBean;
@@ -158,6 +160,15 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
         }
         mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
         mTvDistributionway.setText("朗通快递");
+        if(seckillBean.getShiptime()==0){
+            if(seckillBean.getStatus()==0){
+                mTvDistributionTime.setText("未支付");
+            }else if(seckillBean.getStatus()==1){
+                mTvDistributionTime.setText("未发货");
+            }
+        }else {
+            mTvDistributionTime.setText(DateUtil.getDateToString1(seckillBean.getShiptime()*1000));
+        }
         mTvTradelTotal.setText(seckillBean.getMarket_price()+"");
         if(seckillBean.getGoods()!=null){
             SeckillGoodsBean goodsBean=seckillBean.getGoods();
@@ -167,6 +178,14 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             mTvShopPrice.setText(seckillBean.getMarket_price()+"");
             GlideUtil.getInstance().LoadContextBitmap(mContext,AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
                     mIvShopPhoto,GlideUtil.LOAD_BITMAP);
+            orderGoodsRl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",seckillBean.getId());
+                    startActivity(SeckillYarnActivity.class,bundle);
+                }
+            });
         }
         switchState(seckillBean.getStatus(),seckillBean.getPayment());
     }
@@ -223,8 +242,10 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
                     @Override
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
-                        dialog.dismiss();
+
+                        setResult(2);
                         finish_Activity(SecKillOrderDetailActivity.this);
+                        dialog.dismiss();
                     }
                 }).build().show();
     }
@@ -355,7 +376,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 });
     }
     @OnClick({R.id.cancel_the_order_tv,R.id.contact_the_merchant_tv,R.id.confirm_goods_tv,
-            R.id.immediate_evaluation_tv,R.id.againbuy_tv,R.id.immediate_payment_tv,R.id.additional_comments_tv})
+            R.id.againbuy_tv,R.id.immediate_payment_tv})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -395,13 +416,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 body.put("type","order");
                 mPresenter.sureGoods(body);
                 break;
-            case R.id.immediate_evaluation_tv:
-                Bundle commentbundle = new Bundle();
-                commentbundle.putInt("TYPE",1);
-                commentbundle.putInt("ORDERID",seckillBean.getId());
-                commentbundle.putInt("MZWUIID",seckillBean.getMzw_uid());
-                startActivity(AddCommentActivity.class,commentbundle);
-                break;
             case R.id.againbuy_tv:
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",seckillBean.getId());
@@ -429,7 +443,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                                         Map<String,String> body=new HashMap<String, String>();
                                         body.put("body",seckillBean.getGoods().getTitle());
                                         body.put("out_trade_no",orderNo);
-                                        body.put("total_fee",String.valueOf((int)seckillBean.getTotalprice()));
+                                        body.put("total_fee",String.valueOf((int)seckillBean.getTotalprice()*100));
                                         body.put("spbill_create_ip",getPsdnIp());
                                         body.put("attach","order");
                                         mPresenter.weChatPay(body);
@@ -452,13 +466,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 dialog1.setData(mDatas1);
                 dialog1.show();
                 break;
-            case R.id.additional_comments_tv:
-                Bundle addCommentbundle = new Bundle();
-                addCommentbundle.putInt("TYPE",2);
-                addCommentbundle.putInt("ORDERID",seckillBean.getId());
-                addCommentbundle.putInt("MZWUIID",seckillBean.getMzw_uid());
-                startActivity(AddCommentActivity.class,addCommentbundle);
-                break;
         }
     }
     /**根据交易状态，切换布局显示
@@ -475,8 +482,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.VISIBLE);
                 mTvImmediatePayment.setVisibility(View.VISIBLE);
                 mTvConfirmGoods.setVisibility(View.GONE);
-                mTvImmediateEvaluation.setVisibility(View.GONE);
-                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 if(payment==3){
                     mTvImmediatePayment.setVisibility(View.GONE);
@@ -489,8 +494,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.VISIBLE);
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
-                mTvImmediateEvaluation.setVisibility(View.GONE);
-                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 2:
@@ -498,8 +501,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.GONE);
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.VISIBLE);
-                mTvImmediateEvaluation.setVisibility(View.GONE);
-                mTvAddItionalComment.setVisibility(View.GONE);
                 mTvAgeinBuy.setVisibility(View.GONE);
                 break;
             case 3:
@@ -507,8 +508,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.GONE);
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
-                mTvAddItionalComment.setVisibility(View.GONE);
-                mTvImmediateEvaluation.setVisibility(View.VISIBLE);
                 mTvAgeinBuy.setVisibility(View.VISIBLE);
                 break;
             case 4:
@@ -516,8 +515,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 mTvCancelTheOrder.setVisibility(View.GONE);
                 mTvImmediatePayment.setVisibility(View.GONE);
                 mTvConfirmGoods.setVisibility(View.GONE);
-                mTvImmediateEvaluation.setVisibility(View.GONE);
-                mTvAddItionalComment.setVisibility(View.VISIBLE);
                 mTvAgeinBuy.setVisibility(View.VISIBLE);
                 break;
         }

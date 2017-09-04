@@ -29,7 +29,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_below="@+id/tradename_myorder_tv"
             android:layout_toRightOf="@+id/tradehead_myorder_iv"
-            android:text="颜色：" />
+            android:text="色号：" />
 
         <TextView
             android:id="@+id/tradecolor_myorder_tv"
