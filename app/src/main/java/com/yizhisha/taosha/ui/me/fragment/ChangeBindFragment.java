@@ -49,8 +49,6 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     @Bind(R.id.sava_chagephone_btn)
     Button mBtnSava;
 
-    private int type;
-
     private String bindPhone;
 
     @Override
@@ -79,7 +77,6 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
             public void onClick(View v) {
                 String phone = phoneChagephoneEt.getText().toString().trim();
                 String code = getcodeChagephoneEt.getText().toString().trim();
-                if (type == 1) {
                     if (!checkInput(phone, code)) {
                         return;
                     }
@@ -88,9 +85,6 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                     map.put("mobile", phone);
                     map.put("mobilecode", code);
                     mPresenter.bing(map);
-                } else {
-
-                }
             }
         });
         getcodeChagephoneTv.setOnClickListener(new View.OnClickListener() {
