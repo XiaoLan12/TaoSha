@@ -175,10 +175,15 @@ public class Api {
     public Observable<UserHeadBean> changeUserHead(RequestBody uid,MultipartBody.Part body){
         return service.changeUserHead(uid,body);
     }
-    //绑定微信号
+    //绑定手机号码
     public Observable<RequestStatusBean> bindPhone(Map<String, String> map){
         return service.bindPhone(map);
     }
+    //获得绑定的手机号码
+    public Observable<RequestStatusBean> loadBindPhone(int uid){
+        return service.loadBindPhone(uid);
+    }
+
     //登录
     public Observable<RequestStatusBean> login(Map<String,String> map){
         return service.Login(map);

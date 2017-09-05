@@ -50,8 +50,6 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     @Bind(R.id.sava_chagephone_btn)
     Button mBtnSava;
 
-    private String bindPhone;
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_changebind;
@@ -65,14 +63,6 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                 getActivity().finish();
             }
         });
-        bindPhone=(String)SharedPreferencesUtil.getValue(getActivity(), "MOBILE",new String());
-        if (bindPhone!= null) {
-            bindTv.setText("未绑定手机号");
-            bindTv.setTextColor(RescourseUtil.getColor(R.color.red1));
-        } else {
-            bindTv.setText("已绑定手机号:");
-            bindPhoneTv.setText(bindPhone);
-        }
         mBtnSava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +97,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                 mPresenter.getCode(map);
             }
         });
+        mPresenter.loadBindPhone(AppConstant.UID);
 
     }
                 /**
@@ -134,9 +125,9 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     @Override
     public void bindSuccess(RequestStatusBean msg) {
         if(msg.getStatus().equals("y")) {
-            SharedPreferencesUtil.putValue(getActivity(), "MOBILE", phoneChagephoneEt.getText().toString());
+            bindTv.setText("已绑定手机号码:");
+            bindPhoneTv.setText(phoneChagephoneEt.getText().toString());
         }else{
-            getcodeChagephoneTv.setBackgroundResource(R.drawable.shape_edittext_gray_selector);
             getcodeChagephoneTv.setTextColor(RescourseUtil.getColor(R.color.gray));
             getcodeChagephoneTv.setEnabled(false);
         }
@@ -145,6 +136,17 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     @Override
     public void getCodeSuccess(String info) {
         ToastUtil.showbottomShortToast(info);
+    }
+
+    @Override
+    public void loadBindPhone(String msg) {
+        bindTv.setText("已绑定手机号码:");
+        bindPhoneTv.setText(msg);
+    }
+    @Override
+    public void loadBindPhoneFail(String msg) {
+        bindTv.setText(msg);
+        bindTv.setTextColor(RescourseUtil.getColor(R.color.red1));
     }
 
     @Override

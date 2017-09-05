@@ -198,7 +198,6 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 break;
             case R.id.exit_btn:
                 SharedPreferencesUtil.removeValue(this,"ISLOGIN");
-                SharedPreferencesUtil.removeValue(this,"MOBILE");
                 AppConstant.isLogin=false;
                 AppConstant.infoBean=null;
                 AppConstant.UID=0;

@@ -42,7 +42,7 @@ public class MyCommentListBean implements MultiItemEntity {
     }
 
     public class Goods{
-        private String gid;
+        private int gid;
         private String title;
         private String pname;
         private String price;
@@ -63,11 +63,11 @@ public class MyCommentListBean implements MultiItemEntity {
             this.orderno = orderno;
         }
 
-        public String getGid() {
+        public int getGid() {
             return gid;
         }
 
-        public void setGid(String gid) {
+        public void setGid(int gid) {
             this.gid = gid;
         }
 

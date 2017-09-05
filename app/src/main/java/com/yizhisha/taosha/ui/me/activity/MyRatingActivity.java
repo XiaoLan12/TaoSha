@@ -1,4 +1,5 @@
 package com.yizhisha.taosha.ui.me.activity;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.DataHelper;
 import com.yizhisha.taosha.bean.json.MyCommentListBean;
+import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.contract.MyRatingContract;
 import com.yizhisha.taosha.ui.me.presenter.MyRatingPresenter;
@@ -69,6 +71,20 @@ public class MyRatingActivity extends BaseActivity<MyRatingPresenter> implements
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if(dataList.get(position) instanceof MyCommentListBean.Goods) {
+                    MyCommentListBean.Goods goods= (MyCommentListBean.Goods) dataList.get(position);
+                if(adapter.getItemViewType(position)==2){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("TYPE",1);
+                    bundle.putInt("id", goods.getGid());
+                    startActivity(YarnActivity.class, bundle);
+                }
+                }
+            }
+        });
 
     }
     private void load(boolean isShowLoad){

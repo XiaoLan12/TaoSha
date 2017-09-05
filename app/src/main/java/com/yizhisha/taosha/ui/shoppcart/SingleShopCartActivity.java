@@ -211,17 +211,17 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
                         return;
                     }
                     str.append(dataList.get(i).getDetail()).append("#");
-                    str.append(dataList.get(i).getAmount()).append("，");
+                    str.append(dataList.get(i).getAmount()).append("， ");
                     amount += dataList.get(i).getAmount();
                 }
                 if (str.length() > 0) {
-                    detail = str.substring(0, str.length() - 1);
+                    detail = str.substring(0, str.length() - 2);
                 }
                 Map<String,String> map=new HashMap<>();
                 map.put("gid",String.valueOf(gid));
                 map.put("uid",String.valueOf(AppConstant.UID));
                 map.put("savetype","edit");
-                map.put("amount",String.valueOf(detail));
+                map.put("amount",String.valueOf(amount));
                 map.put("detail",detail);
                 mPresenter.changeShopCart(map);
                 break;

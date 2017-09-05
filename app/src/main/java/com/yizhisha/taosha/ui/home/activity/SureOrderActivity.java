@@ -218,9 +218,12 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     //生成普通订单
     private void createOrder(){
         StringBuilder str=new StringBuilder();
+        String detail="";
         for(int i=0;i<dataList.size();i++){
-            str.append(dataList.get(i).getDetail()).append("#");
-            str.append(dataList.get(i).getAmount()).append("，");
+            str.append(dataList.get(i).getDetail()).append("，");
+        }
+        if(str.length()>0){
+            detail=str.substring(0,str.length()-1);
         }
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
@@ -231,7 +234,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         body.put("totalamount",String.valueOf(orderSureBean.getTotalamount()));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("payment",String.valueOf(mPayType));
-        body.put("detail",str.substring(0,str.length()-1));
+        body.put("detail",detail);
         body.put("remark",remarkEt.getText().toString());
         body.put("express_type",String.valueOf(mExpressType));
         mPresenter.regularOrder(body);

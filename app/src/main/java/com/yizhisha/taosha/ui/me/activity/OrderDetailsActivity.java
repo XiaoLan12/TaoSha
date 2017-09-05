@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -165,13 +166,19 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         }else if(express_type==3){
             mTvDistributionway.setText(" 朗通快递");
         }
-        mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()));
-        if(order.getShiptime()==0){
-            if(order.getStatus()==0){
+        if(payment==3){
+            mTvPayTime.setText("货到付款");
+        } else if(order.getPaytime()==0&&order.getStatus()==0){
+            mTvPayTime.setText("未支付");
+        }else if(order.getPaytime()==0&&order.getStatus()==1){
+            mTvPayTime.setText("未发货");
+        }else {
+            mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()*1000));
+        }
+        if(order.getShiptime()==0&&order.getStatus()==0){
                 mTvDistributionTime.setText("未支付");
-            }else if(order.getStatus()==1){
+            }else if(order.getShiptime()==0&&order.getStatus()==1){
                 mTvDistributionTime.setText("未发货");
-            }
         }else {
             mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
         }

@@ -152,6 +152,10 @@ public interface ApiService {
     @GET("ios/ucenter/mobile_save/")
     Observable<RequestStatusBean> bindPhone(@QueryMap Map<String,String> map);
 
+    //获得绑定的手机号码
+    @GET("ios/ucenter/mobile_binding/")
+    Observable<RequestStatusBean> loadBindPhone(@Query("uid") int uid);
+
     //登录
     @FormUrlEncoded
     @POST("ios/user/dologin/")
@@ -175,7 +179,7 @@ public interface ApiService {
     Observable<RequestStatusBean> getPhoneLoginCode(@QueryMap Map<String,String> map);
     //手机快捷登录
     @FormUrlEncoded
-    @POST("ios/ajax/quicklogin/")
+    @POST("ios/user/quicklogin/")
     Observable<RequestStatusBean> phoneLogin(@FieldMap Map<String,String> map);
 
     //修改密码

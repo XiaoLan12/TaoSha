@@ -105,9 +105,9 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
             RxBus.$().postEvent(new LoginEvent());
             activity.finish();
         }else{
-            mTvGetCode.setBackgroundResource(R.drawable.shape_edittext_gray_selector);
             mTvGetCode.setTextColor(RescourseUtil.getColor(R.color.gray));
             mTvGetCode.setEnabled(false);
+            ToastUtil.showShortToast(info.getInfo());
         }
 
     }

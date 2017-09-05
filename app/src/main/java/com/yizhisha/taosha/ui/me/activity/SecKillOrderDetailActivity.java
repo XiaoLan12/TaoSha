@@ -158,17 +158,25 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
         }else if(payment==5){
             mTvPayWay.setText("微信支付");
         }
-        mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
         mTvDistributionway.setText("朗通快递");
-        if(seckillBean.getShiptime()==0){
-            if(seckillBean.getStatus()==0){
-                mTvDistributionTime.setText("未支付");
-            }else if(seckillBean.getStatus()==1){
-                mTvDistributionTime.setText("未发货");
-            }
+
+        if(payment==3){
+            mTvPayTime.setText("货到付款");
+        } else if(seckillBean.getPaytime()==0&&seckillBean.getStatus()==0){
+            mTvPayTime.setText("未支付");
+        }else if(seckillBean.getPaytime()==0&&seckillBean.getStatus()==1){
+            mTvPayTime.setText("未发货");
+        }else {
+            mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
+        }
+        if(seckillBean.getShiptime()==0&&seckillBean.getStatus()==0){
+            mTvDistributionTime.setText("未支付");
+        }else if(seckillBean.getShiptime()==0&&seckillBean.getStatus()==1){
+            mTvDistributionTime.setText("未发货");
         }else {
             mTvDistributionTime.setText(DateUtil.getDateToString1(seckillBean.getShiptime()*1000));
         }
+
         mTvTradelTotal.setText(seckillBean.getMarket_price()+"");
         if(seckillBean.getGoods()!=null){
             SeckillGoodsBean goodsBean=seckillBean.getGoods();

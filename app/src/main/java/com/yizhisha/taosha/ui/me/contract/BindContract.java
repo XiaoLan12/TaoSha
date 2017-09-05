@@ -15,6 +15,8 @@ public interface BindContract {
     interface View extends BaseView {
         void bindSuccess(RequestStatusBean msg);
         void getCodeSuccess(String info);
+        void loadBindPhone(String msg);
+        void loadBindPhoneFail(String msg);
         void loadFail(String msg);
     }
 
@@ -22,6 +24,7 @@ public interface BindContract {
 
         public abstract void bing(Map<String, String> params);
         public abstract void getCode(Map<String, String> map);
+        public abstract void loadBindPhone(int uid);
 
         @Override
         public void onStart() {

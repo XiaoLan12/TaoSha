@@ -45,4 +45,23 @@ public class BindPresenter extends BindContract.Presenter{
                     }
                 });
     }
+
+    @Override
+    public void loadBindPhone(int uid) {
+        addSubscrebe(Api.getInstance().loadBindPhone(uid),
+                new RxSubscriber<RequestStatusBean>(mContext,true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean requestStatusBean) {
+                        if(requestStatusBean.getStatus().equals("y")){
+                            mView.loadBindPhone(requestStatusBean.getInfo());
+                        }else{
+                            mView.loadBindPhoneFail(requestStatusBean.getInfo());
+                        }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
 }
