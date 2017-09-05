@@ -121,4 +121,23 @@ public class LoginPresenter extends LoginContract.Presenter{
                     }
                 });
     }
+
+    @Override
+    public void bindWeChat(Map<String, String> map) {
+        addSubscrebe(Api.getInstance().bindWeChat(map),
+                new RxSubscriber<RequestStatusBean>(mContext, false) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean info) {
+                        if(info.getStatus().equals("y")){
+                            mView.bindWeChatSuccess(info.getInfo());
+                        }else{
+                            mView.loadFail(info.getInfo());
+                        }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
 }

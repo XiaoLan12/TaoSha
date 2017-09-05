@@ -25,7 +25,7 @@
             />
         <TextView
            style="@style/TS.Theme.Widget.Text"
-            android:text="大朗淘沙 1.0"/>
+            android:text="大朗淘纱 1.0"/>
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/about_rl1"
@@ -36,7 +36,7 @@
 
         <TextView
             style="@style/TS.Theme.Widget.Text"
-            android:text="大朗淘沙介绍"
+            android:text="大朗淘纱介绍"
             android:layout_centerVertical="true"
             />
         <ImageView

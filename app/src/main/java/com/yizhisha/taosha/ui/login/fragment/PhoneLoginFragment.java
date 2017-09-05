@@ -83,8 +83,8 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
                 mPresenter.getCode(map);
                 break;
             case R.id.sure_phonelogin_btn:
-                String loginPhone=accountPhoneloginEt.getText().toString();
-                String code=mTvGetCode.getText().toString();
+                String loginPhone=accountPhoneloginEt.getText().toString().trim();
+                String code=codePhoneloginEt.getText().toString().trim();
                 if(!checkInput(loginPhone,code)){
                     return;
                 }

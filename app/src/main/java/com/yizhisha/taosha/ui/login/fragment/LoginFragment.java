@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.login.fragment;
 import android.content.Context;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,6 +20,7 @@ import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.common.popupwindow.LoginWithWeiPopuwindow;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
@@ -56,6 +58,13 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     private IWXAPI api;
     private static final String APP_SECRET ="74595b3e89da0f0816e5e0f3ab441462";
     private Subscription subscription;
+    LoginWithWeiPopuwindow loginWithWeiPopuwindow;
+
+    //是否绑定微信
+    private boolean isBangWei=false;
+
+    private String oppenid="";
+    private RequestStatusBean requestStatusBean=null;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -89,12 +98,23 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     @Override
     public void loginSuccess(RequestStatusBean bean) {
-        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
-        AppConstant.isLogin=true;
-        AppConstant.UID=bean.getUid();
-        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
-        RxBus.$().postEvent(new LoginEvent());
-        activity.finish();
+
+
+        if(isBangWei){
+            requestStatusBean=bean;
+            Map<String,String> map=new HashMap<>();
+            map.put("uid",String.valueOf(AppConstant.UID));
+            map.put("openid",oppenid);
+            mPresenter.bindWeChat(map);
+        }else{
+            SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+            AppConstant.isLogin=true;
+            AppConstant.UID=bean.getUid();
+            SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
+            RxBus.$().postEvent(new LoginEvent());
+            activity.finish();
+        }
+
     }
 
     @Override
@@ -124,6 +144,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     public void loadWeChatData(WechatBean wechatBean) {
         Map<String,String> map=new HashMap<>();
         map.put("openid",wechatBean.getOpenid());
+        oppenid=wechatBean.getOpenid();
         mPresenter.weChatLogin(map);
     }
     @Override
@@ -133,27 +154,40 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     @Override
     public void weChatLogin(String info) {
-        new NormalAlertDialog.Builder(activity)
-                .setBoolTitle(false)
-                .setContentText("通过手机注册以后才能绑定微信哟，马上注册！")
-                .setContentTextSize(18)
-                .setLeftText("取消")
-                .setRightText("前往")
-                .setWidth(0.75f)
-                .setHeight(0.33f)
-                .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
-                    @Override
-                    public void clickLeftButton(NormalAlertDialog dialog, View view) {
-                        dialog.dismiss();
+        if(loginWithWeiPopuwindow==null){
+            loginWithWeiPopuwindow=new LoginWithWeiPopuwindow(getActivity());
+            //去注册
+            loginWithWeiPopuwindow.setOnContinueClickListener(new LoginWithWeiPopuwindow.OnContinueClickListener() {
+                @Override
+                public void onContinueClickListener() {
+                   startActivity(RegisterActivity.class);
+                }
+            });
+            //绑定微信
+            loginWithWeiPopuwindow.setOnBackIndexClickListener(new LoginWithWeiPopuwindow.OnBackIndexClickListener(){
+                @Override
+                public void onBackIndexClickListener() {
+                    isBangWei=true;
+//                    ToastUtil.showShortToast("绑定");
+                }
+            });
+            loginWithWeiPopuwindow.showAtLocation(mIvIsShowPwd, Gravity.CENTER, 0, 0);
+        }else{
 
-                    }
-                    @Override
-                    public void clickRightButton(NormalAlertDialog dialog, View view) {
-                        startActivity(RegisterActivity.class);
-                        dialog.dismiss();
 
-                    }
-                }).build().show();
+            loginWithWeiPopuwindow.showAtLocation(mIvIsShowPwd, Gravity.CENTER, 0, 0);
+        }
+
+    }
+
+    @Override
+    public void bindWeChatSuccess(String info) {
+        SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
+        AppConstant.isLogin=true;
+        AppConstant.UID=requestStatusBean.getUid();
+        SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
+        RxBus.$().postEvent(new LoginEvent());
+        activity.finish();
     }
 
     public interface switchFragmentListener{

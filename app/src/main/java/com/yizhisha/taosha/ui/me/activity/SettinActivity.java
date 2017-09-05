@@ -214,11 +214,11 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         map.put("uid",String.valueOf(AppConstant.UID));
         map.put("openid",wechatBean.getOpenid());
         mPresenter.bindWeChat(map);
-        String url="https://api.weixin.qq.com/sns/userinfo?access_token="
+     /*   String url="https://api.weixin.qq.com/sns/userinfo?access_token="
                 + wechatBean.getAccess_token()
                 + "&openid="
                 + wechatBean.getOpenid();
-        mPresenter.loadWeChatInfo(url);
+        mPresenter.loadWeChatInfo(url);*/
     }
 
     @Override

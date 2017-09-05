@@ -118,6 +118,11 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
         ToastUtil.showbottomShortToast(info);
     }
 
+    @Override
+    public void bindWeChatSuccess(String info) {
+
+    }
+
     /**
      * 检查输入
      *

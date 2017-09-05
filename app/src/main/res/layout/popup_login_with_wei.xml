@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_corner8">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="18dp"
+                    android:gravity="center"
+                    android:text="温馨提示"
+
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/common_h2"
+                    android:text="微信号尚未绑定商城账号，请先绑定一个商城已有的账号或者注册一个新账号"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray1"
+                ></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@null">
+                <TextView
+                    android:id="@+id/tv_login_with_wei"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@drawable/shape_bg_selector"
+                    android:text="绑定已有账号"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/gray1"/>
+                <TextView
+                    android:id="@+id/tv_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:background="@drawable/shape_bg_selector"
+                    android:text="新用户注册"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/gray1"/>
+                <TextView
+                    android:id="@+id/tv_cancle"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:background="@drawable/shape_bg_selector"
+                    android:layout_marginBottom="6dp"
+                    android:text="取消"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

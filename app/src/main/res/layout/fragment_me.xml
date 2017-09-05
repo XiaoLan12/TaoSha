@@ -231,7 +231,7 @@
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:layout_centerVertical="true"
-                    android:text="大朗淘沙" />
+                    android:text="关于大朗淘纱" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_20"

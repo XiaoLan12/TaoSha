@@ -28,6 +28,9 @@ public interface LoginContract {
 
         void loadFail(String msg);
         void weChatLogin(String info);
+
+        void bindWeChatSuccess(String info);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {
@@ -38,6 +41,7 @@ public interface LoginContract {
         public abstract void getCode(Map<String, String> map);
         public abstract void loadWeChatData(String url);
         public abstract void weChatLogin(Map<String,String> map);
+        public abstract void bindWeChat(Map<String,String> map);
 
         @Override
         public void onStart() {
