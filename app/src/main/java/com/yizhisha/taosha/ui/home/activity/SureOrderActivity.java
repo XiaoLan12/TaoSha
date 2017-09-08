@@ -227,7 +227,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         }
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        //暂时写死
         body.put("gid",String.valueOf(orderSureBean.getGid()));
         body.put("type",orderType);
         body.put("goodsprice",String.valueOf(Double.valueOf(orderSureBean.getTotalprice())));
@@ -243,8 +242,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     private void createShopCartOrder(){
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        //暂时写死
-        //body.put("gid",orderSureBean.getGid());
         body.put("gid",String.valueOf(orderSureBean.getGid()));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("payment",String.valueOf(mPayType));
@@ -255,8 +252,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     private void createNayangOrder(){
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        //暂时写死
-        //body.put("gid",orderSureBean.getGid());
         body.put("gid",String.valueOf(nayangGid));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("express_type",String.valueOf(mExpressType));
@@ -267,8 +262,6 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     private void createSeckillOrder(){
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        //暂时写死
-        //body.put("gid",orderSureBean.getGid());
         body.put("id",String.valueOf(seckillId));
         body.put("payment",String.valueOf(mPayType));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
@@ -456,7 +449,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 Map<String,String> body=new HashMap<String, String>();
                 body.put("body",orderSureBean.getTitle());
                 body.put("out_trade_no",orderNo);
-                body.put("total_fee",String.valueOf((int)orderSureBean.getTotalprice()));
+                body.put("total_fee",String.valueOf((int)orderSureBean.getTotalprice()*100));
                 body.put("spbill_create_ip",getPsdnIp());
                 body.put("attach","order");
                 mPresenter.weChatPay(body);
@@ -683,7 +676,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
             case R.id.pay_way_rl:
                 final List<String> mDatas1=new ArrayList<>();
                 mDatas1.add("微信支付(小额支付建议选此项)");
-                mDatas1.add("支付宝支付(小额支付建议选此项)");
+                //mDatas1.add("支付宝支付(小额支付建议选此项)");
                 mDatas1.add("货到付款(与商家联系付款及发货方式)");
                 NormalSelectionDialog dialog1=new NormalSelectionDialog.Builder(this)
                         .setBoolTitle(true)
@@ -703,13 +696,14 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                                         mPayType=5;
                                         break;
                                     case 1:
-                                        payWayTv.setText("支付宝支付");
-                                        mPayType=2;
-                                        break;
-                                    case 2:
                                         payWayTv.setText("货到付款");
                                         mPayType=3;
+
                                         break;
+                                  /*  case 2:
+                                        payWayTv.setText("支付宝支付");
+                                        mPayType=2;
+                                        break;*/
                                 }
                                 dialog.dismiss();
                             }

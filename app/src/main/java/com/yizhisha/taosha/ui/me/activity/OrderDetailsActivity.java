@@ -465,7 +465,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
             case R.id.immediate_payment_tv:
                 final List<String> mDatas1=new ArrayList<>();
                 mDatas1.add("微信支付(小额支付建议选此项)");
-                mDatas1.add("支付宝支付(小额支付建议选此项)");
+                //mDatas1.add("支付宝支付(小额支付建议选此项)");
                 mDatas1.add("货到付款(与商家联系付款及发货方式)");
                 NormalSelectionDialog dialog1=new NormalSelectionDialog.Builder(this)
                         .setBoolTitle(true)
@@ -492,15 +492,12 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                                         Map<String,String> body=new HashMap<String, String>();
                                         body.put("body",title);
                                         body.put("out_trade_no",orderNo);
-                                        body.put("total_fee",String.valueOf((int)order.getTotalprice()));
+                                        body.put("total_fee",String.valueOf((int)order.getTotalprice()*100));
                                         body.put("spbill_create_ip",getPsdnIp());
                                         body.put("attach","order");
                                         mPresenter.weChatPay(body);
                                         break;
                                     case 1:
-
-                                        break;
-                                    case 2:
                                         Map<String,String> body1=new HashMap<String, String>();
                                         body1.put("uid",String.valueOf(AppConstant.UID));
                                         body1.put("orderno",orderNo);

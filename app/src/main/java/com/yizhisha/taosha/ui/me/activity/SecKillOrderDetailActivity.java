@@ -432,7 +432,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             case R.id.immediate_payment_tv:
                 final List<String> mDatas1=new ArrayList<>();
                 mDatas1.add("微信支付(小额支付建议选此项)");
-                mDatas1.add("支付宝支付(小额支付建议选此项)");
+                //mDatas1.add("支付宝支付(小额支付建议选此项)");
                 mDatas1.add("货到付款(与商家联系付款及发货方式)");
                 NormalSelectionDialog dialog1=new NormalSelectionDialog.Builder(this)
                         .setBoolTitle(true)
@@ -457,9 +457,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                                         mPresenter.weChatPay(body);
                                         break;
                                     case 1:
-
-                                        break;
-                                    case 2:
                                         Map<String,String> body1=new HashMap<String, String>();
                                         body1.put("uid",String.valueOf(AppConstant.UID));
                                         body1.put("orderno",orderNo);
