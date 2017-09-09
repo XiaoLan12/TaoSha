@@ -13,14 +13,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderDetailsAdapter;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.PayReqBean;
 import com.yizhisha.taosha.bean.json.SeckillBean;
 import com.yizhisha.taosha.bean.json.SeckillGoodsBean;
-import com.yizhisha.taosha.bean.json.SeckillListBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
@@ -44,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -167,7 +164,12 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
         }else if(seckillBean.getPaytime()==0&&seckillBean.getStatus()==1){
             mTvPayTime.setText("未发货");
         }else {
-            mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
+            if(seckillBean.getPaytime()==0){
+                mTvPayTime.setText("未支付");
+            }else{
+                mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
+            }
+
         }
         if(seckillBean.getShiptime()==0&&seckillBean.getStatus()==0){
             mTvDistributionTime.setText("未支付");
