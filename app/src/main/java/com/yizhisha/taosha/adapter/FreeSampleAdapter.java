@@ -10,6 +10,8 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.utils.GlideUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,8 +19,10 @@ import java.util.List;
  */
 
 public class FreeSampleAdapter extends BaseQuickAdapter<FreeSampleBean.Active,BaseViewHolder> {
+    private SimpleDateFormat format ;
     public FreeSampleAdapter(@Nullable List<FreeSampleBean.Active> data) {
         super(R.layout.item_freesample,data);
+        this.format=  new SimpleDateFormat("yyyy-MM-dd HH:mm");
     }
 
     @Override
@@ -27,6 +31,9 @@ public class FreeSampleAdapter extends BaseQuickAdapter<FreeSampleBean.Active,Ba
         helper.setText(R.id.paystate_tv,item.getIs_ship()==0?"未发货":"已发货");
         helper.setText(R.id.company_tv,item.getCompany());
         helper.setText(R.id.tradename_tv,item.getTitle());
+        long lt = new Long(item.getAddtime());
+        Date date = new Date(lt*1000);
+        helper.setText(R.id.paytime_tv,format.format(date));
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),
                 (ImageView) helper.getView(R.id.tradehead_iv),GlideUtil.LOAD_BITMAP);
         helper.addOnClickListener(R.id.cancel_the_order_tv);

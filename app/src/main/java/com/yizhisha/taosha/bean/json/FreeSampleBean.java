@@ -59,6 +59,8 @@ public class FreeSampleBean {
 
         private String mobile;
 
+        private String addtime;
+
         public int getId() {
             return id;
         }
@@ -185,6 +187,14 @@ public class FreeSampleBean {
 
         public void setMobile(String mobile) {
             this.mobile = mobile;
+        }
+
+        public String getAddtime() {
+            return addtime;
+        }
+
+        public void setAddtime(String addtime) {
+            this.addtime = addtime;
         }
     }
 }
