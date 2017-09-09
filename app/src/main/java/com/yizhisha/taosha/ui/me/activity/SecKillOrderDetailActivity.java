@@ -25,6 +25,7 @@ import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.ui.home.activity.SeckillYarnActivity;
+import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderDetailsContract;
 import com.yizhisha.taosha.ui.me.presenter.SecKillOrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
@@ -117,9 +118,13 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     }
     @Override
     protected void initToolBar() {
-
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish_Activity(SecKillOrderDetailActivity.this);
+            }
+        });
     }
-
     @Override
     protected void initView() {
         Bundle bundle=getIntent().getExtras();
@@ -159,22 +164,14 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
 
         if(payment==3){
             mTvPayTime.setText("货到付款");
-        } else if(seckillBean.getPaytime()==0&&seckillBean.getStatus()==0){
+        } else if(seckillBean.getPaytime()==0){
             mTvPayTime.setText("未支付");
-        }else if(seckillBean.getPaytime()==0&&seckillBean.getStatus()==1){
-            mTvPayTime.setText("未发货");
         }else {
-            if(seckillBean.getPaytime()==0){
-                mTvPayTime.setText("未支付");
-            }else{
                 mTvPayTime.setText(DateUtil.getDateToString1(seckillBean.getPaytime()*1000));
-            }
 
         }
-        if(seckillBean.getShiptime()==0&&seckillBean.getStatus()==0){
+        if(seckillBean.getShiptime()==0){
             mTvDistributionTime.setText("未支付");
-        }else if(seckillBean.getShiptime()==0&&seckillBean.getStatus()==1){
-            mTvDistributionTime.setText("未发货");
         }else {
             mTvDistributionTime.setText(DateUtil.getDateToString1(seckillBean.getShiptime()*1000));
         }

@@ -168,21 +168,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         }
         if(payment==3){
             mTvPayTime.setText("货到付款");
-        } else if(order.getPaytime()==0&&order.getStatus()==0){
+        } else if(order.getPaytime()==0){
             mTvPayTime.setText("未支付");
-        }else if(order.getPaytime()==0&&order.getStatus()==1){
-            mTvPayTime.setText("未发货");
         }else {
             mTvPayTime.setText(DateUtil.getDateToString1(order.getPaytime()*1000));
         }
-        if(order.getShiptime()==0&&order.getStatus()==0){
+        if(order.getShiptime()==0){
                 mTvDistributionTime.setText("未支付");
-            }else if(order.getShiptime()==0&&order.getStatus()==1){
-                mTvDistributionTime.setText("未发货");
-        }else {
+            }else {
             mTvDistributionTime.setText(DateUtil.getDateToString1(order.getShiptime()*1000));
         }
-
         mTvTradelTotal.setText(order.getGoods_price()+"");
         switchState(order.getStatus(),order.getPayment());
     }

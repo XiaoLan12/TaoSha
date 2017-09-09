@@ -31,13 +31,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             protected void onSuccess(OrderSureBean bean) {
               if(bean.getStatus().equals("y")){
                     mView.loadOrderSuccess(bean);
+                }else if(bean.getStatus().equals("n")&&bean.getInfo().equals("请先添加收货地址")||bean.getInfo().equals("请先添加收货地址。")){
+                  mView.loadOrderSuccess(bean);
+
                 }else{
-                    mView.loadFail(bean.getInfo());
-                }
+                  mView.loadFail(bean.getInfo());
+              }
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -49,13 +52,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             protected void onSuccess(ShopCartOrderSureBean bean) {
               if(bean.getStatus().equals("y")){
                     mView.loadShopCartOrderSuccess(bean);
-                }else{
-                    mView.loadFail(bean.getInfo());
-                }
+                }else if(bean.getStatus().equals("n")&&bean.getInfo().equals("请先添加收货地址")||bean.getInfo().equals("请先添加收货地址。")){
+                  mView.loadShopCartOrderSuccess(bean);
+
+              }else{
+                  mView.loadFail(bean.getInfo());
+              }
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -67,13 +73,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             protected void onSuccess(SeckillOrderSureBean bean) {
              if(bean.getStatus().equals("y")){
                     mView.loadSeckillOrderSuccess(bean);
-                }else{
-                    mView.loadFail(bean.getInfo());
-                }
+                }else if(bean.getStatus().equals("n")&&bean.getInfo().equals("请先添加收货地址")||bean.getInfo().equals("请先添加收货地址。")){
+                 mView.loadSeckillOrderSuccess(bean);
+
+             }else{
+                 mView.loadFail(bean.getInfo());
+             }
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -85,13 +94,16 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             protected void onSuccess(AddressListBean bean) {
              if(bean.getStatus().equals("y")){
                     mView.loadNayangOrderSuccess(bean.getAddress());
-                }else{
-                    mView.loadFail(bean.getInfo());
-                }
+                }else if(bean.getStatus().equals("n")&&bean.getInfo().equals("请先添加收货地址")||bean.getInfo().equals("请先添加收货地址。")){
+                 mView.loadNayangOrderSuccess(bean.getAddress());
+
+             }else{
+                 mView.loadFail(bean.getInfo());
+             }
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.createFail(message);
             }
         });
     }
@@ -145,7 +157,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
             @Override
             protected void onSuccess(RequestStatusBean bean) {
                 if(bean.getStatus().equals("y")){
-                    mView.regularOrderSuccess(bean);
+                    mView.shoppCartOrderSuccess(bean);
                 }else{
                     mView.hideLoading();
                     mView.createFail(bean.getInfo());

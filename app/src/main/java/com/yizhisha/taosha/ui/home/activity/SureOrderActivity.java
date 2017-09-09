@@ -38,11 +38,13 @@ import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.LoadingDialog;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
+import com.yizhisha.taosha.event.UpdateShopCartEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.ui.home.contract.SureOrderContract;
 import com.yizhisha.taosha.ui.home.precenter.SureOrderPresenter;
 import com.yizhisha.taosha.ui.me.activity.MyAddressActivity;
+import com.yizhisha.taosha.ui.me.activity.SecKillOrderDetailActivity;
 import com.yizhisha.taosha.ui.me.activity.SetInfoActivity;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
@@ -218,19 +220,27 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     //生成普通订单
     private void createOrder(){
         StringBuilder str=new StringBuilder();
+        StringBuilder gidStr=new StringBuilder();
         String detail="";
+        String gid="";
         for(int i=0;i<dataList.size();i++){
-            str.append(dataList.get(i).getDetail()).append("，");
+            str.append(dataList.get(i).getDetail()).append(",");
+            gidStr.append(dataList.get(i).getGid()).append(",");
+
         }
         if(str.length()>0){
             detail=str.substring(0,str.length()-1);
         }
+        if(gidStr.length()>0){
+            gid=gidStr.substring(0,gidStr.length()-1);
+        }
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        body.put("gid",String.valueOf(orderSureBean.getGid()));
+        body.put("gid",gid);
         body.put("type",orderType);
         body.put("goodsprice",String.valueOf(Double.valueOf(orderSureBean.getTotalprice())));
         body.put("totalamount",String.valueOf(orderSureBean.getTotalamount()));
+
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("payment",String.valueOf(mPayType));
         body.put("detail",detail);
@@ -240,9 +250,18 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //创建购物车订单
     private void createShopCartOrder(){
+        StringBuilder gidStr=new StringBuilder();
+        String gid="";
+        for(int i=0;i<dataList.size();i++){
+            gidStr.append(dataList.get(i).getGid()).append(",");
+
+        }
+        if(gidStr.length()>0){
+            gid=gidStr.substring(0,gidStr.length()-1);
+        }
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        body.put("gid",String.valueOf(orderSureBean.getGid()));
+        body.put("gid",gid);
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("payment",String.valueOf(mPayType));
         body.put("express_type",String.valueOf(mExpressType));
@@ -250,9 +269,17 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //创建拿样订单
     private void createNayangOrder(){
+        StringBuilder gidStr=new StringBuilder();
+        String gid="";
+        for(int i=0;i<dataList.size();i++){
+            gidStr.append(dataList.get(i).getGid()).append(",");
+        }
+        if(gidStr.length()>0){
+            gid=gidStr.substring(0,gidStr.length()-1);
+        }
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        body.put("gid",String.valueOf(nayangGid));
+        body.put("gid",gid);
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("express_type",String.valueOf(mExpressType));
         body.put("detail",remarkEt.getText().toString());
@@ -260,6 +287,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //创建秒纱订单
     private void createSeckillOrder(){
+
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
         body.put("id",String.valueOf(seckillId));
@@ -354,6 +382,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         orderSureBean=dataList.get(0);
         costTv.setText("合计:￥"+data.getPrice());
         mAdapter.setNewData(dataList);
+        RxBus.$().postEvent(new UpdateShopCartEvent());
     }
     //加载秒纱确认订单后的回调
     @Override
@@ -456,6 +485,25 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 break;
         }
 
+    }
+
+    @Override
+    public void shoppCartOrderSuccess(RequestStatusBean bean) {
+            RxBus.$().postEvent(new UpdateShopCartEvent());
+            new NormalAlertDialog.Builder(this)
+                    .setBoolTitle(true)
+                    .setTitleText("温馨提示")
+                    .setContentText("成功生成订单,请到个人中心'我的订单'查看订单并支付订单,谢谢")
+                    .setSingleModel(true)
+                    .setSingleText("确认")
+                    .setWidth(0.75f)
+                    .setHeight(0.33f)
+                    .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
+                        @Override
+                        public void clickSingleButton(NormalAlertDialog dialog, View view) {
+                            finish_Activity(SureOrderActivity.this);
+                        }
+                    }).build().show();
     }
 
     @Override
@@ -585,6 +633,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     @Override
     public void loadFail(String msg) {
+
         new NormalAlertDialog.Builder(this)
                 .setBoolTitle(false)
                 .setContentText(msg)
@@ -738,6 +787,24 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         }).build().show();
                 break;
             case R.id.sureorder_tv:
+                if(consigneeNameTv.getText().toString()==null||consigneeNameTv.getText().toString().equals("")){
+                    new NormalAlertDialog.Builder(this)
+                            .setBoolTitle(false)
+                            .setContentText("请添加收货地址")
+                            .setSingleModel(true)
+                            .setSingleText("确认")
+                            .setHeight(0.23f)
+                            .setWidth(0.65f)
+                            .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
+                                @Override
+                                public void clickSingleButton(NormalAlertDialog dialog, View view) {
+                                    dialog.dismiss();
+                                }
+                            }).setTouchOutside(false)
+                            .setCancelable(false)
+                            .build().show();
+                    return;
+                }
                 if(mType==1){
                     createOrder();
                 }else if(mType==2){
@@ -766,6 +833,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
             AddressListBean.Address address= (AddressListBean.Address) data.getSerializableExtra("ADDRESS");
             consigneeNameTv.setText(address.getLinkman());
             consigneePhoneTv.setText(address.getMobile());
+            orderSureBean.setAddressId(address.getId());
             shippingaddressTv.setText(address.getAddress());
         }
     }

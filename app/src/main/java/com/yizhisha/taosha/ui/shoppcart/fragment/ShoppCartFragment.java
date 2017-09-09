@@ -162,6 +162,10 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
                 if (str.length() > 0) {
                     sid = str.substring(0, str.length() - 1);
                 }
+                if(str.length()==0){
+                    ToastUtil.showShortToast("请选择要购买的商品");
+                    return;
+                }
                 Bundle bundle=new Bundle();
                 bundle.putInt("ORDERTYPE",2);
                 bundle.putString("gid",sid);

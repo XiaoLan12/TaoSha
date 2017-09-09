@@ -48,9 +48,11 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private MyAddressAdapter mAdapter;
+
     private List<AddressListBean.Address> dataList=new ArrayList<>();
 
     private int index;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_address;
@@ -206,12 +208,10 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         mAdapter.setNewData(dataList);
         mLoadingView.loadError();
     }
-
     @Override
     public void deleteFail(String msg) {
         ToastUtil.showbottomShortToast(msg);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

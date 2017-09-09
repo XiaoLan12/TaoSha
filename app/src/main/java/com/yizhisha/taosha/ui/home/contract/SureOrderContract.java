@@ -30,6 +30,7 @@ public interface SureOrderContract {
         void weChatPay(PayReqBean bean);
 
         void regularOrderSuccess(RequestStatusBean bean);
+        void shoppCartOrderSuccess(RequestStatusBean bean);
         void nayangOrderSuccess(String msg);
 
         void loadWeChatPayState(WeChatPayStateBean bean);
