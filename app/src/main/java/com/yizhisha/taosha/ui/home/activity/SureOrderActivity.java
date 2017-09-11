@@ -480,7 +480,11 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                 body.put("out_trade_no",orderNo);
                 body.put("total_fee",String.valueOf((int)orderSureBean.getTotalprice()*100));
                 body.put("spbill_create_ip",getPsdnIp());
-                body.put("attach","order");
+                if(mType==3){
+                    body.put("attach","seckilling");
+                }else {
+                    body.put("attach", "order");
+                }
                 mPresenter.weChatPay(body);
                 break;
         }

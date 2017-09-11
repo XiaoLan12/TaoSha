@@ -264,7 +264,7 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
                 startActivity(SureOrderActivity.class,bundle);
                 break;
             case R.id.call_us_tv:
-                new NormalAlertDialog.Builder(this)
+               /* new NormalAlertDialog.Builder(this)
                         .setBoolTitle(false)
                         .setContentText("0769-83115811")
                         .setContentTextSize(18)
@@ -285,7 +285,8 @@ public class SeckillYarnActivity extends BaseActivity<SeckillProductPresenter>
                                 dialog.dismiss();
 
                             }
-                        }).build().show();
+                        }).build().show();*/
+                startActivity(OnlineServiceActivity.class);
                 break;
         }
     } @Override

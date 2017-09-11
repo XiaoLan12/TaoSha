@@ -176,13 +176,13 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             mTvDistributionTime.setText(DateUtil.getDateToString1(seckillBean.getShiptime()*1000));
         }
 
-        mTvTradelTotal.setText(seckillBean.getMarket_price()+"");
+        mTvTradelTotal.setText(seckillBean.getTotalprice()+"");
         if(seckillBean.getGoods()!=null){
             SeckillGoodsBean goodsBean=seckillBean.getGoods();
             mTvCompay.setText(goodsBean.getCompany());
             mTvShopTitle.setText(goodsBean.getTitle());
             mTvShopColor.setText(goodsBean.getIngredient());
-            mTvShopPrice.setText(seckillBean.getMarket_price()+"");
+            mTvShopPrice.setText(seckillBean.getTotalprice()+"");
             GlideUtil.getInstance().LoadContextBitmap(mContext,AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
                     mIvShopPhoto,GlideUtil.LOAD_BITMAP);
             orderGoodsRl.setOnClickListener(new View.OnClickListener() {
@@ -388,10 +388,29 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cancel_the_order_tv:
-                Map<String, String> bodyMap = new HashMap<>();
-                bodyMap.put("uid", String.valueOf(AppConstant.UID));
-                bodyMap.put("orderno",seckillBean.getOrderno());
-                mPresenter.cancleOrder(bodyMap);
+                new NormalAlertDialog.Builder(this)
+                        .setBoolTitle(false)
+                        .setContentText("确认取消订单")
+                        .setContentTextSize(18)
+                        .setLeftText("取消")
+                        .setRightText("确认")
+                        .setWidth(0.75f)
+                        .setHeight(0.33f)
+                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
+                            @Override
+                            public void clickLeftButton(NormalAlertDialog dialog, View view) {
+                                dialog.dismiss();
+                            }
+                            @Override
+                            public void clickRightButton(NormalAlertDialog dialog, View view) {
+                                Map<String, String> bodyMap = new HashMap<>();
+                                bodyMap.put("uid", String.valueOf(AppConstant.UID));
+                                bodyMap.put("orderno",seckillBean.getOrderno());
+                                mPresenter.cancleOrder(bodyMap);
+                                dialog.dismiss();
+
+                            }
+                        }).build().show();
                 break;
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
@@ -452,7 +471,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                                         body.put("out_trade_no",orderNo);
                                         body.put("total_fee",String.valueOf((int)seckillBean.getTotalprice()*100));
                                         body.put("spbill_create_ip",getPsdnIp());
-                                        body.put("attach","order");
+                                        body.put("attach","seckilling");
                                         mPresenter.weChatPay(body);
                                         break;
                                     case 1:

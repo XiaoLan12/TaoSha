@@ -221,7 +221,7 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
                 startActivity(SelectYarnColorActivity.class,bundle3);
                 break;
             case R.id.call_us_ll:
-                new NormalAlertDialog.Builder(this)
+                /*new NormalAlertDialog.Builder(this)
                         .setBoolTitle(false)
                         .setContentText("0769-83115811")
                         .setContentTextSize(18)
@@ -242,7 +242,8 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
                                 dialog.dismiss();
 
                             }
-                        }).build().show();
+                        }).build().show();*/
+                startActivity(OnlineServiceActivity.class);
                 break;
         }
     }

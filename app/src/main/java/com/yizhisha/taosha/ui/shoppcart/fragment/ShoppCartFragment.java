@@ -295,6 +295,8 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
             //提供当前父列的子列数据
             List<Map<String, Object>> childMapList = new ArrayList<Map<String, Object>>();
             List<ShopcartGoods> goods=data.get(i).getGoods();
+            Log.d("TTT","妈妈吗"+goods.size());
+            Log.d("TTT","妈妈吗"+goods.toString());
             for (int j = 0; j < goods.size(); j++) {
                 Map<String, Object> childMap = new HashMap<String, Object>();
 

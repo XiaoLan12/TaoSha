@@ -100,16 +100,17 @@ public class SecKillOrderDetailsPresenter extends SecKillOrderDetailsContract.Pr
             @Override
             protected void onSuccess(PayReqBean bean) {
                 mView.hideLoading();
-                if(bean!=null){
-                    mView.weChatPay(bean);
+                if(bean.getStatus()!=null&&!bean.getStatus().equals("y")){
+                    mView.cancelFail("数据加载失败");
+
                 }else{
-                    mView.loadFail("数据加载失败");
+                    mView.weChatPay(bean);
                 }
             }
             @Override
             protected void onFailure(String message) {
                 mView.hideLoading();
-                mView.loadFail(message);
+                mView.cancelFail(message);
             }
         });
     }
@@ -127,7 +128,7 @@ public class SecKillOrderDetailsPresenter extends SecKillOrderDetailsContract.Pr
             }
             @Override
             protected void onFailure(String message) {
-                mView.loadFail(message);
+                mView.cancelFail(message);
             }
         });
     }
