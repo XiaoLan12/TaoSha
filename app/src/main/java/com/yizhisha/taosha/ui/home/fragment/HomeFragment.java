@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.home.fragment;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -143,13 +144,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBarCompat.translucentStatusBar(getActivity(), true);
-//            StatusBarCompat.setStatusBarColor(activity, Color.GREEN);
+//            StatusBarCompat.translucentStatusBar(getActivity(), true);
+            StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
+
         }
     }
     @Override
     protected void initView() {
-        StatusBarCompat.translucentStatusBar(getActivity(), true);
+        StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
+//        StatusBarCompat.translucentStatusBar(getActivity(), true);
         //设置样式,默认为:Banner.NOT_INDICATOR(不显示指示器和标题)
         banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
         //设置轮播样式（没有标题默认为右边,有标题时默认左边）

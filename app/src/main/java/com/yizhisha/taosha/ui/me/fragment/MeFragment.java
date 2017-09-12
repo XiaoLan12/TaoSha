@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.me.fragment;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -94,8 +95,8 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBarCompat.translucentStatusBar(getActivity());
-
+//            StatusBarCompat.translucentStatusBar(getActivity());
+            StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
         }
     }
     @Override
