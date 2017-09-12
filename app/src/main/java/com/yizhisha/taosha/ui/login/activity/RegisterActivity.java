@@ -165,7 +165,8 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
 
         return true;
     }
-    @OnClick({R.id.getcode_register_tv,R.id.sure_findpwd_btn,R.id.setpwd_register_iv,R.id.againpwd_register_iv})
+    @OnClick({R.id.getcode_register_tv,R.id.sure_findpwd_btn,R.id.setpwd_register_iv,
+            R.id.againpwd_register_iv,R.id.login_register_tv})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -220,6 +221,9 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
                     mEtAgainPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 isHidden2 = !isHidden2;
+                break;
+            case R.id.login_register_tv:
+                startActivity(LoginFragmentActivity.class);
                 break;
         }
     }

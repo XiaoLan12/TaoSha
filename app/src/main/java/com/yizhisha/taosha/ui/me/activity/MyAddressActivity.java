@@ -53,6 +53,8 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
 
     private int index;
 
+    private int mType;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_address;
@@ -79,6 +81,10 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
 
     @Override
     protected void initView() {
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null){
+            mType=bundle.getInt("TYPE");
+        }
         initAdapter();
         mPresenter.loadAddress(AppConstant.UID,true);
     }
@@ -98,10 +104,12 @@ public class MyAddressActivity extends BaseActivity<MyAddressPresenter> implemen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent();
-                intent.putExtra("ADDRESS",dataList.get(position));
-                setResult(2,intent);
-                finish_Activity(MyAddressActivity.this);
+                if(mType==1) {
+                    Intent intent = new Intent();
+                    intent.putExtra("ADDRESS", dataList.get(position));
+                    setResult(2, intent);
+                    finish_Activity(MyAddressActivity.this);
+                }
             }
         });
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {

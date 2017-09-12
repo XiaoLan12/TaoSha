@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.me.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -149,6 +150,15 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                                     }).build().show();
                         break;
                 }
+            }
+        });
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id", dataList.get(position).getGid());
+                startActivity(YarnActivity.class, bundle);
             }
         });
     }

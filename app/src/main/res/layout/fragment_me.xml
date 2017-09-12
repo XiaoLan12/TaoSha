@@ -51,7 +51,6 @@
                         style="@style/TS.Theme.Widget.Text"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:text="隔壁家的老"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_normal2" />
                 </RelativeLayout>

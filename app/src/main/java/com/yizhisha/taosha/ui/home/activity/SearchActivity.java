@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -111,14 +112,20 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
                 return tv;
             }
         });
-        tagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+
+        tagFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
             @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent) {
-                value.setLength(0);
-                value.append(searchEt.getText());
-                value.append(dataList.get(position)).append(" ");
+            public void onSelected(Set<Integer> selectPosSet) {
+                if(selectPosSet.size()>0){
+                    value.setLength(0);
+                    for(int i:selectPosSet){
+                        value.append(maAdapter.getItem(i));
+                        value.append(" ");
+                    }
+                }else{
+                    value.setLength(0);
+                }
                 searchEt.setText(value.toString());
-                return true;
             }
         });
         searchEt.addTextChangedListener(new TextWatcher() {

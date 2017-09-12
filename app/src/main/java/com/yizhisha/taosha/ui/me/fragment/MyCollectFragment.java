@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.me.fragment;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -82,7 +83,10 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(YarnActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id", dataList.get(position).getGid());
+                startActivity(YarnActivity.class, bundle);
             }
         });
        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -109,9 +113,10 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
                                    public void clickRightButton(NormalAlertDialog dialog, View view) {
                                        position=pos;
                                        Map<String,String> map=new HashMap<String, String>();
-                                       map.put("gid",dataList.get(pos).getGid());
+                                       map.put("gid",String.valueOf(dataList.get(pos).getGid()));
                                        map.put("uid",String.valueOf(AppConstant.UID));
                                        mPresenter.cacheCollect(map);
+                                       mAdapter.notifyItemRemoved(position);
                                        position=pos;
                                        dialog.dismiss();
 
@@ -155,7 +160,7 @@ public class MyCollectFragment extends BaseFragment<MyCollectPresenter> implemen
 
     @Override
     public void cacheSuccess(String str) {
-        mAdapter.notifyItemRemoved(position);
+        load(mType,false);
     }
     @Override
     public void showLoading() {

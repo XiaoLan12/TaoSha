@@ -56,7 +56,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/right_username_iv"
             android:layout_marginRight="@dimen/dp_10"
-            android:text="老王"/>
+            />
         <ImageView
             android:id="@+id/right_username_iv"
             android:layout_width="@dimen/dp_20"
@@ -86,7 +86,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/right_realname"
             android:layout_marginRight="@dimen/dp_10"
-            android:text="老王"/>
+            />
         <ImageView
             android:id="@+id/right_realname"
             android:layout_width="@dimen/dp_20"
@@ -115,7 +115,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/right_sex_iv"
             android:layout_marginRight="@dimen/dp_10"
-            android:text="男"/>
+            />
         <ImageView
             android:id="@+id/right_sex_iv"
             android:layout_width="@dimen/dp_20"
@@ -136,7 +136,7 @@
 
         <TextView
             style="@style/TS.Theme.Widget.Text"
-            android:text="y邮箱"
+            android:text="邮箱"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -144,7 +144,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/right_e_mail_iv"
             android:layout_marginRight="@dimen/dp_10"
-            android:text="1529252258@qq.com"/>
+            />
         <ImageView
             android:id="@+id/right_e_mail_iv"
             android:layout_width="@dimen/dp_20"
@@ -173,7 +173,7 @@
             style="@style/TS.Theme.Widget.Text"
             android:layout_toLeftOf="@+id/right_companynamel_iv"
             android:layout_marginRight="@dimen/dp_10"
-            android:text="老王杂货铺"/>
+            />
         <ImageView
             android:id="@+id/right_companynamel_iv"
             android:layout_width="@dimen/dp_20"

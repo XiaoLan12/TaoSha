@@ -94,7 +94,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBarCompat.translucentStatusBar(getActivity(), true);
+            StatusBarCompat.translucentStatusBar(getActivity());
 
         }
     }

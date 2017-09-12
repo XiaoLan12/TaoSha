@@ -116,7 +116,6 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
                 mView.hideLoading();
                 if(bean.getStatus()!=null&&bean.getStatus().equals("n")){
                     mView.createFail(bean.getInfo());
-
                 }else{
                     mView.weChatPay(bean);
                 }
@@ -135,6 +134,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().regularOrder(param), new RxSubscriber<RequestStatusBean>(mContext, false) {
             @Override
             protected void onSuccess(RequestStatusBean bean) {
+
                 if(bean.getStatus().equals("y")){
                     mView.regularOrderSuccess(bean);
                 }else{
@@ -156,6 +156,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().shopCartCreateOrder(param), new RxSubscriber<RequestStatusBean>(mContext, false) {
             @Override
             protected void onSuccess(RequestStatusBean bean) {
+
                 if(bean.getStatus().equals("y")){
                     mView.shoppCartOrderSuccess(bean);
                 }else{
@@ -177,10 +178,10 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().naYangCreateOrder(param), new RxSubscriber<RequestStatusBean>(mContext, false) {
             @Override
             protected void onSuccess(RequestStatusBean bean) {
+                mView.hideLoading();
                 if(bean.getStatus().equals("y")){
                     mView.nayangOrderSuccess(bean.getInfo());
                 }else{
-                    mView.hideLoading();
                     mView.createFail(bean.getInfo());
                 }
             }
@@ -198,6 +199,7 @@ public class SureOrderPresenter extends SureOrderContract.Presenter{
         addSubscrebe(Api.getInstance().seckillCreateOrder(param), new RxSubscriber<RequestStatusBean>(mContext, false) {
             @Override
             protected void onSuccess(RequestStatusBean bean) {
+
                 if(bean.getStatus().equals("y")){
                     mView.regularOrderSuccess(bean);
                 }else{

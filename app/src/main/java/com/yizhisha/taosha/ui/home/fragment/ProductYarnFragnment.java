@@ -250,6 +250,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
             userheadIv.setImageResource(R.drawable.icon_head_normal);
             userheadIv.setVisibility(View.GONE);
             commentDetailsTv.setText("暂无评论");
+            lookAllcommentTv.setVisibility(View.GONE);
         }
     }
 

@@ -194,7 +194,9 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
 
                 break;
             case R.id.managedeladdress_rl:
-                startActivity(MyAddressActivity.class);
+                Bundle bundle3=new Bundle();
+                bundle3.putInt("TYPE",0);
+                startActivity(MyAddressActivity.class,bundle3);
                 break;
             case R.id.exit_btn:
                 SharedPreferencesUtil.removeValue(this,"ISLOGIN");

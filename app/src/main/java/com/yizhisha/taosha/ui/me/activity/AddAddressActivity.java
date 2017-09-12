@@ -49,6 +49,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
 
     private int type=0;
 
+    private int addressId=0;
+
     private CityPickerView mCityPickerView;
     @Override
     protected int getLayoutId() {
@@ -61,8 +63,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
         type=bundle.getInt("TYPE");
         if(type==1){
             toolbar.setTitle("修改地址");
-            int id=bundle.getInt("ID");
-            load(id);
+            addressId=bundle.getInt("ID");
+            load(addressId);
         }
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
@@ -180,6 +182,9 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> implem
                 }
                 Map<String,String> map=new HashMap<>();
                 map.put("uid",String.valueOf(AppConstant.UID));
+                if(type==1){
+                map.put("id",String.valueOf(addressId));
+                }
                 map.put("index",String.valueOf(isNormal));
                 map.put("linkman",mEtConsignee.getText().toString());
                 map.put("area_app",mTvArea.getText().toString());

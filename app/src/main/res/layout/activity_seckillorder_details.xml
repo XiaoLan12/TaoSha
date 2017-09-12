@@ -68,7 +68,7 @@
                     android:id="@+id/consigneehead_iv"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
-                    android:src="@drawable/icon_delete" />
+                    android:src="@drawable/icon_user" />
 
                 <TextView
                     android:id="@+id/consignee_tv"
@@ -100,7 +100,7 @@
                     android:id="@+id/shippingaddress_head_tv"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
-                    android:src="@drawable/icon_delete" />
+                    android:src="@drawable/icon_location" />
 
                 <TextView
                     android:id="@+id/shippingaddress_tv"

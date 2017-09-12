@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv_empty"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="@dimen/dp_60"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/icon_empty"/>
 
     <TextView
@@ -20,5 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:visibility="gone"
+        android:textSize="@dimen/font_normal2"
         android:text="没有数据了"/>
 </LinearLayout>

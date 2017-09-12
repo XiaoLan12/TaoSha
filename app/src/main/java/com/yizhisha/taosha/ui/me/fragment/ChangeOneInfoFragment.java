@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.ChangeUserInfoBody;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
@@ -58,6 +60,8 @@ import static android.net.UrlQuerySanitizer.IllegalCharacterValueSanitizer.LT_OK
  */
 
 public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> implements ChangeOneInfoContract.View{
+    @Bind(R.id.toolbar)
+    BaseToolbar toolbar;
     @Bind(R.id.head_personal_iv)
     ImageView mIvHead;
     @Bind(R.id.username_oneinfo_tv)
@@ -120,6 +124,12 @@ public class ChangeOneInfoFragment extends BaseFragment<ChangeOneInfoPresenter> 
     }
     @Override
     protected void initView() {
+        toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityManager.getActivityMar().finishActivity(getActivity());
+            }
+        });
         mPresenter.loadPersonalData(AppConstant.UID);
         changeEvent();
     }

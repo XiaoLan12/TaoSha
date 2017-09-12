@@ -269,17 +269,10 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     }
     //创建拿样订单
     private void createNayangOrder(){
-        StringBuilder gidStr=new StringBuilder();
-        String gid="";
-        for(int i=0;i<dataList.size();i++){
-            gidStr.append(dataList.get(i).getGid()).append(",");
-        }
-        if(gidStr.length()>0){
-            gid=gidStr.substring(0,gidStr.length()-1);
-        }
+
         Map<String,String> body=new HashMap<String, String>();
         body.put("uid",String.valueOf(AppConstant.UID));
-        body.put("gid",gid);
+        body.put("gid",String.valueOf(nayangGid));
         body.put("addressid",String.valueOf(orderSureBean.getAddressId()));
         body.put("express_type",String.valueOf(mExpressType));
         body.put("detail",remarkEt.getText().toString());
@@ -434,6 +427,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
         OrderSureGoodBean goodBean=new OrderSureGoodBean();
         goodBean.setAddressId(addressId);
         orderSureBean=goodBean;
+        dataList.add(orderSureBean);
         costTv.setText("合计:样品免费");
     }
 
@@ -458,6 +452,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
             case 2:
                 break;
             case 3:
+                if(mLoadingDialog!=null){
+                    mLoadingDialog.cancelDialog();
+                }
                 new NormalAlertDialog.Builder(this)
                         .setTitleText("支付结果")
                         .setContentText(bean.getInfo()+"请到\"我的订单\"查看供应商的联系方式,及时与供应商取得联系")
@@ -471,7 +468,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                                 dialog.dismiss();
                                 finish_Activity(SureOrderActivity.this);
                             }
-                        }).build().show();
+                        }).setTouchOutside(false)
+                        .setCancelable(false)
+                        .build().show();
                 break;
             case 5:
                 orderNo=bean.getOrderno();
@@ -507,7 +506,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         public void clickSingleButton(NormalAlertDialog dialog, View view) {
                             finish_Activity(SureOrderActivity.this);
                         }
-                    }).build().show();
+                    }).setTouchOutside(false)
+                    .setCancelable(false)
+                    .build().show();
     }
 
     @Override
@@ -525,7 +526,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         dialog.dismiss();
                         finish_Activity(SureOrderActivity.this);
                     }
-                }).build().show();
+                }).setTouchOutside(false)
+                .setCancelable(false).build().show();
     }
 
     //获得微信支付的状态
@@ -544,7 +546,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         dialog.dismiss();
                         finish_Activity(SureOrderActivity.this);
                     }
-                }).build().show();
+                }).setTouchOutside(false)
+                .setCancelable(false)
+                .build().show();
     }
 
     @Override
@@ -685,7 +689,9 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.shippingaddress_ll:
-                startActivityForResult(MyAddressActivity.class,2);
+                Bundle bundle=new Bundle();
+                bundle.putInt("TYPE",1);
+                startActivityForResult(MyAddressActivity.class,bundle,2);
                 break;
             case R.id.distribution_way_rl:
                 final List<String> mDatas=new ArrayList<>();

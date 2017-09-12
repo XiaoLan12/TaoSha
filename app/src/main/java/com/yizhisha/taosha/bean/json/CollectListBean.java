@@ -31,11 +31,11 @@ public class CollectListBean {
     public class Favorite {
 
 
-        private String id;
+        private int id;
 
-        private String uid;
+        private int uid;
 
-        private String gid;
+        private int gid;
 
         private String title;
 
@@ -53,27 +53,27 @@ public class CollectListBean {
 
         private String price_real;
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
-        public String getUid() {
+        public int getUid() {
             return uid;
         }
 
-        public void setUid(String uid) {
+        public void setUid(int uid) {
             this.uid = uid;
         }
 
-        public String getGid() {
+        public int getGid() {
             return gid;
         }
 
-        public void setGid(String gid) {
+        public void setGid(int gid) {
             this.gid = gid;
         }
 

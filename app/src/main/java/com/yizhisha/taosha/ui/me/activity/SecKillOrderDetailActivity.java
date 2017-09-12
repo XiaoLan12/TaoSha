@@ -182,7 +182,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             mTvCompay.setText(goodsBean.getCompany());
             mTvShopTitle.setText(goodsBean.getTitle());
             mTvShopColor.setText(goodsBean.getIngredient());
-            mTvShopPrice.setText(seckillBean.getTotalprice()+"");
+            mTvShopPrice.setText("价格:"+seckillBean.getTotalprice());
             GlideUtil.getInstance().LoadContextBitmap(mContext,AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+goodsBean.getLitpic(),
                     mIvShopPhoto,GlideUtil.LOAD_BITMAP);
             orderGoodsRl.setOnClickListener(new View.OnClickListener() {

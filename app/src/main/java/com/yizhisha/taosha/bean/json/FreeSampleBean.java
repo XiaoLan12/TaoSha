@@ -59,7 +59,7 @@ public class FreeSampleBean {
 
         private String mobile;
 
-        private String addtime;
+        private long addtime;
 
         public int getId() {
             return id;
@@ -189,11 +189,11 @@ public class FreeSampleBean {
             this.mobile = mobile;
         }
 
-        public String getAddtime() {
+        public long getAddtime() {
             return addtime;
         }
 
-        public void setAddtime(String addtime) {
+        public void setAddtime(long addtime) {
             this.addtime = addtime;
         }
     }

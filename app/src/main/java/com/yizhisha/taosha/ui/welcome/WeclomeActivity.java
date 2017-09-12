@@ -1,8 +1,11 @@
 package com.yizhisha.taosha.ui.welcome;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -38,6 +41,16 @@ public class WeclomeActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_welcome;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        //设置无标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
