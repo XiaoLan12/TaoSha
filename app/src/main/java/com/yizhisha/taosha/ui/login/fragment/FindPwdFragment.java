@@ -83,7 +83,9 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
     }
     @Override
     public void getCodeSuccess(String info) {
-
+        CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(mTvGetCode, 60000, 1000);
+        mCountDownTimerUtils.start();
+        ToastUtil.showShortToast(info);
     }
 
     @Override
@@ -150,8 +152,6 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
                     ToastUtil.showCenterShortToast("请输入你的手机号码");
                     return;
                 }
-                CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(mTvGetCode, 60000, 1000);
-                mCountDownTimerUtils.start();
                 Map<String,String> map=new HashMap<>();
                 map.put("mobile",mEtAccount.getText().toString().trim());
                 mPresenter.getCode(map);

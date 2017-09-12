@@ -76,8 +76,6 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
                     ToastUtil.showCenterShortToast("请输入正确的手机号码");
                     return;
                 }
-                CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(mTvGetCode, 60000, 1000);
-                mCountDownTimerUtils.start();
                 Map<String,String> map=new HashMap<>();
                 map.put("mobile",phone);
                 mPresenter.getCode(map);
@@ -113,7 +111,9 @@ public class PhoneLoginFragment extends BaseFragment<PhoneLoginPresenter> implem
     }
     @Override
     public void getCodeSuccess(String info) {
-        ToastUtil.showbottomShortToast(info);
+        CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(mTvGetCode, 60000, 1000);
+        mCountDownTimerUtils.start();
+        ToastUtil.showShortToast(info);
     }
     @Override
     public void loadFail(String msg) {
