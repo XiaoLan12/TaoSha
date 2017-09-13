@@ -199,14 +199,16 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
         if (goodsBean.isEditing()==1) {
             childViewHolder.mRlNormal.setVisibility(View.GONE);
             childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
+            childViewHolder.mBtnDelete.setVisibility(View.VISIBLE);
 
         } else if (goodsBean.isEditing()==2){
             childViewHolder.mRlNormal.setVisibility(View.GONE);
             childViewHolder.mRlEdit.setVisibility(View.VISIBLE);
-            childViewHolder.mBtnDelete.setVisibility(View.GONE);
+            childViewHolder.mBtnDelete.setVisibility(View.VISIBLE);
         }else{
             childViewHolder.mRlNormal.setVisibility(View.VISIBLE);
             childViewHolder.mRlEdit.setVisibility(View.GONE);
+            childViewHolder.mBtnDelete.setVisibility(View.GONE);
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {

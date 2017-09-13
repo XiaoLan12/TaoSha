@@ -12,6 +12,7 @@
         android:padding="@dimen/dp_5"
         android:textColor="@color/common_h2"
         android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:visibility="visible"
         />
 
@@ -23,6 +24,7 @@
         android:textSize="@dimen/font_normal3"
         android:singleLine="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:ellipsize="end"
         android:text="title"
          />
@@ -34,6 +36,7 @@
         android:padding="@dimen/dp_5"
         android:textColor="@color/common_h2"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:visibility="visible" />
 
 </RelativeLayout>

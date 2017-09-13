@@ -96,6 +96,7 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     @Override
     protected void initView() {
         mToobar.setRightButtonText("编辑");
+        mToobar.setRightButtonTextSize(16);
         mToobar.showRightButton();
 
         mToobar.setRightButtonOnClickLinster(new View.OnClickListener() {

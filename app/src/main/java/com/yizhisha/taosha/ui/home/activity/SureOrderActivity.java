@@ -43,7 +43,10 @@ import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.ui.home.contract.SureOrderContract;
 import com.yizhisha.taosha.ui.home.precenter.SureOrderPresenter;
+import com.yizhisha.taosha.ui.me.activity.FreeSampleActivity;
 import com.yizhisha.taosha.ui.me.activity.MyAddressActivity;
+import com.yizhisha.taosha.ui.me.activity.MyOrderAcitvity;
+import com.yizhisha.taosha.ui.me.activity.SecKillOrderActivity;
 import com.yizhisha.taosha.ui.me.activity.SecKillOrderDetailActivity;
 import com.yizhisha.taosha.ui.me.activity.SetInfoActivity;
 import com.yizhisha.taosha.utils.RescourseUtil;
@@ -466,7 +469,12 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                             @Override
                             public void clickSingleButton(NormalAlertDialog dialog, View view) {
                                 dialog.dismiss();
-                                finish_Activity(SureOrderActivity.this);
+                                if(mType==3){
+                                    startActivity(SecKillOrderActivity.class);
+                                }else{
+                                    startActivity(MyOrderAcitvity.class);
+                                }
+
                             }
                         }).setTouchOutside(false)
                         .setCancelable(false)
@@ -504,7 +512,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                     .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
                         @Override
                         public void clickSingleButton(NormalAlertDialog dialog, View view) {
-                            finish_Activity(SureOrderActivity.this);
+                            dialog.dismiss();
+                            startActivity(MyOrderAcitvity.class);
                         }
                     }).setTouchOutside(false)
                     .setCancelable(false)
@@ -524,7 +533,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                     @Override
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
                         dialog.dismiss();
-                        finish_Activity(SureOrderActivity.this);
+                        startActivity(FreeSampleActivity.class);
                     }
                 }).setTouchOutside(false)
                 .setCancelable(false).build().show();
@@ -544,7 +553,11 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                     @Override
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
                         dialog.dismiss();
-                        finish_Activity(SureOrderActivity.this);
+                        if(mType==3){
+                            startActivity(SecKillOrderActivity.class);
+                        }else{
+                            startActivity(MyOrderAcitvity.class);
+                        }
                     }
                 }).setTouchOutside(false)
                 .setCancelable(false)

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -154,6 +155,12 @@ public class BaseToolbar extends Toolbar {
            return mRightButton.getText().toString();
         }
         return null;
+    }
+    //给右侧按钮设置文字大小
+    public void setRightButtonTextSize(float size) {
+        if (mRightButton != null) {
+            mRightButton.setTextSize(size);
+        }
     }
 
     //给左侧按钮设置图片，也可以在布局文件中直接引入

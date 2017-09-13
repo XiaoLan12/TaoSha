@@ -79,7 +79,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.ll_scan)
     LinearLayout ll_scan;
 
-    private String[] mTitles = {"棉纱", "针型", "价格", "排序"};
+    private String[] mTitles = {"棉纱", "支数", "价格", "排序"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private SelectYarnFragment mFragment;
