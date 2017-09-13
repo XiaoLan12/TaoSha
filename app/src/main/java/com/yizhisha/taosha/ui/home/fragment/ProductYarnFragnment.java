@@ -266,7 +266,9 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     }
 
     private void initSeka() {
-        sekaList.addAll(goods.getSeka());
+        if(goods.getSeka()!=null){
+            sekaList.addAll(goods.getSeka());
+        }
         for (int i = 0; i < sekaList.size(); i++) {
             sekaList.set(i, AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + sekaList.get(i));
         }
