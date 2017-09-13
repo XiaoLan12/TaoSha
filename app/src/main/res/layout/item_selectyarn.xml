@@ -50,7 +50,7 @@
             android:layout_below="@+id/composition_selectyarn_tv"
             android:layout_marginLeft="@dimen/dp_5"
             android:textSize="@dimen/font_small"
-            android:text="适合针型:"/>
+            android:text="适合支数:"/>
 
         <TextView
             android:id="@+id/fit_pittype_selectyarn_tv"

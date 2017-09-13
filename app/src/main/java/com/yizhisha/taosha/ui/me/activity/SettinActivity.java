@@ -10,12 +10,10 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.ShoppCartAdapter;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
-import com.yizhisha.taosha.bean.GoodsBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.bean.json.WechatInfoBean;
@@ -37,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -110,7 +107,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 });
     }
     @OnClick({R.id.changepwd_rl, R.id.changephone_rl, R.id.changeoneinfo_rl,
-            R.id.managedeladdress_rl, R.id.changeweixin_rl,R.id.exit_btn})
+            R.id.changeweixin_rl,R.id.exit_btn})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -193,11 +190,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 }
 
                 break;
-            case R.id.managedeladdress_rl:
-                Bundle bundle3=new Bundle();
-                bundle3.putInt("TYPE",0);
-                startActivity(MyAddressActivity.class,bundle3);
-                break;
+
             case R.id.exit_btn:
                 SharedPreferencesUtil.removeValue(this,"ISLOGIN");
                 AppConstant.isLogin=false;

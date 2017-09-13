@@ -8,9 +8,10 @@
     <TextView
         android:id="@+id/toolbar_leftbutton"
         android:layout_width="@dimen/dp_40"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="@dimen/dp_5"
         android:textColor="@color/common_h2"
+        android:gravity="center"
         android:layout_alignParentLeft="true"
         android:visibility="visible"
         />
@@ -18,11 +19,12 @@
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textColor="@color/common_h1"
         android:textSize="@dimen/font_normal3"
         android:singleLine="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:ellipsize="end"
         android:text="title"
          />
@@ -30,10 +32,12 @@
     <TextView
         android:id="@+id/toolbar_rightbutton"
         android:layout_width="@dimen/dp_40"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="@dimen/dp_5"
         android:textColor="@color/common_h2"
+        android:textSize="16sp"
         android:layout_alignParentRight="true"
+        android:gravity="center"
         android:visibility="visible" />
 
 </RelativeLayout>

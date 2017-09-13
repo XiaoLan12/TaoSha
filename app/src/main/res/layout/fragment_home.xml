@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="44dp"
         android:layout_marginRight="44dp"
         android:background="@drawable/home_search_linearlayout"
@@ -262,7 +262,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/common_bg"
-                        android:src="@drawable/recommend_huashi"/>
+                        android:src="@drawable/recommend_huaqian"/>
                 </com.yizhisha.taosha.widget.SquareIndexLayout>
             </LinearLayout>
             <LinearLayout
@@ -292,7 +292,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/common_bg"
-                        android:src="@drawable/recommend_huaqian"/>
+                        android:src="@drawable/recommend_huashi"/>
                 </com.yizhisha.taosha.widget.SquareIndexLayout>
             </LinearLayout>
             <LinearLayout

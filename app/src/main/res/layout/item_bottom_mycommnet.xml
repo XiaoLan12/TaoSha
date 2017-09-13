@@ -28,21 +28,21 @@
             android:id="@+id/business_reply_mycomment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/yellow2"
+            android:textColor="@color/yellow4"
             android:text="商家回复:"/>
         <TextView
             android:id="@+id/business_reply_content_mycomment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/business_reply_mycomment"
-            android:textColor="@color/yellow2"
+            android:textColor="@color/yellow4"
             tools:text="商家回复"/>
         <TextView
             android:id="@+id/business_reply_time_mycomment_tv"
             style="@style/TS.Theme.Widget.Text"
             android:layout_below="@+id/business_reply_content_mycomment_tv"
             android:layout_marginTop="@dimen/dp_5"
-            android:textColor="@color/yellow2"
+            android:textColor="@color/yellow4"
             tools:text="2017.06.19"/>
     </RelativeLayout>
 

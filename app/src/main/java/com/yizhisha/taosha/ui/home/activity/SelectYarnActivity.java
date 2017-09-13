@@ -300,7 +300,28 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             if (bundle != null) {
                 String result=bundle.getString("result");
 //                ToastUtils.showSingleToast("二维码结果："+result+"  金额"+money);
-            searchYarnEt.setText(result);
+                if(result.contains("id/")){
+                    int i=result.indexOf("id/");
+                    try{
+                        Bundle bundle1=new Bundle();
+                        bundle1.putInt("TYPE",1);
+                        bundle1.putInt("id",Integer.parseInt(result.substring(i+3,result.length())));
+                        startActivity(YarnActivity.class,bundle1);
+                    }catch (Exception e){
+                        searchYarnEt.setText(result);
+                        searchYarnEt.setSelection(searchYarnEt.getText().length());
+                        SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                        selectYarnFragment.search(searchYarnEt.getText().toString());
+                    }
+
+                }else{
+                    searchYarnEt.setText(result);
+                    searchYarnEt.setSelection(searchYarnEt.getText().length());
+                    SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                    selectYarnFragment.search(searchYarnEt.getText().toString());
+                }
+
+
             }
         }
 
@@ -579,6 +600,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             resultBuffer.append(mIatResults.get(key));
         }
         searchYarnEt.setText(resultBuffer.toString());
+        searchYarnEt.setSelection(searchYarnEt.getText().length());
+        SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+        selectYarnFragment.search(searchYarnEt.getText().toString());
 //        Toast.makeText(SelectYarnActivity.this,resultBuffer.toString(),Toast.LENGTH_SHORT).show();
 //        mResultText.setText(resultBuffer.toString());
 //        mResultText.setSelection(mResultText.length());

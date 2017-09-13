@@ -15,7 +15,7 @@
           android:id="@+id/img_back"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
-            android:src="@drawable/icon_back"/>
+            android:src="@drawable/ic_back"/>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="24dp"
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:background="@null"
             android:imeOptions="actionSearch"
             android:singleLine="true"

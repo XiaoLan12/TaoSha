@@ -6,13 +6,11 @@ import android.net.Uri;
 import android.view.View;
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
-import com.yizhisha.taosha.ui.login.fragment.LoginFragment;
-import com.yizhisha.taosha.ui.me.activity.ContactUsActivity;
+import com.yizhisha.taosha.ui.home.activity.OnlineServiceActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -24,6 +22,8 @@ import butterknife.OnClick;
 public class ContactUsFrqment extends BaseFragment{
     @Bind(R.id.toolbar)
     BaseToolbar toolbar;
+
+
     public switchFragmentListener switchFragmentListener;
     public interface switchFragmentListener{
         void switchFragment(int index);
@@ -42,6 +42,13 @@ public class ContactUsFrqment extends BaseFragment{
     }
     @Override
     protected void initView() {
+        toolbar.setRightButtonIcon(getActivity().getResources().getDrawable(R.drawable.icon_contact_us));
+        toolbar.setRightButtonOnClickLinster(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(OnlineServiceActivity.class);
+            }
+        });
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
