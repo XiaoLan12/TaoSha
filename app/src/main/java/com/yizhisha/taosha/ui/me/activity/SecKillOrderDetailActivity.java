@@ -25,7 +25,6 @@ import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.ui.home.activity.SeckillYarnActivity;
-import com.yizhisha.taosha.ui.home.activity.SureOrderActivity;
 import com.yizhisha.taosha.ui.me.contract.SecKillOrderDetailsContract;
 import com.yizhisha.taosha.ui.me.presenter.SecKillOrderDetailsPresenter;
 import com.yizhisha.taosha.utils.DateUtil;
@@ -414,7 +413,8 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 break;
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
-                        .setBoolTitle(false)
+                        .setBoolTitle(true)
+//                        .setTitleText(seckillBean.get)
                         .setContentText(seckillBean.getCompany_mobile())
                         .setContentTextSize(18)
                         .setLeftText("取消")

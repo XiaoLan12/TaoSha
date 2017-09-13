@@ -13,7 +13,6 @@ import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.SecondKillOrderAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.bean.json.OrderFootBean;
 import com.yizhisha.taosha.bean.json.SeckillBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
@@ -128,7 +127,8 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
                     case R.id.contact_the_merchant_tv:
                         final String phone=dataList.get(position).getGoods().getMobile();
                         new NormalAlertDialog.Builder(activity)
-                                .setBoolTitle(false)
+                                .setBoolTitle(true)
+                                .setTitleText(dataList.get(position).getGoods().getCompany())
                                 .setContentText(phone)
                                 .setContentTextSize(18)
                                 .setLeftText("取消")
