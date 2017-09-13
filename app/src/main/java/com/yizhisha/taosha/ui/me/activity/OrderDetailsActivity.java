@@ -420,7 +420,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                         .setContentText(order.getMobile_company())
                         .setContentTextSize(18)
                         .setLeftText("取消")
-                        .setRightText("确认")
+                        .setRightText("呼叫")
                         .setWidth(0.75f)
                         .setHeight(0.33f)
                         .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
