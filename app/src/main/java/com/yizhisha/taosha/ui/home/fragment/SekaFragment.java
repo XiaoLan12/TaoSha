@@ -2,17 +2,13 @@ package com.yizhisha.taosha.ui.home.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyOrderAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
-import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
-import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
 
 import java.util.ArrayList;

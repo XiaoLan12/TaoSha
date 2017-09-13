@@ -16,6 +16,9 @@
     <color name="yellow1">#f08a26</color>
     <color name="yellow3">#e3f026</color>
     <color name="yellow2">#f1f5d647</color>
+    <color name="yellow4">#FF9900</color>
+
+
     <color name="gray">#b8b8b8</color>
     <color name="gray1">#d6d4d4</color>
     <color name="green">#5FB236</color>
@@ -29,6 +32,9 @@
     <color name="common_h2">#727272</color>
     <!--通用三级标题的颜色-->
     <color name="common_h3">#B2B2B2</color>
+
+    <!--通用textvew的颜色-->
+    <color name="common_h">#333333</color>
     <!--通用分割线细-->
     <color name="common_divider_narrow">#E3E3E3</color>
 

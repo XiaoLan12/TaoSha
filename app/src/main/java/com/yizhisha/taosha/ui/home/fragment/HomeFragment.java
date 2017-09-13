@@ -1,41 +1,18 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.signature.StringSignature;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.iflytek.cloud.ErrorCode;
-import com.iflytek.cloud.InitListener;
-import com.iflytek.cloud.RecognizerListener;
-import com.iflytek.cloud.RecognizerResult;
-import com.iflytek.cloud.SpeechConstant;
-import com.iflytek.cloud.SpeechError;
-import com.iflytek.cloud.SpeechRecognizer;
-import com.iflytek.cloud.ui.RecognizerDialog;
-import com.iflytek.cloud.ui.RecognizerDialogListener;
-import com.iflytek.sunflower.FlowerCollector;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.HomeYarnRecommendAdapter;
@@ -55,21 +32,12 @@ import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.HomeContract;
 import com.yizhisha.taosha.ui.home.precenter.HomePresenter;
-import com.yizhisha.taosha.utils.ToastUtil;
-import com.yizhisha.taosha.utils.xunfei.IatSettings;
-import com.yizhisha.taosha.utils.xunfei.JsonParser;
 import com.yizhisha.taosha.widget.SpacesItemDecoration;
 import com.youth.banner.Banner;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -339,7 +307,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("TYPE",1);
-                bundle.putInt("id", data6.get(position).getId());
+                bundle.putInt("id", data7.get(position).getId());
                 startActivity(YarnActivity.class, bundle);
             }
         });
@@ -432,7 +400,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
             @Override
             public void OnBannerClick(View view, int position) {
-                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -462,18 +430,19 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         data4=model.getHunfangsha();
         adapter4.setNewData(data4);
 
-        data5=model.getHuashisha();
+        data5=model.getHuaxiansha();
         adapter5.setNewData(data5);
 
-        data6=model.getHuaxiansha();
+        data6=
+        model.getHuashisha();
         adapter6.setNewData(data6);
-
-        data7.add(data1.get(0));
-        data7.add(data2.get(0));
-        data7.add(data3.get(0));
-        data7.add(data4.get(0));
-        data7.add(data5.get(0));
-        data7.add(data6.get(0));
+//        Log.e("EEE",new Random().nextInt(5)+"---"+new Random().nextInt(5));
+        data7.add(data1.get(new Random().nextInt(data1.size())));
+        data7.add(data2.get(new Random().nextInt(data2.size())));
+        data7.add(data3.get(new Random().nextInt(data3.size())));
+        data7.add(data4.get(new Random().nextInt(data4.size())));
+        data7.add(data5.get(new Random().nextInt(data1.size())));
+        data7.add(data6.get(new Random().nextInt(data1.size())));
         adapter7.setNewData(data7);
 
     }

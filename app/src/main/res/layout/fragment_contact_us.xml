@@ -57,7 +57,7 @@
                 <TextView
                     android:id="@+id/email_address_tv"
                     style="@style/TS.Theme.Widget.Text"
-                    android:text="5874511214@qq.com"/>
+                    android:text="1063755676@qq.com"/>
 
             </LinearLayout>
             <LinearLayout

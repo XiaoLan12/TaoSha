@@ -1,42 +1,29 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.rx.RxBus;
-import com.yizhisha.taosha.bean.DateBean;
-import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.event.SecKillEvent;
-import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
-import com.yizhisha.taosha.ui.home.activity.SeckillActivityActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
-import com.yizhisha.taosha.ui.home.contract.SeckillProductContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
-import com.yizhisha.taosha.ui.home.precenter.SeckillProductPresenter;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
-import com.yizhisha.taosha.utils.DateUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 import com.youth.banner.Banner;
 
@@ -47,9 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import uk.co.senab.photoview.log.LoggerDefault;
 
 /**
  * Created by lan on 2017/8/17.
@@ -159,7 +144,7 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
             @Override
             public void OnBannerClick(View view, int position) {
-                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_LONG).show();
             }
         });
         //加载商品详情

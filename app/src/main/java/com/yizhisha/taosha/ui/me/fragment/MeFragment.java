@@ -9,13 +9,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.yizhisha.taosha.App;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.BaseActivity;
@@ -27,7 +24,6 @@ import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.UserHeadEvent;
-import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.ui.ClipHeaderActivity;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
@@ -35,6 +31,7 @@ import com.yizhisha.taosha.ui.me.activity.AboutActivity;
 import com.yizhisha.taosha.ui.me.activity.AccountCenterActivity;
 import com.yizhisha.taosha.ui.me.activity.ContactUsActivity;
 import com.yizhisha.taosha.ui.me.activity.FreeSampleActivity;
+import com.yizhisha.taosha.ui.me.activity.MyAddressActivity;
 import com.yizhisha.taosha.ui.me.activity.MyCollectActivity;
 import com.yizhisha.taosha.ui.me.activity.MyFootprintActivity;
 import com.yizhisha.taosha.ui.me.activity.MyOrderAcitvity;
@@ -45,14 +42,11 @@ import com.yizhisha.taosha.ui.me.contract.MeContract;
 import com.yizhisha.taosha.ui.me.presenter.MePresenter;
 import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.ImageUtils;
-import com.yizhisha.taosha.utils.LogUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -281,7 +275,7 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
     }
     @OnClick({R.id.set_me_iv,R.id.myorder_set_tv,R.id.mycollect_set_tv,R.id.myfootprint_set_tv,
             R.id.accountcenter_me_rl,R.id.freesample_me_rl,R.id.myrating_me_rl,R.id.contactus_rl
-            ,R.id.abouttaosha_rl,R.id.seckillorder_me_rl,R.id.head_me_iv})
+            ,R.id.abouttaosha_rl,R.id.seckillorder_me_rl,R.id.head_me_iv,R.id.managedeladdress_rl})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -426,6 +420,11 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
 
                 chaHeaddialog.setData(headData);
                 chaHeaddialog.show();
+                break;
+            case R.id.managedeladdress_rl:
+                Bundle bundle3=new Bundle();
+                bundle3.putInt("TYPE",0);
+                startActivity(MyAddressActivity.class,bundle3);
                 break;
         }
     }

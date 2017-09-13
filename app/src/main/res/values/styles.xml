@@ -41,8 +41,8 @@
     <style name="TS.Theme.Widget.Text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_normal</item>
-        <item name="android:textColor">@color/common_h2</item>
+        <item name="android:textSize">@dimen/font_normal2</item>
+        <item name="android:textColor">@color/common_h</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_gravity">center</item>
     </style>

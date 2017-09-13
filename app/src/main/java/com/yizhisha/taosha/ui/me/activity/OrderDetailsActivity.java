@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -416,11 +415,12 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
                 break;
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
-                        .setBoolTitle(false)
+                        .setBoolTitle(true)
+                        .setTitleText(order.getCompany())
                         .setContentText(order.getMobile_company())
                         .setContentTextSize(18)
                         .setLeftText("取消")
-                        .setRightText("确认")
+                        .setRightText("呼叫")
                         .setWidth(0.75f)
                         .setHeight(0.33f)
                         .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {

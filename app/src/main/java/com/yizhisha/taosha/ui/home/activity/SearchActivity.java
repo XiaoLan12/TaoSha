@@ -179,7 +179,22 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
             Bundle bundle = data.getExtras();
             if (bundle != null) {
                 String result = bundle.getString("result");
-                searchEt.setText(result);
+//                searchEt.setText(result);
+
+                if(result.contains("id/")){
+                    int i=result.indexOf("id/");
+                    try{
+                        Bundle bundle1=new Bundle();
+                        bundle1.putInt("TYPE",1);
+                        bundle1.putInt("id",Integer.parseInt(result.substring(i+3,result.length())));
+                        startActivity(YarnActivity.class,bundle1);
+                    }catch (Exception e){
+                        searchEt.setText(result);
+                    }
+
+                }else{
+                    searchEt.setText(result);
+                }
             }
         }
     }
