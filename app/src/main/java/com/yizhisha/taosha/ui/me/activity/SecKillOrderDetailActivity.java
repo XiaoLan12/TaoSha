@@ -414,8 +414,10 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
                         .setBoolTitle(true)
-//                        .setTitleText(seckillBean.get)
-                        .setContentText(seckillBean.getCompany_mobile())
+                        .setBoolSubtitleTitle(true)
+                        .setTitleText(seckillBean.getGoods().getCompany())
+                        .setSubtitleTitleText(seckillBean.getGoods().getLinkman())
+                        .setContentText(seckillBean.getGoods().getMobile())
                         .setContentTextSize(18)
                         .setLeftText("取消")
                         .setRightText("确认")
@@ -428,7 +430,7 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                             }
                             @Override
                             public void clickRightButton(NormalAlertDialog dialog, View view) {
-                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + seckillBean.getCompany_mobile()));
+                                Intent phoneIneten = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + seckillBean.getGoods().getMobile()));
                                 startActivity(phoneIneten);
                                 dialog.dismiss();
 

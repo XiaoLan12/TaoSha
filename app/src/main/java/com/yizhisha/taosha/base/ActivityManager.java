@@ -61,7 +61,6 @@ public class ActivityManager {
             activity=null;
         }
     }
-
     /**
      * 结束掉所有的Activity
      */
@@ -86,6 +85,7 @@ public class ActivityManager {
         }
         return null;
     }
+
     /**
      * 退出栈中所有Activity
      * @param cls

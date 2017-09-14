@@ -127,8 +127,11 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                     case R.id.contact_the_merchant_tv:
                         final String phone=dataList.get(position).getMobile();
                             new NormalAlertDialog.Builder(activity)
-                                    .setBoolTitle(false)
-                                    .setContentText(phone)
+                                    .setBoolTitle(true)
+                                    .setBoolSubtitleTitle(true)
+                                    .setTitleText(dataList.get(position).getCompany())
+                                    .setSubtitleTitleText(dataList.get(position).getLinkman())
+                                    .setContentText(dataList.get(position).getMobile())
                                     .setContentTextSize(18)
                                     .setLeftText("取消")
                                     .setRightText("确认")

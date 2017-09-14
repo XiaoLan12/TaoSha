@@ -3,6 +3,7 @@ package com.yizhisha.taosha.common.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +21,7 @@ import com.yizhisha.taosha.utils.RescourseUtil;
  */
 public class NormalAlertDialog {
     private TextView mTitle;
+    private TextView mSubtitleTitle;
     private TextView mContent;
     private Button mLeftBtn;
     private Button mRightBtn;
@@ -44,6 +46,7 @@ public class NormalAlertDialog {
         dialogWindow.setAttributes(lp);
 
         mTitle = (TextView) mDialogView.findViewById(R.id.dialog_normal_title);
+        mSubtitleTitle=(TextView) mDialogView.findViewById(R.id.dialog_normal_subtitletitle);
         mContent = (TextView) mDialogView.findViewById(R.id.dialog_normal_content);
         mLeftBtn = (Button) mDialogView.findViewById(R.id.dialog_normal_leftbtn);
         mRightBtn = (Button) mDialogView.findViewById(R.id.dialog_normal_rightbtn);
@@ -61,6 +64,13 @@ public class NormalAlertDialog {
         }else{
             mTitle.setVisibility(View.GONE);
         }
+        if(mBuilder.isBoolSubtitleTitle()){
+            Log.d("TTT","TTTT");
+            mSubtitleTitle.setVisibility(View.VISIBLE);
+        }else{
+            Log.d("TTT","TTTTfsdf");
+            mSubtitleTitle.setVisibility(View.GONE);
+        }
         if(mBuilder.isSingleModel){
             mLeftBtn.setVisibility(View.GONE);
             mLineTv.setVisibility(View.GONE);
@@ -70,6 +80,11 @@ public class NormalAlertDialog {
         mTitle.setText(builder.getTitleText());
         mTitle.setTextColor(builder.getTitleTextColor());
         mTitle.setTextSize(builder.getTitleTextSize());
+        Log.d("TTT","TTTT11"+builder.getSubtitleTitleText());
+        mSubtitleTitle.setText(builder.getSubtitleTitleText());
+        mSubtitleTitle.setTextColor(builder.getSubtitleTitleTextColor());
+        mSubtitleTitle.setTextSize(builder.getSubtitleTitleTextSize());
+
         mContent.setText(builder.getContentText());
         mContent.setTextColor(builder.getContentTextColor());
         mContent.setTextSize(builder.getContentTextSize());
@@ -122,9 +137,14 @@ public class NormalAlertDialog {
         private Context mContext;
         //设置标题属性
         private boolean  boolTitle;
+        private boolean  boolSubtitleTitle;
         private String titleText;
         private int titleTextColor;
         private float titleTextSize;
+
+        private String subtitleTitleText;
+        private int subtitleTitleTextColor;
+        private float subtitleTitleTextSize;
         //设置内容属性\
         private CharSequence contentText;
         private int contentTextColor;
@@ -154,8 +174,11 @@ public class NormalAlertDialog {
         public Builder(Context context){
             mContext=context;
             boolTitle=false;
+            boolSubtitleTitle=false;
             titleText="温馨提示";
+            subtitleTitleText="温馨提示";
             titleTextColor= ContextCompat.getColor(mContext, R.color.common_h1);
+            subtitleTitleTextColor=ContextCompat.getColor(mContext, R.color.common_h1);
 
             contentTextColor= ContextCompat.getColor(mContext, R.color.common_h1);
             singleText="确认";
@@ -167,12 +190,12 @@ public class NormalAlertDialog {
             rightTextColor= ContextCompat.getColor(mContext, R.color.blue);
             onclickListener = null;
             singleListener = null;
-            boolTitle = false;
             isTouchOutside = true;
             isCancelable=true;
             height = 0.23f;
             width = 0.65f;
             titleTextSize = 16;
+            subtitleTitleTextSize=14;
             contentTextSize = 16;
             buttonTextSize = 14;
         }
@@ -182,6 +205,15 @@ public class NormalAlertDialog {
 
         public Builder setBoolTitle(boolean boolTitle) {
             this.boolTitle = boolTitle;
+            return this;
+        }
+
+        public boolean isBoolSubtitleTitle() {
+            return boolSubtitleTitle;
+        }
+
+        public Builder setBoolSubtitleTitle(boolean boolTitle) {
+            this.boolSubtitleTitle = boolTitle;
             return this;
         }
 
@@ -215,6 +247,30 @@ public class NormalAlertDialog {
             this.titleTextSize = titleTextSize;
             return this;
         }
+
+        public Builder setSubtitleTitleText(String titleText) {
+            this.subtitleTitleText = titleText;
+            return this;
+        }
+        public String getSubtitleTitleText() {
+            return subtitleTitleText;
+        }
+
+        public Builder setSubtitleTitleTextColor(int titleTextColor) {
+            this.subtitleTitleTextColor = ContextCompat.getColor(mContext, titleTextColor);
+            return this;
+        }
+        public int getSubtitleTitleTextColor() {
+            return subtitleTitleTextColor;
+        }
+        public Builder setSubtitleTitleTextSize(float titleTextSize) {
+            this.subtitleTitleTextSize = titleTextSize;
+            return this;
+        }
+        public float getSubtitleTitleTextSize() {
+            return subtitleTitleTextSize;
+        }
+
         public CharSequence getContentText() {
             return contentText;
         }
