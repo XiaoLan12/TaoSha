@@ -4,27 +4,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.yizhisha.taosha.R;
-import com.yizhisha.taosha.base.BaseActivity;
-import com.yizhisha.taosha.ui.MainActivity;
-import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
-import com.yizhisha.taosha.ui.home.fragment.SelectYarnFragment;
 import com.yizhisha.taosha.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2017/8/27 0027.
  */
 
-public class WeclomeActivity extends BaseActivity {
+public class WeclomeActivity extends AppCompatActivity {
     @Bind(R.id.vp)
     ViewPager viewPager;
     @Bind(R.id.radio_group)
@@ -38,10 +36,10 @@ public class WeclomeActivity extends BaseActivity {
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
-    @Override
+  /*  @Override
     protected int getLayoutId() {
         return R.layout.activity_welcome;
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +49,19 @@ public class WeclomeActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.activity_welcome);
+        //添加注解
+        ButterKnife.bind(this);
+        initView();
+
     }
 
-    @Override
+   /* @Override
     protected void initToolBar() {
 
-    }
+    }*/
 
-    @Override
+
     protected void initView() {
 
 
