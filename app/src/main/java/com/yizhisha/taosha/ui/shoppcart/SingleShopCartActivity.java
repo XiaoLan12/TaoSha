@@ -1,14 +1,9 @@
 package com.yizhisha.taosha.ui.shoppcart;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
@@ -26,8 +21,6 @@ import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,10 +110,14 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
                                     return;
                                 }
                             }
+                            for (int i = 0; i < dataList.size(); i++) {
+                                dataList.get(i).setAdd(false);
+                            }
+
                             ShopCartBean.ShopcartList shopcartList=new ShopCartBean().new ShopcartList();
                             shopcartList.setAmount(1);
                             shopcartList.setDetail("");
-                            shopcartList.setAdd(false);
+                            shopcartList.setAdd(true);
                             dataList.add(0,shopcartList);
                             mShopCartAddShopAdapter.setNewData(dataList);
                         }else {
