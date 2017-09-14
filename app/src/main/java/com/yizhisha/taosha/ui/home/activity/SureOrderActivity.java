@@ -23,6 +23,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.MyCollectAdapter;
 import com.yizhisha.taosha.adapter.OrderSureAdapter;
 import com.yizhisha.taosha.adapter.SeckillOrderSureAdapter;
+import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
@@ -38,6 +39,8 @@ import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.LoadingDialog;
 import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
+import com.yizhisha.taosha.event.FinishEvent;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.UpdateShopCartEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.event.WeChatPayEvent;
@@ -474,6 +477,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                                 }else{
                                     startActivity(MyOrderAcitvity.class);
                                 }
+                                RxBus.$().postEvent(new FinishEvent());
+                                finish_Activity(SureOrderActivity.this);
 
                             }
                         }).setTouchOutside(false)
@@ -514,6 +519,7 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         public void clickSingleButton(NormalAlertDialog dialog, View view) {
                             dialog.dismiss();
                             startActivity(MyOrderAcitvity.class);
+                            finish_Activity(SureOrderActivity.this);
                         }
                     }).setTouchOutside(false)
                     .setCancelable(false)
@@ -534,6 +540,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
                         dialog.dismiss();
                         startActivity(FreeSampleActivity.class);
+                        finish_Activity(SureOrderActivity.this);
+
                     }
                 }).setTouchOutside(false)
                 .setCancelable(false).build().show();
@@ -558,6 +566,8 @@ public class SureOrderActivity extends BaseActivity<SureOrderPresenter>
                         }else{
                             startActivity(MyOrderAcitvity.class);
                         }
+                        RxBus.$().postEvent(new FinishEvent());
+                        finish_Activity(SureOrderActivity.this);
                     }
                 }).setTouchOutside(false)
                 .setCancelable(false)

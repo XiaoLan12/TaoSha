@@ -129,7 +129,7 @@ public class SecKillOrderFragment extends BaseFragment<SecKillOrderPresenter>
                         new NormalAlertDialog.Builder(activity)
                                 .setBoolTitle(true)
                                 .setTitleText(dataList.get(position).getGoods().getCompany())
-                                .setContentText(phone)
+                                .setContentText(dataList.get(position).getGoods().getLinkman())
                                 .setContentTextSize(18)
                                 .setLeftText("取消")
                                 .setRightText("呼叫")

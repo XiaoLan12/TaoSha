@@ -19,11 +19,15 @@ import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
+import com.yizhisha.taosha.event.FinishEvent;
+import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.UpdateShopCartEvent;
+import com.yizhisha.taosha.event.UserHeadEvent;
 import com.yizhisha.taosha.ui.home.contract.SelectYarnColorContract;
 import com.yizhisha.taosha.ui.home.precenter.SelectYarnColorPresenter;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
+import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -33,6 +37,9 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2017/7/19.
@@ -57,6 +64,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     private boolean isBanmao=false;
 
     private NormalSelectionDialog dialog;
+    private Subscription subscription;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_yarn_color;
@@ -163,6 +171,7 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                 dialog.show();
             }
         });
+        event();
     }
     private void showLoginDialog(){
         final List<String> mDatas1=new ArrayList<>();
@@ -193,6 +202,16 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                 }).setTouchOutside(true)
                 .build();
         dialog.setData(mDatas1);
+    }
+    private void event(){
+        subscription= RxBus.$().toObservable(FinishEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<FinishEvent>() {
+                    @Override
+                    public void call(FinishEvent event) {
+                      finish_Activity(SelectYarnColorActivity.this);
+                    }
+                });
     }
     @OnClick({R.id.sure_btn})
     @Override
@@ -282,5 +301,12 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
     @Override
     public void loadFail(String msg) {
         ToastUtil.showShortToast(msg);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null&&!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
     }
 }
