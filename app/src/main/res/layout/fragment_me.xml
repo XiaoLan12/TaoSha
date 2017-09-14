@@ -132,11 +132,19 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_skill"/>
 
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
+                    android:text="秒纱活动"
                     android:layout_centerVertical="true"
-                    android:text="秒纱活动" />
+                    android:layout_toRightOf="@+id/img1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/img1" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_20"
@@ -158,10 +166,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
-
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_fressample"/>
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/img2"
+                    android:layout_marginLeft="10dp"
                     android:text="免费拿样" />
 
                 <ImageView
@@ -180,10 +194,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
-
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_address"/>
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:text="@string/manage_delivery_address"
+                    android:layout_toRightOf="@+id/img3"
+                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     />
                 <ImageView
@@ -203,10 +223,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
-
+                <ImageView
+                    android:id="@+id/img4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_my_comment"/>
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/img4"
+                    android:layout_marginLeft="10dp"
                     android:text="我的评价" />
 
                 <ImageView
@@ -227,10 +253,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
-
+                <ImageView
+                    android:id="@+id/img5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_connect_us"/>
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/img5"
+                    android:layout_marginLeft="10dp"
                     android:text="联系我们" />
 
                 <ImageView
@@ -254,10 +286,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_bg_selector"
                 android:padding="@dimen/dp_14">
-
+                <ImageView
+                    android:id="@+id/img6"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/person_abour_us"/>
                 <TextView
                     style="@style/TS.Theme.Widget.Text"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/img6"
+                    android:layout_marginLeft="10dp"
                     android:text="关于大朗淘纱" />
 
                 <ImageView
