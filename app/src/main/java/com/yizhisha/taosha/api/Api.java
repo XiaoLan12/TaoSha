@@ -184,6 +184,11 @@ public class Api {
         return service.loadBindPhone(uid);
     }
 
+    //获得绑定的微信
+    public Observable<RequestStatusBean> loadBindWeChat(int uid){
+        return service.loadBindWeChat(uid);
+    }
+
     //登录
     public Observable<RequestStatusBean> login(Map<String,String> map){
         return service.Login(map);

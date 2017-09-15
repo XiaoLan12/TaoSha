@@ -156,6 +156,10 @@ public interface ApiService {
     @GET("ios/ucenter/mobile_binding/")
     Observable<RequestStatusBean> loadBindPhone(@Query("uid") int uid);
 
+    //获得绑定的微信
+    @GET("ios/user/wxshow/")
+    Observable<RequestStatusBean> loadBindWeChat(@Query("uid") int uid);
+
     //登录
     @FormUrlEncoded
     @POST("ios/user/dologin/")

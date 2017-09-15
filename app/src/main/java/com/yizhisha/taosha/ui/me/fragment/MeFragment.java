@@ -421,6 +421,13 @@ public class MeFragment extends BaseFragment<MePresenter> implements MeContract.
                 chaHeaddialog.show();
                 break;
             case R.id.managedeladdress_rl:
+                if(AppConstant.isLogin==false){
+                    if(dialog==null){
+                        showLoginDialog();
+                    }
+                    dialog.show();
+                    return;
+                }
                 Bundle bundle3=new Bundle();
                 bundle3.putInt("TYPE",0);
                 startActivity(MyAddressActivity.class,bundle3);

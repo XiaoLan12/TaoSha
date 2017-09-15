@@ -19,6 +19,7 @@ public interface SetContract {
         void bindWeChat(String info);
         void unBindWeChat(String msg);
         void loadWeChatInfo(WechatInfoBean bean);
+        void loadBindWeChat(RequestStatusBean uid);
         void showBindWeChart(RequestStatusBean bean);
         void loadFail(String msg);
         void unBindWeChatFail(String msg);
@@ -28,6 +29,7 @@ public interface SetContract {
         public abstract void loadWeChatData(String url);
         public abstract void bindWeChat(Map<String,String> map);
         public abstract void loadWeChatInfo(String url);
+        public abstract void loadBindWeChat(int uid);
         public abstract void unBindWeChat(int uid);
         public abstract void showBindWeChart(int uid);
 

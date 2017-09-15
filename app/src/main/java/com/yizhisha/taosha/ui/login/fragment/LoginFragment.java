@@ -20,6 +20,7 @@ import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
 import com.yizhisha.taosha.bean.json.WechatInfoBean;
+import com.yizhisha.taosha.common.dialog.LoadingDialog;
 import com.yizhisha.taosha.common.popupwindow.LoginWithWeiPopuwindow;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
@@ -63,8 +64,12 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     //是否绑定微信
     private boolean isBangWei=false;
 
+    private int uid;
+
     private String oppenid="";
-    private RequestStatusBean requestStatusBean=null;
+    private String token="";
+
+    private LoadingDialog mLoadingDialog;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -99,11 +104,14 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     @Override
     public void loginSuccess(RequestStatusBean bean) {
         if(isBangWei){
-            requestStatusBean=bean;
-            Map<String,String> map=new HashMap<>();
-            map.put("uid",String.valueOf(bean.getUid()));
-            map.put("openid",oppenid);
-            mPresenter.bindWeChat(map);
+            //缓存暂时的uid
+            uid=bean.getUid();
+            String url="https://api.weixin.qq.com/sns/userinfo?access_token="
+                    + token
+                    + "&openid="
+                    + oppenid;
+            mPresenter.loadWeChatInfo(url);
+
         }else{
             SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
             AppConstant.isLogin=true;
@@ -141,12 +149,9 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         Map<String,String> map=new HashMap<>();
         map.put("openid",wechatBean.getOpenid());
         oppenid=wechatBean.getOpenid();
+        token=wechatBean.getAccess_token();
         mPresenter.weChatLogin(map);
-        String url="https://api.weixin.qq.com/sns/userinfo?access_token="
-                + wechatBean.getAccess_token()
-                + "&openid="
-                + wechatBean.getOpenid();
-        mPresenter.loadWeChatInfo(url);
+
     }
     @Override
     public void loadFail(String msg) {
@@ -185,7 +190,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     public void bindWeChatSuccess(String info) {
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
         AppConstant.isLogin=true;
-        AppConstant.UID=requestStatusBean.getUid();
+        AppConstant.UID=uid;
         SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
@@ -193,7 +198,24 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     @Override
     public void loadWeChatInfo(WechatInfoBean bean) {
-        SharedPreferencesUtil.putValue(activity,"WECHARTNAME",bean.getNickname());
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(uid));
+        map.put("openid",oppenid);
+        map.put("nickname",bean.getNickname());
+        mPresenter.bindWeChat(map);
+    }
+
+    @Override
+    public void showLoading() {
+        mLoadingDialog=new LoadingDialog(activity,"正在登录...",false);
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        if(mLoadingDialog!=null){
+            mLoadingDialog.cancelDialog();
+        }
     }
 
     public interface switchFragmentListener{

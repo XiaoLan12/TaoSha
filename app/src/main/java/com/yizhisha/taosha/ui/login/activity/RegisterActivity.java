@@ -131,6 +131,16 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
 
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
     /**
      * 检查输入
      *

@@ -51,6 +51,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     private Subscription subscription;
     private IWXAPI api;
     private String weChartName="";
+    private String oppenid="";
 
     @Override
     protected int getLayoutId() {
@@ -68,7 +69,6 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     }
     @Override
     protected void initView() {
-        weChartName= (String) SharedPreferencesUtil.getValue(this,"WECHARTNAME",new String(""));
         if(AppConstant.infoBean!=null){
             GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv,
                     R.drawable.icon_head_normal,R.drawable.icon_head_normal);
@@ -79,7 +79,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         // 将该app注册到微信
         api.registerApp(AppConstant.WEIXIN_APP_ID);
         event();
-        //loadWetChatInfo();
+        mPresenter.loadBindWeChat(AppConstant.UID);
     }
     private void event(){
         subscription= RxBus.$().toObservable(Object.class)
@@ -206,10 +206,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
 
     @Override
     public void loadWeChatData(WechatBean wechatBean) {
-        Map<String,String> map=new HashMap<>();
-        map.put("uid",String.valueOf(AppConstant.UID));
-        map.put("openid",wechatBean.getOpenid());
-        mPresenter.bindWeChat(map);
+        oppenid=wechatBean.getOpenid();
         String url="https://api.weixin.qq.com/sns/userinfo?access_token="
                 + wechatBean.getAccess_token()
                 + "&openid="
@@ -236,8 +233,21 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
 
     @Override
     public void loadWeChatInfo(WechatInfoBean bean) {
-        SharedPreferencesUtil.putValue(this,"WECHARTNAME",bean.getNickname());
         weChartName=bean.getNickname();
+        Map<String,String> map=new HashMap<>();
+        map.put("uid",String.valueOf(AppConstant.UID));
+        map.put("openid",oppenid);
+        map.put("nickname",weChartName);
+        mPresenter.bindWeChat(map);
+    }
+
+    @Override
+    public void loadBindWeChat(RequestStatusBean bean) {
+        if(bean.getStatus().equals("y")){
+            weChartName=bean.getNickname();
+        }else{
+            weChartName="";
+        }
     }
 
     @Override

@@ -15,6 +15,10 @@ public class RequestStatusBean {
 
     private String mobile;
 
+    private String nickname;
+
+
+
     public String getMobile() {
         return mobile;
     }
@@ -42,5 +46,9 @@ public class RequestStatusBean {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 }

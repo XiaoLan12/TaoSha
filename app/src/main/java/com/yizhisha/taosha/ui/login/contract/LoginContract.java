@@ -33,6 +33,9 @@ public interface LoginContract {
         void bindWeChatSuccess(String info);
         void loadWeChatInfo(WechatInfoBean bean);
 
+        void showLoading();
+        void hideLoading();
+
     }
 
     abstract class Presenter extends BasePresenter<View> {

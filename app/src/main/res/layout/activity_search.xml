@@ -78,8 +78,6 @@
                 android:visibility="gone"
                 android:text="搜索"/>
 
-
-
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
@@ -97,24 +95,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/common_bg">
+        android:background="@color/common_bg"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:background="@color/white"
             android:scrollbars="none"
             >
-
-            <com.yizhisha.taosha.common.flowlayout.TagFlowLayout
-                android:id="@+id/tagflowlayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/dp_5"
-                zhy:max_select="-1">
+                android:orientation="vertical">
+                <com.yizhisha.taosha.common.flowlayout.TagFlowLayout
+                    android:id="@+id/tagflowlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    zhy:max_select="-1">
+                </com.yizhisha.taosha.common.flowlayout.TagFlowLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@color/common_bg"/>
+            </LinearLayout>
 
-            </com.yizhisha.taosha.common.flowlayout.TagFlowLayout>
         </ScrollView>
         <TextView
             android:id="@+id/search_tv"

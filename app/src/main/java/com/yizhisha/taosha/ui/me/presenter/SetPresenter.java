@@ -66,6 +66,21 @@ public class SetPresenter extends SetContract.Presenter{
     }
 
     @Override
+    public void loadBindWeChat(int uid) {
+        addSubscrebe(Api.getInstance().loadBindWeChat(uid),
+                new RxSubscriber<RequestStatusBean>(mContext, true) {
+                    @Override
+                    protected void onSuccess(RequestStatusBean bean) {
+                        mView.loadBindWeChat(bean);
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
+
+    @Override
     public void unBindWeChat(int uid) {
         addSubscrebe(Api.getInstance().unBindWeChat(uid),
                 new RxSubscriber<RequestStatusBean>(mContext, true) {

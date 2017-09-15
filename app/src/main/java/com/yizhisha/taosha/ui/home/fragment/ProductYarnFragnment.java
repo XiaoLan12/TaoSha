@@ -53,6 +53,8 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     TextView tv_price_real;
     @Bind(R.id.tv_company)
     TextView tv_company;
+    @Bind(R.id.collect_iv)
+    ImageView collectIv;
 
 
     @Bind(R.id.comment_amount_tv)
@@ -356,6 +358,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
 
     @Override
     public void collectProductSuccess(String msg) {
+        collectIv.setImageResource(R.drawable.icon_favorit);
         ToastUtil.showShortToast(msg);
     }
 

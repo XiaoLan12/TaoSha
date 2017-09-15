@@ -63,6 +63,8 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     TextView companyTv;
     @Bind(R.id.activit_state_tv)
     TextView activitStateTv;
+    @Bind(R.id.collect_iv)
+    ImageView collectIv;
 
     //参数
     @Bind(R.id.tv_product_code)
@@ -336,6 +338,7 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     }
     @Override
     public void collectProductSuccess(String msg) {
+        collectIv.setImageResource(R.drawable.icon_favorit);
         ToastUtil.showShortToast(msg);
     }
 

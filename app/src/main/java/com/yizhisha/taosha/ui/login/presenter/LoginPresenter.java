@@ -16,19 +16,22 @@ import java.util.Map;
 public class LoginPresenter extends LoginContract.Presenter{
     @Override
     public void login(Map<String, String> map) {
+        mView.showLoading();
         addSubscrebe(Api.getInstance().login(map),
-                new RxSubscriber<RequestStatusBean>(mContext, "正在登录....", true) {
+                new RxSubscriber<RequestStatusBean>(mContext,false) {
                     @Override
                     protected void onSuccess(RequestStatusBean requestStatusBean) {
                         if(requestStatusBean.getStatus().equals("y")){
                             mView.loginSuccess(requestStatusBean);
                         }else{
+                            mView.hideLoading();
                             mView.loadFail(requestStatusBean.getInfo());
                         }
                     }
                     @Override
                     protected void onFailure(String message) {
-                            mView.loadFail(message);
+                        mView.hideLoading();
+                        mView.loadFail(message);
                     }
                 });
     }
@@ -129,6 +132,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                 new RxSubscriber<RequestStatusBean>(mContext, false) {
                     @Override
                     protected void onSuccess(RequestStatusBean info) {
+                        mView.hideLoading();
                         if(info.getStatus().equals("y")){
                             mView.bindWeChatSuccess(info.getInfo());
                         }else{
@@ -137,6 +141,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                     }
                     @Override
                     protected void onFailure(String message) {
+                        mView.hideLoading();
                         mView.loadFail(message);
                     }
                 });
@@ -152,6 +157,7 @@ public class LoginPresenter extends LoginContract.Presenter{
                     }
                     @Override
                     protected void onFailure(String message) {
+                        mView.hideLoading();
                         mView.loadFail(message);
                     }
                 });

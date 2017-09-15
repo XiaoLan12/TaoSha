@@ -57,7 +57,7 @@
                     android:id="@+id/collect_iv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/icon_favorite"/>
+                    android:src="@drawable/icon_favorit_normale"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
