@@ -134,7 +134,7 @@ public class FreeSampleFragment extends BaseFragment<FreeSamplePresenter> implem
                                     .setContentText(dataList.get(position).getMobile())
                                     .setContentTextSize(18)
                                     .setLeftText("取消")
-                                    .setRightText("确认")
+                                    .setRightText("呼叫")
                                     .setWidth(0.75f)
                                     .setHeight(0.33f)
                                     .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {
