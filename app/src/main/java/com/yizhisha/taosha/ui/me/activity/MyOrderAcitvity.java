@@ -1,9 +1,8 @@
 package com.yizhisha.taosha.ui.me.activity;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.fragment.MyOrderFragment;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
@@ -43,6 +42,8 @@ public class MyOrderAcitvity extends BaseActivity {
     private int[] mType = {0, 1, 2, 3, 4,5};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
+    private String id="";
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_order_acitvity;
@@ -53,7 +54,14 @@ public class MyOrderAcitvity extends BaseActivity {
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManager.getActivityMar().finishActivity(MyOrderAcitvity.this);
+                if(!id.equals("")){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("TYPE",1);
+                    bundle.putInt("id", Integer.parseInt(id));
+                    startActivity(YarnActivity.class, bundle);
+                }else {
+                    ActivityManager.getActivityMar().finishActivity(MyOrderAcitvity.this);
+                }
             }
         });
         toolbar.setRightButtonIcon(RescourseUtil.getDrawable(R.drawable.icon_search));
@@ -68,6 +76,11 @@ public class MyOrderAcitvity extends BaseActivity {
 
     @Override
     protected void initView() {
+        Bundle bundle = getIntent().getExtras();
+//以下为判断bundle是否为空，以及bundle是否包含关键词“id”
+        if (bundle != null &&bundle.containsKey("id")) {
+            id=bundle.getString("id");
+        }
         for (int type : mType) {
             mFragments.add(MyOrderFragment.getInstance(type));
         }

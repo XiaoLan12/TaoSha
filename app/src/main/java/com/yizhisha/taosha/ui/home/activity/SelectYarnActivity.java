@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +47,7 @@ import com.yizhisha.taosha.bean.PopupListBean;
 import com.yizhisha.taosha.common.popupwindow.ListPopupwindow;
 import com.yizhisha.taosha.ui.home.fragment.SelectYarnFragment;
 import com.yizhisha.taosha.utils.DensityUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.utils.xunfei.IatSettings;
 import com.yizhisha.taosha.utils.xunfei.JsonParser;
 
@@ -77,7 +78,9 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.img_scan)
     ImageView img_scan;
     @Bind(R.id.ll_scan)
-    LinearLayout ll_scan;
+    RelativeLayout ll_scan;
+    @Bind(R.id.tv_search)
+    TextView tv_search;
 
     private String[] mTitles = {"棉纱", "支数", "价格", "排序"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -257,6 +260,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
                     SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
                     selectYarnFragment.search(v.getText().toString());
+                    searchYarnEt.setText("");
                     return true;
                 }
                 return false;
@@ -274,6 +278,11 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             @Override
             public void afterTextChanged(Editable s) {
                     key=s.toString();
+                if(s.length()==0){
+                    tv_search.setVisibility(View.GONE);
+                }else{
+                    tv_search.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -300,7 +309,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
             if (bundle != null) {
                 String result=bundle.getString("result");
 //                ToastUtils.showSingleToast("二维码结果："+result+"  金额"+money);
-                if(result.contains("id/")){
+                if(result.contains("taoshamall")&&result.contains("id/")){
                     int i=result.indexOf("id/");
                     try{
                         Bundle bundle1=new Bundle();
@@ -315,10 +324,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                     }
 
                 }else{
-                    searchYarnEt.setText(result);
-                    searchYarnEt.setSelection(searchYarnEt.getText().length());
-                    SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
-                    selectYarnFragment.search(searchYarnEt.getText().toString());
+                    ToastUtil.showShortToast("尊敬的用户,扫码功能仅提供大朗淘纱商品二维码扫码");
                 }
 
 
@@ -479,7 +485,7 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
         // 给标题栏弹窗添加子类
         mOrderbyPopup.addAction(list);
     }
-    @OnClick({R.id.img_back,R.id.ll_scan})
+    @OnClick({R.id.img_back,R.id.ll_scan,R.id.tv_search,R.id.img_scan})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -489,6 +495,15 @@ public class SelectYarnActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.img_back:
                 finish_Activity(SelectYarnActivity.this);
+                break;
+            case R.id.img_scan:
+                scan();
+                break;
+            case R.id.tv_search:
+
+                SelectYarnFragment selectYarnFragment = (SelectYarnFragment) mFragments.get(commonTabLayout.getCurrentTab());
+                selectYarnFragment.search(searchYarnEt.getText().toString());
+                searchYarnEt.setText("");
                 break;
         }
     }

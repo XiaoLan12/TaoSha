@@ -1,6 +1,5 @@
 package com.yizhisha.taosha;
 
-import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 
 /**
