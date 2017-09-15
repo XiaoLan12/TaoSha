@@ -416,7 +416,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
             case R.id.contact_the_merchant_tv:
                 new NormalAlertDialog.Builder(this)
                         .setBoolTitle(true)
-                        .setTitleText(order.getCompany())
+                        .setBoolSubtitleTitle(true)
+                        .setTitleText(order.getCcompany())
+                        .setSubtitleTitleText(order.getClinkman())
                         .setContentText(order.getMobile_company())
                         .setContentTextSize(18)
                         .setLeftText("取消")

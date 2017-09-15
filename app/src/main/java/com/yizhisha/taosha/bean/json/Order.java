@@ -59,6 +59,8 @@ public class Order implements MultiItemEntity {
         private List<Goods> goods;
 
         private String mobile_company;
+        private String clinkman;
+        private String ccompany;
         private int commentstatus;
 
     public int getCommentstatus() {
@@ -252,6 +254,22 @@ public class Order implements MultiItemEntity {
         public void setMobile_company(String mobile_company) {
             this.mobile_company = mobile_company;
         }
+
+    public String getClinkman() {
+        return clinkman;
+    }
+
+    public void setClinkman(String clinkman) {
+        this.clinkman = clinkman;
+    }
+
+    public String getCcompany() {
+        return ccompany;
+    }
+
+    public void setCcompany(String ccompany) {
+        this.ccompany = ccompany;
+    }
 
     public int getMzw_uid() {
         return mzw_uid;

@@ -50,6 +50,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     private static final String APP_SECRET ="74595b3e89da0f0816e5e0f3ab441462";
     private Subscription subscription;
     private IWXAPI api;
+    private String weChartName="";
 
     @Override
     protected int getLayoutId() {
@@ -65,10 +66,9 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
             }
         });
     }
-
     @Override
     protected void initView() {
-        AppConstant.weChartName= (String) SharedPreferencesUtil.getValue(this,"WECHARTNAME",new String(""));
+        weChartName= (String) SharedPreferencesUtil.getValue(this,"WECHARTNAME",new String(""));
         if(AppConstant.infoBean!=null){
             GlideUtil.getInstance().LoadContextCircleBitmap(this,AppConstant.USERHEAD+AppConstant.infoBean.getAvatar(),headIv,
                     R.drawable.icon_head_normal,R.drawable.icon_head_normal);
@@ -79,6 +79,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         // 将该app注册到微信
         api.registerApp(AppConstant.WEIXIN_APP_ID);
         event();
+        //loadWetChatInfo();
     }
     private void event(){
         subscription= RxBus.$().toObservable(Object.class)
@@ -128,8 +129,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                 startActivity(SetInfoActivity.class, bundle2);
                 break;
             case R.id.changeweixin_rl:
-                String weChartName=AppConstant.weChartName;
-                if(weChartName.equals("")){
+                if(weChartName.equals("")||weChartName==null){
                     final List<String> mDatas=new ArrayList<>();
                     mDatas.add("绑定微信");
                     NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
@@ -167,7 +167,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
                     mDatas.add("修改绑定的微信");
                     NormalSelectionDialog dialog=new NormalSelectionDialog.Builder(this)
                             .setBoolTitle(true)
-                            .setTitleText("微信绑定修改\n" + "(" + AppConstant.weChartName + ")")
+                            .setTitleText("微信绑定修改\n" + "(" + weChartName + ")")
                             .setItemHeight(45)
                             .setItemTextColor(R.color.blue)
                             .setItemTextSize(14)
@@ -193,6 +193,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
 
             case R.id.exit_btn:
                 SharedPreferencesUtil.removeValue(this,"ISLOGIN");
+                SharedPreferencesUtil.removeValue(this,"UID");
                 AppConstant.isLogin=false;
                 AppConstant.infoBean=null;
                 AppConstant.UID=0;
@@ -209,11 +210,11 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
         map.put("uid",String.valueOf(AppConstant.UID));
         map.put("openid",wechatBean.getOpenid());
         mPresenter.bindWeChat(map);
-     /*   String url="https://api.weixin.qq.com/sns/userinfo?access_token="
+        String url="https://api.weixin.qq.com/sns/userinfo?access_token="
                 + wechatBean.getAccess_token()
                 + "&openid="
                 + wechatBean.getOpenid();
-        mPresenter.loadWeChatInfo(url);*/
+        mPresenter.loadWeChatInfo(url);
     }
 
     @Override
@@ -236,7 +237,7 @@ public class SettinActivity extends BaseActivity<SetPresenter> implements SetCon
     @Override
     public void loadWeChatInfo(WechatInfoBean bean) {
         SharedPreferencesUtil.putValue(this,"WECHARTNAME",bean.getNickname());
-        AppConstant.weChartName=bean.getNickname();
+        weChartName=bean.getNickname();
     }
 
     @Override

@@ -194,12 +194,14 @@ public class MyOrderFragment extends BaseFragment<MyOrderPresenter> implements
                         if(dataList.get(position) instanceof OrderFootBean) {
                             final OrderFootBean orderFootBean= (OrderFootBean) dataList.get(position);
                             new NormalAlertDialog.Builder(activity)
-                                    .setBoolTitle(false)
-
+                                    .setBoolTitle(true)
+                                    .setBoolSubtitleTitle(true)
+                                    .setTitleText(orderFootBean.getCcompany())
+                                    .setSubtitleTitleText(orderFootBean.getClinkman())
                                     .setContentText(orderFootBean.getMobile_company())
                                     .setContentTextSize(18)
                                     .setLeftText("取消")
-                                    .setRightText("确认")
+                                    .setRightText("呼叫")
                                     .setWidth(0.75f)
                                     .setHeight(0.33f)
                                     .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {

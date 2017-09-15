@@ -4,6 +4,7 @@ import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 
 import java.util.Map;
@@ -133,6 +134,21 @@ public class LoginPresenter extends LoginContract.Presenter{
                         }else{
                             mView.loadFail(info.getInfo());
                         }
+                    }
+                    @Override
+                    protected void onFailure(String message) {
+                        mView.loadFail(message);
+                    }
+                });
+    }
+
+    @Override
+    public void loadWeChatInfo(String url) {
+        addSubscrebe(Api.getInstance().getWeChatInfo(url),
+                new RxSubscriber<WechatInfoBean>(mContext, false) {
+                    @Override
+                    protected void onSuccess(WechatInfoBean bean) {
+                        mView.loadWeChatInfo(bean);
                     }
                     @Override
                     protected void onFailure(String message) {

@@ -90,15 +90,13 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                     ToastUtil.showCenterShortToast("请输入正确的手机号码");
                     return;
                 }
-                CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(getcodeChagephoneTv, 60000, 1000);
-                mCountDownTimerUtils.start();
+
                 Map<String,String> map=new HashMap<>();
                 map.put("mobile",phone);
                 mPresenter.getCode(map);
             }
         });
         mPresenter.loadBindPhone(AppConstant.UID);
-
     }
                 /**
                  * 检查输入
@@ -135,6 +133,8 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
     }
     @Override
     public void getCodeSuccess(String info) {
+        CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(getcodeChagephoneTv, 60000, 1000);
+        mCountDownTimerUtils.start();
         ToastUtil.showbottomShortToast(info);
     }
 

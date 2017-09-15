@@ -82,7 +82,7 @@ public class ContactUsFrqment extends BaseFragment{
                        .setContentText("0769-83115811")
                        .setContentTextSize(18)
                        .setLeftText("取消")
-                       .setRightText("确认")
+                       .setRightText("呼叫")
                        .setWidth(0.75f)
                        .setHeight(0.33f)
                        .setOnclickListener(new DialogInterface.OnLeftAndRightClickListener<NormalAlertDialog>() {

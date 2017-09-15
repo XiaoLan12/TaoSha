@@ -3,9 +3,7 @@ package com.yizhisha.taosha.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -16,7 +14,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.rx.RxBus;
-import com.yizhisha.taosha.event.WeChatEvent;
 import com.yizhisha.taosha.event.WeChatPayEvent;
 import com.yizhisha.taosha.utils.ToastUtil;
 

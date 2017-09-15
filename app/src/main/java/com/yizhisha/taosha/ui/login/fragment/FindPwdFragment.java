@@ -12,6 +12,7 @@ import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
 import com.yizhisha.taosha.utils.CheckUtils;
@@ -105,6 +106,11 @@ public class FindPwdFragment extends BaseFragment<LoginPresenter> implements Log
 
     @Override
     public void bindWeChatSuccess(String info) {
+
+    }
+
+    @Override
+    public void loadWeChatInfo(WechatInfoBean bean) {
 
     }
 

@@ -3,6 +3,7 @@ package com.yizhisha.taosha.ui.login.fragment;
 import android.content.Context;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,8 +19,7 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
-import com.yizhisha.taosha.common.dialog.DialogInterface;
-import com.yizhisha.taosha.common.dialog.NormalAlertDialog;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.common.popupwindow.LoginWithWeiPopuwindow;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.event.WeChatEvent;
@@ -98,12 +98,10 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
 
     @Override
     public void loginSuccess(RequestStatusBean bean) {
-
-
         if(isBangWei){
             requestStatusBean=bean;
             Map<String,String> map=new HashMap<>();
-            map.put("uid",String.valueOf(AppConstant.UID));
+            map.put("uid",String.valueOf(bean.getUid()));
             map.put("openid",oppenid);
             mPresenter.bindWeChat(map);
         }else{
@@ -120,14 +118,12 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     @Override
     public void weChatLoginSuccess(RequestStatusBean bean) {
         SharedPreferencesUtil.putValue(activity,"ISLOGIN",true);
-        SharedPreferencesUtil.putValue(activity,"MOBILE",bean.getMobile());
         AppConstant.isLogin=true;
         AppConstant.UID=bean.getUid();
         SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
     }
-
     @Override
     public void registerSuccess(String info) {
 
@@ -146,6 +142,11 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         map.put("openid",wechatBean.getOpenid());
         oppenid=wechatBean.getOpenid();
         mPresenter.weChatLogin(map);
+        String url="https://api.weixin.qq.com/sns/userinfo?access_token="
+                + wechatBean.getAccess_token()
+                + "&openid="
+                + wechatBean.getOpenid();
+        mPresenter.loadWeChatInfo(url);
     }
     @Override
     public void loadFail(String msg) {
@@ -188,6 +189,11 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         SharedPreferencesUtil.putValue(activity,"UID",AppConstant.UID);
         RxBus.$().postEvent(new LoginEvent());
         activity.finish();
+    }
+
+    @Override
+    public void loadWeChatInfo(WechatInfoBean bean) {
+        SharedPreferencesUtil.putValue(activity,"WECHARTNAME",bean.getNickname());
     }
 
     public interface switchFragmentListener{

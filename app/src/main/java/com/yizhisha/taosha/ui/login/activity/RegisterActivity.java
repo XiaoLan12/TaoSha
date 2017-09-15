@@ -15,6 +15,7 @@ import com.yizhisha.taosha.base.BaseToolbar;
 import com.yizhisha.taosha.base.rx.RxBus;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
+import com.yizhisha.taosha.bean.json.WechatInfoBean;
 import com.yizhisha.taosha.event.LoginEvent;
 import com.yizhisha.taosha.ui.login.contract.LoginContract;
 import com.yizhisha.taosha.ui.login.presenter.LoginPresenter;
@@ -122,6 +123,11 @@ public class RegisterActivity extends BaseActivity<LoginPresenter> implements Lo
 
     @Override
     public void bindWeChatSuccess(String info) {
+
+    }
+
+    @Override
+    public void loadWeChatInfo(WechatInfoBean bean) {
 
     }
 

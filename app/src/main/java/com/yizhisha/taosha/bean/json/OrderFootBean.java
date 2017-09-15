@@ -13,6 +13,8 @@ public class OrderFootBean implements Serializable{
     private int status;
     private int amount;
     private String mobile_company;
+    private String clinkman;
+    private String ccompany;
     private int commentstatus;
     private int payment;
 
@@ -71,6 +73,22 @@ public class OrderFootBean implements Serializable{
 
     public void setOrderno(String orderno) {
         this.orderno = orderno;
+    }
+
+    public String getClinkman() {
+        return clinkman;
+    }
+
+    public void setClinkman(String clinkman) {
+        this.clinkman = clinkman;
+    }
+
+    public String getCcompany() {
+        return ccompany;
+    }
+
+    public void setCcompany(String ccompany) {
+        this.ccompany = ccompany;
     }
 
     @Override

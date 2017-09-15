@@ -53,6 +53,9 @@ public class DataHelper {
             orderFootBean.setOrderno(order.getOrderno());
             orderFootBean.setPayment(order.getPayment());
             orderFootBean.setMobile_company(order.getMobile_company());
+            orderFootBean.setClinkman(order.getClinkman());
+            orderFootBean.setCcompany(order.getCcompany());
+
             dataList.add(orderFootBean);
         }
         return dataList;
