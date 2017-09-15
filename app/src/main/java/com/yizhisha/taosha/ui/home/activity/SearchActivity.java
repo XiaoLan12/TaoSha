@@ -38,6 +38,7 @@ import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.common.flowlayout.FlowLayout;
 import com.yizhisha.taosha.common.flowlayout.TagAdapter;
 import com.yizhisha.taosha.common.flowlayout.TagFlowLayout;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.utils.xunfei.IatSettings;
 import com.yizhisha.taosha.utils.xunfei.JsonParser;
 
@@ -65,6 +66,10 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
     ImageView img_back;
     @Bind(R.id.search_et)
     EditText searchEt;
+    @Bind(R.id.tv_search)
+    TextView tv_search;
+    @Bind(R.id.img_scan)
+    ImageView img_scan;
 
     // 语音听写对象
     private SpeechRecognizer mIat;
@@ -140,6 +145,11 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
             public void afterTextChanged(Editable s) {
 
                 searchEt.setSelection(searchEt.getText().length());
+                if(s.length()==0){
+                    tv_search.setVisibility(View.GONE);
+                }else{
+                    tv_search.setVisibility(View.VISIBLE);
+                }
             }
         });
         // 初始化识别无UI识别对象
@@ -181,7 +191,7 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
                 String result = bundle.getString("result");
 //                searchEt.setText(result);
 
-                if(result.contains("id/")){
+                if(result.contains("taoshamall")&&result.contains("id/")){
                     int i=result.indexOf("id/");
                     try{
                         Bundle bundle1=new Bundle();
@@ -193,12 +203,12 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
                     }
 
                 }else{
-                    searchEt.setText(result);
+                    ToastUtil.showShortToast("尊敬的用户,扫码功能仅提供大朗淘纱商品二维码扫码");
                 }
             }
         }
     }
-    @OnClick({R.id.img_back,R.id.search_tv,R.id.scan_iv,R.id.voice_iv})
+    @OnClick({R.id.img_back,R.id.search_tv,R.id.img_scan,R.id.voice_iv,R.id.tv_search})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -211,8 +221,13 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
                 bundle.putString("KEY", searchEt.getText().toString().trim());
                 startActivity(SelectYarnActivity.class, bundle);
                 break;
-            case R.id.scan_iv:
+            case R.id.img_scan:
                 scan();
+                break;
+            case R.id.tv_search:
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("KEY", searchEt.getText().toString().trim());
+                startActivity(SelectYarnActivity.class, bundle1);
                 break;
             case R.id.voice_iv:
                 //⑧申请录制音频的动态权限

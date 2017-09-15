@@ -1,7 +1,11 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
-import android.graphics.Color;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.HomeYarnRecommendAdapter;
@@ -32,6 +38,8 @@ import com.yizhisha.taosha.ui.home.activity.SelectYarnActivity;
 import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.HomeContract;
 import com.yizhisha.taosha.ui.home.precenter.HomePresenter;
+import com.yizhisha.taosha.utils.DensityUtil;
+import com.yizhisha.taosha.utils.ToastUtil;
 import com.yizhisha.taosha.widget.SpacesItemDecoration;
 import com.youth.banner.Banner;
 
@@ -42,6 +50,8 @@ import java.util.Random;
 import butterknife.Bind;
 import butterknife.OnClick;
 import qiu.niorgai.StatusBarCompat;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by lan on 2017/6/22.
@@ -67,6 +77,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     RecyclerView recycleview7;
     @Bind(R.id.ll_search)
     LinearLayout ll_search;
+    @Bind(R.id.rl_banner)
+    RelativeLayout rl_banner;
+    @Bind(R.id.img_scan)
+            ImageView img_scan;
+
 
 
     //设置图片资源:url或本地资源
@@ -112,14 +127,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-//            StatusBarCompat.translucentStatusBar(getActivity(), true);
-            StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
+            StatusBarCompat.translucentStatusBar(getActivity(), true);
+//            StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
 
         }
     }
     @Override
     protected void initView() {
-        StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
+        StatusBarCompat.translucentStatusBar(getActivity(), true);
+//        StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
+
+        //动态设置banner的高度
+        RelativeLayout.LayoutParams linearParams =(RelativeLayout.LayoutParams) banner.getLayoutParams();
+        int ss=DensityUtil.getScreenWidth(getActivity());
+        linearParams.height = ss/2;// 控件的宽强制设成30
+        banner.setLayoutParams(linearParams);
+
 //        StatusBarCompat.translucentStatusBar(getActivity(), true);
         //设置样式,默认为:Banner.NOT_INDICATOR(不显示指示器和标题)
         banner.setBannerStyle(Banner.CIRCLE_INDICATOR);
@@ -336,8 +359,49 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         }
         return list;
     }
+    //扫描二维码
+    //https://cli.im/text?2dd0d2b267ea882d797f03abf5b97d88二维码生成网站
+    public void scan() {
+        // 扫描功能
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //申请CAMERA权限
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 3);
+        } else {
 
-    @OnClick({R.id.ll_search})
+            Intent intent=  new Intent(getActivity(), CaptureActivity.class);
+            startActivityForResult(intent,0);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && data != null) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String result = bundle.getString("result");
+//                searchEt.setText(result);
+
+                if(result.contains("taoshamall")&&result.contains("id/")){
+                    int i=result.indexOf("id/");
+                    try{
+                        Bundle bundle1=new Bundle();
+                        bundle1.putInt("TYPE",1);
+                        bundle1.putInt("id",Integer.parseInt(result.substring(i+3,result.length())));
+                        startActivity(YarnActivity.class,bundle1);
+                    }catch (Exception e){
+
+                    }
+
+                }else{
+                    ToastUtil.showShortToast("尊敬的用户,扫码功能仅提供大朗淘纱商品二维码扫码");
+                }
+            }
+        }
+    }
+
+    @OnClick({R.id.ll_search,R.id.img_scan})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -347,6 +411,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
              /*   Bundle bundle4 = new Bundle();
                 bundle4.putInt("YARNTYPE", 0);*/
                 startActivity(SearchActivity.class);
+                break;
+            case R.id.img_scan:
+                scan();
                 break;
         }
     }

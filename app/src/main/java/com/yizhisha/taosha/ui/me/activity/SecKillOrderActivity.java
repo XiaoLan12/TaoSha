@@ -1,5 +1,6 @@
 package com.yizhisha.taosha.ui.me.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -11,10 +12,8 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.base.ActivityManager;
 import com.yizhisha.taosha.base.BaseActivity;
 import com.yizhisha.taosha.base.BaseToolbar;
-import com.yizhisha.taosha.ui.me.fragment.FreeSampleFragment;
-import com.yizhisha.taosha.ui.me.fragment.MyOrderFragment;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.me.fragment.SecKillOrderFragment;
-import com.yizhisha.taosha.ui.me.presenter.SecKillOrderPresenter;
 import com.yizhisha.taosha.utils.RescourseUtil;
 import com.yizhisha.taosha.widget.ClearEditText;
 
@@ -43,6 +42,8 @@ public class SecKillOrderActivity extends BaseActivity{
     private String[] mTitles = {"全部", "待付款", "待发货", "待收货","已完成"};
     private int[] mType= {0,1,2,3,4};
     private ArrayList<Fragment> mFragments = new ArrayList<>();
+
+    private String id="";
     @Override
     protected int getLayoutId() {
         return R.layout.activity_second_kill_order;
@@ -52,7 +53,15 @@ public class SecKillOrderActivity extends BaseActivity{
         toolbar.setLeftButtonOnClickLinster(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManager.getActivityMar().finishActivity(SecKillOrderActivity.this);
+                if(!id.equals("")){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("TYPE",1);
+                    bundle.putInt("id", Integer.parseInt(id));
+                    startActivity(YarnActivity.class, bundle);
+                }else{
+                    ActivityManager.getActivityMar().finishActivity(SecKillOrderActivity.this);
+                }
+
             }
         });
         toolbar.setRightButtonIcon(RescourseUtil.getDrawable(R.drawable.icon_search));
@@ -60,12 +69,20 @@ public class SecKillOrderActivity extends BaseActivity{
         toolbar.setRightButtonOnClickLinster(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 searchLl.setVisibility(View.VISIBLE);
             }
         });
     }
     @Override
     protected void initView() {
+        Bundle bundle = getIntent().getExtras();
+//以下为判断bundle是否为空，以及bundle是否包含关键词“id”
+        if (bundle != null &&bundle.containsKey("id")) {
+            id=bundle.getString("id");
+        }
+
+
         for (int type : mType) {
             mFragments.add(SecKillOrderFragment.getInstance(type));
         }

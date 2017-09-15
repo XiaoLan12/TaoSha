@@ -23,6 +23,7 @@ android {
             }
         }
     }
+    //ceshishangcuang
     buildTypes {
         release {
             minifyEnabled true

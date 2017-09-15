@@ -248,7 +248,6 @@ public class SecKillOrderDetailActivity extends BaseActivity<SecKillOrderDetails
                 .setSingleListener(new DialogInterface.OnSingleClickListener<NormalAlertDialog>() {
                     @Override
                     public void clickSingleButton(NormalAlertDialog dialog, View view) {
-
                         setResult(2);
                         finish_Activity(SecKillOrderDetailActivity.this);
                         dialog.dismiss();
