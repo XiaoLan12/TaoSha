@@ -1,31 +1,32 @@
 package com.yizhisha.taosha.api;
 
 import com.yizhisha.taosha.bean.json.AccountBean;
-import com.yizhisha.taosha.bean.json.CommentPicBean;
-import com.yizhisha.taosha.bean.json.FootpringBean;
-import com.yizhisha.taosha.bean.json.HotCommendBean;
-import com.yizhisha.taosha.bean.json.MyCommentBean;
-import com.yizhisha.taosha.bean.json.OrderSureBean;
-import com.yizhisha.taosha.bean.json.PayReqBean;
-import com.yizhisha.taosha.bean.json.SeckillOrderSureBean;
-import com.yizhisha.taosha.bean.json.SeckillProductBean;
-import com.yizhisha.taosha.bean.json.ShopCartBean;
-import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
-import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.AddressListBean;
 import com.yizhisha.taosha.bean.json.CollectListBean;
 import com.yizhisha.taosha.bean.json.CommentListBean;
+import com.yizhisha.taosha.bean.json.CommentPicBean;
+import com.yizhisha.taosha.bean.json.FootpringBean;
 import com.yizhisha.taosha.bean.json.FreeSampleBean;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.bean.json.ListGoodsBean;
+import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
+import com.yizhisha.taosha.bean.json.OrderSureBean;
+import com.yizhisha.taosha.bean.json.PayReqBean;
 import com.yizhisha.taosha.bean.json.PersonalDataBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.SearchBean;
 import com.yizhisha.taosha.bean.json.SeckillActListBean;
 import com.yizhisha.taosha.bean.json.SeckillListBean;
+import com.yizhisha.taosha.bean.json.SeckillOrderSureBean;
+import com.yizhisha.taosha.bean.json.SeckillProductBean;
+import com.yizhisha.taosha.bean.json.ShopCartBean;
+import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
 import com.yizhisha.taosha.bean.json.ShopcartListBean;
+import com.yizhisha.taosha.bean.json.UserHeadBean;
 import com.yizhisha.taosha.bean.json.UserInfoBean;
 import com.yizhisha.taosha.bean.json.WeChatPayStateBean;
 import com.yizhisha.taosha.bean.json.WechatBean;
@@ -219,6 +220,11 @@ public interface ApiService {
     //首页轮播
     @GET("ios/index/")
     Observable<IndexPPTBean> getPPT();
+
+
+    //淘纱清单
+    @GET("ios/goodsList/")
+    Observable<ListGoodsBean> getGoodList(@Query("type") String type);
 
     //首页推荐纺纱6种
     @GET("ios/goods/goodsNew/")

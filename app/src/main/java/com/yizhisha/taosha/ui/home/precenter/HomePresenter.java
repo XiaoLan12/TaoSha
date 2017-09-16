@@ -1,14 +1,11 @@
 package com.yizhisha.taosha.ui.home.precenter;
 
-import android.util.Log;
-
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.bean.json.ListGoodsBean;
 import com.yizhisha.taosha.ui.home.contract.HomeContract;
-
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/7/8.
@@ -41,6 +38,59 @@ public class HomePresenter extends HomeContract.Presenter {
             @Override
             protected void onFailure(String message) {
                 mView.getPPTFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void getListGoodsDaily(String type) {
+        addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
+            @Override
+            protected void onSuccess(ListGoodsBean model) {
+                if(model.getStatus().equals("y")) {
+                    mView.getListGoodsDailySuccess(model);
+                }
+            }
+
+            @Override
+            protected void onFailure(String message) {
+//                mView.getPPTFail(message);
+            }
+        });
+
+    }
+
+    @Override
+    public void getListGoodsNaYang(String type) {
+        addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
+            @Override
+            protected void onSuccess(ListGoodsBean model) {
+                if(model.getStatus().equals("y")) {
+                    mView.getListGoodsNaYangSuccess(model);
+                }
+            }
+
+            @Override
+            protected void onFailure(String message) {
+//                mView.getPPTFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void getListGoodsBannao(String type) {
+        addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
+            @Override
+            protected void onSuccess(ListGoodsBean model) {
+                if(model.getStatus().equals("y")){
+                    mView.getListGoodsBannaoSuccess(model);
+                }
+
+            }
+
+            @Override
+            protected void onFailure(String message) {
+//                mView.getPPTFail(message);
             }
         });
     }

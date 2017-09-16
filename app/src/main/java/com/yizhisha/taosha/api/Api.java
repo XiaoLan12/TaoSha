@@ -9,6 +9,7 @@ import com.yizhisha.taosha.bean.json.FreeSampleBean;
 import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
+import com.yizhisha.taosha.bean.json.ListGoodsBean;
 import com.yizhisha.taosha.bean.json.MyCommentBean;
 import com.yizhisha.taosha.bean.json.MyOrderListBean;
 import com.yizhisha.taosha.bean.json.OrderSureBean;
@@ -371,4 +372,9 @@ public class Api {
     public Observable<WeChatPayStateBean> weChatPayState(Map<String,String> map){
         return service.weChatPayState(map);
     }
+
+    public Observable<ListGoodsBean> getGoodList(String type){
+        return service.getGoodList(type);
+    }
+
 }
