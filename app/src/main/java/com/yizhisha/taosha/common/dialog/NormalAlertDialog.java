@@ -195,7 +195,7 @@ public class NormalAlertDialog {
             height = 0.23f;
             width = 0.65f;
             titleTextSize = 16;
-            subtitleTitleTextSize=14;
+            subtitleTitleTextSize=16;
             contentTextSize = 16;
             buttonTextSize = 14;
         }

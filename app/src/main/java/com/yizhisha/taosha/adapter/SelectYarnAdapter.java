@@ -26,7 +26,7 @@ public class SelectYarnAdapter extends BaseQuickAdapter<SearchDetailBean,BaseVie
         helper.setText(R.id.unitprice_selectyarn_tv,"￥"+item.getPrice_real()+"/份");
         helper.setText(R.id.shopname_selectyarn_tv,item.getTitle());
         helper.setText(R.id.composition_selectyarn_tv,item.getIngredient());
-        helper.setText(R.id.fit_pittype_selectyarn_tv,item.getNeedle_name());
+        helper.setText(R.id.fit_pittype_selectyarn_tv,item.getYam());
         helper.setText(R.id.totalprice_selectyarn_tv,"￥"+item.getPrice());
         GlideUtil.getInstance().LoadContextBitmap(mContext, AppConstant.INDEX_RECOMMEND_TYPE_IMG_URL+item.getLitpic(),
                 (ImageView) helper.getView(R.id.shophead_selectyarn_iv),GlideUtil.LOAD_BITMAP);

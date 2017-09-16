@@ -33,7 +33,7 @@
                         android:layout_width="@dimen/dp_25"
                         android:layout_height="@dimen/dp_25"
                         android:layout_alignParentRight="true"
-                        android:layout_margin="@dimen/dp_5"
+                        android:layout_margin="@dimen/dp_10"
                         android:src="@drawable/icon_setting" />
 
                     <ImageView
@@ -57,44 +57,72 @@
             </FrameLayout>
 
             <LinearLayout
-
+                android:id="@+id/myorder_set_tv"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@color/white"
+                android:orientation="horizontal"
                 android:gravity="center">
-
-                <TextView
-                    android:id="@+id/myorder_set_tv"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_order"
                     android:gravity="center"
-                    android:textColor="@color/common_h"
-                    android:textSize="16sp"
-                    android:text="我的订单" />
-
-                <TextView
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_order"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:textColor="@color/common_h"
+                        android:textSize="16sp"
+                        android:text="我的订单" />
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/mycollect_set_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_favorit_normale"
                     android:gravity="center"
-                    android:textColor="@color/common_h"
-                    android:textSize="16sp"
-                    android:text="我的收藏" />
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_favorit_normale"
+                        />
 
-                <TextView
-                    android:id="@+id/myfootprint_set_tv"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/common_h"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="我的收藏" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_footprint"
                     android:gravity="center"
-                    android:textColor="@color/common_h"
-                    android:textSize="16sp"
-                    android:text="我的足迹" />
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icon_footprint"/>
+                    <TextView
+                        android:id="@+id/myfootprint_set_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:textColor="@color/common_h"
+                        android:textSize="16sp"
+                        android:text="我的足迹" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <View

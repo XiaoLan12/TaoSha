@@ -28,7 +28,10 @@ public class SekaFragment extends BaseFragment {
 
     public static SekaFragment getInstance(List<String> list) {
         SekaFragment sf = new SekaFragment();
-       sf.dataList.addAll(list);
+        if(list!=null){
+            sf.dataList.addAll(list);
+        }
+
         return sf;
     }
     @Override
