@@ -199,17 +199,23 @@ public class SingleShopCartActivity extends BaseActivity<SingleShopCartPresenter
                 int amount = 0;
                 String detail = "";
                 for(int i=0;i<dataList.size();i++){
-                    if (dataList.get(i).getDetail().equals("")){
-                        ToastUtil.showShortToast("请输入6位数内的色号");
+                   /* if (dataList.get(i).getDetail().equals("")){
+                        ToastUtil.showShortToast("请先输入色号");
                         return;
-                    }
+                    }*/
                     if (dataList.get(i).getAmount()==0) {
                         ToastUtil.showShortToast("请输入购买的数量数量");
                         return;
                     }
-                    str.append(dataList.get(i).getDetail()).append("#");
-                    str.append(dataList.get(i).getAmount()).append("， ");
-                    amount += dataList.get(i).getAmount();
+                    if(!dataList.get(i).getDetail().equals("")) {
+                        str.append(dataList.get(i).getDetail()).append("#");
+                        str.append(dataList.get(i).getAmount()).append("， ");
+                        amount += dataList.get(i).getAmount();
+                    }
+                }
+                if(str.toString().equals("")){
+                    ToastUtil.showShortToast("请先输入色号");
+                    return;
                 }
                 if (str.length() > 0) {
                     detail = str.substring(0, str.length() - 2);

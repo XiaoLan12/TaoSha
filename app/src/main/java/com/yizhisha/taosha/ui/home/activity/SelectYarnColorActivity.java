@@ -224,13 +224,20 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                     int amount = 0;
                     String detail = "";
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getColor().equals("")){
-                            ToastUtil.showShortToast("请输入6位数内的色号");
+                       /* if (list.get(i).getColor().equals("")){
+                            ToastUtil.showShortToast("请先输入色号");
                             return;
+                        }*/
+                        if(!list.get(i).getColor().equals("")){
+                            str.append(list.get(i).getColor()).append("#");
+                            str.append(list.get(i).getNum()).append("， ");
+                            amount += list.get(i).getNum();
                         }
-                        str.append(list.get(i).getColor()).append("#");
-                        str.append(list.get(i).getNum()).append("， ");
-                        amount += list.get(i).getNum();
+
+                    }
+                    if(str.toString().equals("")){
+                        ToastUtil.showShortToast("请先输入色号");
+                        return;
                     }
                     if(AppConstant.isLogin==false){
                         if(dialog==null){
@@ -258,17 +265,23 @@ public class SelectYarnColorActivity extends BaseActivity<SelectYarnColorPresent
                     int amount = 0;
                     String detail = "";
                     for(int i=0;i<list.size();i++){
-                        if (list.get(i).getColor().equals("")){
-                            ToastUtil.showShortToast("请输入6位数内的色号");
+                       /* if (list.get(i).getColor().equals("")){
+                            ToastUtil.showShortToast("请先输入色号");
                             return;
-                        }
+                        }*/
                         if (list.get(i).getNum()==0) {
                             ToastUtil.showShortToast("请输入购买的数量数量");
                             return;
                         }
-                        str.append(list.get(i).getColor()).append("#");
-                        str.append(list.get(i).getNum()).append("， ");
-                        amount+=list.get(i).getNum();
+                        if(!list.get(i).getColor().equals("")) {
+                            str.append(list.get(i).getColor()).append("#");
+                            str.append(list.get(i).getNum()).append("， ");
+                            amount += list.get(i).getNum();
+                        }
+                    }
+                    if(str.toString().equals("")){
+                        ToastUtil.showShortToast("请先输入色号");
+                        return;
                     }
                     if(AppConstant.isLogin==false){
                         if(dialog==null){
