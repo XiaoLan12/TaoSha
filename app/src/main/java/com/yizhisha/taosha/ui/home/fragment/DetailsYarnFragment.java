@@ -28,7 +28,9 @@ public class DetailsYarnFragment extends BaseFragment{
     private List<String> dataList=new ArrayList<>();
     public static DetailsYarnFragment getInstance(List<String> list) {
         DetailsYarnFragment sf = new DetailsYarnFragment();
-        sf.dataList.addAll(list);
+        if(list!=null){
+            sf.dataList.addAll(list);
+        }
         return sf;
     }
     @Override

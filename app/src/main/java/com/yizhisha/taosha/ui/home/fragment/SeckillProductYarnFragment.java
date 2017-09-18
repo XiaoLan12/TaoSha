@@ -205,7 +205,9 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
         });
     }
     private void initDetail() {
-        contentList.addAll(goods.getContent());
+        if(goods.getContent()!=null){
+            contentList.addAll(goods.getContent());
+        }
         for(int i=0;i<contentList.size();i++){
             contentList.set(i,AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL+contentList.get(i));
         }

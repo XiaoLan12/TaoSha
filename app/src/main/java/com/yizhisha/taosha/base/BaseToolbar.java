@@ -137,7 +137,7 @@ public class BaseToolbar extends Toolbar {
     public void setRightButtonIcon(Drawable icon) {
 
         if (mRightButton != null) {
-            icon.setBounds(0, 0, icon.getMinimumWidth(), icon.getMinimumHeight());
+            icon.setBounds(0, 0,DensityUtil.dip2px(25) , DensityUtil.dip2px(25));
             mRightButton.setCompoundDrawables(null,null,icon,null);
         }
     }

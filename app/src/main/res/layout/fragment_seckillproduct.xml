@@ -166,8 +166,8 @@
                     tools:text="高品质，段染四经一维"/>
                 <ImageView
                     android:id="@+id/collect_iv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/icon_favorit_normale"/>
             </LinearLayout>
 
@@ -183,15 +183,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_small"
                     android:text="快递运费："/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/font_small"
                     android:text="到付"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_small"
                     android:text="东莞市大朗镇"/>
             </LinearLayout>
             <View style="@style/TS.Theme.Widget.Divider.Line.Vertical"/>

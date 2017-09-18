@@ -297,7 +297,9 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     }
 
     private void initDetail() {
-        contentList.addAll(goods.getContent_());
+        if(goods.getContent_()!=null){
+            contentList.addAll(goods.getContent_());
+        }
         for (int i = 0; i < contentList.size(); i++) {
             contentList.set(i, AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + contentList.get(i));
         }

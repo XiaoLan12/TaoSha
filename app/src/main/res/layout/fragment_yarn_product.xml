@@ -52,11 +52,12 @@
                     android:layout_weight="1"
                     android:textSize="16sp"
                     android:gravity="center_vertical"
+                    android:textColor="@color/common_h1"
                     android:text="高品质，段染四经一维"/>
                 <ImageView
                     android:id="@+id/collect_iv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/icon_favorit_normale"/>
             </LinearLayout>
             <LinearLayout
@@ -106,15 +107,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_small"
                     android:text="运营："/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/font_small"
                     android:text="快递到付"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_small"
                     android:text="东莞市大朗镇"/>
             </LinearLayout>
             <LinearLayout
@@ -129,8 +133,8 @@
                 android:layout_marginRight="10dp"
                 android:gravity="center_vertical">
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/ic_checkbox_seleted"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -138,19 +142,22 @@
                     android:textSize="12sp"
                     android:gravity="center_vertical"
                     android:text="织信通" />
+
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/imageView"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_checkbox_seleted"/>
+                    android:src="@drawable/ic_checkbox_seleted" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:text="实名认证" />
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_checkbox_seleted"/>
                 <TextView
@@ -159,8 +166,8 @@
                     android:textSize="12sp"
                     android:text="检测证书" />
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_checkbox_seleted"/>
                 <TextView
