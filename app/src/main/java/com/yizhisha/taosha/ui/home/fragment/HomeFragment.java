@@ -187,8 +187,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
 
         LinearLayout.LayoutParams linearParam2 =(LinearLayout.LayoutParams) img_index_daohang.getLayoutParams();
-        linearParam2.height = ss/160;// 控件的宽强制设成30
-        img_index_daohang.setLayoutParams(linearParam1);
+        linearParam2.height = ss/16;// 控件的宽强制设成30
+        img_index_daohang.setLayoutParams(linearParam2);
 
 //        img_mafang.setLayoutParams(linearParam1);
 
