@@ -94,7 +94,7 @@
         android:visibility="visible"
         android:layout_marginTop="10dp">
         <ImageView
-
+            android:id="@+id/img_index_daohang"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:scaleType="fitXY"
@@ -110,7 +110,7 @@
             android:id="@+id/img_daily"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:src="@drawable/index_rc_1"
+
 
             android:layout_weight="1"/>
         <View
@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/index_1"/>
+              />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/index_2"/>
+              />
         </LinearLayout>
     </LinearLayout>
             <LinearLayout

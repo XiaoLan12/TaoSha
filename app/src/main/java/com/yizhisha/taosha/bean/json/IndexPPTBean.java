@@ -12,6 +12,10 @@ public class IndexPPTBean {
 
     private List<IndexADSBean> ads;
 
+    private List<IndexImgBean> meiri;
+    private List<IndexImgBean> nayang;
+    private List<IndexImgBean> banmao;
+
     private List<IndexImgBean> mafang;
     private List<IndexImgBean> maofang;
     private List<IndexImgBean> mianfang;
@@ -92,11 +96,38 @@ public class IndexPPTBean {
         this.remen = remen;
     }
 
+    public List<IndexImgBean> getMeiri() {
+        return meiri;
+    }
+
+    public void setMeiri(List<IndexImgBean> meiri) {
+        this.meiri = meiri;
+    }
+
+    public List<IndexImgBean> getNayang() {
+        return nayang;
+    }
+
+    public void setNayang(List<IndexImgBean> nayang) {
+        this.nayang = nayang;
+    }
+
+    public List<IndexImgBean> getBanmao() {
+        return banmao;
+    }
+
+    public void setBanmao(List<IndexImgBean> banmao) {
+        this.banmao = banmao;
+    }
+
     @Override
     public String toString() {
         return "IndexPPTBean{" +
                 "ppt=" + ppt +
                 ", ads=" + ads +
+                ", meiri=" + meiri +
+                ", nayang=" + nayang +
+                ", banmao=" + banmao +
                 ", mafang=" + mafang +
                 ", maofang=" + maofang +
                 ", mianfang=" + mianfang +

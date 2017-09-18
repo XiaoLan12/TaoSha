@@ -105,6 +105,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Bind(R.id.img_banmao)
     ImageView img_banmao;
 
+    @Bind(R.id.img_index_daohang)
+    ImageView img_index_daohang;
+
+
     private String nayang="";
     private String daily="";
     private String bannao="";
@@ -180,6 +184,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         img_hauxian.setLayoutParams(linearParam1);
         img_huashi.setLayoutParams(linearParam1);
         img_maofang.setLayoutParams(linearParam1);
+
+
+        LinearLayout.LayoutParams linearParam2 =(LinearLayout.LayoutParams) img_index_daohang.getLayoutParams();
+        linearParam2.height = ss/160;// 控件的宽强制设成30
+        img_index_daohang.setLayoutParams(linearParam1);
+
 //        img_mafang.setLayoutParams(linearParam1);
 
 //        StatusBarCompat.translucentStatusBar(getActivity(), true);
@@ -553,7 +563,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHunfang().get(0).getImg()).into(img_hunfang);
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHauxian().get(0).getImg()).into(img_hauxian);
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHuashi().get(0).getImg()).into(img_huashi);
-        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getRemen().get(0).getImg()).placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).into(img_remen);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getRemen().get(0).getImg()).into(img_remen);//.placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getMeiri().get(0).getImg()).into(img_daily);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getNayang().get(0).getImg()).into(img_nayang);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getBanmao().get(0).getImg()).into(img_banmao);
 //        GlideUtil.getInstance().LoadContextBitmap();
     }
 
