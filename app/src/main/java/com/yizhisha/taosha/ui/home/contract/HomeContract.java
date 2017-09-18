@@ -30,6 +30,7 @@ public interface HomeContract {
         void getListGoodsDailySuccess(ListGoodsBean model);
         void getListGoodsNaYangSuccess(ListGoodsBean model);
         void getListGoodsBannaoSuccess(ListGoodsBean model);
+        void getListGoodsFail(String msg);
     }
 
     abstract class Presenter extends BasePresenter<HomeContract.View> {
