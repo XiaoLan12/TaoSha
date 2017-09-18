@@ -334,13 +334,12 @@ public class ShoppCartFragment extends BaseFragment<ShoppCartPresenter> implemen
     }
     @Override
     public void deleteShoppCart(String msg) {
-      adapter.removeGoods();
+        adapter.removeGoods();
         mToobar.setRightButtonText("编辑");
     }
     @Override
     public void deleteOneShoppCart(String msg, int groupPosition, int childPosition) {
-        adapter.removeOneGood(groupPosition,childPosition);
-
+        mPresenter.loadShoppCart(AppConstant.UID,false);
     }
     @Override
     public void showLoading() {

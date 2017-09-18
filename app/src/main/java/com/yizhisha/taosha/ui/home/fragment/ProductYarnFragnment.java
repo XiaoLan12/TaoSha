@@ -146,6 +146,13 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         if (productDetailBean == null) {
             return;
         }
+
+        if(productDetailBean.getFavorite().equals("y")){
+            collectIv.setImageResource(R.drawable.icon_favorit);
+        }else{
+            collectIv.setImageResource(R.drawable.icon_favorit_normale);
+        }
+
         goods = productDetailBean.getGoods();
         if (goods == null) {
             return;
@@ -219,6 +226,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         tv_company.setText(goods.getCompany());
         mainProductTv.setText(goods.getMajor());
         merchantAddrssTv.setText(goods.getAddress());
+
         initComment();
         initParameter();
         initSeka();
@@ -346,6 +354,10 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
                             .build();
                     dialog.setData(mDatas1);
                     dialog.show();
+                    return;
+                }
+                if(productDetailBean.getFavorite().equals("y")){
+                    ToastUtil.showShortToast("该商品已收藏");
                     return;
                 }
                 Map<String, String> map = new HashMap<>();

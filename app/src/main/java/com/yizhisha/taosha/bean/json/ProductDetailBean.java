@@ -12,6 +12,8 @@ public class ProductDetailBean{
     private String status;
 
     private String info;
+
+    private String  favorite;
     public String getStatus() {
         return status;
     }
@@ -35,6 +37,10 @@ public class ProductDetailBean{
 
     public Comment getComment() {
         return comment;
+    }
+
+    public String getFavorite() {
+        return favorite;
     }
 
     public void setComment(Comment comment) {

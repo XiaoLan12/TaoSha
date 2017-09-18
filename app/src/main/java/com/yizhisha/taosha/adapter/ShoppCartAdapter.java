@@ -383,7 +383,7 @@ public class ShoppCartAdapter extends BaseExpandableListAdapter {
     }
     public void removeOneGood(int groupPosition, int childPosition) {
         //StoreBean storeBean = (StoreBean) parentMapList.get(groupPosition).get("parentName");
-        List<Map<String, Object>> childMapList = childMapList_list.get(groupPosition);
+        List<Map<String, Object>> childMapList = childMapList_list.get(childPosition);
         // GoodsBean goodsBean = (GoodsBean) childMapList.get(childPosition).get("childName");
         childMapList.remove(childPosition);
 

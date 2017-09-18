@@ -35,7 +35,7 @@ public class DataHelper {
             //大订单支付的金额核定单状态
             OrderHeadBean orderHeadBean = new OrderHeadBean();
             orderHeadBean.setStatus(order.getStatus());
-            orderHeadBean.setCompany(order.getCompany());
+            orderHeadBean.setCompany(order.getCcompany());
             orderHeadBean.setPayment(order.getPayment());
             dataList.add(orderHeadBean);
 

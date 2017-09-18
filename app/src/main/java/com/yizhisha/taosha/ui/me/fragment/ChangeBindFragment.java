@@ -92,6 +92,7 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
                 }
 
                 Map<String,String> map=new HashMap<>();
+                map.put("uid", String.valueOf(AppConstant.UID));
                 map.put("mobile",phone);
                 mPresenter.getCode(map);
             }
@@ -129,13 +130,14 @@ public class ChangeBindFragment extends BaseFragment<BindPresenter> implements B
             getcodeChagephoneTv.setTextColor(RescourseUtil.getColor(R.color.gray));
             getcodeChagephoneTv.setEnabled(false);
         }
-        ToastUtil.showCenterShortToast(msg.getInfo());
+        ToastUtil.showShortToast(msg.getInfo());
+        activity.finish();
     }
     @Override
     public void getCodeSuccess(String info) {
         CountDownTimerUtil mCountDownTimerUtils = new CountDownTimerUtil(getcodeChagephoneTv, 60000, 1000);
         mCountDownTimerUtils.start();
-        ToastUtil.showbottomShortToast(info);
+        ToastUtil.showShortToast(info);
     }
 
     @Override

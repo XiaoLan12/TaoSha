@@ -145,7 +145,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsPresenter> im
         mTvConsignee.setText(order.getLinkman());
         mTvConsigneePhone.setText(order.getMobile());
         mTvShipAddress.setText(order.getAddress());
-        mTvCompay.setText(order.getCompany());
+        mTvCompay.setText(order.getCcompany());
         mTvOrderNo.setText(order.getOrderno());
 
         mTvOrderTime.setText(DateUtil.getDateToString1(order.getAddtime()*1000));
