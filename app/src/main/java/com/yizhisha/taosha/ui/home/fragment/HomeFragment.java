@@ -42,7 +42,6 @@ import com.yizhisha.taosha.ui.home.contract.HomeContract;
 import com.yizhisha.taosha.ui.home.precenter.HomePresenter;
 import com.yizhisha.taosha.utils.DensityUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
-import com.yizhisha.taosha.widget.CommonLoadingView;
 import com.yizhisha.taosha.widget.SpacesItemDecoration;
 import com.youth.banner.Banner;
 
@@ -197,7 +196,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
 
         LinearLayout.LayoutParams linearParam2 =(LinearLayout.LayoutParams) img_index_daohang.getLayoutParams();
-        linearParam2.height = ss/16;
+        linearParam2.height = ss/12;
         img_index_daohang.setLayoutParams(linearParam2);
 
        /* LinearLayout.LayoutParams linearParam3 =(LinearLayout.LayoutParams) img_daily.getLayoutParams();
