@@ -30,6 +30,7 @@ import com.yizhisha.taosha.bean.json.IndexImgBean;
 import com.yizhisha.taosha.bean.json.IndexPPTBean;
 import com.yizhisha.taosha.bean.json.IndexRecommendYarnBean;
 import com.yizhisha.taosha.bean.json.ListGoodsBean;
+import com.yizhisha.taosha.common.dialog.LoadingDialog;
 import com.yizhisha.taosha.ui.home.activity.CreditLoanActivity;
 import com.yizhisha.taosha.ui.home.activity.HotCommendActivity;
 import com.yizhisha.taosha.ui.home.activity.ProductsCommendActivity;
@@ -83,6 +84,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Bind(R.id.img_scan)
     ImageView img_scan;
 
+//    @Bind(R.id.loadingView)
+//    CommonLoadingView mLoadingView;
+
     @Bind(R.id.img_mafang)
             ImageView img_mafang;
     @Bind(R.id.img_maofang)
@@ -105,6 +109,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Bind(R.id.img_banmao)
     ImageView img_banmao;
 
+    @Bind(R.id.img_index_daohang)
+    ImageView img_index_daohang;
+
+    private LoadingDialog mLoadingDialog;
     private String nayang="";
     private String daily="";
     private String bannao="";
@@ -163,6 +171,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     protected void initView() {
         StatusBarCompat.translucentStatusBar(getActivity(), true);
+
+        if(mLoadingDialog!=null){
+            mLoadingDialog.cancelDialog();
+        }
 //        StatusBarCompat.setStatusBarColor(activity, Color.WHITE,125);
         int ss=DensityUtil.getScreenWidth(getActivity());
         //动态设置banner的高度
@@ -170,6 +182,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         linearParams.height = ss/2;// 控件的宽强制设成30
         banner.setLayoutParams(linearParams);
+
 
         LinearLayout.LayoutParams linearParam1 =(LinearLayout.LayoutParams) img_remen.getLayoutParams();
         linearParam1.height = ss/2;// 控件的宽强制设成30
@@ -180,6 +193,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         img_hauxian.setLayoutParams(linearParam1);
         img_huashi.setLayoutParams(linearParam1);
         img_maofang.setLayoutParams(linearParam1);
+
+
+        LinearLayout.LayoutParams linearParam2 =(LinearLayout.LayoutParams) img_index_daohang.getLayoutParams();
+        linearParam2.height = ss/12;
+        img_index_daohang.setLayoutParams(linearParam2);
+
+       /* LinearLayout.LayoutParams linearParam3 =(LinearLayout.LayoutParams) img_daily.getLayoutParams();
+        linearParam3.height = ss/2;
+        img_daily.setLayoutParams(linearParam3);*/
+
+      /*  LinearLayout.LayoutParams linearParam4 =(LinearLayout.LayoutParams) img_nayang.getLayoutParams();
+        linearParam4.height = ss/4;
+        img_daily.setLayoutParams(linearParam4);
+
+        img_banmao.setLayoutParams(linearParam4);
+*/
 //        img_mafang.setLayoutParams(linearParam1);
 
 //        StatusBarCompat.translucentStatusBar(getActivity(), true);
@@ -380,9 +409,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         //首页推荐纺纱6种
         mPresenter.getRecmomendYarn();
 
-        mPresenter.getListGoodsBannao("banmao");
-        mPresenter.getListGoodsDaily("daily");
-        mPresenter.getListGoodsNaYang("nayang");
+
 
 
     }
@@ -459,36 +486,23 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                 scan();
                 break;
             case R.id.img_nayang:
-                if(nayang.equals("")){
-                ToastUtil.showShortToast("网络错误或者系统繁忙");
-                }else{
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("TYPE",1);
-                    bundle.putInt("id", Integer.parseInt(nayang));
-                    startActivity(YarnActivity.class, bundle);
-                }
+                mPresenter.getListGoodsNaYang("nayang");
+
+
                 break;
 
             case R.id.img_daily:
-                if(daily.equals("")){
+                mPresenter.getListGoodsDaily("daily");
+               /* if(daily.equals("")){
                     ToastUtil.showShortToast("网络错误或者系统繁忙");
                 }else{
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("TYPE",1);
-                    bundle.putInt("id", Integer.parseInt(daily));
-                    startActivity(YarnActivity.class, bundle);
-                }
+
+                }*/
 
                 break;
             case R.id.img_banmao:
-                if(bannao.equals("")){
-                    ToastUtil.showShortToast("网络错误或者系统繁忙");
-                }else{
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("TYPE",1);
-                    bundle.putInt("id", Integer.parseInt(bannao));
-                    startActivity(YarnActivity.class, bundle);
-                }
+                mPresenter.getListGoodsBannao("banmao");
+
 
                 break;
         }
@@ -496,11 +510,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void showLoading() {
-
+        mLoadingDialog=new LoadingDialog(activity,"加载中",false);
+        mLoadingDialog.show();
     }
 
     @Override
     public void hideLoading() {
+        if(mLoadingDialog!=null){
+            mLoadingDialog.cancelDialog();
+        }
 
     }
 
@@ -553,7 +571,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHunfang().get(0).getImg()).into(img_hunfang);
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHauxian().get(0).getImg()).into(img_hauxian);
         Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getHuashi().get(0).getImg()).into(img_huashi);
-        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getRemen().get(0).getImg()).placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).into(img_remen);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getRemen().get(0).getImg()).into(img_remen);//.placeholder(R.drawable.icon_glide_loading).error(R.drawable.icon_glide_failed).
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getMeiri().get(0).getImg()).into(img_daily);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getNayang().get(0).getImg()).into(img_nayang);
+        Glide.with(getActivity()).load(AppConstant.INDEX_BANK_IMG_URL+model.getBanmao().get(0).getImg()).into(img_banmao);
 //        GlideUtil.getInstance().LoadContextBitmap();
     }
 
@@ -607,20 +628,34 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void getListGoodsDailySuccess(ListGoodsBean model) {
 //        Log.e("TTT","-3-"+model.getGoods());
-        daily=model.getGoods();
-
+//        daily=model.getGoods();
+        Bundle bundle = new Bundle();
+        bundle.putInt("TYPE",1);
+        bundle.putInt("id", Integer.parseInt(model.getGoods()));
+        startActivity(YarnActivity.class, bundle);
     }
 
     @Override
     public void getListGoodsNaYangSuccess(ListGoodsBean model) {
 //        Log.e("TTT","-2-"+model.getGoods());
-        nayang=model.getGoods();
+        Bundle bundle = new Bundle();
+        bundle.putInt("TYPE",1);
+        bundle.putInt("id", Integer.parseInt(model.getGoods()));
+        startActivity(YarnActivity.class, bundle);
     }
 
     @Override
     public void getListGoodsBannaoSuccess(ListGoodsBean model) {
 //        Log.e("TTT","-1-"+model.getGoods());
-        bannao=model.getGoods();
+        Bundle bundle = new Bundle();
+        bundle.putInt("TYPE",1);
+        bundle.putInt("id", Integer.parseInt(model.getGoods()));
+        startActivity(YarnActivity.class, bundle);
+    }
+
+    @Override
+    public void getListGoodsFail(String msg) {
+        ToastUtil.showShortToast(msg);
     }
 
 

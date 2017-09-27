@@ -193,7 +193,8 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {//设置点击事件
             @Override
             public void OnBannerClick(View view, int position) {
-                PicShowDialog dialog = new PicShowDialog(activity, albumList, position);
+//                Log.e("UUU",position+"--");
+                PicShowDialog dialog = new PicShowDialog(activity, albumList, position-1);
                 dialog.show();
             }
         });

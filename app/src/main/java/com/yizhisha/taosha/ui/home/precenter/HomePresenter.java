@@ -44,16 +44,22 @@ public class HomePresenter extends HomeContract.Presenter {
 
     @Override
     public void getListGoodsDaily(String type) {
+        mView.showLoading();
         addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
             @Override
             protected void onSuccess(ListGoodsBean model) {
+                mView.hideLoading();
                 if(model.getStatus().equals("y")) {
                     mView.getListGoodsDailySuccess(model);
+                }else{
+                    mView.getListGoodsFail("系统繁忙");
                 }
             }
 
             @Override
             protected void onFailure(String message) {
+                mView.hideLoading();
+                mView.getListGoodsFail(message);
 //                mView.getPPTFail(message);
             }
         });
@@ -62,16 +68,21 @@ public class HomePresenter extends HomeContract.Presenter {
 
     @Override
     public void getListGoodsNaYang(String type) {
+        mView.showLoading();
         addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
             @Override
             protected void onSuccess(ListGoodsBean model) {
+                mView.hideLoading();
                 if(model.getStatus().equals("y")) {
                     mView.getListGoodsNaYangSuccess(model);
+                }else{
+                    mView.getListGoodsFail("系统繁忙");
                 }
             }
 
             @Override
             protected void onFailure(String message) {
+                mView.getListGoodsFail(message);
 //                mView.getPPTFail(message);
             }
         });
@@ -79,17 +90,23 @@ public class HomePresenter extends HomeContract.Presenter {
 
     @Override
     public void getListGoodsBannao(String type) {
+        mView.showLoading();
         addSubscrebe(Api.getInstance().getGoodList(type), new RxSubscriber<ListGoodsBean>(mContext,false) {
             @Override
             protected void onSuccess(ListGoodsBean model) {
+                mView.hideLoading();
                 if(model.getStatus().equals("y")){
                     mView.getListGoodsBannaoSuccess(model);
+                }else{
+                    mView.getListGoodsFail("系统繁忙");
                 }
 
             }
 
             @Override
             protected void onFailure(String message) {
+                mView.hideLoading();
+                mView.getListGoodsFail(message);
 //                mView.getPPTFail(message);
             }
         });
