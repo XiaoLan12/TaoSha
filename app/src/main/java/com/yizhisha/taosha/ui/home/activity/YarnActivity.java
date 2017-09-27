@@ -303,7 +303,7 @@ public class YarnActivity extends BaseActivity<YarnPresenter> implements
             @Override
             public int getCount() {
                 return mFragments.size();
-            }
+        }
 
             @Override
             public Fragment getItem(int position) {
