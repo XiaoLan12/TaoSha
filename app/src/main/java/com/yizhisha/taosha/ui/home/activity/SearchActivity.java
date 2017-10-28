@@ -90,7 +90,7 @@ public class SearchActivity  extends BaseActivity implements View.OnClickListene
 
     private String[] data=new String[]{"棉","麻","丝","毛","仿","兔","貂","羊","牦","绒","粘","尼","氨","腈","涤","马海","羊驼","天丝","金银","100%","段染",
      "彩点","竹节","高捻","冰","色纺","喷毛","圈圈","人造","爽","锦纶","亚麻",
-     "包芯","纤维","欧根","莫代尔","莱赛尔","抗起球","AB","美丽奴","巴素兰","安哥拉",
+     "包芯","纤维","欧根","莫代尔","莱赛尔","抗起球","AB","美丽诺","巴素兰","安哥拉",
      "拉斐尔","包缠","带子","经纬","花式","特种"};
     private List<String> dataList = new ArrayList<>();
     private StringBuilder value=new StringBuilder();
