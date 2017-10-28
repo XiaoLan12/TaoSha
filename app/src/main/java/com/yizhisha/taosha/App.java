@@ -20,7 +20,7 @@ public class App extends Application{
         context=this;
         //讯飞语音初始化工作
         SpeechUtility.createUtility(this, SpeechConstant.APPID + "=59a8c40b");
-
+        //测试上传
     }
     public static Context getAppContext() {
         return context;
