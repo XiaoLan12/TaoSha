@@ -34,7 +34,7 @@ public class SquareIndexLayout extends RelativeLayout {
 //        <span style="color: rgb(153, 153, 153); font-family: Monaco, MonacoRegular, 'Courier New', monospace;  line-height: 15px; white-space: pre; background-color: rgb(248, 248, 255);">
 //</span>  
           widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
-        heightMeasureSpec=widthMeasureSpec*4/8;
+        heightMeasureSpec=widthMeasureSpec;
 //        heightMeasureSpec= new Double(widthMeasureSpec*(0.3)).intValue();
 //        Log.e("III",widthMeasureSpec+"---"+heightMeasureSpec);
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_5"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_5"
+    android:paddingBottom="@dimen/dp_5"
+
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.yizhisha.taosha.widget.SquareIndexLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/pic_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            tools:src="@drawable/icon_delete"
+            />
+    </com.yizhisha.taosha.widget.SquareIndexLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_tv"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/common_h1"
+
+            tools:text="商品名"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5">
+            <TextView
+                android:id="@+id/price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red1"
+                tools:text="￥64.0元 /公斤"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:text="板毛:￥"/>
+            <TextView
+                android:id="@+id/price_real_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="32/份"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

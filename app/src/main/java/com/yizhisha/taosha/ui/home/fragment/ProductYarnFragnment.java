@@ -1,8 +1,10 @@
 package com.yizhisha.taosha.ui.home.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,20 +14,26 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yizhisha.taosha.AppConstant;
 import com.yizhisha.taosha.R;
+import com.yizhisha.taosha.adapter.CommendAdapter;
+import com.yizhisha.taosha.adapter.HotCommendAdapter;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.ProductDeatilItemBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
 import com.yizhisha.taosha.common.dialog.PicShowDialog;
 import com.yizhisha.taosha.ui.home.activity.CommentYarnActivity;
+import com.yizhisha.taosha.ui.home.activity.YarnActivity;
 import com.yizhisha.taosha.ui.home.contract.ProductYarnContract;
 import com.yizhisha.taosha.ui.home.precenter.ProductYarnPresenter;
 import com.yizhisha.taosha.ui.login.activity.LoginFragmentActivity;
 import com.yizhisha.taosha.ui.login.activity.RegisterActivity;
 import com.yizhisha.taosha.utils.GlideUtil;
 import com.yizhisha.taosha.utils.ToastUtil;
+import com.yizhisha.taosha.widget.CommonLoadingView;
+import com.yizhisha.taosha.widget.RecyclerViewDriverLine;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -98,6 +106,11 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     //详情
     @Bind(R.id.recycleview1)
     RecyclerView mRecyclerView1;
+    //同类推荐
+    @Bind(R.id.recycleview2)
+    RecyclerView mRecyclerView2;
+    @Bind(R.id.loadingView)
+    CommonLoadingView mLoadingView;
     @Bind(R.id.ll_banner)
     LinearLayout ll_banner;
     @Bind(R.id.merchant_addrss_tv)
@@ -113,6 +126,9 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     //商品信息
     private ProductDetailBean productDetailBean;
     private ProductDeatilItemBean goods;
+
+    private CommendAdapter mAdapter;
+    private List<HotCommendBean.Goods> dataLists=new ArrayList<>();
 
     private int id;
 
@@ -216,6 +232,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         } else {
             tv_lijian.setVisibility(View.GONE);
         }
+
        /* if(model.getGoods().getIs_fanxian().equals("1")){
             tv_fanxian.setVisibility(View.VISIBLE);
         }else{
@@ -232,7 +249,26 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         initParameter();
         initSeka();
         initDetail();
+        initCommend();
 
+    }
+
+    private void initCommend() {
+        mPresenter.loadCommend(goods.getId(),true);
+        mAdapter=new CommendAdapter(dataLists);
+        mRecyclerView2.setLayoutManager(new GridLayoutManager(activity,2));
+        mRecyclerView2.setHasFixedSize(true);
+        mRecyclerView2.setNestedScrollingEnabled(false);
+        mRecyclerView2.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("TYPE",1);
+                bundle.putInt("id",dataLists.get(position).getId());
+                startActivity(YarnActivity.class,bundle);
+            }
+        });
     }
 
     //加载评论
@@ -301,6 +337,7 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         if(goods.getContent_()!=null){
             contentList.addAll(goods.getContent_());
         }
+
         for (int i = 0; i < contentList.size(); i++) {
             contentList.set(i, AppConstant.PRODUCT_DETAIL_SEKA_IMG_URL + contentList.get(i));
         }
@@ -318,12 +355,15 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
         });
     }
 
-    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll, R.id.collect_iv})
+    @OnClick({R.id.look_allcomment_tv, R.id.comment_ll, R.id.collect_iv,R.id.similar_commend_iv})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.look_allcomment_tv:
 
+                break;
+            case R.id.similar_commend_iv:
+                mPresenter.loadCommend(goods.getId(),true);
                 break;
 
             case R.id.collect_iv:
@@ -375,6 +415,43 @@ public class ProductYarnFragnment extends BaseFragment<ProductYarnPresenter> imp
     public void collectProductSuccess(String msg) {
         collectIv.setImageResource(R.drawable.icon_favorit);
         ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void loadSuccess(HotCommendBean bean) {
+        dataLists.clear();
+        dataLists.addAll(bean.getGoods());
+        mAdapter.setNewData(dataLists);
+    }
+
+    @Override
+    public void showLoading() {
+        mLoadingView.load();
+    }
+
+    @Override
+    public void hideLoading() {
+        mLoadingView.loadSuccess();
+    }
+
+    @Override
+    public void showEmpty() {
+        dataLists.clear();
+        mAdapter.setNewData(dataLists);
+        mLoadingView.loadSuccess(true);
+    }
+
+    @Override
+    public void loadCommend(String msg) {
+        dataLists.clear();
+        mAdapter.setNewData(dataLists);
+        mLoadingView.loadError();
+        mLoadingView.setLoadingHandler(new CommonLoadingView.LoadingHandler() {
+            @Override
+            public void doRequestData() {
+                mPresenter.loadCommend(goods.getId(),true);
+            }
+        });
     }
 
     @Override

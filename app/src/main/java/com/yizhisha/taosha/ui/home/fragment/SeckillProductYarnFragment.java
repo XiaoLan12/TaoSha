@@ -15,6 +15,7 @@ import com.yizhisha.taosha.R;
 import com.yizhisha.taosha.adapter.ProductDetailImgAdapter;
 import com.yizhisha.taosha.base.BaseFragment;
 import com.yizhisha.taosha.base.rx.RxBus;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.SeckillProductBean;
 import com.yizhisha.taosha.common.dialog.DialogInterface;
 import com.yizhisha.taosha.common.dialog.NormalSelectionDialog;
@@ -342,6 +343,31 @@ public class SeckillProductYarnFragment extends BaseFragment<ProductYarnPresente
     public void collectProductSuccess(String msg) {
         collectIv.setImageResource(R.drawable.icon_favorit);
         ToastUtil.showShortToast(msg);
+    }
+
+    @Override
+    public void loadSuccess(HotCommendBean bean) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void loadCommend(String msg) {
+
     }
 
     @Override

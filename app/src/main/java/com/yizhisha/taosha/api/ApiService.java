@@ -253,6 +253,10 @@ public interface ApiService {
     @POST("ios/goods/goodsComment/")
     Observable<CommentListBean> getCommentList(@FieldMap Map<String, String> param);
 
+    //同类推荐
+    @GET("ios/goods/goodsRecommend/")
+    Observable<HotCommendBean> loadCommend(@Query("gid") int id);
+
     //购物车
     @GET("ios/ucenter/shopcart/")
     Observable<ShopcartListBean> getShoppCartList(@Query("uid") int id);

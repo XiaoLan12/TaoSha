@@ -2,6 +2,7 @@ package com.yizhisha.taosha.ui.home.precenter;
 
 import com.yizhisha.taosha.api.Api;
 import com.yizhisha.taosha.base.rx.RxSubscriber;
+import com.yizhisha.taosha.bean.json.HotCommendBean;
 import com.yizhisha.taosha.bean.json.ProductDetailBean;
 import com.yizhisha.taosha.bean.json.RequestStatusBean;
 import com.yizhisha.taosha.bean.json.ShopCartOrderSureBean;
@@ -29,6 +30,30 @@ public class ProductYarnPresenter extends ProductYarnContract.Presenter{
             }
             @Override
             protected void onFailure(String message) {
+                mView.loadFail(message);
+            }
+        });
+    }
+
+    @Override
+    public void loadCommend(int gid, boolean isShowload) {
+        if(isShowload){
+            mView.showLoading();
+        }
+        addSubscrebe(Api.getInstance().loadCommend(gid), new RxSubscriber<HotCommendBean>(mContext, false) {
+            @Override
+            protected void onSuccess(HotCommendBean bean) {
+                mView.hideLoading();
+                if(bean.getStatus().equals("y")){
+                    mView.loadSuccess(bean);
+                }else{
+                    mView.showEmpty();
+                }
+            }
+
+            @Override
+            protected void onFailure(String message) {
+                mView.hideLoading();
                 mView.loadFail(message);
             }
         });

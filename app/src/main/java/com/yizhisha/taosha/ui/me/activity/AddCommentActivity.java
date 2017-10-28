@@ -262,7 +262,7 @@ public class AddCommentActivity extends BaseActivity<AddCommentPresenter>
         }
     }
     private void showPhotoPicker(){
-        performCodeWithPermission("软件更新需要您提供浏览存储的权限", new PermissionCallback() {
+        performCodeWithPermission("需要您提供浏览存储的权限", new PermissionCallback() {
             @Override
             public void hasPermission() {
                 PhotoPickerIntent intent = new PhotoPickerIntent(AddCommentActivity.this);

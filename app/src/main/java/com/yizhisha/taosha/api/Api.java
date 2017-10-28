@@ -249,9 +249,12 @@ public class Api {
         return service.getRecommendYarn();
     }
     //加载热门推荐
-    //我的评论
     public Observable<HotCommendBean> loadHotCommend(String type){
         return service.loadHotCommend(type);
+    }
+    //加载同类推荐
+    public Observable<HotCommendBean> loadCommend(int gid){
+        return service.loadCommend(gid);
     }
     // 搜索页搜索
     public Observable<SearchBean> search(Map<String,String> map){
